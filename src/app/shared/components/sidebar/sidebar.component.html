@@ -1,0 +1,39 @@
+<div class="back"
+    [ngClass]="{ 'back_show': sidebarService.sidebarActivo, '': !sidebarService.sidebarActivo, }"
+    (click)="sidebarService.sidebarActivo = false"></div>
+
+<aside class="sidebar" #sidebar [ngClass]="{ 'sidebar_show': sidebarService.sidebarActivo, '': !sidebarService.sidebarActivo, }">
+    <section>
+        <!-- Logo app -->
+        <article class="sidebar-logo">
+            <img src="assets/logo.png" alt="logo">
+            <h1>Empresa genial</h1>
+        </article>
+
+        <hr>
+
+        <!-- Menu items -->
+        <article>
+            <ul class="sidebar-menu">
+                <li class="sidebar-menu-item"
+                    *ngFor="let item of menuItems"
+                    [routerLink]="item.route"
+                    routerLinkActive="sidebar-menu-item_active"
+                    [routerLinkActiveOptions]="{ exact: true }"
+                    (click)="sidebarService.sidebarActivo = false">
+
+                    <span [class]="item.icon"></span>
+                    <p>{{ item.label }}</p>
+                </li>
+            </ul>
+        </article>
+    </section>
+
+    <!-- Link hacia la documentacion -->
+    <article>
+        <div class="sidebar-menu-item" [routerLink]="['/app/docs']">
+            <span class="pi pi-fw pi-question-circle"></span>
+            <p>Ayuda</p>
+        </div>
+    </article>
+</aside>

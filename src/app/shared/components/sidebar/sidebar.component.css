@@ -1,0 +1,78 @@
+.sidebar {
+    background-color: var(--surface-overlay);
+    padding: var(--spacing-2);
+    width: var(--sidebar-width);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: fixed;
+    transition: transform .2s;
+    left: 0;
+    top: 0;
+}
+
+.sidebar-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar-menu-item {
+    padding: var(--spacing-2);
+    margin-bottom: var(--spacing-1);
+    border-radius: var(--border-radius);
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+}
+
+.sidebar-menu-item_active {
+    background-color: var(--highlight-bg);
+}
+
+.sidebar-menu-item:hover {
+    background-color: var(--highlight-bg);
+}
+
+.sidebar-menu-item p {
+    margin: 0;
+    margin-left: var(--spacing-2);
+}
+
+/* Estilo para tablets y dispositivos con pantallas medianas */
+@media (max-width: 1023px) {
+    .sidebar {
+        transform: translateX( calc( -1 * var(--sidebar-width)) );
+    }
+
+    .back {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        color: #000000ca;
+        backdrop-filter: blur(8px);
+        display: none;
+    }
+
+    .back_show {
+        display: block;
+    }
+}
+
+.sidebar-logo {
+    display: flex;
+}
+.sidebar-logo h1 {
+    display: flex;
+    margin-left: var(--spacing-1);
+    font-size: var(--text-xl);
+}
+.sidebar-logo img {
+    width: 45px;
+    height: 45px;
+}
+
+.sidebar_show {
+    transform: translateX( 0 );
+}

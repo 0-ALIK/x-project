@@ -1,0 +1,14 @@
+.not-found {
+    align-items: center;
+}
+
+
+.not-found h2 {
+    font-size: var(--text-7xl);
+    text-align: center;
+}
+
+.not-found p {
+    font-size: var(--text-2xl);
+    text-align: center;
+}

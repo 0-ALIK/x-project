@@ -1,0 +1,32 @@
+<p-sidebar [(visible)]="sidebarVisible" position="right" [style]="{ witdh: '200px' }">
+    <h2>Selecciona un tema</h2>
+    <div>
+        <p-button label="Claro" (onClick)="themesService.switchTheme('viva-light')"></p-button>
+        <p-button label="Oscuro" [style]="{ marginLeft: '10px' }" (onClick)="themesService.switchTheme('viva-dark')"></p-button>
+    </div>
+</p-sidebar>
+
+<nav class="nav">
+
+    <article class="nav-toggle">
+        <p-button icon="pi pi-bars" [rounded]="true" [text]="true" (onClick)="sidebarService.sidebarActivo = true"></p-button>
+    </article>
+
+    <section class="nav-actions">
+
+        <article>
+            <p-button icon="pi pi-cog" [rounded]="true" [text]="true" (onClick)="sidebarVisible = true"></p-button>
+
+            <p-button icon="pi pi-bell" [rounded]="true" [text]="true"></p-button>
+        </article>
+
+        <article>
+            <div (click)="menu.toggle( $event )" class="avatar-cursor">
+                <p-menu #menu [model]="avatarMenuItems" [popup]="true"></p-menu>
+                <p-avatar label="A" shape="circle"></p-avatar>
+            </div>
+        </article>
+
+    </section>
+
+</nav>
