@@ -11,13 +11,13 @@ public products = [
   {code : '001', name: 'Coca Cola',  category: 'Bebidas', type: 'Refresco', price: 10, quantity: 15.00, undefined: 'undefined'},
   {code : '002', name: 'Pepsi',  category: 'Bebidas', type: 'Refresco', price: 10, quantity: 15.00, undefined: 'undefined'},
   {code : '003', name: 'Fanta',  category: 'Bebidas', type: 'Refresco', price: 10, quantity: 15.00, undefined: 'undefined'},
-  {code : '004', name: 'Sprite',  category: 'Bebidas', type: 'Refresco', price: 10, quantity: 7.00, undefined: 'undefined'},
+  {code : '004', name: 'Sprite',  category: 'Bebidas', type: 'Refresco', price: 10, quantity: 15.00, undefined: 'undefined'},
   {code : '005', name: 'Manzana',  category: 'Bebidas', type: 'Refresco', price: 10, quantity: 15.00, undefined: 'undefined'},
   {code : '006', name: 'Naranja',  category: 'Bebidas', type: 'Refresco', price: 10, quantity: 10.00, undefined: 'undefined'},
   {code : '007', name: 'Limon',  category: 'Bebidas', type: 'Refresco', price: 10, quantity: 10.00, undefined: 'undefined'},
-  {code : '008', name: 'Jamaica',  category: 'Bebidas', type: 'Refresco', price: 10, quantity: 5.00, undefined: 'undefined'},
-  {code : '009', name: 'Mango',  category: 'Bebidas', type: 'Refresco', price: 10, quantity: 0.00, undefined: 'undefined'},
-  {code : '010', name: 'Tamarindo',  category: 'Bebidas', type: 'Refresco', price: 10, quantity: 5.00, undefined: 'undefined'}
+  {code : '008', name: 'Jamaica',  category: 'Bebidas', type: 'Refresco', price: 10, quantity: 7.00, undefined: 'undefined'},
+  {code : '009', name: 'Mango',  category: 'Bebidas', type: 'Refresco', price: 10, quantity: 5.00, undefined: 'undefined'},
+  {code : '010', name: 'Tamarindo',  category: 'Bebidas', type: 'Refresco', price: 10, quantity: 55.00, undefined: 'undefined'}
 
 ];
 first = 0;
@@ -36,5 +36,15 @@ onPageChange(event: any){
 
 }
 
+// funcion para cambiar el color de la cantidad de productos en stock
+getStockClass(quantity: number): string{
+  if(quantity === 0){
+    return 'outofstock';
+  }else if(quantity > 0 && quantity <= 10){
+    return 'lowstock';
+  }else{
+    return 'instock';
+  }
+}
 }
 
