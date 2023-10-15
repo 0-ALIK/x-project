@@ -7,7 +7,7 @@ import { AgregarEditarProductoComponent } from './pages/agregar-editar-producto/
 import { TableInventarioComponent } from './components/table-inventario/table-inventario.component';
 import { TableModule } from 'primeng/table';
 import { PaginatorModule } from 'primeng/paginator'; 
-
+import { ButtonModule } from 'primeng/button';
 @NgModule({
   declarations: [
     VerInventarioComponent,
@@ -18,7 +18,8 @@ import { PaginatorModule } from 'primeng/paginator';
     CommonModule,
     InventarioRoutingModule,
     TableModule,
-    PaginatorModule
+    PaginatorModule,
+    ButtonModule
   ]
 })
 export class InventarioModule { }

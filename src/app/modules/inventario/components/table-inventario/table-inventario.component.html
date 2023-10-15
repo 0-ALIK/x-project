@@ -1,6 +1,12 @@
 <div>
     <p-table [value]="products" styleClass="p-datatable-gridlines" [tableStyle]="{ 'min-width': '50rem' }">
-        <ng-template pTemplate="caption"> Header </ng-template>
+        <ng-template pTemplate="caption"> 
+            <div class="p-buttonset">
+                <p-button label="Limpiar" class="l-button"></p-button>
+                <p-button label="Reporte" class="r-button"></p-button>
+            </div>
+
+        </ng-template>
         <ng-template pTemplate="header">
             <tr>
                 <th>Producto <i class="pi pi-filter"></i></th>
@@ -14,7 +20,6 @@
         </ng-template>
         <ng-template pTemplate="body" let-product>
             <tr>
-                <td>{{ product.code }}</td>
                 <td>{{ product.name }}</td>
                 <td>{{ product.category }}</td>
                 <td>{{ product.type }}</td>
