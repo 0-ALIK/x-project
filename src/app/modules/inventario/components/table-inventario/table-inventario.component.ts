@@ -37,5 +37,7 @@ onPageChange(event: any){
 
 }
 
+filters: { [s: string]: FilterMetadata } = {};
+
 }
 
