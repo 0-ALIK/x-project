@@ -1,11 +1,11 @@
 /* Agrega un margen derecho al primer botón */
 .l-button {
-    margin-right: 0.25rem;
+    margin-right: var(--spacing-4)
 }
 
 /* Agrega un margen izquierdo al segundo botón */
 .r-button {
-    margin-left: 0.25rem;
+    margin-left: var(--spacing-4)
 }
 
 
