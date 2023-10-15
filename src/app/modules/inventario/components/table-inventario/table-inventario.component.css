@@ -1,12 +1,11 @@
-/* espacio entre botones */
-button.p-mr-1{
-    margin-right: 1.5rem;
-    transition: margin-right 0.3s ease-in-out;
+/* Agrega un margen derecho al primer botón */
+.l-button {
+    margin-right: 0.25rem;
 }
 
-
-button:hover {
-    margin-right: 1.8rem;
+/* Agrega un margen izquierdo al segundo botón */
+.r-button {
+    margin-left: 0.25rem;
 }
 
 
