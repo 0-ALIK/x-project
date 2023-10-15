@@ -40,7 +40,7 @@ onPageChange(event: any){
 getStockClass(quantity: number): string{
   if(quantity === 0){
     return 'outofstock';
-  }else if(quantity > 0 && quantity > 10){
+  }else if(quantity > 0 && quantity <= 10){
     return 'lowstock';
   }else{
     return 'instock';
