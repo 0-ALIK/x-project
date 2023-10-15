@@ -1,0 +1,11 @@
+/* espacio entre botones */
+button {
+    margin-right: 1.5rem;
+    transition: margin-right 0.3s ease-in-out;
+}
+
+button:hover {
+    margin-right: 1.8rem;
+}
+
+
