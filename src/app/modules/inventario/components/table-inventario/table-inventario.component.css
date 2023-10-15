@@ -1,13 +1,40 @@
 /* Agrega un margen derecho al primer botón */
 .l-button {
-    margin-right: var(--spacing-3)
+    margin-right: var(--spacing-3);
+    animation: pulse 1s infinite;
 }
 
 /* Agrega un margen izquierdo al segundo botón */
 .r-button {
-    margin-left: var(--spacing-1)
+    margin-left: var(--spacing-1);
+    animation: shake 0.5s infinite;
 }
 
+/* agrega la animacion de pulso */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* agrega la animacion de sacudida */
+@keyframes shake {
+    0% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(5px);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
 
 
 /* muestra color rojo por no tener stock */
