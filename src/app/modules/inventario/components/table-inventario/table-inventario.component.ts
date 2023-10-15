@@ -37,13 +37,13 @@ onPageChange(event: any){
 }
 
 // funcion para cambiar el color de la cantidad de productos en stock
-getStockClass(stock: number){
-  if(stock > 10){
-    return 'stock-high';
-  }else if(stock <= 10 && stock > 5){
-    return 'stock-medium';
+getStockClass(quantity: number): string{
+  if(quantity === 0){
+    return 'outofstock';
+  }else if(quantity > 0 && quantity > 10){
+    return 'lowstock';
   }else{
-    return 'stock-low';
+    return 'instock';
   }
 }
 }
