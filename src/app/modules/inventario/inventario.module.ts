@@ -7,6 +7,7 @@ import { TableInventarioComponent } from './components/table-inventario/table-in
 import { TableModule } from 'primeng/table';
 import { PaginatorModule } from 'primeng/paginator'; 
 import { ButtonModule } from 'primeng/button';
+
 @NgModule({
   declarations: [
     VerInventarioComponent,

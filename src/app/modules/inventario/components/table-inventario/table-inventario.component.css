@@ -8,19 +8,22 @@
     margin-left: var(--spacing-4)
 }
 
+
+
 /* muestra color rojo por no tener stock */
 .outofstock {
-    color: var(red)
-}
+    color: var(--red-500)
+    
+    }
 
 /* muestra color amarillo por bajo stock */
-.lowstock {
-    color: var(yellow)
+.lowstock{
+    color: var(--yellow-500)
 }
 
 /* muestra color verde por buen stock */
 .instock {
-    color: var(green)
+    color: var(--green-300)
 }
 
 
