@@ -23,8 +23,9 @@
                 <td>{{ product.type }}</td>
                 <td>{{ product.price }}</td>
                 <td>
-                    <div [ngClass]="{'outofstock' : product.quantity === 0, 'lowstock': (product.quantity > 0  && product.quantity < 10), 'instock': product.quantity > 10}">
-                         {{ product.quantity }}</div>
+                    <div [ngClass]="getStockClass(product.quantity)">
+                        {{ product.quantity }}
+                    </div>
                         </td>
                 <td>{{ product.undefenid }}</td>
             </tr>
