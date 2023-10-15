@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
+import { PaginatorModule } from 'primeng/paginator';
 
 @Component({
   selector: 'app-table-inventario',
@@ -8,3 +9,9 @@ import { Component } from '@angular/core';
 export class TableInventarioComponent {
 public products: any[] = []
 }
+
+@NgModule({
+  imports: [PaginatorModule],
+})
+
+export class TableInventarioComponentModule {}
