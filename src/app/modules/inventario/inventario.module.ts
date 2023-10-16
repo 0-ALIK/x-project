@@ -7,6 +7,8 @@ import { TableInventarioComponent } from './components/table-inventario/table-in
 import { TableModule } from 'primeng/table';
 import { PaginatorModule } from 'primeng/paginator'; 
 import { ButtonModule } from 'primeng/button';
+import { SplitButtonModule } from 'primeng/splitbutton';
+import { InputTextModule } from 'primeng/inputtext';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { ButtonModule } from 'primeng/button';
     InventarioRoutingModule,
     TableModule,
     PaginatorModule,
-    ButtonModule
+    ButtonModule,
+    SplitButtonModule,
+    InputTextModule
   ]
 })
 export class InventarioModule { }

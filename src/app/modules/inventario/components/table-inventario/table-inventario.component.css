@@ -1,3 +1,25 @@
+/* Aqui esta el titulo y el medu desplegable */
+.p-encabezado {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-inline: 10px;
+
+}
+
+/* Aqui estan los botones y el searchbar */
+.header-table {
+    display: flex;
+    justify-content: space-between;    
+}
+
+/* Alineo el searchbar con el icono cuando se achica */
+.p-input-icon-left {
+    display: flex;
+    align-items: center;
+    max-width: 100%;
+}
+
 /* Agrega un margen derecho al primer botón */
 .l-button {
     margin-right: var(--spacing-3);
@@ -53,5 +75,9 @@
     color: var(--green-300)
 }
 
-
-
+/* Estilos para dispositivos móviles */
+@media screen and (max-width: 560px) {
+    .p-input-icon-left > input {
+        max-width: 90%;
+    }    
+  }
