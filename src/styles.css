@@ -1,0 +1,52 @@
+@import "primeng/resources/primeng.css";
+@import "primeicons/primeicons.css";
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    /* LARGO DEL SIDEBAR */
+    --sidebar-width: 250px;
+
+    /* ANCHO DEL NAV */
+    --nav-height: 55px;
+
+    /* VARIABLES DE TAMANO DE TEXTO */
+    --text-xs: .75rem;
+    --text-sm: .875rem;
+    --text-base: 1rem;
+    --text-lg: 1.125rem;
+    --text-xl: 1.25rem;
+    --text-2xl: 1.5rem;
+    --text-3xl: 1.75rem;
+    --text-4xl: 2rem;
+    --text-5xl: 2.5rem;
+    --text-6xl: 3rem;
+    --text-7xl: 4rem;
+    --text-8xl: 6rem;
+
+    /* VARIABLES PARA ESPACIADOS (MARGIN y PADDING) */
+    --spacing-0: 0;
+    --spacing-1: 0.25rem;
+    --spacing-2: 0.5rem;
+    --spacing-3: 1rem;
+    --spacing-4: 1.5rem;
+    --spacing-5: 2rem;
+    --spacing-6: 3rem;
+    --spacing-7: 4rem;
+    --spacing-8: 5rem;
+}
+
+body {
+    background-color: var(--surface-ground);
+}
+
+/* Estilo para dispositivos móviles */
+@media (max-width: 767px) {}
+
+/* Estilo para tablets y dispositivos con pantallas medianas */
+@media (max-width: 1023px) {}
+
+/* Estilo para monitores muy largos o pantallas grandes */
+@media (min-width: 1200px) {}

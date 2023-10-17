@@ -1,0 +1,42 @@
+.nav {
+    width: 100%;
+    padding-left: calc(var(--sidebar-width) + var(--spacing-2));
+    padding-right: var(--spacing-2);
+    height: var(--nav-height);
+    position: fixed;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    top: 0;
+    background-color: transparent;
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+}
+
+.nav-toggle {
+    display: none;
+}
+
+.avatar-cursor {
+    cursor: pointer;
+}
+
+.options-sidebar {
+    width: 200px;
+}
+
+/* Estilo para tablets y dispositivos con pantallas medianas */
+@media (max-width: 1023px) {
+    .nav {
+        padding-left: var(--spacing-2);
+        justify-content: space-between;
+    }
+
+    .nav-toggle {
+        display: block;
+    }
+}
