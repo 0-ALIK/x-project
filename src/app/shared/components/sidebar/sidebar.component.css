@@ -10,6 +10,7 @@
     transition: transform .2s;
     left: 0;
     top: 0;
+    z-index: 1000;
 }
 
 .sidebar-menu {
@@ -53,6 +54,7 @@
         color: #000000ca;
         backdrop-filter: blur(8px);
         display: none;
+        z-index: 990;
     }
 
     .back_show {

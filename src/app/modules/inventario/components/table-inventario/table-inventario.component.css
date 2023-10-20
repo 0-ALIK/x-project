@@ -1,108 +1,46 @@
-/* Aqui esta el titulo y el medu desplegable */
-.p-encabezado {
+/* Ajuste del titulo */
+.tittle {
+    margin-top: 0;
+    margin-left: 5px;
+}
+
+.table {
+    background-color: white;
+    width: 100%;
+}
+
+.subtittle {
+    color: black;
+}
+
+p-table {
+    padding: 1%;
+    display: block;
+    width: 100%;
+}
+
+.header-table {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin-inline: 10px;
-
 }
 
-/*ajuste del header table hacia la tabla para que esten junto */
+.th-max {
+    min-width: max-content;
 
-.p-datatable{
-    margin-top: -80px;
-    
-}
-
-/* Alineo el texto de las celdas de la tabla al centro */
-.p-datatable td, .p-datatable th {
-    text-align: center;
-}
-
-/* Alineo el searchbar con el icono cuando se achica */
-.p-input-icon-left {
-    display: flex;
-    align-items: center;
-    max-width: 100%;
-}
-
-/*aqui estan los botones y el searchbar */
-.header-table{
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: -16px;
-    align-items:center;
-    border: 1px solid var(--gray-200);
-    border-radius: 10px;
-    padding: 10px;
-    background-color: var(--blue-300);
-    margin-top: 70px;
-}
-/* Agrega un margen derecho al primer botón */
-.l-button {
-    padding: 20px;
-    margin-right: var(--spacing-3);
-    animation: pulse 1s infinite;
-
-}
-
-/* Agrega un margen izquierdo al segundo botón */
-.r-button {
-    margin-left: var(--spacing-1);
-
-}
-
-/* Define los colores de fondo para los encabezados de columna de la tabla */
-:host ::ng-deep .p-datatable thead > tr > th {
-    background-color: var(--blue-500);
-    color: var(--blue-50);
-}
-
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.1);
-    }
-    100% {
-        transform: scale(1);
+    & .flex {
+        display: flex;
+        min-width: max-content;
+        align-items: center;
     }
 }
 
-/* agrega la animacion de sacudida */
-@keyframes shake {
-    0% {
-        transform: translateX(0);
-    }
-    50% {
-        transform: translateX(5px);
-    }
-    100% {
-        transform: translateX(0);
+@media (max-width: 550px) {
+    .header-table {
+        flex-direction: column;
+        align-items: center;
+
+        & div {
+            margin-bottom: 10px;
+        }
     }
 }
-
-
-/* muestra color rojo por no tener stock */
-.outofstock {
-    color: var(--red-500)
-
-    }
-
-/* muestra color amarillo por bajo stock */
-.lowstock{
-    color: var(--yellow-500)
-}
-
-/* muestra color verde por buen stock */
-.instock {
-    color: var(--green-300)
-}
-
-/* Estilos para dispositivos móviles */
-@media screen and (max-width: 560px) {
-    .p-input-icon-left > input {
-        max-width: 90%;
-    }
-  }

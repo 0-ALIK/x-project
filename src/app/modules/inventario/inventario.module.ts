@@ -9,12 +9,14 @@ import { PaginatorModule } from 'primeng/paginator';
 import { ButtonModule } from 'primeng/button';
 import { SplitButtonModule } from 'primeng/splitbutton';
 import { InputTextModule } from 'primeng/inputtext';
+import { SplitButtonComponent } from './components/split-button/split-button.component';
 
 @NgModule({
   declarations: [
     VerInventarioComponent,
     AgregarEditarProductoComponent,
-    TableInventarioComponent
+    TableInventarioComponent,
+    SplitButtonComponent
   ],
   imports: [
     CommonModule,

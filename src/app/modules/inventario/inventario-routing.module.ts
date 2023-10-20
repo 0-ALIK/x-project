@@ -20,7 +20,7 @@ const routes: Routes = [
     },
     {
         path: 'tabla-inventario',
-        component: VerInventarioComponent
+        component: TableInventarioComponent
 
     }
 ];
