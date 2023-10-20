@@ -5,7 +5,7 @@ import { VerInventarioComponent } from './pages/ver-inventario/ver-inventario.co
 import { AgregarEditarProductoComponent } from './pages/agregar-editar-producto/agregar-editar-producto.component';
 import { TableInventarioComponent } from './components/table-inventario/table-inventario.component';
 import { TableModule } from 'primeng/table';
-import { PaginatorModule } from 'primeng/paginator'; 
+import { PaginatorModule } from 'primeng/paginator';
 import { ButtonModule } from 'primeng/button';
 import { SplitButtonModule } from 'primeng/splitbutton';
 import { InputTextModule } from 'primeng/inputtext';

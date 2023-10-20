@@ -8,7 +8,7 @@ const routes: Routes = [
     {
         path: '',
         pathMatch: 'full',
-        component: TableInventarioComponent
+        component: VerInventarioComponent
     },
     {
         path: 'agregar-producto',
@@ -21,7 +21,7 @@ const routes: Routes = [
     {
         path: 'tabla-inventario',
         component: VerInventarioComponent
-        
+
     }
 ];
 

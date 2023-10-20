@@ -12,26 +12,27 @@ export class TableInventarioComponent implements OnInit {
 
   items: MenuItem[];
 
-public products = [
-  {code : '001', name: 'Coca Cola',  category: 'Bebidas', type: 'Refresco', price: 10.00, quantity: 15, undefined: 'undefined'},
-  {code : '002', name: 'Pepsi',  category: 'Bebidas', type: 'Refresco', price: 10.00, quantity: 20, undefined: 'undefined'},
-  {code : '003', name: 'Fanta',  category: 'Bebidas', type: 'Refresco', price: 10.00, quantity: 5, undefined: 'undefined'},
-  {code : '004', name: 'Sprite',  category: 'Bebidas', type: 'Refresco', price: 10.00, quantity: 10, undefined: 'undefined'},
-  {code : '005', name: 'Coca Cola',  category: 'Bebidas', type: 'Refresco', price: 10.00, quantity: 15, undefined: 'undefined'},
-  {code : '006', name: 'Pepsi',  category: 'Bebidas', type: 'Refresco', price: 10.00, quantity: 20, undefined: 'undefined'},
-  {code : '007', name: 'Fanta',  category: 'Bebidas', type: 'queso', price: 10.00, quantity: 20, undefined: 'undefined'},
-  {code : '008', name: 'Sprite',  category: 'Bebidas', type: 'Refresco', price: 10.00, quantity: 10, undefined: 'undefined'},
-  {code : '009', name: 'Coca Cola',  category: 'Bebidas', type: 'Refresco', price: 10.00, quantity: 0, undefined: 'undefined'},
-  {code : '010', name: 'Pepsi',  category: 'Bebidas', type: 'Refresco', price: 10.00, quantity: 0, undefined: 'undefined'},
-];
-first = 0;
-rows = 10;
-totalRecords = 120;
+    public products = [
+        {code : '001', name: 'Coca Cola',  category: 'Bebidas', type: 'Refresco', price: 10.00, quantity: 15, undefined: 'undefined'},
+        {code : '002', name: 'Pepsi',  category: 'Bebidas', type: 'Refresco', price: 10.00, quantity: 20, undefined: 'undefined'},
+        {code : '003', name: 'Fanta',  category: 'Bebidas', type: 'Refresco', price: 10.00, quantity: 5, undefined: 'undefined'},
+        {code : '004', name: 'Sprite',  category: 'Bebidas', type: 'Refresco', price: 10.00, quantity: 10, undefined: 'undefined'},
+        {code : '005', name: 'Coca Cola',  category: 'Bebidas', type: 'Refresco', price: 10.00, quantity: 15, undefined: 'undefined'},
+        {code : '006', name: 'Pepsi',  category: 'Bebidas', type: 'Refresco', price: 10.00, quantity: 20, undefined: 'undefined'},
+        {code : '007', name: 'Fanta',  category: 'Bebidas', type: 'queso', price: 10.00, quantity: 20, undefined: 'undefined'},
+        {code : '008', name: 'Sprite',  category: 'Bebidas', type: 'Refresco', price: 10.00, quantity: 10, undefined: 'undefined'},
+        {code : '009', name: 'Coca Cola',  category: 'Bebidas', type: 'Refresco', price: 10.00, quantity: 0, undefined: 'undefined'},
+        {code : '010', name: 'Pepsi',  category: 'Bebidas', type: 'Refresco', price: 10.00, quantity: 0, undefined:'undefined'},
+    ];
+
+    first = 0;
+    rows = 10;
+    totalRecords = 120;
 
 constructor(/*private messageService: MessageService*/) {
         this.items = [
             {
-                label: 'Producto', 
+                label: 'Producto',
                 styleClass: 'p-splitButton-drop',
                 routerLink: ['agregar-producto']
             },
@@ -45,11 +46,11 @@ constructor(/*private messageService: MessageService*/) {
     }
 
     // Para el SearchBar
-    value: string | undefined;    
+    value: string | undefined;
     value2: string | undefined;
 
 ngOnInit(): void {
-  
+
 }
 
 onPageChange(event: any){
