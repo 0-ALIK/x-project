@@ -1,0 +1,57 @@
+<p-table
+    [value]="arregloEmpresas"
+    [paginator]="true"
+    styleClass="p-datatable-gridlines"
+    [rows]="5"
+    [showCurrentPageReport]="true"
+    [tableStyle]="{ 'min-width': '50rem' }"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    (onPage)="pageChange($event)"
+    [rowsPerPageOptions]="[10, 25, 50]">
+
+    <ng-template pTemplate="caption">
+        <div class="contenido">
+            <div class="botones">
+                <button pButton label="Limpiar" class="p-button-outlined" ></button>
+                <button pButton label="Reporte" class="p-button-outlined" style="margin-left: var(--spacing-3);"></button>
+            </div>
+            <div class="input">
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input type="text" placeholder="Buscar..." pInputText/>
+
+                </span>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header" >
+        <tr>
+            <th>Foto</th>
+            <th>Nombre</th>
+            <th>propietario</th>
+            <th>RUC</th>
+            <th>Telefono</th>
+            <th>Direccion</th>
+            <th>Campo</th>
+            <th>Total Pedidos</th>
+            <th>Acciones</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-cliente >
+        <tr>
+            <td>{{ cliente.foto }}</td>
+            <td>{{ cliente.nombre }}</td>
+            <td>{{ cliente.propietario }}</td>
+            <td>{{ cliente.ruc }}</td>
+            <td>{{ cliente.telefono }}</td>
+            <td>{{ cliente.direccion }}</td>
+            <td>{{ cliente.campos }}</td>
+            <td>{{ cliente.total }}</td>
+            <td>
+                <p-button icon="pi pi-pencil" [rounded]="true" [text]="true"></p-button>
+                <p-button icon="pi pi-trash" [rounded]="true" [text]="true" severity="danger "></p-button>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
