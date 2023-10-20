@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FilterMetadata, MenuItem, MessageService } from 'primeng/api';
+import { SplitButtonModule } from 'primeng/splitbutton';
 
 
 @Component({

@@ -6,11 +6,12 @@
     </div>
     <p-table [value]="products" styleClass="p-datatable-gridlines" [tableStyle]="{ 'min-width': '50rem'}" class="p-datatable"
         [scrollable]="true" [scrollHeight]="'400px'">
-        <ng-template pTemplate="caption">
+         <ng-template pTemplate="caption">
+           <h2>Inventario de Productos</h2>
             <div class="header-table">
                 <div class="p-buttonset">
-                    <p-button label="Limpiar" class="l-button"></p-button>
-                    <p-button label="Reporte" severity="danger" class="r-button p-m1-1"></p-button>
+                    <p-button label="Limpiar" [rounded] ="true" class="l-button"></p-button>
+                    <p-button label="Reporte" [rounded] ="true" class="r-button p-m1-1"></p-button>
                 </div>
                 <span class="p-input-icon-left">
                     <i class="pi pi-search"></i>
@@ -19,7 +20,7 @@
             </div>
 
         </ng-template>
-        <ng-template pTemplate="header" scrollable>
+          <ng-template pTemplate="header" scrollable>
             <tr>
                 <th pSortableColumn="name" style="width:20%">Nombre <p-sortIcon field="name"></p-sortIcon></th>
                 <th pSortableColumn="category" style="width:20%">Categoría <p-sortIcon field="category"></p-sortIcon>
