@@ -7,16 +7,18 @@ import { TableInventarioComponent } from './components/table-inventario/table-in
 import { TableModule } from 'primeng/table';
 import { PaginatorModule } from 'primeng/paginator';
 import { ButtonModule } from 'primeng/button';
-import { SplitButtonModule } from 'primeng/splitbutton';
+// import { SplitButtonModule } from 'primeng/splitbutton';
 import { InputTextModule } from 'primeng/inputtext';
-import { SplitButtonComponent } from './components/split-button/split-button.component';
+import { TabMenuModule } from 'primeng/tabmenu';
+import { MenuModule } from 'primeng/menu';
+import { TableEntradasComponent } from './components/table-entradas/table-entradas.component';
 
 @NgModule({
   declarations: [
     VerInventarioComponent,
     AgregarEditarProductoComponent,
     TableInventarioComponent,
-    SplitButtonComponent
+    TableEntradasComponent
   ],
   imports: [
     CommonModule,
@@ -24,8 +26,10 @@ import { SplitButtonComponent } from './components/split-button/split-button.com
     TableModule,
     PaginatorModule,
     ButtonModule,
-    SplitButtonModule,
-    InputTextModule
+    // SplitButtonModule,
+    InputTextModule,
+    TabMenuModule,
+    MenuModule
   ]
 })
 export class InventarioModule { }

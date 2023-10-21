@@ -9,16 +9,17 @@ import { Component, OnInit } from '@angular/core';
 
 export class TableInventarioComponent implements OnInit {
 
-  constructor() { }
-  
-  ngOnInit(): void { }
-  
+  constructor() {}
+
+  ngOnInit(): void {}
+
   public products = [
     { name: 'Coca Cola', category: 'Bebidas', type: 'Refresco', price_unit: 10.00, stock: 15, photo: 'null', p_reorden: 'null' },
     { name: 'Coca Cola', category: 'Bebidas', type: 'Refresco', price_unit: 10.00, stock: 15, photo: 'null', p_reorden: 'null' },
-    { name: 'Coca Cola', category: 'Bebidas', type: 'Refresco', price_unit: 10.00, stock: 15, photo: 'null', p_reorden: 'null' },
     { name: 'Coca Cola', category: 'Bebidas', type: 'Refresco', price_unit: 10.00, stock: 15, photo: 'null', p_reorden: 'null' }
-];
+  ];
+
+
 
 }
 

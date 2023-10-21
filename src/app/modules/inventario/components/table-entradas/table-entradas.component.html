@@ -1,4 +1,4 @@
-<p-table [value]="products" [rows]="5" [paginator]="true" styleClass="p-datatable-gridlines"
+<p-table [value]="persons" [rows]="5" [paginator]="true" styleClass="p-datatable-gridlines"
     [tableStyle]="{ 'min-width': '50rem'}" [scrollable]="true" [scrollHeight]="'400px'">
 
     <ng-template pTemplate="caption">
@@ -18,32 +18,32 @@
         <tr>
             <th>
                 <div class="flex align-items-center">
+                    Id <p-columnFilter display="menu"></p-columnFilter>
+                </div>
+            </th>
+            <th>
+                <div class="flex align-items-center">
+                    Admin <p-columnFilter display="menu"></p-columnFilter>
+                </div>
+            </th>
+            <th>
+                <div class="flex align-items-center">
+                    Fecha <p-columnFilter display="menu"></p-columnFilter>
+                </div>
+            </th>
+            <th>
+                <div class="flex align-items-center">
+                    Cantidad <p-columnFilter display="menu"></p-columnFilter>
+                </div>
+            </th>
+            <th>
+                <div class="flex align-items-center">
                     Producto <p-columnFilter display="menu"></p-columnFilter>
                 </div>
             </th>
             <th>
                 <div class="flex align-items-center">
-                    Categoría <p-columnFilter display="menu"></p-columnFilter>
-                </div>
-            </th>
-            <th>
-                <div class="flex align-items-center">
                     Tipo <p-columnFilter display="menu"></p-columnFilter>
-                </div>
-            </th>
-            <th>
-                <div class="flex align-items-center">
-                    Precio Unit <p-columnFilter display="menu"></p-columnFilter>
-                </div>
-            </th>
-            <th>
-                <div class="flex align-items-center">
-                    Stock <p-columnFilter display="menu"></p-columnFilter>
-                </div>
-            </th>
-            <th>
-                <div class="flex align-items-center">
-                    Foto <p-columnFilter display="menu"></p-columnFilter>
                 </div>
             </th>
             <th>
@@ -54,15 +54,15 @@
         </tr>
     </ng-template>
 
-    <ng-template pTemplate="body" let-product>
+    <ng-template pTemplate="body" let-person>
         <tr>
-            <td>{{ product.name }}</td>
-            <td>{{ product.category }}</td>
-            <td>{{ product.type }}</td>
-            <td>{{ product.price_unit }}</td>
-            <td>{{ product.stock }}</td>
-            <td>{{ product.photo }}</td>
-            <td>{{ product.p_reorden }}</td>
+            <td>{{ person.id }}</td>
+            <td>{{ person.admin }}</td>
+            <td>{{ person.date }}</td>
+            <td>{{ person.quantity }}</td>
+            <td>{{ person.product }}</td>
+            <td>{{ person.type }}</td>
+            <td>{{ person.p_reorden }}</td>
         </tr>
     </ng-template>
 </p-table>

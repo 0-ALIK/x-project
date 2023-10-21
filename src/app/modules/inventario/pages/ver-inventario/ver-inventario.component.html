@@ -1,1 +1,18 @@
-<app-table-inventario></app-table-inventario>
+<h1>Inventario</h1>
+
+<div class="split-menu">
+    <p-menu #menu [model]="items" [popup]="true"></p-menu>
+    <button pButton type="button" (click)="menu.toggle($event)" icon="pi pi-angle-down" label="Agregar"></button>
+</div>
+
+<div class="table_background">
+    <h2 class="subtittle">Inventario de productos</h2>
+    <hr>
+    <div class="card div-p-tabMenu">
+        <p-tabMenu [model]="tabs" [activeItem]="activeItem"  (activeItemChange)="onActiveItemChange($event)"></p-tabMenu>
+    </div>
+
+    <app-table-inventario *ngIf="activeItem.label === 'Inventario'"></app-table-inventario>
+    <app-table-entradas *ngIf="activeItem.label === 'Entradas'"></app-table-entradas>
+
+</div>
