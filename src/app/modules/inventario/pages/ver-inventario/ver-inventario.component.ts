@@ -40,12 +40,12 @@ export class VerInventarioComponent {
         this.activeItem = event;
     }
 
-    showAgregarCategoria(){
-        this.ref = this.dialogService.open(DialogAgregarCategoriaComponent, { header: 'Agregar Categoría'});
+    showAgregarCategoria() {
+        this.ref = this.dialogService.open(DialogAgregarCategoriaComponent, { header: 'Agregar Categoría' });
     }
 
     showRealizarCompra() {
-        this.ref = this.dialogService.open(DialogRealizarCompraComponent, { header: 'Realizar Compra'});
+        this.ref = this.dialogService.open(DialogRealizarCompraComponent, { header: 'Realizar Compra' });
     }
 
 }

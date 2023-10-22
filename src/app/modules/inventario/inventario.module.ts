@@ -11,30 +11,27 @@ import { EditarMarcaComponent } from './pages/editar-marca/editar-marca.componen
 
 import { TableInventarioComponent } from './components/table-inventario/table-inventario.component';
 import { TableEntradasComponent } from './components/table-entradas/table-entradas.component';
-import { ModalRealizarCompraComponent } from './components/modal-realizar-compra/modal-realizar-compra.component';
 import { DialogAgregarCategoriaComponent } from './components/dialog-agregar-categoria/dialog-agregar-categoria.component';
 import { DialogRealizarCompraComponent } from './components/dialog-realizar-compra/dialog-realizar-compra.component';
 import { DialogGenerarReporteComponent } from './components/dialog-generar-reporte/dialog-generar-reporte.component';
 
-import { TableModule } from 'primeng/table';
-import { PaginatorModule } from 'primeng/paginator';
-import { ButtonModule } from 'primeng/button';
-import { InputTextModule } from 'primeng/inputtext';
-import { TabMenuModule } from 'primeng/tabmenu';
 import { MenuModule } from 'primeng/menu';
-import { DialogModule } from 'primeng/dialog';
-import { ConfirmationService, MessageService } from 'primeng/api';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
-import { DynamicDialogModule } from 'primeng/dynamicdialog';
-import { DialogService } from 'primeng/dynamicdialog';
+import { ButtonModule } from 'primeng/button';
+import { DialogModule } from 'primeng/dialog';
+import { TabMenuModule } from 'primeng/tabmenu';
+import { InputTextModule } from 'primeng/inputtext';
+import { PaginatorModule } from 'primeng/paginator';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { DynamicDialogModule, DialogService } from 'primeng/dynamicdialog';
 
 @NgModule({
   declarations: [
     VerInventarioComponent,
     TableInventarioComponent,
     TableEntradasComponent,
-    ModalRealizarCompraComponent,
     AgregarMarcaComponent,
     AgregarProductoComponent,
     EditarMarcaComponent,
