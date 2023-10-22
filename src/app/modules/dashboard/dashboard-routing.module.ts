@@ -34,6 +34,10 @@ const routes: Routes = [
             {
                 path: 'usuarios',
                 redirectTo: ''
+            },
+            {
+                path: 'analitica',
+                loadChildren: () => import('../analitica/analitica.module').then(m => m.AnaliticaModule)
             }
         ]
     }
