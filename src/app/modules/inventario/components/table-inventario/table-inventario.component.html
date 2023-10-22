@@ -1,51 +1,79 @@
-<div>
-    <div class="p-encabezado">
-        <h1>Inventario</h1>
-        <p-splitButton label="Agregar" [model]="items" styleClass="p-button-success mb-2" class="button-split"></p-splitButton>
-        <!--  (onClick)="save('info')" (onClick)="save('success')"-->
-    </div>
-    <p-table [value]="products" styleClass="p-datatable-gridlines" [tableStyle]="{ 'min-width': '50rem'}" class="p-datatable"
-        [scrollable]="true" [scrollHeight]="'400px'">
-         <ng-template pTemplate="caption">
-           <h2>Inventario de Productos</h2>
-            <div class="header-table">
-                <div class="p-buttonset">
-                    <p-button label="Limpiar" [rounded] ="true" class="l-button"></p-button>
-                    <p-button label="Reporte" [rounded] ="true" class="r-button p-m1-1"></p-button>
-                </div>
-                <span class="p-input-icon-left">
-                    <i class="pi pi-search"></i>
-                    <input type="text" pInputText [(ngModel)]="value" placeholder="Buscar..." />
-                </span>
-            </div>
+<p-toast></p-toast>
+<p-confirmDialog [style]="{ width: '50vw' }" key="positionDialog" [position]="position" rejectButtonStyleClass="p-button-outlined" acceptLabel="Si" rejectLabel="No"></p-confirmDialog>
 
-        </ng-template>
-          <ng-template pTemplate="header" scrollable>
-            <tr>
-                <th pSortableColumn="name" style="width:20%">Nombre <p-sortIcon field="name"></p-sortIcon></th>
-                <th pSortableColumn="category" style="width:20%">Categoría <p-sortIcon field="category"></p-sortIcon>
-                </th>
-                <th pSortableColumn="type" style="width:20%">Tipo <p-sortIcon field="type"></p-sortIcon></th>
-                <th pSortableColumn="price" style="width:20%">Precio <p-sortIcon field="price"></p-sortIcon></th>
-                <th pSortableColumn="quantity" style="width:20%">Cantidad <p-sortIcon field="quantity"></p-sortIcon>
-                </th>
-                <th style="width:20%">Acciones</th>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-product>
-            <tr>
-                <td>{{ product.name }}</td>
-                <td>{{ product.category }}</td>
-                <td>{{ product.type }}</td>
-                <td>{{ product.price }}</td>
-                <td
-                    [ngClass]="{'outofstock': product.quantity === 0, 'lowstock': product.quantity > 0 && product.quantity <= 10, 'instock': product.quantity >=10 }">
-                    {{ product.quantity }}
-                </td>
-                <td>{{ product.undefined}}</td>
-            </tr>
-        </ng-template>
-    </p-table>
-    <p-paginator (onPageChange)="onPageChange($event)" [rows]="rows" [totalRecords]="totalRecords"
-        [rowsPerPageOptions]="[5,10,20]"></p-paginator>
-</div>
+<p-table [value]="products" [rows]="5" [paginator]="true" styleClass="p-datatable-gridlines" [tableStyle]="{ 'min-width': '50rem'}" [scrollable]="true" [scrollHeight]="'400px'">
+
+    <ng-template pTemplate="caption">
+        <div class="flex header-table" scrollable>
+            <div class="p-buttonset">
+                <button pButton label="Limpiar" class="p-button-outlined" icon="pi pi-filter-slash"></button>
+                <button pButton label="Reporte" class="" icon="pi pi-file-export"></button>
+            </div>
+            <span class="p-input-icon-left ml-auto">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" placeholder="Buscar producto..." />
+            </span>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="header">
+        <tr>
+            <th>
+                <div class="flex align-items-center">
+                    Producto <p-columnFilter display="menu"></p-columnFilter>
+                </div>
+            </th>
+            <th>
+                <div class="flex align-items-center">
+                    Categoría <p-columnFilter display="menu"></p-columnFilter>
+                </div>
+            </th>
+            <th>
+                <div class="flex align-items-center">
+                    Tipo <p-columnFilter display="menu"></p-columnFilter>
+                </div>
+            </th>
+            <th>
+                <div class="flex align-items-center">
+                    Precio Unit <p-columnFilter display="menu"></p-columnFilter>
+                </div>
+            </th>
+            <th>
+                <div class="flex align-items-center">
+                    Stock <p-columnFilter display="menu"></p-columnFilter>
+                </div>
+            </th>
+            <th>
+                <div class="flex align-items-center">
+                    Foto <p-columnFilter display="menu"></p-columnFilter>
+                </div>
+            </th>
+            <th>
+                <div class="flex align-items-center">
+                    P. reorden <p-columnFilter display="menu"></p-columnFilter>
+                </div>
+            </th>
+            <th>
+                <div class="flex align-items-center">
+                    Acciones
+                </div>
+            </th>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-product>
+        <tr>
+            <td>{{ product.name }}</td>
+            <td>{{ product.category }}</td>
+            <td>{{ product.type }}</td>
+            <td>{{ product.price_unit }}</td>
+            <td>{{ product.stock }}</td>
+            <td>{{ product.photo }}</td>
+            <td>{{ product.p_reorden }}</td>
+            <td class="td-buttons">
+                <p-button icon="pi pi-pencil" [raised]="true" severity="warning" [routerLink]="['editar-marca']"></p-button>
+                <p-button icon="pi pi-trash" (click)="confirmPosition('bottom', product.id)" [raised]="true" severity="danger"></p-button>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>

@@ -1,79 +1,54 @@
 import { Component, OnInit } from '@angular/core';
-import { FilterMetadata, MenuItem, MessageService } from 'primeng/api';
-import { SplitButtonModule } from 'primeng/splitbutton';
-
+import { ConfirmationService, MessageService, ConfirmEventType } from 'primeng/api'
 
 @Component({
-  selector: 'app-table-inventario',
-  templateUrl: './table-inventario.component.html',
-  styleUrls: ['./table-inventario.component.css']
+    selector: 'app-table-inventario',
+    templateUrl: './table-inventario.component.html',
+    styleUrls: ['./table-inventario.component.css']
 })
-// datos quemados en la tabla de inventario
+
+
 export class TableInventarioComponent implements OnInit {
 
-  items: MenuItem[];
+    position: string = 'center';
+
+    constructor(private confirmationService: ConfirmationService, private messageService: MessageService) { }
+
+    ngOnInit(): void { }
 
     public products = [
-        {code : '001', name: 'Coca Cola',  category: 'Bebidas', type: 'Refresco', price: 10.00, quantity: 15, undefined: 'undefined'},
-        {code : '002', name: 'Pepsi',  category: 'Bebidas', type: 'Refresco', price: 10.00, quantity: 20, undefined: 'undefined'},
-        {code : '003', name: 'Fanta',  category: 'Bebidas', type: 'Refresco', price: 10.00, quantity: 5, undefined: 'undefined'},
-        {code : '004', name: 'Sprite',  category: 'Bebidas', type: 'Refresco', price: 10.00, quantity: 10, undefined: 'undefined'},
-        {code : '005', name: 'Coca Cola',  category: 'Bebidas', type: 'Refresco', price: 10.00, quantity: 15, undefined: 'undefined'},
-        {code : '006', name: 'Pepsi',  category: 'Bebidas', type: 'Refresco', price: 10.00, quantity: 20, undefined: 'undefined'},
-        {code : '007', name: 'Fanta',  category: 'Bebidas', type: 'queso', price: 10.00, quantity: 20, undefined: 'undefined'},
-        {code : '008', name: 'Sprite',  category: 'Bebidas', type: 'Refresco', price: 10.00, quantity: 10, undefined: 'undefined'},
-        {code : '009', name: 'Coca Cola',  category: 'Bebidas', type: 'Refresco', price: 10.00, quantity: 0, undefined: 'undefined'},
-        {code : '010', name: 'Pepsi',  category: 'Bebidas', type: 'Refresco', price: 10.00, quantity: 0, undefined:'undefined'},
+        { id: 1, name: 'Coca Cola', category: 'Bebidas', type: 'Refresco', price_unit: 10.00, stock: 15, photo: 'null', p_reorden: 'null' },
+        { id: 2, name: 'Pepsi', category: 'Bebidas', type: 'Refresco', price_unit: 12.00, stock: 20, photo: 'null', p_reorden: 'null' },
+        { id: 3, name: 'Sprite', category: 'Bebidas', type: 'Refresco', price_unit: 11.00, stock: 18, photo: 'null', p_reorden: 'null' }
     ];
 
-    first = 0;
-    rows = 10;
-    totalRecords = 120;
+    confirmPosition(position: string, productId: number) {
+        this.position = position;
 
-constructor(/*private messageService: MessageService*/) {
-        this.items = [
-            {
-                label: 'Producto',
-                styleClass: 'p-splitButton-drop',
-                routerLink: ['agregar-producto']
-            },
-            {
-                label: 'Tipo',
-                styleClass: 'p-splitButton-drop'
-            },
-            // { separator: true },
-            // { label: 'Setup', icon: 'pi pi-cog', routerLink: ['/setup'] }
-        ];
+        const product = this.products.find((p) => p.id === productId);
+
+        if (product) {
+            this.confirmationService.confirm({
+                message: `¿Quieres eliminar el registro de ${product.name}?`,
+                header: 'Confirmar Eliminación',
+                icon: 'pi pi-info-circle',
+                accept: () => {
+                    this.messageService.add({ severity: 'info', summary: 'Operación Exitosa', detail: 'Registro eliminado' });
+                },
+                reject: (type: ConfirmEventType) => {
+                    switch (type) {
+                        case ConfirmEventType.REJECT:
+                            this.messageService.add({ severity: 'error', summary: 'Operación Fallida', detail: 'Registro no eliminado' });
+                            break;
+                        case ConfirmEventType.CANCEL:
+                            this.messageService.add({ severity: 'warn', summary: 'Operación Cancelada', detail: 'Cancelado' });
+                            break;
+                    }
+                },
+                key: 'positionDialog'
+            });
+        }
     }
 
-    // Para el SearchBar
-    value: string | undefined;
-    value2: string | undefined;
-
-ngOnInit(): void {
 
 }
-
-onPageChange(event: any){
-  this.first = event.first;
-  this.rows = event.rows;
-
-}
-
-filters: { [s: string]: FilterMetadata } = {};
-
-// save(severity: string) {
-//   this.messageService.add({ severity: severity, summary: 'Success', detail: 'Data Saved' });
-// }
-
-// update() {
-//   this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Data Updated' });
-// }
-
-// delete() {
-//   this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Data Deleted' });
-// }
-
-}
-
-

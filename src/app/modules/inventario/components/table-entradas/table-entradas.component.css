@@ -19,12 +19,6 @@ th {
     }
 }
 
-.td-buttons {
-    display: flex;
-    justify-content: space-between;
-}
-
-
 @media (max-width: 550px) {
     .header-table {
         flex-direction: column;
