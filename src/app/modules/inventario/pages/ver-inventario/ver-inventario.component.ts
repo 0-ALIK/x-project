@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { MenuItem } from 'primeng/api';
+import { MenuItem, MessageService } from 'primeng/api';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DialogAgregarCategoriaComponent } from '../../components/dialog-agregar-categoria/dialog-agregar-categoria.component';
+import { DialogRealizarCompraComponent } from '../../components/dialog-realizar-compra/dialog-realizar-compra.component';
 
 @Component({
     selector: 'app-ver-inventario',
@@ -13,12 +16,14 @@ export class VerInventarioComponent {
     activeItem: MenuItem;
 
     visibleCompra: boolean = false;
+    ref: DynamicDialogRef | undefined;
 
-    constructor() {
+    constructor(public dialogService: DialogService, public messageService: MessageService) {
+
         this.items = [
             { label: 'Marca', routerLink: ['agregar-marca'] },
             { label: 'Producto', routerLink: ['agregar-producto'] },
-            { label: 'Categoría' },
+            { label: 'Categoría', command: () => { this.showAgregarCategoria(); } },
             { separator: true },
             { label: 'Realizar compra', command: () => { this.showRealizarCompra(); } }
         ];
@@ -35,8 +40,12 @@ export class VerInventarioComponent {
         this.activeItem = event;
     }
 
+    showAgregarCategoria(){
+        this.ref = this.dialogService.open(DialogAgregarCategoriaComponent, { header: 'Agregar Categoría'});
+    }
+
     showRealizarCompra() {
-        this.visibleCompra = true;
+        this.ref = this.dialogService.open(DialogRealizarCompraComponent, { header: 'Realizar Compra'});
     }
 
 }
