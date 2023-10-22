@@ -21,7 +21,7 @@ export class VentasTableComponent implements OnInit {
             },
             empresa: {
                 nombre: 'Dell',
-                logo: 'https://res.cloudinary.com/duwsb7fbe/image/upload/v1697773715/xd_upxbh0.jpg'
+                foto: 'https://res.cloudinary.com/duwsb7fbe/image/upload/v1697773715/xd_upxbh0.jpg'
             },
             fecha: new Date(),
             forma_pago: 'tarjeta',
@@ -35,7 +35,7 @@ export class VentasTableComponent implements OnInit {
             },
             empresa: {
                 nombre: 'Dell',
-                logo: 'https://res.cloudinary.com/duwsb7fbe/image/upload/v1697773715/xd_upxbh0.jpg'
+                foto: 'https://res.cloudinary.com/duwsb7fbe/image/upload/v1697773715/xd_upxbh0.jpg'
             },
             fecha: new Date(),
             forma_pago: 'tarjeta',

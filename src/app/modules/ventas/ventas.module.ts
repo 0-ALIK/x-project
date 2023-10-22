@@ -8,13 +8,15 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { AvatarModule } from 'primeng/avatar';
-import { TagModule } from 'primeng/tag'
+import { TagModule } from 'primeng/tag';
+import { VerPedidoByIdComponent } from './pages/ver-pedido-by-id/ver-pedido-by-id.component'
 
 
 @NgModule({
     declarations: [
         VerVentasComponent,
-        VentasTableComponent
+        VentasTableComponent,
+        VerPedidoByIdComponent
     ],
     imports: [
         CommonModule,
