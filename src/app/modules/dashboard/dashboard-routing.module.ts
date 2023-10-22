@@ -21,7 +21,7 @@ const routes: Routes = [
             },
             {
                 path: 'tickets',
-                redirectTo: ''
+                loadChildren: () => import('../tickets/tickets.module').then(m => m.TicketsModule)
             },
             {
                 path: 'chat',
