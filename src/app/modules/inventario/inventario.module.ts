@@ -9,6 +9,9 @@ import { PaginatorModule } from 'primeng/paginator';
 import { ButtonModule } from 'primeng/button';
 import { SplitButtonModule } from 'primeng/splitbutton';
 import { InputTextModule } from 'primeng/inputtext';
+import { FileUploadModule } from 'primeng/fileupload';
+import { DividerModule } from 'primeng/divider';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 
 @NgModule({
   declarations: [
@@ -23,7 +26,10 @@ import { InputTextModule } from 'primeng/inputtext';
     PaginatorModule,
     ButtonModule,
     SplitButtonModule,
-    InputTextModule
+    InputTextModule,
+    FileUploadModule,
+    DividerModule,
+    AutoCompleteModule
   ]
 })
 export class InventarioModule { }

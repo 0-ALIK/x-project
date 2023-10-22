@@ -1,1 +1,53 @@
-<p>agregar-editar-producto works!</p>
+<div class="agregar-producto">
+    <div class="p-encabezado">
+        <h1>Agregar Producto</h1>
+    </div>
+    <div class="contenedor">
+        <div class="p-imagenProducto">
+            <div *ngIf="uploadedFiles.length > 0; else defaultImage">
+                <img [src]="uploadedFiles[0].objectURL" alt="Imagen subida" />
+            </div>
+            <ng-template #defaultImage>
+                <img src="https://camarasal.com/wp-content/uploads/2020/08/default-image-5-1.jpg"
+                    alt="imagen_predeterminada" />
+            </ng-template>
+            <br><br>
+            <p-fileUpload name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php"
+                (onUpload)="onUpload($event)" [multiple]="false" accept="image/*" [maxFileSize]="1000000">
+                <ng-template pTemplate="content">
+                    <ul *ngIf="uploadedFiles.length">
+                        <li *ngFor="let file of uploadedFiles">{{ file.name }} - {{ file.size }} bytes</li>
+                    </ul>
+                </ng-template>
+            </p-fileUpload>
+        </div>
+        <div class="p-agregarProducto">
+            <h3>Información general del producto</h3>
+            <p-divider></p-divider>
+            <form action="" method="post">
+                <div>
+                    <label for="">Nombre:</label>
+                    <br><br>
+                    <input type="text">
+                </div>
+                <br><br>
+                <div>
+                    <label for="">Categoria:</label>
+                    <br><br>
+                    <p-autoComplete [(ngModel)]="selectedCategorie" [dropdown]="true" [suggestions]="filteredCategories"
+                        (completeMethod)="filterCategory($event)"></p-autoComplete>
+                </div>
+                <br><br>
+                <div>
+                    <label for="">Descripcion:</label>
+                    <br><br>
+                    <textarea name="" id="" cols="30" rows="10"></textarea>
+                </div>
+                <br><br>
+                <div>
+                    <button type="submit" name="agregar">Agregar Producto</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,49 @@
+.agregar-producto{
+    padding: 1%;
+}
+
+.contenedor{
+    display: flex;
+    align-items: start;
+}
+
+.p-imagen, .p-agregarProducto {
+    padding-left: 3%;
+}
+
+.p-imagenProducto img {
+    width: 350px;
+    height: auto;
+}
+
+.p-fileUpload {
+    width: 350px;
+}
+
+.p-fileupload-buttonbar .ui-button{
+    font-size: 10px;
+    padding: 40px 20px;
+}
+
+.p-agregarProducto label {
+    display: inline-block;
+    width: 200px;
+}
+
+.p-agregarProducto input, .p-agregarProducto textarea, .p-autoComplete {
+    width: 100%;
+}
+
+.p-agregarProducto textarea {
+    resize: none;
+}
+
+.p-agregarProducto button {
+    display: block;
+    margin: 0 auto;
+}
+
+
+h3{
+    font-size: x-large;
+}
