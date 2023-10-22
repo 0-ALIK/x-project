@@ -1,0 +1,64 @@
+<p-table
+    #tablePedidos
+    [value]="pedidos"
+    styleClass="p-datatable-gridlines"
+    [tableStyle]="{ 'min-width': '50rem' }"
+    [paginator]="true"
+    [rows]="10"
+    [showCurrentPageReport]="true"
+    currentPageReportTemplate="Hay un total de {totalRecords} registros">
+
+    <ng-template pTemplate="caption">
+        <div class="caption">
+            <div>
+                <p-button label="Limpiar" [outlined]="true" icon="pi pi-filter-slash"></p-button>
+                <p-button label="Reporte" [style]="{ marginLeft: 'var(--spacing-3)' }" icon="pi pi-chart-bar"></p-button>
+            </div>
+            <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input type="text" pInputText placeholder="Buscar...">
+            </span>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Cliente</th>
+            <th>Fecha</th>
+            <th>Estado</th>
+            <th>Forma de pago</th>
+            <th>Empresa</th>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-pedido>
+        <tr>
+            <td class="celda-cliente">
+                <div>
+                    <p-avatar [image]="pedido.cliente.foto" shape="circle"></p-avatar>
+                </div>
+                <p class="celda-cliente-nombre">{{ pedido.cliente.nombre + ' ' + pedido.cliente.apellido }}</p>
+            </td>
+
+            <td>
+                {{ pedido.fecha | date }}
+            </td>
+
+            <td>
+                <p-tag [value]="pedido.estado"></p-tag>
+            </td>
+
+            <td>
+                {{ pedido.forma_pago }}
+            </td>
+
+            <td class="celda-cliente">
+                <div>
+                    <p-avatar [image]="pedido.empresa.logo" shape="square"></p-avatar>
+                </div>
+                <p class="celda-cliente-nombre">{{ pedido.empresa.nombre }}</p>
+            </td>
+        </tr>
+    </ng-template>
+
+</p-table>
