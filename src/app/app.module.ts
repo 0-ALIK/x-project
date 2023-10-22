@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { GenerarReporteClientesComponent } from './modules/analitica/generar-reporte-clientes/generar-reporte-clientes.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LandingPageComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    GenerarReporteClientesComponent,
   ],
   imports: [
     BrowserModule,
