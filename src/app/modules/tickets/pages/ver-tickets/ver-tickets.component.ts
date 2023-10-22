@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class VerTicketsComponent {
 
-  products: any[] = [
+  products: object[] = [
     { id:'#2345',usuario:'Jose M.',asunto:'Pedido Tardio',prioridad:'alta',estatus:'Revisión',fecha:'29/03/2023'},
     { id:'#4567',usuario:'Julian M.',asunto:'Pedido Tardio',prioridad:'alta',estatus:'Revisión',fecha:'25/03/2023'},
     { id:'#4576',usuario:'Moises M.',asunto:'Pedido Tardio',prioridad:'baja',estatus:'Revisión',fecha:'22/03/2023'},
