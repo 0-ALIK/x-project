@@ -1,0 +1,24 @@
+.card{
+    display: flex;
+    background-color: var(--surface-card);
+    padding: var(--spacing-4);
+    border-radius: var(--border-radius);
+    align-items: center;
+    gap: var(--spacing-4);
+    justify-content: space-between;
+    margin: var(--spacing-3);
+    border: 2px solid rgb(91, 90, 90);
+}
+
+.card h2, .card p{
+    margin: 0;
+    padding: 0;
+}
+
+.boton{
+    margin-left: var(--spacing-4);
+}
+
+.contenido{
+    display: flex;
+}

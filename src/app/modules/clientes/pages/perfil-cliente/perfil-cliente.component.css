@@ -1,0 +1,22 @@
+.tabMenu label{
+    padding-left: var(--spacing-4);
+}
+
+.top{
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: var(--spacing-4) ;
+}
+
+
+
+.boton{
+    align-self: end;
+}
+
+.direcciones{
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+

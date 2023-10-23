@@ -1,13 +1,18 @@
-
+<ng-container *ngIf="activeItem?.label && activeItem?.label === 'Clientes'">
+    <h1>LISTADO CLIENTES</h1>
+</ng-container>
+<ng-container *ngIf="activeItem?.label && activeItem?.label === 'Empresas'">
+    <h1>LISTADO CLIENTES</h1>
+</ng-container>
 <p-tabMenu (activeItemChange)="onChange($event)" [model]="items" [activeItem]="activeItem"></p-tabMenu>
 
 <ng-container *ngIf="activeItem?.label && activeItem?.label === 'Clientes'">
-    <h1>LISTADO CLIENTES</h1>
+
     <app-clientes-table></app-clientes-table>
 </ng-container>
 
 <ng-container *ngIf="activeItem?.label && activeItem?.label === 'Empresas'">
-    <h1>LISTADO EMPRESAS</h1>
+
     <app-empresas-table></app-empresas-table>
 </ng-container>
 
