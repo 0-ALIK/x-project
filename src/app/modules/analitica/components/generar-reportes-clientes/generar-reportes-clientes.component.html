@@ -1,22 +1,70 @@
-<div class="">
-    <form action="">
-    <!-- Nombre del reporte -->
-        <div class="">
-            <span class="p-float-label">
-            <input pInputText id="nameInforme" />
-            <label htmlFor="username">Nombre del Informe</label>
-            </span>
-        </div>
+<div class="container">
+    <div class="centro-container scroll">
+        <form action="" class="centro-container-">
+            <h1>INFORME DE CLIENTES</h1>
+            <!-- Nombre del informe -->
+            <div >
+                <span class="p-float-label">
+                <input pInputText id="nameInforme" />
+                <label htmlFor="username">Nombre del Informe</label>
+                </span>
+            </div>
 
-            <!-- tipo formato -->
-        <p-dropdown [options]="formatos" [(ngModel)]="selectedFormato" optionLabel="nameFormato"></p-dropdown>
-        <!-- tipo de reporte -->
-        <p-dropdown [options]="formatos" [(ngModel)]="selectedFormato" optionLabel="name2"></p-dropdown>
+            <h2>Formato del informe</h2>
+            <p-dropdown [options]="formatos" [(ngModel)]="selectedFormato" optionLabel="nameFormato"></p-dropdown><br>
 
-        <!-- Segmentar reporte -->
-        <div *ngFor="let category of categories" class="field-checkbox">
-            <p-checkbox name="group" [value]="category" [(ngModel)]="selectedCategories" [inputId]="category.key"></p-checkbox>
-            <label [for]="category.key">{{ category.name }}</label>
-        </div>
-    </form>
+            <h2>Tipo de informe</h2>
+            <p-dropdown [options]="tiposReportes" [(ngModel)]="selectedTipos" optionLabel="nameTipos"></p-dropdown>
+
+            <h2>Segmentar según: </h2>
+            <!-- PRECIO -->
+            <div>
+                <h3>Precio</h3>
+                <span class="p-float-label">
+                    <p-inputNumber [(ngModel)]="value1" inputId="currency-us" mode="currency" currency="USD" locale="en-US"> </p-inputNumber>
+                    <label htmlFor="number-input">Minimo</label>
+                </span>
+                <span class="p-float-label">
+                    <p-inputNumber [(ngModel)]="value1" inputId="currency-us" mode="currency" currency="USD" locale="en-US"> </p-inputNumber>
+                    <label htmlFor="number-input">Máximo</label>
+                </span>
+            </div>
+
+            <!-- CANTIDA -->
+            <div class="card flex flex-wrap gap-3 p-fluid">
+                <h3>Cantidad en Stock</h3>
+                    <div class="flex-auto">
+                        <label class="mb-2 block font-bold" for="stacked">Minima</label>
+                        <p-inputNumber [(ngModel)]="value1" [showButtons]="true" inputId="stacked" > </p-inputNumber>
+                    </div>
+                    <div class="flex-auto">
+                        <label class="mb-2 block font-bold" for="stacked">Máxima</label>
+                        <p-inputNumber [(ngModel)]="value1" [showButtons]="true" inputId="stacked" > </p-inputNumber>
+                    </div>
+            </div>
+
+            <!-- TIPO PRODUCTO -->
+            <div>
+                <h3>Tipo de producto</h3>
+                <p-multiSelect [options]="segmentos" [(ngModel)]="selectedSegmentos" defaultLabel="Elija un una segmentación" optionLabel="nameSegmento" display="chip"></p-multiSelect>
+
+            </div>
+
+            <div>
+                <h3>Categoria</h3>
+                <p-multiSelect [options]="segmentos" [(ngModel)]="selectedSegmentos" defaultLabel="Elija un una segmentación" optionLabel="nameSegmento" display="chip"></p-multiSelect>
+
+            </div>
+
+            <div>
+                <h3>Marca</h3>
+                <p-multiSelect [options]="segmentos" [(ngModel)]="selectedSegmentos" defaultLabel="Elija un una segmentación" optionLabel="nameSegmento" display="chip"></p-multiSelect>
+
+            </div>
+            <!-- botón -->
+            <div class="card flex justify-content-center">
+                <p-button label="Generar Informe" [loading]="loading" loadingIcon="pi pi-spinner" (onClick)="load()"></p-button>
+            </div>
+        </form>
+    </div>
 </div>

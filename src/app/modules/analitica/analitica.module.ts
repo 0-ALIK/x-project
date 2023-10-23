@@ -9,7 +9,10 @@ import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule } from '@angular/forms';
 import { CheckboxModule } from 'primeng/checkbox';
 import { InputTextModule } from 'primeng/inputtext';
-import { FormControl, FormGroup } from '@angular/forms';
+import { ButtonModule } from 'primeng/button';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { InputNumberModule } from 'primeng/inputnumber';
+
 
 @NgModule({
     declarations: [
@@ -22,8 +25,9 @@ import { FormControl, FormGroup } from '@angular/forms';
         DropdownModule,
         CheckboxModule,
         InputTextModule,
-        FormControl,
-        FormGroup,
+        ButtonModule,
+        MultiSelectModule,
+        InputNumberModule,
         AnaliticaRoutingModule
     ],
     // Recuerden exportar sus componentes aquí para que los otros módulos puedas acceder a ellos
