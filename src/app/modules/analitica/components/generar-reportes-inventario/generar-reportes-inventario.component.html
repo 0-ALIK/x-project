@@ -11,21 +11,21 @@
     </div>
 
     <h2>Formato del informe</h2>
-    <p-dropdown [options]="formatos" [(ngModel)]="selectedFormato" optionLabel="nameFormato"></p-dropdown><br>
+    <p-dropdown [ngModelOptions]="{standalone: true}" [options]="formatos" [(ngModel)]="selectedFormato" optionLabel="nameFormato"></p-dropdown><br>
 
     <h2>Tipo de informe</h2>
-    <p-dropdown [options]="tiposReportes" [(ngModel)]="selectedTipos" optionLabel="nameTipos"></p-dropdown>
+    <p-dropdown [ngModelOptions]="{standalone: true}" [options]="tiposReportes" [(ngModel)]="selectedTipos" optionLabel="nameTipos"></p-dropdown>
 
     <h2>Segmentar según: </h2>
     <!-- PRECIO -->
     <div>
         <h3>Precio</h3>
-        <span class="p-float-label">
-            <p-inputNumber [(ngModel)]="value1" inputId="currency-us" mode="currency" currency="USD" locale="en-US"> </p-inputNumber>
+        <span class="p-float-label" [style]="{'margin-bottom': 'var(--spacing-4)'}">
+            <p-inputNumber [ngModelOptions]="{standalone: true}" [(ngModel)]="value1" inputId="currency-us" mode="currency" currency="USD" locale="en-US"> </p-inputNumber>
             <label htmlFor="number-input">Minimo</label>
         </span>
         <span class="p-float-label">
-            <p-inputNumber [(ngModel)]="value1" inputId="currency-us" mode="currency" currency="USD" locale="en-US"> </p-inputNumber>
+            <p-inputNumber [ngModelOptions]="{standalone: true}" [(ngModel)]="value1" inputId="currency-us" mode="currency" currency="USD" locale="en-US"> </p-inputNumber>
             <label htmlFor="number-input">Máximo</label>
         </span>
     </div>
@@ -35,30 +35,30 @@
         <h3>Cantidad en Stock</h3>
             <div class="flex-auto">
                 <label class="mb-2 block font-bold" for="stacked">Minima</label>
-                <p-inputNumber [(ngModel)]="value1" [showButtons]="true" inputId="stacked" > </p-inputNumber>
+                <p-inputNumber [ngModelOptions]="{standalone: true}" [(ngModel)]="value1" [showButtons]="true" inputId="stacked" > </p-inputNumber>
             </div>
             <div class="flex-auto">
                 <label class="mb-2 block font-bold" for="stacked">Máxima</label>
-                <p-inputNumber [(ngModel)]="value1" [showButtons]="true" inputId="stacked" > </p-inputNumber>
+                <p-inputNumber [ngModelOptions]="{standalone: true}" [(ngModel)]="value1" [showButtons]="true" inputId="stacked" > </p-inputNumber>
             </div>
     </div>
 
     <!-- TIPO PRODUCTO -->
     <div>
         <h3>Tipo de producto</h3>
-        <p-multiSelect [options]="segmentos" [(ngModel)]="selectedSegmentos" defaultLabel="Elija un una segmentación" optionLabel="nameSegmento" display="chip"></p-multiSelect>
+        <p-multiSelect [ngModelOptions]="{standalone: true}" [options]="segmentos" [(ngModel)]="selectedSegmentos" defaultLabel="Elija un una segmentación" optionLabel="nameSegmento" display="chip"></p-multiSelect>
 
     </div>
 
     <div>
         <h3>Categoria</h3>
-        <p-multiSelect [options]="segmentos" [(ngModel)]="selectedSegmentos" defaultLabel="Elija un una segmentación" optionLabel="nameSegmento" display="chip"></p-multiSelect>
+        <p-multiSelect [ngModelOptions]="{standalone: true}" [options]="segmentos" [(ngModel)]="selectedSegmentos" defaultLabel="Elija un una segmentación" optionLabel="nameSegmento" display="chip"></p-multiSelect>
 
     </div>
 
     <div>
         <h3>Marca</h3>
-        <p-multiSelect [options]="segmentos" [(ngModel)]="selectedSegmentos" defaultLabel="Elija un una segmentación" optionLabel="nameSegmento" display="chip"></p-multiSelect>
+        <p-multiSelect [ngModelOptions]="{standalone: true}" [options]="segmentos" [(ngModel)]="selectedSegmentos" defaultLabel="Elija un una segmentación" optionLabel="nameSegmento" display="chip"></p-multiSelect>
 
     </div>
     <!-- botón -->

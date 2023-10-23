@@ -22,25 +22,27 @@ interface Formato{
   styleUrls: ['./generar-reportes-inventario.component.css']
 })
 export class GenerarReportesInventarioComponent implements OnInit {
-    precio: number = 50;
-    value: string | undefined;
+    public precio: number = 50;
+    public value: string | undefined;
 
-    value1: number = 20;
+    public value1: number = 20;
 
-    value2: number = 10.5;
+    public value2: number = 10.5;
 
-    value3: number = 25;
+    public value3: number = 25;
 
-    segmentos: Segmentacion[] | undefined;
-        selectedSegmentos: Segmentacion[] | undefined;
+    public segmentos: Segmentacion[] | undefined;
+    public selectedSegmentos: Segmentacion[] | undefined;
 
-    formatos: Formato[] | undefined;
-        selectedFormato: Formato | undefined;
+    public formatos: Formato[] | undefined;
+    public selectedFormato: Formato | undefined;
 
-    tiposReportes: TiposReportes[] | undefined;
-        selectedTipos: TiposReportes | undefined;
+    public tiposReportes: TiposReportes[] | undefined;
+    public selectedTipos: TiposReportes | undefined;
 
-    ngOnInit() {
+    public loading: boolean = false;
+
+    public ngOnInit(): void {
         this.formatos = [
             { nameFormato: '.txt', codeFormato: 'txt' },
             { nameFormato: '.doc', codeFormato: 'doc' },
@@ -68,9 +70,9 @@ export class GenerarReportesInventarioComponent implements OnInit {
         ];
     }
 
-    loading: boolean = false;
 
-    load() {
+
+    public load(): void {
         this.loading = true;
 
         setTimeout(() => {
