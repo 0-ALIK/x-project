@@ -1,1 +1,4 @@
-<p>dialog-agregar-categoria works!</p>
+<div class="card flex justify-content-center">
+    <input type="text" pInputText [(ngModel)]="value" placeholder="Categoria..." />
+    <p-button label="Agregar" [loading]="loading" (onClick)="load()" [disabled]="!value"></p-button>
+</div>

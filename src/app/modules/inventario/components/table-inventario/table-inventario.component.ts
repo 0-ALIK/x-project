@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ConfirmationService, MessageService, ConfirmEventType } from 'primeng/api'
+import { Component } from '@angular/core';
+import { Table } from 'primeng/table';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { ConfirmationService, MessageService, ConfirmEventType } from 'primeng/api'
 import { DialogGenerarReporteComponent } from '../dialog-generar-reporte/dialog-generar-reporte.component';
 
 @Component({
@@ -9,15 +10,12 @@ import { DialogGenerarReporteComponent } from '../dialog-generar-reporte/dialog-
     styleUrls: ['./table-inventario.component.css']
 })
 
-
-export class TableInventarioComponent implements OnInit {
+export class TableInventarioComponent {
 
     position: string = 'center';
     ref: DynamicDialogRef | undefined;
 
     constructor(private confirmationService: ConfirmationService, private messageService: MessageService, public dialogService: DialogService) { }
-
-    ngOnInit(): void { }
 
     public products = [
         { id: 1, name: 'Coca Cola', category: 'Bebidas', type: 'Refresco', price_unit: 10.00, stock: 15, photo: 'null', p_reorden: 'null' },
@@ -54,8 +52,11 @@ export class TableInventarioComponent implements OnInit {
     }
 
     showGenerarReporte() {
-        this.ref = this.dialogService.open(DialogGenerarReporteComponent, { header: 'Generar Reporte'});
+        this.ref = this.dialogService.open(DialogGenerarReporteComponent, { header: 'Generar Reporte' });
     }
 
+    clear(table: Table) {
+        table.clear();
+    }
 
 }

@@ -1,29 +1,33 @@
 /* Ajuste del titulo */
 h1 {
-    margin: 0 1% 0 0;
+    margin: var(--spacing-0) var(--spacing-3) var(--spacing-0) var(--spacing-1);
 }
 
+/* Posiciona el boton de agregar al final */
 .split-menu  {
     display: flex;
     justify-content: flex-end;
-    margin-bottom: 1.5%;
+    margin-bottom: var(--spacing-3);
 }
 
+/* Define un fondo para la tabla */
 .table_background {
     background-color: var(--surface-a);
-    width: 100%;
 }
 
+/* Acomoda el subtitulo */
 .subtittle {
-    padding: 0;
-    margin: 0;
-    padding-left: 1%;
-    padding-top: 3%;
-    padding-bottom: 2%;
+    margin: var(--spacing-0);
+    padding: var(--spacing-0);
+    padding-left: var(--spacing-3);
+    padding-top: var(--spacing-5);
+    padding-bottom: var(--spacing-4);
+    color: var(--text-color);
 }
 
+/* Posiciona los tabs */
 .div-p-tabMenu {
     width: max-content;
-    margin-left: 1%;
-    margin-top: 2%;
+    margin-left: var(--spacing-1);
+    margin-top: var(--spacing-2);
 }

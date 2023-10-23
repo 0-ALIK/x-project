@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .formulario-container {
     background-color: #f5f5f5;
     padding: 20px;
@@ -114,4 +115,47 @@ button.p-button:hover {
 .p-col-12 {
     flex-basis: 100%;
     max-width: 100%;
+=======
+.div-contenedor {
+    display: flex;
+    justify-content: center;
+}
+
+.tittle {
+    font-size: var(--text-3xl);
+    padding: var(--spacing-1);
+}
+
+.div-body {
+    display: flex;
+}
+
+.add-photo {
+    margin-left: var(--spacing-8);
+}
+
+.flex {
+    display: flex;
+    margin-bottom: var(--spacing-3);
+}
+
+.flex-div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: var(--spacing-3);
+}
+
+.buttons {
+    display: flex;
+    justify-content: flex-end;
+
+    & .btn-agregar {
+        margin-right: var(--spacing-3);
+    }
+>>>>>>> a1355660e91cccfd3515a8ebcb64173107e61df4
 }
