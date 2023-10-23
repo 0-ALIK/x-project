@@ -22,6 +22,7 @@ h1 {
     padding-left: var(--spacing-3);
     padding-top: var(--spacing-5);
     padding-bottom: var(--spacing-4);
+    color: var(--text-color);
 }
 
 /* Posiciona los tabs */

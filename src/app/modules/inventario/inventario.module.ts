@@ -21,8 +21,13 @@ import { ToastModule } from 'primeng/toast';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { TabMenuModule } from 'primeng/tabmenu';
+import { FieldsetModule } from 'primeng/fieldset';
 import { InputTextModule } from 'primeng/inputtext';
 import { PaginatorModule } from 'primeng/paginator';
+import { FileUploadModule } from 'primeng/fileupload';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { DynamicDialogModule, DialogService } from 'primeng/dynamicdialog';
@@ -52,7 +57,12 @@ import { DynamicDialogModule, DialogService } from 'primeng/dynamicdialog';
     DialogModule,
     ToastModule,
     ConfirmDialogModule,
-    DynamicDialogModule
+    DynamicDialogModule,
+    FileUploadModule,
+    FieldsetModule,
+    MultiSelectModule,
+    InputNumberModule,
+    InputTextareaModule
   ],
   providers: [ ConfirmationService, MessageService, DialogService ]
 })

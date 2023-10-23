@@ -13,6 +13,10 @@ const routes: Routes = [
         component: VerInventarioComponent
     },
     {
+        path: 'ver-inventario',
+        component: VerInventarioComponent
+    },
+    {
         path: 'agregar-marca',
         component: AgregarMarcaComponent
     },

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Table } from 'primeng/table';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ConfirmationService, MessageService, ConfirmEventType } from 'primeng/api'
 import { DialogGenerarReporteComponent } from '../dialog-generar-reporte/dialog-generar-reporte.component';
@@ -8,7 +9,6 @@ import { DialogGenerarReporteComponent } from '../dialog-generar-reporte/dialog-
     templateUrl: './table-inventario.component.html',
     styleUrls: ['./table-inventario.component.css']
 })
-
 
 export class TableInventarioComponent {
 
@@ -53,6 +53,10 @@ export class TableInventarioComponent {
 
     showGenerarReporte() {
         this.ref = this.dialogService.open(DialogGenerarReporteComponent, { header: 'Generar Reporte' });
+    }
+
+    clear(table: Table) {
+        table.clear();
     }
 
 }
