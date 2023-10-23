@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { AnaliticaRoutingModule } from './analitica-routing.module';
 import { VerDashboardComponent } from './pages/ver-dashboard/ver-dashboard.component';
-import { GenerarReportesClientesComponent } from './components/generar-reportes-inventario/generar-reportes-inventario.component';
 
 import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule } from '@angular/forms';
@@ -12,12 +11,13 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { GenerarReportesInventarioComponent } from './components/generar-reportes-inventario/generar-reportes-inventario.component';
 
 
 @NgModule({
     declarations: [
         VerDashboardComponent,
-        GenerarReportesClientesComponent
+        GenerarReportesInventarioComponent
     ],
     imports: [
         CommonModule,

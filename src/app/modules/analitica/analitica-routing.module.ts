@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { VerDashboardComponent } from './pages/ver-dashboard/ver-dashboard.component';
 import { NotFoundComponent } from 'src/app/not-found/not-found.component';
-import { GenerarReportesInventarioComponent } from './components/generar-reportes-inventario/generar-reportes-inventario.component';
 
 const routes: Routes = [
     {
@@ -13,10 +12,6 @@ const routes: Routes = [
         path: '**',
         component: NotFoundComponent
     },
-    {
-        path: 'app-generar-reportes-clientes',
-        component: GenerarReportesInventarioComponent
-    }
 ];
 
 @NgModule({

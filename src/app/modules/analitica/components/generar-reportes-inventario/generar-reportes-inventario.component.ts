@@ -17,7 +17,7 @@ interface Formato{
 
 
 @Component({
-  selector: 'app-generar-reportes-inventario',
+  selector: 'ana-reporte-inventario',
   templateUrl: './generar-reportes-inventario.component.html',
   styleUrls: ['./generar-reportes-inventario.component.css']
 })
