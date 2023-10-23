@@ -17,11 +17,11 @@ interface Formato{
 
 
 @Component({
-  selector: 'app-generar-reportes-clientes',
-  templateUrl: './generar-reportes-clientes.component.html',
-  styleUrls: ['./generar-reportes-clientes.component.css']
+  selector: 'app-generar-reportes-inventario',
+  templateUrl: './generar-reportes-inventario.component.html',
+  styleUrls: ['./generar-reportes-inventario.component.css']
 })
-export class GenerarReportesClientesComponent implements OnInit {
+export class GenerarReportesInventarioComponent implements OnInit {
     precio: number = 50;
     value: string | undefined;
 
