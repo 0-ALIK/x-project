@@ -21,11 +21,11 @@
     <div>
         <h3>Precio</h3>
         <span class="p-float-label" [style]="{'margin-bottom': 'var(--spacing-4)'}">
-            <p-inputNumber [ngModelOptions]="{standalone: true}" [(ngModel)]="value1" inputId="currency-us" mode="currency" currency="USD" locale="en-US"> </p-inputNumber>
+            <p-inputNumber [ngModelOptions]="{standalone: true}" [(ngModel)]="precio1" inputId="currency-us" mode="currency" currency="USD" locale="en-US"> </p-inputNumber>
             <label htmlFor="number-input">Minimo</label>
         </span>
         <span class="p-float-label">
-            <p-inputNumber [ngModelOptions]="{standalone: true}" [(ngModel)]="value1" inputId="currency-us" mode="currency" currency="USD" locale="en-US"> </p-inputNumber>
+            <p-inputNumber [ngModelOptions]="{standalone: true}" [(ngModel)]="precio2" inputId="currency-us" mode="currency" currency="USD" locale="en-US"> </p-inputNumber>
             <label htmlFor="number-input">Máximo</label>
         </span>
     </div>
@@ -39,7 +39,7 @@
             </div>
             <div class="flex-auto">
                 <label class="mb-2 block font-bold" for="stacked">Máxima</label>
-                <p-inputNumber [ngModelOptions]="{standalone: true}" [(ngModel)]="value1" [showButtons]="true" inputId="stacked" > </p-inputNumber>
+                <p-inputNumber [ngModelOptions]="{standalone: true}" [(ngModel)]="value2" [showButtons]="true" inputId="stacked" > </p-inputNumber>
             </div>
     </div>
 
