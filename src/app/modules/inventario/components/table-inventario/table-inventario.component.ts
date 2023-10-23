@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfirmationService, MessageService, ConfirmEventType } from 'primeng/api'
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DialogGenerarReporteComponent } from '../dialog-generar-reporte/dialog-generar-reporte.component';
 
 @Component({
     selector: 'app-table-inventario',
@@ -11,8 +13,9 @@ import { ConfirmationService, MessageService, ConfirmEventType } from 'primeng/a
 export class TableInventarioComponent implements OnInit {
 
     position: string = 'center';
+    ref: DynamicDialogRef | undefined;
 
-    constructor(private confirmationService: ConfirmationService, private messageService: MessageService) { }
+    constructor(private confirmationService: ConfirmationService, private messageService: MessageService, public dialogService: DialogService) { }
 
     ngOnInit(): void { }
 
@@ -48,6 +51,10 @@ export class TableInventarioComponent implements OnInit {
                 key: 'positionDialog'
             });
         }
+    }
+
+    showGenerarReporte() {
+        this.ref = this.dialogService.open(DialogGenerarReporteComponent, { header: 'Generar Reporte'});
     }
 
 

@@ -5,7 +5,6 @@ import { RouterModule } from '@angular/router';
 import { InventarioRoutingModule } from './inventario-routing.module';
 
 import { VerInventarioComponent } from './pages/ver-inventario/ver-inventario.component';
-import { AgregarEditarProductoComponent } from './pages/agregar-editar-producto/agregar-editar-producto.component';
 import { AgregarMarcaComponent } from './pages/agregar-marca/agregar-marca.component';
 import { AgregarProductoComponent } from './pages/agregar-producto/agregar-producto.component';
 import { EditarMarcaComponent } from './pages/editar-marca/editar-marca.component';
@@ -24,14 +23,17 @@ import { InputTextModule } from 'primeng/inputtext';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { MenuModule } from 'primeng/menu';
 import { DialogModule } from 'primeng/dialog';
-import { ConfirmationService, MessageService, ConfirmEventType } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { DialogService } from 'primeng/dynamicdialog';
+import { FormsModule } from '@angular/forms';
+import { FileUploadModule } from 'primeng/fileupload';
 
 @NgModule({
   declarations: [
     VerInventarioComponent,
-    AgregarEditarProductoComponent,
     TableInventarioComponent,
     TableEntradasComponent,
     ModalRealizarCompraComponent,
@@ -54,8 +56,16 @@ import { ToastModule } from 'primeng/toast';
     MenuModule,
     DialogModule,
     ToastModule,
-    ConfirmDialogModule
-  ],
-  providers: [ ConfirmationService, MessageService ]
+    ConfirmDialogModule,
+    FormsModule,
+    FileUploadModule
+ ],
+  providers: [
+    ConfirmationService, MessageService, DialogService
+ ],
+
+  exports: [AgregarProductoComponent],
+
 })
 export class InventarioModule { }
+export class AgregarProductoModule { }

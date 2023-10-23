@@ -1,1 +1,34 @@
-<p>agregar-producto works!</p>
+<div class="formulario-container">
+    <form>
+        <fieldset>
+            <legend>Agregar Producto</legend>
+            <div class="p-field">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" [(ngModel)]="nombre" name="nombre" pInputText>
+            </div>
+            <div class="p-field">
+                <label for="categoria">Categoría:</label>
+                <input type="text" id="categoria" [(ngModel)]="categoria" name="categoria" pInputText>
+            </div>
+            <div class="p-field">
+                <label for="descripcion">Descripción:</label>
+                <textarea id="descripcion" [(ngModel)]="descripcion" name="descripcion" pInputTextarea></textarea>
+            </div>
+            <div class="imagen-container">
+                <img src="https://via.placeholder.com/350x150" alt="Imagen del producto">
+            </div>
+            <div class="card flex justify-content-center">
+                <p-toast></p-toast>
+                <p-fileUpload name="demo[]" url="https://primefaces.org/cdn/api/upload.php" (onUpload)="onUpload($event)" [multiple]="true" accept="image/*" maxFileSize="10000">
+                    <ng-template pTemplate="content">
+                        <ul *ngIf="uploadedFiles.length">
+                            <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+                        </ul>
+                    </ng-template>
+                </p-fileUpload>
+            </div>
+
+            <button type="submit" pButton>Agregar Producto</button>
+        </fieldset>
+    </form>
+</div>
