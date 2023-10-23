@@ -1,0 +1,22 @@
+<div class="">
+    <form action="">
+    <!-- Nombre del reporte -->
+        <div class="">
+            <span class="p-float-label">
+            <input pInputText id="nameInforme" />
+            <label htmlFor="username">Nombre del Informe</label>
+            </span>
+        </div>
+
+            <!-- tipo formato -->
+        <p-dropdown [options]="formatos" [(ngModel)]="selectedFormato" optionLabel="nameFormato"></p-dropdown>
+        <!-- tipo de reporte -->
+        <p-dropdown [options]="formatos" [(ngModel)]="selectedFormato" optionLabel="name2"></p-dropdown>
+
+        <!-- Segmentar reporte -->
+        <div *ngFor="let category of categories" class="field-checkbox">
+            <p-checkbox name="group" [value]="category" [(ngModel)]="selectedCategories" [inputId]="category.key"></p-checkbox>
+            <label [for]="category.key">{{ category.name }}</label>
+        </div>
+    </form>
+</div>

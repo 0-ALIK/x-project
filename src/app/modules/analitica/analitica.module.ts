@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { AnaliticaRoutingModule } from './analitica-routing.module';
 import { VerDashboardComponent } from './pages/ver-dashboard/ver-dashboard.component';
-import { GenerarReportesClientesComponent } from './generar-reportes-clientes/generar-reportes-clientes.component';
+import { GenerarReportesClientesComponent } from './components/generar-reportes-clientes/generar-reportes-clientes.component';
 
 import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule } from '@angular/forms';
