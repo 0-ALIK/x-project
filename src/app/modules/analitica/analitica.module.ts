@@ -3,11 +3,14 @@ import { CommonModule } from '@angular/common';
 
 import { AnaliticaRoutingModule } from './analitica-routing.module';
 import { VerDashboardComponent } from './pages/ver-dashboard/ver-dashboard.component';
+import { GenerarReporteClientesComponent } from './components/generar-reporte-clientes/generar-reporte-clientes.component';
 
+/* Acá haces los imports de los componentes de prime ng */
 
 @NgModule({
     declarations: [
-        VerDashboardComponent
+        VerDashboardComponent,
+        GenerarReporteClientesComponent
     ],
     imports: [
         CommonModule,
