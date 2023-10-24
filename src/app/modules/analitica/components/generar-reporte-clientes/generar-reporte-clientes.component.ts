@@ -29,13 +29,17 @@ interface Productos{
 })
 export class GenerarReporteClientesComponent implements OnInit {
   public provincias: Provincias[] | undefined;
-  public selectedProvincia: Provincias[] | undefined;
+  public selectedProvinciaCliente: Provincias[] | undefined;
+  public selectedProvinciaMas: Provincias[] | undefined;
+  public selectedProvinciaMenos: Provincias[] | undefined;
   public productos: Productos[] | undefined;
-  public selectedProductos: Productos[] | undefined;
+  public selectedProductoCliente: Productos[] | undefined;
+  public selectedProductoMas: Productos[] | undefined;
+  public selectedProductoMenos: Productos[] | undefined;
   public formatos: Formato[] | undefined;
   public selectedFormato: Formato [] | undefined;
   public tiposReportes: TiposDeReportes [] | undefined;
-  public selectedTipos: TiposDeReportes [] | undefined;
+  public selectedTipo: TiposDeReportes [] | undefined;
   public loading: boolean= false;
   
   public ngOnInit(): void {
