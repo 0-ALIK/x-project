@@ -1,5 +1,5 @@
 import { Component, OnInit} from '@angular/core';
-
+//Interfaces
 interface Formato{
   nameFormato: string,
   codeFormato: string
@@ -20,7 +20,10 @@ interface Productos{
   codeProducto: string,
 }
 
-
+interface Genero{
+  nameGenero: String,
+  codeGenero: String
+}
 
 @Component({
   selector: 'estefanie-generar-reporte-clientes',
@@ -28,14 +31,16 @@ interface Productos{
   styleUrls: ['./generar-reporte-clientes.component.css']
 })
 export class GenerarReporteClientesComponent implements OnInit {
+  public generos: Genero[] | undefined;
+  public selectedGenero: Genero[] | undefined;
+  public nombreCliente: string ="";
+  public minEdad: number | undefined;
+  public maxEdad: number | undefined;
+  public minPedidos: number | undefined;
+  public maxPedidos: number | undefined;
   public provincias: Provincias[] | undefined;
-  public selectedProvinciaCliente: Provincias[] | undefined;
-  public selectedProvinciaMas: Provincias[] | undefined;
-  public selectedProvinciaMenos: Provincias[] | undefined;
+  public selectedProvincia: Provincias[] | undefined;
   public productos: Productos[] | undefined;
-  public selectedProductoCliente: Productos[] | undefined;
-  public selectedProductoMas: Productos[] | undefined;
-  public selectedProductoMenos: Productos[] | undefined;
   public formatos: Formato[] | undefined;
   public selectedFormato: Formato [] | undefined;
   public tiposReportes: TiposDeReportes [] | undefined;
@@ -46,7 +51,12 @@ export class GenerarReporteClientesComponent implements OnInit {
     this.formatos = [
       {nameFormato: '.txt', codeFormato: 'txt'},
       {nameFormato: '.cvs', codeFormato: 'cvs'},
-      {nameFormato: '.pdf', codeFormato: 'pdf'}
+      {nameFormato: '.doc', codeFormato: 'doc'},
+      {nameFormato: '.xls', codeFormato: 'xls'},
+      {nameFormato: '.xlsx', codeFormato: 'xlsx'},
+      {nameFormato: '.png', codeFormato: 'png'},
+      {nameFormato: '.ods', codeFormato: 'ods'},
+      {nameFormato: '.xps', codeFormato: 'xps'},
     ]
 
     this.tiposReportes = [
@@ -65,15 +75,16 @@ export class GenerarReporteClientesComponent implements OnInit {
       {nameProvincia: 'Los Santos', codeProvincia: '7'},
       {nameProvincia: 'Panamá', codeProvincia: '8'},
       {nameProvincia: 'Veraguas', codeProvincia: '9'},
-      {nameProvincia: 'Panamá Oeste', codeProvincia: '10'},
+      {nameProvincia: 'Panamá Oeste', codeProvincia: '10'}
     ]
 
-    this.productos = [
-      {nameProducto: 'Coca Cola', codeProducto: 'S'},
-      {nameProducto: 'Pepsi', codeProducto: 'T'},
-      {nameProducto: 'Fanta', codeProducto: 'C'},
-      {nameProducto: 'Etc', codeProducto: 'M'}
-    ]
+     this.generos = [
+      {nameGenero: 'masculino', codeGenero: 'M'},
+      {nameGenero: 'femenino', codeGenero: 'F'},
+      {nameGenero: 'Prefiero no decirlo', codeGenero: 'P'},
+      {nameGenero: 'otro', codeGenero: 'O'}
+      
+     ]
   }
     public load(): void {
       this.loading = true;

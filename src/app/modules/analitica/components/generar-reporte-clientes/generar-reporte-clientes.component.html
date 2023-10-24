@@ -2,9 +2,10 @@
 class="container-centro-">
   <h1>INFORME DE CLIENTES</h1>
   <div>
+   <!--Nombre del informe-->
     <h2>Nombre del informe</h2>
     <span class="p-float-label">
-    <input pInputText id="nameInforme" />
+    <input pInputText id="nameInforme" /> <!--Boton que ingresa el nombre-->
     <label htmlFor="username">Nombre del informe</label></span>
   </div> 
   <div>
@@ -16,37 +17,57 @@ class="container-centro-">
     <p-dropdown [ngModelOptions]="{standalone: true}" [options]="tiposReportes" [(ngModel)]="selectedTipo" optionLabel ="nameTipo"></p-dropdown><br>
    </div>
    <div>
-    <h2>Segmentar reporte según:</h2><!--Productos más o menos comprados por provincia-->
+    <h2>Segmentar reporte en base a:</h2>
+    <div>
+      <h3>Nombre del cliente</h3>
+      <span class="p-float-label">
+      <input pInputText id="nameInformeCliente"/>
+      <label htmlFor="username">Nombre del cliente</label></span>
+    </div> 
         <div>
-           <h3>Productos más comprados por cliente en provincia</h3>
-           <p-multiSelect [ngModelOptions]="{standalone: true}" [options]="provincias" [(ngModel)]="selectedProvinciaMas" defaultlabel="Elija las provincia" optionLabel="nameProvincia" display="chip"></p-multiSelect>
+            <h3>Selector de género</h3>
+            <p-dropdown [ngModelOptions]="{standalone: true}" [options]="generos" [(ngModel)]="selectedGenero" optionLabel="nameGenero"></p-dropdown><br>
         </div>
-        <div>
-            <h3>Productos menos comprados por cliente en provincia</h3>
-            <p-multiSelect [ngModelOptions]="{standalone: true}" [options]="provincias" [(ngModel)]="selectedProvinciaMenos" defaultlabel="Elija las provincia" optionLabel="nameProvincia" display="chip"></p-multiSelect>
+         <div>
+            <h3>Selector de provincias</h3>
+            <p-multiSelect [ngModelOptions]="{standalone: true}" [options]="provincias" [(ngModel)]="selectedProvincia" defaultlabel="Elija las provincias" optionLabel="nameProvincia" display="chip"></p-multiSelect>
          </div>
          <div>
-            <!---Productos más o menos comprados por clientes-->
-            <h3>Productos más comprados por clientes</h3>
-            <p-multiSelect [ngModelOptions]="{standalone: true}" [options]="productos" [(ngModel)]="selectedProductoMas" defaultlabel="Elija los productos" optionLabel="nameProducto" display="chip"></p-multiSelect>
+            <h3>Rango de edad</h3>
+            <div> <!----Elegir el mínimo-->
+               <span class ="p-float-label">
+               <input type="number" id="minEdad"[(ngModel)] = "minEdad" />
+               <label htmlfor="minEdad">Mínima edad</label>
+               </span>
+            </div>
+            <div><!----Elegir el maximo-->
+               <span class ="p-float-label">
+               <input type="number" id="maxEdad"[(ngModel)] = "maxEdad" />
+               <label htmlfor="maxEdad">Maxima edad</label>
+               </span>
+            </div>
          </div>
          <div>
-            <h3>Productos menos comprados por cliente</h3>
-            <p-multiSelect [ngModelOptions]="{standalone: true}" [options]="productos" [(ngModel)]="selectedProductoMenos" defaultlabel="Elija los productos" optionLabel="nameProducto" display="chip"></p-multiSelect>
+            <h3>Pedidos realizados (mínimo y máximo)</h3>
+            <div><!----Elegir el mínimo-->
+               <span class ="p-float-label">
+               <input type="number" id="minPedidos"[(ngModel)] = "minPedidos" />
+               <label htmlfor="minPedidos">Mínimo de pedidos</label>
+               </span>
+            </div>
+            <div><!----Elegir el maximo-->
+               <span class ="p-float-label">
+               <input type="number" id="maxPedidos"[(ngModel)] = "maxPedidos" />
+               <label htmlfor="maxPedidos">Maximo de pedidos</label>
+               </span>
+            </div>
          </div>
-         <div>
-            <h3>Cliente que productos compran</h3>
-            <p-multiSelect [ngModelOptions]="{standalone: true}" [options]="productos" [(ngModel)]="selectedProductoCliente" defaultlabel="Elija los productos" optionLabel="nameProducto" display="chip"></p-multiSelect>
          </div>
-         <div>
-            <!--Clientes por provincias-->
-            <h3>Clientes por provincias</h3>
-            <p-multiSelect [ngModelOptions]="{standalone: true}" [options]="provincias" [(ngModel)]="selectedProvinciaCliente" defaultlabel="Elija las provincias" optionLabel="nameProvincia" display="chip"></p-multiSelect>
-         </div>
+      <br>
+   <!----Boton para generar reporte-->
     <div class="card flex justify-content-center">
        <p-button label="Generar informe"[loading]="loading" loadingcon="pi pi-spinner" (onClick)="load()"></p-button> 
-    </div>
-    
-   </div>
+    </div> 
+
 </form>
 
