@@ -34,7 +34,7 @@ import { GenerarReporteClientesComponent } from './components/generar-reporte-cl
     
     // Recuerden exportar sus componentes aquí para que los otros módulos puedas acceder a ellos
     exports: [
-
+         GenerarReporteClientesComponent
     ]
 })
 export class AnaliticaModule { }
