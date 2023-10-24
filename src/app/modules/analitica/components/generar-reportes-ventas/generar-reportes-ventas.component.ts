@@ -24,13 +24,18 @@ interface Formato{
     codeTipoPago: string
   }
 
+  interface Cliente{
+    nameClientes: string,
+    codeClientes: string
+  }
+
 @Component({
   selector: 'ana-reporte-ventas',
   templateUrl: './generar-reportes-ventas.component.html',
   styleUrls: ['./generar-reportes-ventas.component.css']
 })
 export class GenerarReportesVentasComponent implements OnInit {
-    dates: Date[] | undefined;
+    rangeDates: Date[] | undefined;
 
     public metodosPagos: Pago[] | undefined;
     public selectedMetodosPagos: Pago | undefined;
@@ -46,6 +51,9 @@ export class GenerarReportesVentasComponent implements OnInit {
 
     public tiposPagos: TipoPago[] | undefined;
     public selectedTiposPagos: TipoPago | undefined;
+
+    public clientes: Cliente[] | undefined;
+    public selectedClientes: Cliente | undefined;
 
     public loading: boolean = false;
 
@@ -71,7 +79,7 @@ export class GenerarReportesVentasComponent implements OnInit {
         ];
 
         this.estadoPedidos = [
-            { nameEstadoPedidos: 'Peocesado', codeEstadoPedidos: 'S' },
+            { nameEstadoPedidos: 'Procesado', codeEstadoPedidos: 'S' },
             { nameEstadoPedidos: 'Enviado', codeEstadoPedidos: 'T' },
             { nameEstadoPedidos: 'etEntregadoc', codeEstadoPedidos: 'C' }
         ];
@@ -85,6 +93,14 @@ export class GenerarReportesVentasComponent implements OnInit {
         this.tiposPagos = [
             { nameTipoPago: 'Al contado', codeTipoPago: 'A' },
             { nameTipoPago: 'Credito', codeTipoPago: 'C'}
+        ]
+
+        this.clientes = [
+            { nameClientes: 'Juancho Perez', codeClientes: '09990'},
+            { nameClientes: 'Flavio Sánchez', codeClientes: '4788'},
+            { nameClientes: 'Maria del Carmen', codeClientes: '4788'},
+            { nameClientes: 'Ameth Cebrían', codeClientes: '4788'},
+            { nameClientes: 'José Liao', codeClientes: '4788'},
         ]
     }
 

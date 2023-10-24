@@ -1,6 +1,6 @@
 <form action="" class="">
     <div>
-        <h1>INFORME DE VENTAS</h1>
+        <h1>REPORTE DE VENTAS</h1>
         <!-- Nombre del informe -->
         <article >
             <span class="p-float-label">
@@ -18,17 +18,11 @@
     <!-- SEGMENTOS -->
     <section>
         <h2>Segmentar según: </h2>
-        <article>
-            <h3>Identificación de la venta</h3>
-            <span class="p-float-label">
-                <input pInputText id="nameInforme" />
-                <label htmlFor="username">ID PEDIDO</label>
-            </span>
-        </article>
 
         <h3>Rango de Fechas</h3>
-        <span>
-            <p-calendar [(ngModel)]="dates" selectionMode="multiple" [readonlyInput]="true" [showIcon]="true"></p-calendar>
+        <span class="p-float-label">
+            <p-calendar [(ngModel)]="rangeDates" selectionMode="range" dateFormat="d/m/yy" [readonlyInput]="false" [showIcon]="true"></p-calendar>
+            <label for="float-label"><small>Fecha de inicio - fecha final</small></label>
         </span>
 
         <article>
@@ -41,9 +35,10 @@
             <p-multiSelect [ngModelOptions]="{standalone: true}" [options]="metodosPagos" [(ngModel)]="selectedMetodosPagos" defaultLabel="Elija una método de pago" optionLabel="nameMetodoPago" display="chip"></p-multiSelect>
         </article>
         <article>
-            <h3>Cliente que realizó el pedido</h3>
+            <h3>Cliente que realizó el pedido</h3><br>
             <span class="p-float-label">
-                <input pInputText id="nameInforme" />
+                <p-multiSelect [ngModelOptions]="{standalone: true}" [options]="clientes" [(ngModel)]="selectedClientes" optionLabel="nameClientes" defaultLabel="Escoja el nombre del cliente" [virtualScroll]="true" [virtualScrollItemSize]="25" display="chip" [filter]="true"></p-multiSelect>
+
                 <label htmlFor="username">NOMBRE CLIENTE</label>
             </span>
         </article>
