@@ -1,3 +1,4 @@
+import { CalendarModule } from 'primeng/calendar';
 import { Component, OnInit } from '@angular/core';
 
 interface Formato{
@@ -10,35 +11,33 @@ interface Formato{
     codeReportes: string
   }
 
-  interface Marca{
-    nameMarca: string,
-    codeMarca: string
+  interface Pago{
+    namePago: string,
+    codePago: string
   }
   interface Tipo{
     nameTipo: string,
     codeTipo: string
   }
-  interface Categoria{
-    nameCategoria: string,
-    codeCategoria: string
+  interface Pedido{
+    nameTiposPedidos: string,
+    codePedidos: string
   }
 
 
 @Component({
-  selector: 'ana-reporte-inventario',
-  templateUrl: './generar-reportes-inventario.component.html',
-  styleUrls: ['./generar-reportes-inventario.component.css']
+  selector: 'ana-reporte-ventas',
+  templateUrl: './generar-reportes-ventas.component.html',
+  styleUrls: ['./generar-reportes-ventas.component.css']
 })
-export class GenerarReportesInventarioComponent implements OnInit {
+export class GenerarReportesVentasComponent implements OnInit {
+    dates: Date[] | undefined;
 
-    public marcas: Marca[] | undefined;
-    public selectedMarcas: Marca | undefined;
+    public metodosPagos: Pago[] | undefined;
+    public selectedMetodosPagos: Pago | undefined;
 
-    public tipos: Tipo[] | undefined;
-    public selectedTipos: Tipo | undefined;
-
-    public categorias: Categoria[] | undefined;
-    public selectedCategorias: Categoria | undefined;
+    public pedidos: Pedido[] | undefined;
+    public selectedPedidos: Pedido | undefined;
 
     public formatos: Formato[] | undefined;
     public selectedFormato: Formato | undefined;
@@ -67,19 +66,19 @@ export class GenerarReportesInventarioComponent implements OnInit {
             { nameReportes: 'Compras', codeReportes: 'C' },
             { nameReportes: 'Otro', codeReportes: 'O' }
         ];
-        this.marcas = [
-            { nameMarca: 'Coca Cola', codeMarca: 'S' },
-            { nameMarca: 'Pepsi', codeMarca: 'T' },
-            { nameMarca: 'Fanta', codeMarca: 'C' },
-            { nameMarca: 'etc', codeMarca: 'P' },
-            { nameMarca: 'etc', codeMarca: 'M' }
+
+        this.pedidos = [
+            { nameTiposPedidos: 'Suplementos', codePedidos: 'S' },
+            { nameTiposPedidos: 'refrescos', codePedidos: 'T' },
+            { nameTiposPedidos: 'etc', codePedidos: 'C' },
+            { nameTiposPedidos: 'etc', codePedidos: 'P' },
+            { nameTiposPedidos: 'etc', codePedidos: 'M' }
         ];
-        this.categorias = [
-            { nameCategoria: 'Suplementos', codeCategoria: 'S' },
-            { nameCategoria: 'refrescos', codeCategoria: 'T' },
-            { nameCategoria: 'etc', codeCategoria: 'C' },
-            { nameCategoria: 'etc', codeCategoria: 'P' },
-            { nameCategoria: 'etc', codeCategoria: 'M' }
+
+        this.metodosPagos = [
+            { namePago: 'Tarjeta', codePago: 'I' },
+            { namePago: 'Efectivo', codePago: 'C' },
+            { namePago: 'Otro', codePago: 'O' }
         ];
     }
 

@@ -12,12 +12,14 @@ import { ButtonModule } from 'primeng/button';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { GenerarReportesInventarioComponent } from './components/generar-reportes-inventario/generar-reportes-inventario.component';
-
+import { GenerarReportesVentasComponent } from './components/generar-reportes-ventas/generar-reportes-ventas.component';
+import { CalendarModule } from 'primeng/calendar';
 
 @NgModule({
     declarations: [
         VerDashboardComponent,
-        GenerarReportesInventarioComponent
+        GenerarReportesInventarioComponent,
+        GenerarReportesVentasComponent
     ],
     imports: [
         CommonModule,
@@ -28,11 +30,13 @@ import { GenerarReportesInventarioComponent } from './components/generar-reporte
         ButtonModule,
         MultiSelectModule,
         InputNumberModule,
+        CalendarModule,
         AnaliticaRoutingModule
     ],
     // Recuerden exportar sus componentes aquí para que los otros módulos puedas acceder a ellos
     exports: [
-        GenerarReportesInventarioComponent
+        GenerarReportesInventarioComponent,
+        GenerarReportesVentasComponent
     ]
 })
 export class AnaliticaModule { }
