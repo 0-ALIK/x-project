@@ -12,18 +12,17 @@ interface Formato{
   }
 
   interface Pago{
-    namePago: string,
-    codePago: string
-  }
-  interface Tipo{
-    nameTipo: string,
-    codeTipo: string
+    nameMetodoPago: string,
+    codeMetodoPago: string
   }
   interface Pedido{
-    nameTiposPedidos: string,
-    codePedidos: string
+    nameEstadoPedidos: string,
+    codeEstadoPedidos: string
   }
-
+  interface TipoPago{
+    nameTipoPago: string,
+    codeTipoPago: string
+  }
 
 @Component({
   selector: 'ana-reporte-ventas',
@@ -36,14 +35,17 @@ export class GenerarReportesVentasComponent implements OnInit {
     public metodosPagos: Pago[] | undefined;
     public selectedMetodosPagos: Pago | undefined;
 
-    public pedidos: Pedido[] | undefined;
-    public selectedPedidos: Pedido | undefined;
+    public estadoPedidos: Pedido[] | undefined;
+    public selectedEstadoPedidos: Pedido | undefined;
 
     public formatos: Formato[] | undefined;
     public selectedFormato: Formato | undefined;
 
     public tiposReportes: TiposReportes[] | undefined;
     public selectedReportes: TiposReportes | undefined;
+
+    public tiposPagos: TipoPago[] | undefined;
+    public selectedTiposPagos: TipoPago | undefined;
 
     public loading: boolean = false;
 
@@ -64,22 +66,26 @@ export class GenerarReportesVentasComponent implements OnInit {
         this.tiposReportes = [
             { nameReportes: 'Inventario', codeReportes: 'I' },
             { nameReportes: 'Compras', codeReportes: 'C' },
+            { nameReportes: 'Ventas', codeReportes: 'V'},
             { nameReportes: 'Otro', codeReportes: 'O' }
         ];
 
-        this.pedidos = [
-            { nameTiposPedidos: 'Suplementos', codePedidos: 'S' },
-            { nameTiposPedidos: 'refrescos', codePedidos: 'T' },
-            { nameTiposPedidos: 'etc', codePedidos: 'C' },
-            { nameTiposPedidos: 'etc', codePedidos: 'P' },
-            { nameTiposPedidos: 'etc', codePedidos: 'M' }
+        this.estadoPedidos = [
+            { nameEstadoPedidos: 'Peocesado', codeEstadoPedidos: 'S' },
+            { nameEstadoPedidos: 'Enviado', codeEstadoPedidos: 'T' },
+            { nameEstadoPedidos: 'etEntregadoc', codeEstadoPedidos: 'C' }
         ];
 
         this.metodosPagos = [
-            { namePago: 'Tarjeta', codePago: 'I' },
-            { namePago: 'Efectivo', codePago: 'C' },
-            { namePago: 'Otro', codePago: 'O' }
+            { nameMetodoPago: 'Tarjeta', codeMetodoPago: 'T' },
+            { nameMetodoPago: 'Efectivo', codeMetodoPago: 'E' },
+            { nameMetodoPago: 'Otro', codeMetodoPago: 'O' }
         ];
+
+        this.tiposPagos = [
+            { nameTipoPago: 'Al contado', codeTipoPago: 'A' },
+            { nameTipoPago: 'Credito', codeTipoPago: 'C'}
+        ]
     }
 
 
