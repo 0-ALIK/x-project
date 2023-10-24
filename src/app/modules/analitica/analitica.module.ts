@@ -32,7 +32,7 @@ import { GenerarReportesInventarioComponent } from './components/generar-reporte
     ],
     // Recuerden exportar sus componentes aquí para que los otros módulos puedas acceder a ellos
     exports: [
-
+        GenerarReportesInventarioComponent
     ]
 })
 export class AnaliticaModule { }
