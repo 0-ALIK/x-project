@@ -3,19 +3,8 @@ body
     margin: 0;
 }
 
-.container{
-    display: flex;
-    place-content: center;
-}
-.centro-container{
-    display: flex;
-    place-content: center;
-    justify-content: center;
-    width: 40rem;
-    height: 30rem;
-    background-color: rgba(56, 60, 64, 0.32);
-    flex-direction: column;
+.spacing{
 
+    margin: var(--spacing-4);
 }
-
 /* template y reactivos */

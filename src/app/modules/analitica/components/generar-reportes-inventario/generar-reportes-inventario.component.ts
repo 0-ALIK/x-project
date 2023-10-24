@@ -22,16 +22,6 @@ interface Formato{
   styleUrls: ['./generar-reportes-inventario.component.css']
 })
 export class GenerarReportesInventarioComponent implements OnInit {
-    public precio1: number = 50;
-    public precio2: number = 50;
-
-    public value: string | undefined;
-
-    public value1: number = 20;
-
-    public value2: number = 10.5;
-
-    public value3: number = 25;
 
     public segmentos: Segmentacion[] | undefined;
     public selectedSegmentos: Segmentacion[] | undefined;
