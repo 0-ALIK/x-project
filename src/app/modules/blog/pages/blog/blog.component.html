@@ -1,0 +1,101 @@
+<p-sidebar [(visible)]="sidebarVisible" position="right" [style]="{ witdh: '200px' }">
+    <p-panel class="custom-panel">
+        <h4>Danos tu valoración</h4>
+        <div class="stars">
+            <span class="starbotton" style="font-size: 10px;" [class.filled]="star <= starsToFill"
+                *ngFor="let star of [1, 2, 3, 4, 5]"></span>
+        </div>
+    </p-panel>
+    <p-panel class="custom-panel">
+        <h4>Dinos lo que piensas de nosotros</h4>
+        <textarea placeholder="Deja tu comentario..." pInputTextarea formControlName="text" rows="5" cols="25"></textarea>
+    </p-panel>
+    <button title="enviar" pRipple label="ENVIAR" class="p-button-success send-button"></button>
+
+</p-sidebar>
+
+<div class="title-container">
+    <h2>BLOG / OPINIONES</h2>
+</div>
+<div class="div">
+    <p-panel class="custom-panel">
+        <div class="rating-section">
+            <div class="left-section">
+                <div class="rating-text">Valoración de Cliente</div>
+                <div class="stars">
+                    <span class="star" [class.filled]="star <= starsToFill" *ngFor="let star of [1, 2, 3, 4, 5]"></span>
+                </div>
+                <div class="rating-description">
+                    <strong>Excelente</strong>
+                    <p>5.0/5.0</p>
+                </div>
+            </div>
+            <div class="right-section">
+                <ng-container *ngFor="let section of rightSections">
+                    <div class="right-section-item">
+                        <div class="seccionstart">{{ section.stars }}</div>
+                        <div class="filled-rectangle"
+                            [style.background]="section.filledPercentage >= 5 ? 'yellow' : 'grey'"
+                            [style.width.%]="section.filledPercentage"></div>
+                        <p>{{ section.text }}</p>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </p-panel>
+</div>
+
+<div class="div">
+    <p-panel class="custom-panel">
+        <ng-container *ngFor="let section of rightSectionsP">
+            <div class="div2">
+
+                <div class="rating-section">
+                    <div class="left-section">
+                        <div>
+                            <div>
+                                <img src="https://e7.pngegg.com/pngimages/178/595/png-clipart-user-profile-computer-icons-login-user-avatars-monochrome-black-thumbnail.png"
+                                    alt="Usuario" width="100" height="100" style="border-radius: 50%;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="center-section">
+                        <div class="panel">
+                            <div class="user-info">
+                                <div class="user-name">
+                                    <h3>Pepito Perez.</h3>
+                                    <p class="p">Variedad excepcion, calidad inigualable, mi eleccion preferidad para
+                                        sodas, aguas y
+                                        suplementos</p>
+                                </div>
+                                <div class="user-name">
+                                    <div class="star-text">
+                                        <span class="star1" [class.filled]="star <= starsToFill"
+                                            *ngFor="let star of [1, 2, 3, 4, 5]">
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="right-section">
+                        <div class="user-date">
+                            <p>21/05/2022</p>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+            </div>
+
+        </ng-container>
+    </p-panel>
+</div>
+
+<article class="article">
+    <p-button icon="pi pi-plus" [rounded]="true" [text]="true" (onClick)="sidebarVisible = true"></p-button>
+</article>
+<p-panel *ngIf="mostrarCalificacion" [style]="{ position: 'fixed', bottom: '20px', right: '20px', zIndex: '9999' }">
+    <div class="stars">
+    </div>
+</p-panel>
+
