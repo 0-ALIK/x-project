@@ -12,7 +12,9 @@ export class TicketsTableComponent {
 
     selectedProduct!: any;
 
-	constructor(private router: Router) { }
+	constructor(
+        private router: Router
+    ) { }
 
 	redirectToAnotherPage(productId: string) {
         //this.router.navigate(['/dashboard/tickets', 12]);

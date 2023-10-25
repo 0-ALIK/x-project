@@ -1,0 +1,13 @@
+.mensajes-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+}
+
+.left {
+    align-items: flex-start;
+}
+
+.right {
+    align-self: flex-end
+}
