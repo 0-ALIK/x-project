@@ -6,6 +6,7 @@ import { VerTicketsComponent } from './pages/ver-tickets/ver-tickets.component';
 
 import { TagModule } from 'primeng/tag';
 import { TableModule } from 'primeng/table';
+import { InputTextModule } from 'primeng/inputtext';
 import { VerDetalleComponent } from './pages/ver-detalle/ver-detalle.component';
 import { SplitButtonModule } from 'primeng/splitbutton';
 @NgModule({
@@ -19,7 +20,8 @@ import { SplitButtonModule } from 'primeng/splitbutton';
 		TableModule,
 		ButtonModule,
 		TagModule,
-		SplitButtonModule
+		SplitButtonModule,
+        InputTextModule
 	]
 })
 export class TicketsModule { }

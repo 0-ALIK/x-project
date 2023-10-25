@@ -10,11 +10,17 @@ import { Router } from '@angular/router';
 export class VerTicketsComponent {
 	activityValues: number[] = [0, 100];
 
-	constructor(private router: Router) { } 
+    selectedProduct!: any;
+
+	constructor(private router: Router) { }
 
 	redirectToAnotherPage(productId: string) {
-	  this.router.navigate(['ver-detalle']);
+        //this.router.navigate(['/dashboard/tickets', 12]);
 	}
+
+    public onSeleccion( evento: any ): void {
+        this.router.navigate(['/dashboard/tickets', evento.data.id]);
+    }
 
 	products: object[] = [
 		{ id: '#2345', usuario: 'Jose L.', asunto: 'Pedido Tardio', prioridad: 'ALTA', estatus: 'REVISADO', fecha: '29/03/2023' },
@@ -37,7 +43,7 @@ export class VerTicketsComponent {
 			case 'ALTA':
 				return 'danger';
 			default:
-				return 'unknown'; 
+				return 'unknown';
 		}
 	}
 	getSeverity(estatus: string): string {
@@ -49,8 +55,8 @@ export class VerTicketsComponent {
 			case 'OUTOFSTOCK':
 				return 'danger';
 			default:
-				return 'unknown'; 
+				return 'unknown';
 		}
 	}
-	
+
 }

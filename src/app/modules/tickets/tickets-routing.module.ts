@@ -11,7 +11,7 @@ const routes: Routes = [
 		component: VerTicketsComponent
 	},
 	{
-		path: 'ver-detalle/',
+		path: ':id',
 		component: VerDetalleComponent
 	},
 ];
