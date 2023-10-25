@@ -47,4 +47,9 @@ export class VentasTableComponent implements OnInit {
         if(!this.tablePedidos) return;
     }
 
+    public example( evento: any ): void {
+        console.log('filtro personalizado');
+        console.log( evento );
+    }
+
 }

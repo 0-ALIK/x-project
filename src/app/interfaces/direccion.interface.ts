@@ -4,6 +4,7 @@ export interface Provincia {
 }
 
 export interface Direccion {
+    direccion_id?: number;
     provincia?: Provincia;
     codigo_postal?: string;
     telefono?: string;

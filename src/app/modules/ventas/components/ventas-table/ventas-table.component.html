@@ -6,7 +6,9 @@
     [paginator]="true"
     [rows]="10"
     [showCurrentPageReport]="true"
-    currentPageReportTemplate="Hay un total de {totalRecords} registros">
+    currentPageReportTemplate="Hay un total de {totalRecords} registros"
+    (onFilter)="example( $event )"
+    >
 
     <ng-template pTemplate="caption">
         <div class="caption">
@@ -23,8 +25,30 @@
 
     <ng-template pTemplate="header">
         <tr>
-            <th>Cliente</th>
-            <th>Fecha</th>
+            <th>
+                Cliente
+                <p-columnFilter
+                    type="text"
+                    field="e_nombre"
+                    display="menu"
+                    [showMatchModes]="false"
+                    [showOperator]="false"
+                    [showAddButton]="false">
+                </p-columnFilter>
+            </th>
+
+            <th>
+                Fecha
+                <p-columnFilter
+                    type="date"
+                    field="e_fecha"
+                    display="menu"
+                    [showMatchModes]="false"
+                    [showOperator]="false"
+                    [showAddButton]="false"
+                    >
+                </p-columnFilter>
+            </th>
             <th>Estado</th>
             <th>Forma de pago</th>
             <th>Empresa</th>

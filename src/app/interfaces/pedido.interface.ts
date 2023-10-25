@@ -1,27 +1,31 @@
 import { Direccion } from "./direccion.interface";
 import { Producto } from "./producto.iterface";
-import { Cliente, Empresa } from "./usuario.inteface";
+import { Admin, Cliente, Empresa } from "./usuario.inteface";
 
 export interface FormaPago {
-    forma_pago_id?: number;
+    id_forma_pago?: number;
     nombre?: string;
 }
 
 export interface Pago {
-    pago_id?: number;
+    id_pago?: number;
     monto?: number;
     fecha?: Date;
     forma_pago?: FormaPago;
 }
 
 export interface PedidoProductos {
-    pedido_producto_id?: number;
+    id_pedido_producto?: number;
     producto?: Producto;
     cantidad?: number;
 }
 
+export interface EstadoPedido {
+
+}
+
 export interface Pedido {
-    pedido_id?: number;
+    id_pedido?: number;
     cliente?: Cliente,
     fecha?: Date,
     fecha_cambio_estado?: Date,
@@ -31,4 +35,11 @@ export interface Pedido {
     empresa?: Empresa;
     direccion?: Direccion;
     pedido_producto?: PedidoProductos[]
+}
+
+export interface Compra {
+    id_compra?: number;
+    admin?: Admin;
+    fecha?: Date;
+    cantidad?: number;
 }
