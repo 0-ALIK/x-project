@@ -1,11 +1,6 @@
 import { Component } from '@angular/core';
 import { MessageService } from 'primeng/api';
 
-interface UploadEvent {
-    originalEvent: Event;
-    files: File[];
-}
-
 @Component({
     selector: 'app-agregar-marca',
     templateUrl: './agregar-marca.component.html',
@@ -16,19 +11,18 @@ export class AgregarMarcaComponent {
     name: string | undefined;
     description: string | undefined;
 
-
     uploadedFiles: any[] = [];
 
     constructor(private messageService: MessageService) {}
 
-    ngOnInit() {}
-
+    // Este metodo es el que permite cargar los archivos
     onUpload(event:any) {
         for(let file of event.files) {
             this.uploadedFiles.push(file);
         }
 
-        this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
+        this.messageService.add({severity: 'info', summary: 'Archivo Cargado', detail: ''});
+        //console.log('Archivos cargados:', this.uploadedFiles);
     }
 
 }
