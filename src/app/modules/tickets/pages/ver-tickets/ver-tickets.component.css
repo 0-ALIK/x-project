@@ -1,0 +1,21 @@
+.container {
+    display: flex;
+    align-items: center;
+}
+
+.container > div {
+    margin-right: var(--spacing-2); 
+}
+
+.custom-table {
+    border-collapse: collapse; 
+    width: 100%; 
+  }
+  
+  .custom-table th, .custom-table td {
+    border: 1px solid #ddd;
+    padding: var(--spacing-3); 
+    text-align: left; 
+  }
+  
+

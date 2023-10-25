@@ -42,6 +42,10 @@
 
 /* Estilo para tablets y dispositivos con pantallas medianas */
 @media (max-width: 1023px) {
+    
+    .sidebar {
+        z-index: 100;
+    }
     .sidebar {
         transform: translateX( calc( -1 * var(--sidebar-width)) );
     }

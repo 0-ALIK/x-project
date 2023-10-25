@@ -4,6 +4,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegistroComponent } from './pages/registro/registro.component';
 import { NotFoundComponent } from 'src/app/not-found/not-found.component';
 
+import { VerDetalleComponent } from '../../modules/tickets/pages/ver-detalle/ver-detalle.component';
+
 const routes: Routes = [
     {
         path: '',
@@ -15,6 +17,10 @@ const routes: Routes = [
             {
                 path: 'registro',
                 component: RegistroComponent
+            },
+            {
+                path: 'verDetalle',
+                component: VerDetalleComponent
             },
             {
                 path: '',

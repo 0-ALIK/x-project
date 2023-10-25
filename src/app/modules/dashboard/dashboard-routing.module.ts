@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
+import { VerDetalleComponent } from '../tickets/pages/ver-detalle/ver-detalle.component';
 
 const routes: Routes = [
     {
@@ -36,11 +37,18 @@ const routes: Routes = [
                 redirectTo: ''
             }
         ]
+
+    },
+    {
+
+        path: 'ver-detalle',
+        component: VerDetalleComponent
+
     }
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forChild(routes)],
+    exports: [RouterModule]
 })
 export class DashboardRoutingModule { }
