@@ -9,10 +9,12 @@ import { TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
 import { VerDetalleComponent } from './pages/ver-detalle/ver-detalle.component';
 import { SplitButtonModule } from 'primeng/splitbutton';
+import { TicketsTableComponent } from './components/tickets-table/tickets-table.component';
 @NgModule({
 	declarations: [
 		VerTicketsComponent,
   VerDetalleComponent,
+  TicketsTableComponent,
 	],
 	imports: [
 		CommonModule,
