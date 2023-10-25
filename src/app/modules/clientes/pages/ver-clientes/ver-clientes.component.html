@@ -7,7 +7,6 @@
 <p-tabMenu (activeItemChange)="onChange($event)" [model]="items" [activeItem]="activeItem"></p-tabMenu>
 
 <ng-container *ngIf="activeItem?.label && activeItem?.label === 'Clientes'">
-
     <app-clientes-table></app-clientes-table>
 </ng-container>
 

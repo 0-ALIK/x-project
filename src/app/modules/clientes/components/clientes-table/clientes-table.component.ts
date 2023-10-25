@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-clientes-table',
@@ -27,10 +28,6 @@ export class ClientesTableComponent {
             foto: 'xd', nombre: 'flavio', cedula: 'flacio', genero: '8888888', telefono: '66782932', correo: 'asdnkasjdnk', frecuencia: 'asd', empresa: '10'
         }
     ];
-
-
-
-
 
     ngOnInit() {
 
@@ -71,4 +68,15 @@ export class ClientesTableComponent {
         return false;
         // this.customers ? this.first === 0 : true;
     }
+
+    onRowSelect(event: any) {
+        this.router.navigate(['./dashboard/inventario'])
+    }
+
+    constructor(private router: Router){
+
+    }
+
+
+
 }

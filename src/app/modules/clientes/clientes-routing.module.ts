@@ -7,7 +7,7 @@ import { PerfilEmpresaComponent } from './pages/perfil-empresa/perfil-empresa.co
 const routes: Routes = [
     {
         path: '',
-        component: PerfilEmpresaComponent
+        component: VerClientesComponent
 
     }
 
