@@ -1,5 +1,5 @@
 <p-table #prs [value]="persons" [rows]="5" [paginator]="true" styleClass="p-datatable-gridlines"
-    [tableStyle]="{ 'min-width': '50rem'}" [scrollable]="true" [scrollHeight]="'400px'">
+    [tableStyle]="{ 'min-width': '50rem'}" [scrollable]="true" [scrollHeight]="'400px'" [globalFilterFields]="['name']">
 
     <ng-template pTemplate="caption">
         <div class="flex header-table" scrollable>
@@ -9,7 +9,7 @@
             </div>
             <span class="p-input-icon-left ml-auto">
                 <i class="pi pi-search"></i>
-                <input pInputText type="text" placeholder="Buscar producto..." />
+                <input pInputText type="text" (input)="prs.filterGlobal($any($event.target).value, 'contains')" placeholder="Buscar admin..." />
             </span>
         </div>
     </ng-template>
@@ -57,7 +57,7 @@
     <ng-template pTemplate="body" let-person>
         <tr>
             <td>{{ person.id }}</td>
-            <td>{{ person.admin }}</td>
+            <td>{{ person.name }}</td>
             <td>{{ person.date }}</td>
             <td>{{ person.quantity }}</td>
             <td>{{ person.product }}</td>
