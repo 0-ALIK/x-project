@@ -10,7 +10,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
   declarations: [
     AppComponent,
     LandingPageComponent,
-    NotFoundComponent
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,

@@ -28,39 +28,38 @@ import { PerfilEmpresaComponent } from './pages/perfil-empresa/perfil-empresa.co
 import { DireccionCardComponent } from './components/direccion-card/direccion-card.component';
 import { ColaboradorCardComponent } from './components/colaborador-card/colaborador-card.component';
 
-
 @NgModule({
-  declarations: [
-    EditarAgregarEmpComponent,
-    VerClientesComponent,
-    ClientesTableComponent,
-    EmpresasTableComponent,
-    SolicitudCardComponent,
-    PerfilCardComponent,
-    PerfilClienteComponent,
-    PerfilEmpresaComponent,
-    DireccionCardComponent,
-    ColaboradorCardComponent,
-  ],
-  imports: [
-    CommonModule,
-    ClientesRoutingModule,
-    SharedModule,
-    TableModule,
-    ButtonModule,
-    MultiSelectModule,
-    DropdownModule,
-    TagModule,
-    SliderModule,
-    FormsModule,
-    TabMenuModule,
-    AvatarGroupModule,
-    AvatarModule,
-    InputTextModule,
-    PaginatorModule,
-    FileUploadModule,
-    ImageModule,
-    RadioButtonModule
-]
+    declarations: [
+        EditarAgregarEmpComponent,
+        VerClientesComponent,
+        ClientesTableComponent,
+        EmpresasTableComponent,
+        SolicitudCardComponent,
+        PerfilCardComponent,
+        PerfilClienteComponent,
+        PerfilEmpresaComponent,
+        DireccionCardComponent,
+        ColaboradorCardComponent,
+    ],
+    imports: [
+        CommonModule,
+        ClientesRoutingModule,
+        SharedModule,
+        TableModule,
+        ButtonModule,
+        MultiSelectModule,
+        DropdownModule,
+        TagModule,
+        SliderModule,
+        FormsModule,
+        TabMenuModule,
+        AvatarGroupModule,
+        AvatarModule,
+        InputTextModule,
+        PaginatorModule,
+        FileUploadModule,
+        ImageModule,
+        RadioButtonModule
+    ]
 })
 export class ClientesModule {}

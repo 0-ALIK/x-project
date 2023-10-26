@@ -21,15 +21,15 @@ const routes: Routes = [
             },
             {
                 path: 'tickets',
-                redirectTo: ''
+                loadChildren: () => import('../tickets/tickets.module').then(m => m.TicketsModule)
             },
             {
                 path: 'chat',
-                redirectTo: ''
+                loadChildren: () => import('../chat/chat.module').then(m => m.ChatModule)
             },
             {
                 path: 'blog',
-                redirectTo: ''
+                loadChildren: () => import('../blog/blog.module').then(m => m.BlogModule)
             },
             {
                 path: 'usuarios',

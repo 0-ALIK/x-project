@@ -1,0 +1,16 @@
+.caption {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+/* Estilo para dispositivos móviles */
+@media (max-width: 767px) {
+
+    .caption {
+        flex-direction: column;
+        gap: var(--spacing-2);
+    }
+
+}
