@@ -1,34 +1,3 @@
-<!-- <h2>Tickets</h2> -->
-<!-- 
-<p-table [value]="products" [tableStyle]="{'min-width': '60rem'}">
-    <ng-template pTemplate="header">
-        <tr>
-            <th pSortableColumn="id" style="width:20%">ID<p-sortIcon field="id"></p-sortIcon></th>
-            <th pSortableColumn="usuario" style="width:20%">Usuario<p-sortIcon field="usuario"></p-sortIcon></th>
-            <th pSortableColumn="asunto" style="width:20%">Asunto<p-sortIcon field="asunto"></p-sortIcon></th>
-            <th pSortableColumn="prioridad" style="width:20%">Prioridad<p-sortIcon field="prioridad"></p-sortIcon></th>
-            <th pSortableColumn="estatus" style="width:20%">Estatus<p-sortIcon field="estatus"></p-sortIcon></th>
-            <th pSortableColumn="fecha" style="width:20%">Fecha<p-sortIcon field="fecha"></p-sortIcon></th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-product>
-        <tr>
-            <td>{{product.id}}</td>
-            <td> <i class="pi pi-user"></i> {{product.usuario}}</td>
-            <td>{{product.asunto}}</td>
-            <td [style.color]="product.prioridad === 'baja' ? 'green' : (product.prioridad === 'media' ? 'orange' : 'red')">
-                <i [ngClass]="{
-                    'pi pi-circle-fill': true,
-                    'green-icon': product.prioridad === 'baja',
-                    'orange-icon': product.prioridad === 'media',
-                    'red-icon': product.prioridad === 'alta'
-                }"></i>
-            </td>
-            <td>{{product.estatus}}</td>
-            <td>{{product.fecha}}</td>
-        </tr>
-    </ng-template>
-</p-table> -->
 <h1>Tickets</h1>
 <div class="card">
     <app-tickets-table></app-tickets-table>

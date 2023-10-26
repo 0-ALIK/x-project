@@ -27,6 +27,6 @@ import { TicketsTableComponent } from './components/tickets-table/tickets-table.
 		TagModule,
 		SplitButtonModule,
         InputTextModule
-	]
+	],
 })
 export class TicketsModule { }
