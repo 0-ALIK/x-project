@@ -1,0 +1,58 @@
+<form action="" class="">
+    <div>
+        <h1>INFORME DE VENTAS</h1>
+        <!-- Nombre del informe -->
+        <article >
+            <span class="p-float-label">
+            <input pInputText id="nameInforme" />
+            <label htmlFor="username">Nombre del Informe</label>
+            </span>
+        </article>
+
+        <h2>Formato del informe</h2>
+        <p-dropdown [ngModelOptions]="{standalone: true}" [options]="formatos" [(ngModel)]="selectedFormato" optionLabel="nameFormato"></p-dropdown><br>
+
+        <h2>Tipo de informe</h2>
+        <p-dropdown [ngModelOptions]="{standalone: true}" [options]="tiposReportes" [(ngModel)]="selectedReportes" optionLabel="nameReportes"></p-dropdown>
+    </div>
+    <!-- SEGMENTOS -->
+    <section>
+        <h2>Segmentar según: </h2>
+        <article>
+            <h3>Identificación de la venta</h3>
+            <span class="p-float-label">
+                <input pInputText id="nameInforme" />
+                <label htmlFor="username">ID PEDIDO</label>
+            </span>
+        </article>
+
+        <h3>Rango de Fechas</h3>
+        <span>
+            <p-calendar [(ngModel)]="dates" selectionMode="multiple" [readonlyInput]="true" [showIcon]="true"></p-calendar>
+        </span>
+
+        <article>
+            <h2>Estado del pedido</h2>
+            <p-dropdown [ngModelOptions]="{standalone: true}" [options]="estadoPedidos" [(ngModel)]="selectedEstadoPedidos" optionLabel="nameEstadoPedidos"></p-dropdown>
+        </article>
+
+        <article>
+            <h3>Método de Pago</h3>
+            <p-multiSelect [ngModelOptions]="{standalone: true}" [options]="metodosPagos" [(ngModel)]="selectedMetodosPagos" defaultLabel="Elija una método de pago" optionLabel="nameMetodoPago" display="chip"></p-multiSelect>
+        </article>
+        <article>
+            <h3>Cliente que realizó el pedido</h3>
+            <span class="p-float-label">
+                <input pInputText id="nameInforme" />
+                <label htmlFor="username">NOMBRE CLIENTE</label>
+            </span>
+        </article>
+        <article>
+            <h3>Tipo de pago</h3>
+            <p-dropdown [ngModelOptions]="{standalone: true}" [options]="tiposPagos" [(ngModel)]="selectedTiposPagos" defaultLabel="Elija el tipo de pago" optionLabel="nameTipoPago"></p-dropdown><br>
+        </article>
+
+            <p-button label="Generar Informe" [loading]="loading" loadingIcon="pi pi-spinner" (onClick)="load()" [style]="{'margin-top': 'var(--spacing-5)'}"></p-button>
+    </section>
+</form>
+
