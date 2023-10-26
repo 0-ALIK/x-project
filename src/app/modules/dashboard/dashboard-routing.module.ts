@@ -13,7 +13,7 @@ const routes: Routes = [
             },
             {
                 path: 'ventas',
-                redirectTo: ''
+                loadChildren: () => import('../ventas/ventas.module').then(m => m.VentasModule)
             },
             {
                 path: 'clientes',
