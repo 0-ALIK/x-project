@@ -2,6 +2,7 @@ import { Direccion } from "./direccion.interface";
 import { Permisos } from "./permisos.interface";
 
 export interface Usuario {
+    id_usuario?: number;
     nombre?: string;
     correo?: string;
     pass?: string;
@@ -12,6 +13,7 @@ export interface Usuario {
 }
 
 export interface Admin extends Usuario {
+    id_admin?: number;
     apellido?: string;
     genero?: string;
     cedula?: string;
@@ -19,6 +21,7 @@ export interface Admin extends Usuario {
 }
 
 export interface Cliente extends Usuario {
+    id_cliente?: number;
     apellido?: string;
     cedula?: string;
     genero?: string;
@@ -28,6 +31,7 @@ export interface Cliente extends Usuario {
 }
 
 export interface Empresa extends Usuario {
+    id_empresa?: number;
     RUC?: string;
     razon_social?: string;
     documento?: string;

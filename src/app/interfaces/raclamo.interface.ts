@@ -2,22 +2,22 @@ import { Pedido } from "./pedido.interface";
 import { Admin, Cliente } from "./usuario.inteface";
 
 export interface ReclamoCategoria {
-    reclamo_categoria_id?: number;
+    id_reclamo_categoria?: number;
     nombre?: string;
 }
 
 export interface ReclamoPrioridad {
-    reclamo_prioridad_id?: number;
+    id_reclamo_prioridad?: number;
     prioridad?: string;
 }
 
 export interface ReclamoEstado {
-    reclamo_estado_id?: number;
+    id_reclamo_estado?: number;
     estado?: string;
 }
 
 export interface Reclamo {
-    reclamo_id?: number;
+    id_reclamo?: number;
     admin?: Admin;
     pedido?: Pedido;
     categora?: ReclamoCategoria;
@@ -30,6 +30,7 @@ export interface Reclamo {
 }
 
 export interface Mensaje {
+    id_mensaje?: number;
     reclamo?: Reclamo;
     mensaje?: string;
     fecha_envio?: Date;
@@ -38,3 +39,10 @@ export interface Mensaje {
     remitente?: string;
 }
 
+export interface Sugerencia {
+    id_sugerencia?: number;
+    contenido?: string;
+    fecha?: Date;
+    valoracion?: number;
+    cliente?: Cliente;
+}

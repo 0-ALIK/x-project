@@ -1,16 +1,17 @@
 export interface Categoria {
-    categoria_id?: number;
+    id_categoria?: number;
     nombre?: string;
 }
 
 export interface Marca {
-    marca_id?: number;
+    id_marca?: number;
     nombre?: string;
     descripcion?: string;
     logo?: string;
 }
 
 export interface Producto {
+    id_producto?: number;
     marca: Marca,
     categoria: Categoria,
     nombre?: string;

@@ -20,8 +20,9 @@ export interface PedidoProductos {
     cantidad?: number;
 }
 
-export interface EstadoPedido {
-
+export interface PedidoEstado {
+    id_estado_pedido?: number;
+    estado?: string;
 }
 
 export interface Pedido {
@@ -30,8 +31,8 @@ export interface Pedido {
     fecha?: Date,
     fecha_cambio_estado?: Date,
     detalles?: string;
-    forma_pago?: string;
-    estado?: string;
+    forma_pago?: FormaPago;
+    estado?: PedidoEstado;
     empresa?: Empresa;
     direccion?: Direccion;
     pedido_producto?: PedidoProductos[]

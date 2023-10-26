@@ -1,6 +1,6 @@
 .div-contenedor {
     display: flex;
-    justify-content: center;
+    gap: var(--spacing-2);
 }
 
 .tittle {
@@ -10,10 +10,6 @@
 
 .div-body {
     display: flex;
-}
-
-.add-photo {
-    margin-left: var(--spacing-8);
 }
 
 .flex {

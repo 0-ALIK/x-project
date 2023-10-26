@@ -24,8 +24,14 @@ export class VentasTableComponent implements OnInit {
                 foto: 'https://res.cloudinary.com/duwsb7fbe/image/upload/v1697773715/xd_upxbh0.jpg'
             },
             fecha: new Date(),
-            forma_pago: 'tarjeta',
-            estado: 'proceso'
+            forma_pago: {
+                id_forma_pago: 1,
+                nombre: 'Tarjeta'
+            },
+            estado: {
+                id_estado_pedido: 1,
+                estado: 'Proceso'
+            }
         },
         {
             cliente: {
@@ -38,8 +44,14 @@ export class VentasTableComponent implements OnInit {
                 foto: 'https://res.cloudinary.com/duwsb7fbe/image/upload/v1697773715/xd_upxbh0.jpg'
             },
             fecha: new Date(),
-            forma_pago: 'tarjeta',
-            estado: 'proceso'
+            forma_pago: {
+                id_forma_pago: 1,
+                nombre: 'Tarjeta'
+            },
+            estado: {
+                id_estado_pedido: 1,
+                estado: 'Proceso'
+            }
         }
     ];
 
