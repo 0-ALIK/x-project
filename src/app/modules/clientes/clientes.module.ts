@@ -8,7 +8,7 @@ import { EditarAgregarEmpComponent } from './pages/editar-agregar-emp/editar-agr
 import { MultiSelectModule} from 'primeng/multiselect';
 import { DropdownModule } from 'primeng/dropdown';
 import { TagModule } from 'primeng/tag';
-import { Slider, SliderModule } from 'primeng/slider';
+import { SliderModule } from 'primeng/slider';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { FormsModule } from '@angular/forms';
 import { TabMenuModule } from 'primeng/tabmenu';

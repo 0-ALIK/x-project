@@ -1,25 +1,23 @@
-<ng-container *ngIf="activeItem?.label && activeItem?.label === 'Clientes'">
-    <h1>LISTADO CLIENTES</h1>
-</ng-container>
-<ng-container *ngIf="activeItem?.label && activeItem?.label === 'Empresas'">
-    <h1>LISTADO CLIENTES</h1>
-</ng-container>
+<h1>{{ titulo }}</h1>
+
 <p-tabMenu (activeItemChange)="onChange($event)" [model]="items" [activeItem]="activeItem"></p-tabMenu>
 
 <ng-container *ngIf="activeItem?.label && activeItem?.label === 'Clientes'">
-    <app-clientes-table></app-clientes-table>
+    <div class="card">
+        <app-clientes-table></app-clientes-table>
+    </div>
 </ng-container>
 
 <ng-container *ngIf="activeItem?.label && activeItem?.label === 'Empresas'">
-
-    <app-empresas-table></app-empresas-table>
+    <div class="card">
+        <app-empresas-table></app-empresas-table>
+    </div>
 </ng-container>
 
-
 <ng-container *ngIf="activeItem?.label && activeItem?.label === 'Solicitudes'">
-        <app-solicitud-card></app-solicitud-card>
-        <app-solicitud-card></app-solicitud-card>
-        <app-solicitud-card></app-solicitud-card>
-        <app-solicitud-card></app-solicitud-card>
-        <app-solicitud-card></app-solicitud-card>
+    <app-solicitud-card></app-solicitud-card>
+    <app-solicitud-card></app-solicitud-card>
+    <app-solicitud-card></app-solicitud-card>
+    <app-solicitud-card></app-solicitud-card>
+    <app-solicitud-card></app-solicitud-card>
 </ng-container>

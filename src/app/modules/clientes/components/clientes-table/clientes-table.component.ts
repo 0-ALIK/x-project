@@ -19,13 +19,13 @@ export class ClientesTableComponent {
 
     public arregloClientes: any[] = [
         {
-            foto: 'xd', nombre: 'flavio', cedula: 'flacio', genero: '8888888', telefono: '66782932', correo: 'asdnkasjdnk', frecuencia: 'asd', empresa: '10'
+            foto: 'https://res.cloudinary.com/duwsb7fbe/image/upload/v1697773715/xd_upxbh0.jpg', nombre: 'Flavio', apellido: 'Sánchez', cedula: 'flacio', genero: '8888888', telefono: '66782932', correo: 'asdnkasjdnk', frecuencia: 'asd', empresa: '10'
         },
         {
-            foto: 'xd', nombre: 'flavio', cedula: 'flacio', genero: '8888888', telefono: '66782932', correo: 'asdnkasjdnk', frecuencia: 'asd', empresa: '10'
+            foto: 'https://res.cloudinary.com/duwsb7fbe/image/upload/v1697773715/xd_upxbh0.jpg', nombre: 'Flavio', apellido: 'Sánchez', cedula: 'flacio', genero: '8888888', telefono: '66782932', correo: 'asdnkasjdnk', frecuencia: 'asd', empresa: '10'
         },
         {
-            foto: 'xd', nombre: 'flavio', cedula: 'flacio', genero: '8888888', telefono: '66782932', correo: 'asdnkasjdnk', frecuencia: 'asd', empresa: '10'
+            foto: 'https://res.cloudinary.com/duwsb7fbe/image/upload/v1697773715/xd_upxbh0.jpg', nombre: 'Flavio', apellido: 'Sánchez', cedula: 'flacio', genero: '8888888', telefono: '66782932', correo: 'asdnkasjdnk', frecuencia: 'asd', empresa: '10'
         }
     ];
 

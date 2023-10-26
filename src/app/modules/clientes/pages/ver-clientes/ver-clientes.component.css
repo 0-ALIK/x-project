@@ -1,12 +1,16 @@
 .column {
     flex: left;
-  }
+}
 
+.card {
+    background-color: var(--surface-card);
+    padding: var(--spacing-3);
+    border-radius: var(--border-radius);
+}
 
-
-  /* Clear floats after the columns */
-  .row:after {
+/* Clear floats after the columns */
+.row:after {
     content: "";
     display: table;
     clear: both;
-  }
+}

@@ -16,7 +16,7 @@ export class VerClientesComponent implements OnInit {
     ]
 
 
-
+    public titulo: string | undefined = 'Clientes';
     public items: MenuItem[] | undefined;
     public activeItem: MenuItem | undefined;
 
@@ -32,6 +32,7 @@ export class VerClientesComponent implements OnInit {
     }
 
     public onChange(event:MenuItem):void {
+        this.titulo = event.label;
         this.activeItem = event;
     }
 
