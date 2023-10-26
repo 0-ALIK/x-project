@@ -13,11 +13,11 @@ const routes: Routes = [
             },
             {
                 path: 'ventas',
-                redirectTo: ''
+                redirectTo: '' 
             },
             {
                 path: 'clientes',
-                redirectTo: ''
+                loadChildren: () => import('../clientes/clientes.module').then(m => m.ClientesModule)
             },
             {
                 path: 'tickets',
