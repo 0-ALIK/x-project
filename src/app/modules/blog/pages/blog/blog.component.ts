@@ -10,7 +10,7 @@ import { FormGroup} from '@angular/forms';
 })
 
 export class VerBlogComponent {
-  
+
   public sidebarVisible: boolean = false;
   starsToFill = 0; // Variable para controlar cuántas estrellas se llenan
 
@@ -31,11 +31,9 @@ export class VerBlogComponent {
   ];
 
   review =[
-   { name: '5 estrella',  
+   { name: '5 estrella',
    reviewText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et urna tincidunt, feugiat nunc quis, vehicula justo. Nunc tristique mi sed nisl congue, ac elementum magna tincidunt. Ut velit enim, efficitur feugiat hendrerit id, maximus at magna. Sed at sapien vel ex feugiat gravida. Pellentesque eu justo felis. Nulla eget tellus sodales, consequat dui et, tincidunt justo. Sed et magna eget est ultrices pharetra et vel ligula.' },
   ];
-
-  formGroup!: FormGroup;
 
   products: any[] = [
     {
@@ -43,8 +41,8 @@ export class VerBlogComponent {
       nombre: 'Pepsi Cola',
       fecha: 'hace 3 meses',
       descripcion: 'Descripción del Producto 1Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et urna tincidunt, feugiat nunc quis, vehicula justo. Nunc tristique mi sed nisl congue, ac elementum magna tincidunt. Ut velit enim, efficitur feugiat hendrerit id, maximus at magna. Sed at sapien vel ex feugiat gravida. Pellentesque eu justo felis. Nulla eget tellus sodales, consequat dui et, tincidunt justo. Sed et magna eget est ultrices pharetra et vel ligula.',
-      rating: 4, 
-      date: '2023-10-25', 
+      rating: 4,
+      date: '2023-10-25',
     },
 
     {
@@ -52,17 +50,17 @@ export class VerBlogComponent {
       nombre: 'Pepsi Cola',
       fecha: 'hace 3 meses',
       descripcion: 'Descripción del Producto 1Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et urna tincidunt, feugiat nunc quis, vehicula justo. Nunc tristique mi sed nisl congue, ac elementum magna tincidunt. Ut velit enim, efficitur feugiat hendrerit id, maximus at magna. Sed at sapien vel ex feugiat gravida. Pellentesque eu justo felis. Nulla eget tellus sodales, consequat dui et, tincidunt justo. Sed et magna eget est ultrices pharetra et vel ligula.',
-      rating: 4, 
-      date: '2023-10-25', 
+      rating: 4,
+      date: '2023-10-25',
     },
-    
+
     {
       imageUrl: 'URL_DE_LA_IMAGEN_1',
       nombre: 'Pepsi Cola',
       fecha: 'hace 3 meses',
       descripcion: 'Descripción del Producto 1Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et urna tincidunt, feugiat nunc quis, vehicula justo. Nunc tristique mi sed nisl congue, ac elementum magna tincidunt. Ut velit enim, efficitur feugiat hendrerit id, maximus at magna. Sed at sapien vel ex feugiat gravida. Pellentesque eu justo felis. Nulla eget tellus sodales, consequat dui et, tincidunt justo. Sed et magna eget est ultrices pharetra et vel ligula.',
-      rating: 4, 
-      date: '2023-10-25', 
+      rating: 4,
+      date: '2023-10-25',
     },
   ];
 }

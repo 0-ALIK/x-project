@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MessageService } from 'primeng/api';
+import { DynamicDialogRef } from 'primeng/dynamicdialog';
 
 @Component({
     selector: 'app-dialog-agregar-categoria',
@@ -7,38 +7,23 @@ import { MessageService } from 'primeng/api';
     styleUrls: ['./dialog-agregar-categoria.component.css']
 })
 export class DialogAgregarCategoriaComponent {
-    value: string = '';
-    loading: boolean = false;
 
-    constructor(private messageService: MessageService) {}
+    public value: string = '';
 
-    load() {
+    public loading: boolean = false;
+
+    public constructor(
+        public ref: DynamicDialogRef
+    ) {}
+
+    public agregar(): void {
         this.loading = true;
-
-        setTimeout(() => {
-            if (this.value === "hola") {
-                this.showSuccessToast('Categoría agregada');
-            } else {
-                this.showErrorToast('Categoría no agregada');
-            }
-            this.loading = false;
-            this.value = '';
-        }, 2000);
+        this.loading = false;
+        this.cerrarDynamicDialog();
     }
 
-    private showSuccessToast(message: string) {
-        this.messageService.add({
-            severity: 'success',
-            summary: 'Éxito',
-            detail: message,
-        });
+    public cerrarDynamicDialog( categoria?: any ): void {
+        this.ref.close( categoria );
     }
 
-    private showErrorToast(message: string) {
-        this.messageService.add({
-            severity: 'error',
-            summary: 'Error',
-            detail: message,
-        });
-    }
 }

@@ -13,7 +13,6 @@ import { TableInventarioComponent } from './components/table-inventario/table-in
 import { TableEntradasComponent } from './components/table-entradas/table-entradas.component';
 import { DialogAgregarCategoriaComponent } from './components/dialog-agregar-categoria/dialog-agregar-categoria.component';
 import { DialogRealizarCompraComponent } from './components/dialog-realizar-compra/dialog-realizar-compra.component';
-import { DialogGenerarReporteComponent } from './components/dialog-generar-reporte/dialog-generar-reporte.component';
 
 import { MenuModule } from 'primeng/menu';
 import { TableModule } from 'primeng/table';
@@ -33,37 +32,36 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { DynamicDialogModule, DialogService } from 'primeng/dynamicdialog';
 
 @NgModule({
-  declarations: [
-    VerInventarioComponent,
-    TableInventarioComponent,
-    TableEntradasComponent,
-    AgregarMarcaComponent,
-    AgregarProductoComponent,
-    EditarMarcaComponent,
-    DialogAgregarCategoriaComponent,
-    DialogRealizarCompraComponent,
-    DialogGenerarReporteComponent
-  ],
-  imports: [
-    RouterModule,
-    CommonModule,
-    InventarioRoutingModule,
-    TableModule,
-    PaginatorModule,
-    ButtonModule,
-    InputTextModule,
-    TabMenuModule,
-    MenuModule,
-    DialogModule,
-    ToastModule,
-    ConfirmDialogModule,
-    DynamicDialogModule,
-    FileUploadModule,
-    FieldsetModule,
-    MultiSelectModule,
-    InputNumberModule,
-    InputTextareaModule
-  ],
-  providers: [ ConfirmationService, MessageService, DialogService ]
+    declarations: [
+        VerInventarioComponent,
+        TableInventarioComponent,
+        TableEntradasComponent,
+        AgregarMarcaComponent,
+        AgregarProductoComponent,
+        EditarMarcaComponent,
+        DialogAgregarCategoriaComponent,
+        DialogRealizarCompraComponent,
+    ],
+    imports: [
+        RouterModule,
+        CommonModule,
+        InventarioRoutingModule,
+        TableModule,
+        PaginatorModule,
+        ButtonModule,
+        InputTextModule,
+        TabMenuModule,
+        MenuModule,
+        DialogModule,
+        ToastModule,
+        ConfirmDialogModule,
+        DynamicDialogModule,
+        FileUploadModule,
+        FieldsetModule,
+        MultiSelectModule,
+        InputNumberModule,
+        InputTextareaModule
+    ],
+    providers: [ ConfirmationService, MessageService, DialogService ]
 })
 export class InventarioModule { }

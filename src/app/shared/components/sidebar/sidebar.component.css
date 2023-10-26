@@ -45,7 +45,6 @@
 @media (max-width: 1023px) {
     .sidebar {
         transform: translateX( calc( -1 * var(--sidebar-width)) );
-        z-index: 4;
     }
 
     .back {

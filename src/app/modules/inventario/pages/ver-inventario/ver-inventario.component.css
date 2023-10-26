@@ -1,8 +1,3 @@
-/* Ajuste del titulo */
-h1 {
-    margin: var(--spacing-0) var(--spacing-3) var(--spacing-0) var(--spacing-1);
-}
-
 /* Posiciona el boton de agregar al final */
 .split-menu  {
     display: flex;
@@ -12,7 +7,9 @@ h1 {
 
 /* Define un fondo para la tabla */
 .table_background {
-    background-color: var(--surface-a);
+    background-color: var(--surface-card);
+    padding: var(--spacing-2);
+    border-radius: var(--border-radius);
 }
 
 /* Acomoda el subtitulo */
@@ -25,9 +22,8 @@ h1 {
     color: var(--text-color);
 }
 
-/* Posiciona los tabs */
-.div-p-tabMenu {
-    width: max-content;
-    margin-left: var(--spacing-1);
-    margin-top: var(--spacing-2);
+.title-split-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }

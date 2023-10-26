@@ -1,12 +1,12 @@
-<p-sidebar [(visible)]="sidebarVisible" position="right" [style]="{ width: '450px' }">  
+<p-sidebar [(visible)]="sidebarVisible" position="right" [style]="{ width: '450px' }">
         <h3>Valora tu experiencia con nosotros</h3>
         <div class="stars-client">
-            <form [formGroup]="formGroup">
+            <form>
                 <p-rating formControlName="value"></p-rating>
             </form>
         </div>
         <h3>Cuéntanos más sobre tu experiencia</h3>
-        <textarea placeholder="Recuerda valorarnos de forma honesta y constructiva. Sus opiniones contribuyen a que sigamos mejorando :)" rows="8" cols="40" pInputTextarea></textarea>
+        <textarea placeholder="Recuerda valorarnos de forma honesta y constructiva. Sus opiniones contribuyen a que sigamos mejorando :" rows="8" cols="40" pInputTextarea></textarea>
         <p-button label="Enviar" [raised]="true" severity="info"></p-button>
 
 </p-sidebar>
@@ -63,7 +63,7 @@
                             <div class="reseña-descripcion">{{ product.descripcion }}</div>
                             <p-rating [readonly]="true" [cancel]="false"></p-rating>
                             <div class="flex align-items-center gap-3">
-                            </div>    
+                            </div>
                         </div>
                     </div>
                     <div class="reseña-botones">
