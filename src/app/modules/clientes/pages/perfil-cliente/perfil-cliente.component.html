@@ -1,0 +1,49 @@
+<p-tabMenu
+    (activeItemChange)="onChange($event)"
+    [model]="items"
+    [activeItem]="activeItem">
+</p-tabMenu>
+
+<div class="card">
+
+    <ng-container *ngIf="activeItem?.label && activeItem?.label === 'Informacion'">
+        <app-perfil-card></app-perfil-card>
+    </ng-container>
+    <ng-container  *ngIf="activeItem?.label && activeItem?.label === 'Direcciones'" >
+        <div class="top">
+            <div>
+                <p>Filtrar por Nombre</p>
+                <div class="card flex justify-content-center">
+                    <p-dropdown  placeholder="A a la Z..." [group]="true">
+                        <ng-template let-group pTemplate="group">
+                            <div class="flex align-items-center">
+                                <img src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png" [class]="'mr-2 flag flag-' + group.value" style="width: 20px" />
+                                <span>{{ group.label }}</span>
+                            </div>
+                        </ng-template>
+                    </p-dropdown>
+                </div>
+            </div>
+
+
+            <p-button class="boton">Limpiar Filtros</p-button>
+        </div>
+
+        <div class="direcciones">
+            <div>
+                <app-direccion-card></app-direccion-card>
+                <app-direccion-card></app-direccion-card>
+                <app-direccion-card></app-direccion-card>
+            </div>
+            <div>
+                <app-direccion-card></app-direccion-card>
+                <app-direccion-card></app-direccion-card>
+                <app-direccion-card></app-direccion-card>
+            </div>
+        </div>
+
+    </ng-container>
+
+    <ng-container  *ngIf="activeItem?.label && activeItem?.label === 'Reclamos'" ></ng-container>
+    <ng-container  *ngIf="activeItem?.label && activeItem?.label === 'Pedidos'" ></ng-container>
+</div>
