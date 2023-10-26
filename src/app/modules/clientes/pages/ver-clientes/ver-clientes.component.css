@@ -4,7 +4,7 @@
 
 .card {
     background-color: var(--surface-card);
-    padding: var(--spacing-3);
+    padding: var(--spacing-2);
     border-radius: var(--border-radius);
 }
 
@@ -13,4 +13,22 @@
     content: "";
     display: table;
     clear: both;
+}
+
+
+.list-cards-solicitud {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    margin-bottom: var(--spacing-2);
+    gap: var(--spacing-2);
+}
+
+
+/* Estilo para dispositivos móviles */
+@media (max-width: 767px) {
+
+    .list-cards-solicitud {
+        grid-template-columns: 100%;
+    }
+
 }

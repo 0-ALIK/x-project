@@ -1,37 +1,31 @@
-.top {
+.section {
     display: flex;
-    align-items: center;
+    gap: var(--spacing-2);
 }
 
-.top h2{
-    padding: var(--spacing-1) 1% 0px 10%;
+.image {
+    display: flex;
+    justify-content: center;
 }
 
-.top h3{
-    padding: var(--spacing-1) 1% 0px 0%;
-    font-weight: normal;
+.a1 {
+    flex: 1;
 }
 
-.top p{
-    padding: 0%;
+.a2 {
+    flex: 2;
 }
 
-.body{
-    display: grid;
-    grid-template-columns: 40% 30% 30%;
+.input {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: var(--spacing-2);
 }
 
-.body h4{
-    font-weight: normal;
-    padding-bottom: var(--spacing-4);
+/* Estilo para dispositivos móviles */
+@media (max-width: 767px) {
+
+    .section {
+        flex-direction: column;
+    }
 }
-
-
-.foto_perfil{
-    width: 250px;
-    height: 250px;
-    padding-right: var(--spacing-4);
-}
-
-
-

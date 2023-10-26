@@ -3,13 +3,10 @@ import { MenuItem } from 'primeng/api';
 
 
 @Component({
-  selector: 'app-perfil-cliente',
-  templateUrl: './perfil-cliente.component.html',
-  styleUrls: ['./perfil-cliente.component.css']
+    selector: 'app-perfil-cliente',
+    templateUrl: './perfil-cliente.component.html',
+    styleUrls: ['./perfil-cliente.component.css']
 })
-
-
-
 export class PerfilClienteComponent implements OnInit{
 
     public items: MenuItem[] | undefined;

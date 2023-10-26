@@ -8,7 +8,11 @@
     padding-bottom: var(--spacing-4) ;
 }
 
-
+.card {
+    background-color: var(--surface-card);
+    padding: var(--spacing-2);
+    border-radius: var(--border-radius);
+}
 
 .boton{
     align-self: end;

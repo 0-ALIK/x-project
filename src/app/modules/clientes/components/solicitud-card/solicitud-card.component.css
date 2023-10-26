@@ -1,12 +1,11 @@
-.card{
+.card {
     display: flex;
-    background-color: var(--surface-card);
+    background-color: var(--surface-50);
     padding: var(--spacing-4);
     border-radius: var(--border-radius);
     align-items: center;
     gap: var(--spacing-4);
     justify-content: space-between;
-    margin: var(--spacing-3);
 }
 
 .card h2, .card p{

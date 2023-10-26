@@ -13,6 +13,8 @@
 .celda-cliente-nombre {
     font-size: var(--text-md);
     margin-left: var(--spacing-1);
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 /* Estilo para dispositivos móviles */

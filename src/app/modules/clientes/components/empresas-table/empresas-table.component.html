@@ -7,7 +7,9 @@
     [tableStyle]="{ 'min-width': '50rem' }"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
     (onPage)="pageChange($event)"
-    [rowsPerPageOptions]="[10, 25, 50]">
+    [rowsPerPageOptions]="[10, 25, 50]"
+    selectionMode="single"
+    (onRowSelect)="onRowSelect( $event )">
 
     <ng-template pTemplate="caption">
         <div class="contenido">
@@ -25,7 +27,6 @@
     </ng-template>
     <ng-template pTemplate="header" >
         <tr>
-            <th>Foto</th>
             <th>Nombre</th>
             <th>propietario</th>
             <th>RUC</th>
@@ -36,19 +37,22 @@
             <th>Acciones</th>
         </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-cliente >
-        <tr>
-            <td>{{ cliente.foto }}</td>
-            <td>{{ cliente.nombre }}</td>
-            <td>{{ cliente.propietario }}</td>
-            <td>{{ cliente.ruc }}</td>
-            <td>{{ cliente.telefono }}</td>
-            <td>{{ cliente.direccion }}</td>
-            <td>{{ cliente.campos }}</td>
-            <td>{{ cliente.total }}</td>
+    <ng-template pTemplate="body" let-empresa >
+        <tr [pSelectableRow]="empresa">
+            <td class="celda-cliente">
+                <div>
+                    <p-avatar [image]="empresa.foto" shape="circle"></p-avatar>
+                </div>
+                <p class="celda-cliente-nombre">{{empresa.nombre}}</p>
+            </td>
+            <td>{{ empresa.propietario }}</td>
+            <td>{{ empresa.ruc }}</td>
+            <td>{{ empresa.telefono }}</td>
+            <td>{{ empresa.direccion }}</td>
+            <td>{{ empresa.campos }}</td>
+            <td>{{ empresa.total }}</td>
             <td>
-                <p-button icon="pi pi-pencil" [rounded]="true" [text]="true"></p-button>
-                <p-button icon="pi pi-trash" [rounded]="true" [text]="true" severity="danger "></p-button>
+                <p-button icon="pi pi-trash" [rounded]="true" [text]="true" severity="danger"></p-button>
             </td>
         </tr>
     </ng-template>

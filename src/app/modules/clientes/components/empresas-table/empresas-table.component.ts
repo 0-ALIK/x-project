@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 
 @Component({
@@ -18,18 +19,22 @@ export class EmpresasTableComponent {
 
     public arregloEmpresas: any[] = [
         {
-            foto: 'xd', nombre: 'flavio', propietario: 'flacio', ruc: '8888888', telefono: '66782932', direccion: 'asdnkasjdnk', campos: 'asd', total: '10'
+            id: 1, foto: 'xd', nombre: 'flavio', propietario: 'flacio', ruc: '8888888', telefono: '66782932', direccion: 'asdnkasjdnk', campos: 'asd', total: '10'
         },
         {
-            foto: 'xd', nombre: 'flavio', propietario: 'flacio', ruc: '8888888', telefono: '66782932', direccion: 'asdnkasjdnk', campos: 'asd', total: '10'
+            id: 2, foto: 'xd', nombre: 'flavio', propietario: 'flacio', ruc: '8888888', telefono: '66782932', direccion: 'asdnkasjdnk', campos: 'asd', total: '10'
         },
         {
-            foto: 'xd', nombre: 'flavio', propietario: 'flacio', ruc: '8888888', telefono: '66782932', direccion: 'asdnkasjdnk', campos: 'asd', total: '10'
+            id: 3, foto: 'xd', nombre: 'flavio', propietario: 'flacio', ruc: '8888888', telefono: '66782932', direccion: 'asdnkasjdnk', campos: 'asd', total: '10'
         }
 
     ]
 
-    ngOnInit() {
+    public constructor (
+        private router: Router
+    ) {}
+
+    public ngOnInit(): void {
 
         this.tabs = [
             { label: 'Home', icon: 'pi pi-fw pi-home' },
@@ -67,5 +72,10 @@ export class EmpresasTableComponent {
     isFirstPage(): boolean {
         return false;
         // this.customers ? this.first === 0 : true;
+    }
+
+    public onRowSelect(event: any): void {
+        const { id } = event.data;
+        this.router.navigate(['/dashboard/clientes/perfil', id]);
     }
 }

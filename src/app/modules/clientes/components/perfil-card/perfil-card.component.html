@@ -1,38 +1,42 @@
-<div class="top">
-    <p-avatar icon="pi pi-user" shape="circle" size="large"></p-avatar>
-    <h2>Empresa</h2>
-    <h2>RUC: </h2> <h3 >8-888-8888</h3>
-    <h2>Telefono:</h2> <h3 >507 6555-5555</h3>
-</div>
+<section class="section">
+    <article class="article a1">
+        <div class="image">
+            <p-image
+                src="https://primefaces.org/cdn/primeng/images/galleria/galleria1.jpg"
+                alt="Perfil"
+                width="300"
+                [preview]="true">
+            </p-image>
+        </div>
 
-<hr>
-<h2>INFORMACION GENERAL CLIENTE</h2>
+        <p-fileUpload
+            name="demo[]"
+            (onUpload)="onUpload($event)"
+            [multiple]="false" accept="image/*"
+            [maxFileSize]="1000000">
+            <ng-template pTemplate="content">
+                <ul *ngIf="uploadedFiles.length">
+                    <li *ngFor="let file of uploadedFiles">{{ file.name }} - {{ file.size }} bytes</li>
+                </ul>
+            </ng-template>
+        </p-fileUpload>
+    </article>
 
-<div class="body">
-        <img class="foto_perfil">
-
-            <div >
-                <h2>ID: </h2> <h4>9-888-888</h4>
-                <h2>Nombre: </h2> <h4>Nombre</h4>
-                <h2>Apellido: </h2> <h4>apellido</h4>
+    <article class="article a2">
+        <form>
+            <div class="input">
+                <label htmlFor="username">Nombre</label>
+                <input pInputText id="username" aria-describedby="username-help">
             </div>
-            <div >
-                <h2>Correo: </h2> <h4>correo@gmail.com</h4>
-                <h2>Telefono: </h2> <h4>6666-6666</h4>
-                <h2>Genero: </h2> <h4>no binario</h4>
+            <div class="input">
+                <label htmlFor="username">Apellido</label>
+                <input pInputText id="username" aria-describedby="username-help">
             </div>
-</div>
-
-<p-card header="Razon Social"  [style]="{'width': '95%', 'margin':'1em', 'margin-bottom': '2em', 'box-shadow': '0 4px 8px 0 rgba(0,0,0,0.2)' }">
-    <hr>
-    <p>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-    </p>
-  </p-card>
+            <div class="input">
+                <label htmlFor="username">Telefono</label>
+                <input pInputText id="username" aria-describedby="username-help">
+            </div>
+        </form>
+    </article>
+</section>
 

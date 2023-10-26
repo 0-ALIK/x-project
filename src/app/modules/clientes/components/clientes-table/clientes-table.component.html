@@ -1,13 +1,14 @@
 <p-table
+    #tablePedidos
     [value]="arregloClientes"
+    [tableStyle]="{ 'min-width': '50rem' }"
     [paginator]="true"
     styleClass="p-datatable-gridlines"
-    [rows]="5"
+    [rows]="10"
     selectionMode="single"
-    [(selection)]="activeItem"
     (onRowSelect)="onRowSelect($event)"
     [showCurrentPageReport]="true"
-    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    currentPageReportTemplate="Hay un total de {totalRecords} registros"
     (onPage)="pageChange($event)"
     [rowsPerPageOptions]="[10, 25, 50]">
 
@@ -21,7 +22,6 @@
                 <span class="p-input-icon-left">
                     <i class="pi pi-search"></i>
                     <input type="text" placeholder="Buscar..." pInputText/>
-
                 </span>
             </div>
         </div>
@@ -40,7 +40,7 @@
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-cliente >
-        <tr>
+        <tr [pSelectableRow]="cliente">
             <td class="celda-cliente">
                 <div>
                     <p-avatar [image]="cliente.foto" shape="circle"></p-avatar>
@@ -52,10 +52,9 @@
             <td>{{ cliente.correo }}</td>
             <td>{{ cliente.frecuencia }}</td>
             <td>{{ cliente.empresa }}</td>
-            <td> 24 </td>
+            <td>24</td>
             <td>
-                <p-button icon="pi pi-pencil" [rounded]="true" [text]="true"></p-button>
-                <p-button icon="pi pi-trash" [rounded]="true" [text]="true" severity="danger "></p-button>
+                <p-button icon="pi pi-trash" [rounded]="true" [text]="true" severity="danger"></p-button>
             </td>
         </tr>
     </ng-template>

@@ -9,27 +9,31 @@ import { Router } from '@angular/router';
 })
 export class ClientesTableComponent {
 
-    tabs: MenuItem[] | undefined;
+    public tabs: MenuItem[] | undefined;
 
-    activeItem: MenuItem | undefined;
+    public activeItem: MenuItem | undefined;
 
-    first = 0;
+    public first = 0;
 
-    rows = 10;
+    public rows = 10;
 
     public arregloClientes: any[] = [
         {
-            foto: 'https://res.cloudinary.com/duwsb7fbe/image/upload/v1697773715/xd_upxbh0.jpg', nombre: 'Flavio', apellido: 'Sánchez', cedula: 'flacio', genero: '8888888', telefono: '66782932', correo: 'asdnkasjdnk', frecuencia: 'asd', empresa: '10'
+            id: 1, foto: 'https://res.cloudinary.com/duwsb7fbe/image/upload/v1697773715/xd_upxbh0.jpg', nombre: 'Flavio', apellido: 'Sánchez', cedula: 'flacio', genero: '8888888', telefono: '66782932', correo: 'asdnkasjdnk', frecuencia: 'asd', empresa: '10'
         },
         {
-            foto: 'https://res.cloudinary.com/duwsb7fbe/image/upload/v1697773715/xd_upxbh0.jpg', nombre: 'Flavio', apellido: 'Sánchez', cedula: 'flacio', genero: '8888888', telefono: '66782932', correo: 'asdnkasjdnk', frecuencia: 'asd', empresa: '10'
+            id: 2, foto: 'https://res.cloudinary.com/duwsb7fbe/image/upload/v1697773715/xd_upxbh0.jpg', nombre: 'Flavio', apellido: 'Sánchez', cedula: 'flacio', genero: '8888888', telefono: '66782932', correo: 'asdnkasjdnk', frecuencia: 'asd', empresa: '10'
         },
         {
-            foto: 'https://res.cloudinary.com/duwsb7fbe/image/upload/v1697773715/xd_upxbh0.jpg', nombre: 'Flavio', apellido: 'Sánchez', cedula: 'flacio', genero: '8888888', telefono: '66782932', correo: 'asdnkasjdnk', frecuencia: 'asd', empresa: '10'
+            id: 3, foto: 'https://res.cloudinary.com/duwsb7fbe/image/upload/v1697773715/xd_upxbh0.jpg', nombre: 'Flavio', apellido: 'Sánchez', cedula: 'flacio', genero: '8888888', telefono: '66782932', correo: 'asdnkasjdnk', frecuencia: 'asd', empresa: '10'
         }
     ];
 
-    ngOnInit() {
+    public constructor(
+        private router: Router
+    ) {}
+
+    public ngOnInit(): void {
 
         this.tabs = [
             { label: 'Home', icon: 'pi pi-fw pi-home' },
@@ -42,41 +46,36 @@ export class ClientesTableComponent {
         this.activeItem = this.tabs[0];
     }
 
-    next() {
+    public next(): void {
         this.first = this.first + this.rows;
     }
 
-    prev() {
+    public prev(): void {
         this.first = this.first - this.rows;
     }
 
-    reset() {
+    public reset(): void {
         this.first = 0;
     }
 
-    pageChange(event: any) {
+    public pageChange(event: any): void {
         this.first = event.first;
         this.rows = event.rows;
     }
 
-    isLastPage(): boolean {
+    public isLastPage(): boolean {
         return false;
         // this.customers ? this.first === this.customers.length - this.rows : true;
     }
 
-    isFirstPage(): boolean {
+    public isFirstPage(): boolean {
         return false;
         // this.customers ? this.first === 0 : true;
     }
 
-    onRowSelect(event: any) {
-        this.router.navigate(['./dashboard/inventario'])
+    public onRowSelect(event: any): void {
+        const { id } = event.data;
+        this.router.navigate(['/dashboard/clientes/perfil', id]);
     }
-
-    constructor(private router: Router){
-
-    }
-
-
 
 }
