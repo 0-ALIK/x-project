@@ -1,0 +1,27 @@
+<div class="card">
+    <h3>{{cantReviews}} reseñas de nuestros clientes: </h3>
+    <p-dataView #dv [value]="products" [rows]="5" [paginator]="true">
+        <ng-template let-product pTemplate="listItem">
+            <div class="col-12">
+                <div class="reseña-container">
+                        <img src="https://cdn.icon-icons.com/icons2/91/PNG/512/users_16478.png"
+                            alt="Usuario" width="100" height="100">
+                        <div class="reseña-info-container flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
+                        <div class="reseña-info flex flex-column align-items-center sm:align-items-start gap-3">
+                            <div class="reseña-nombre">{{ product.nombre }}</div>
+                            <div class="reseña-fecha">{{ product.fecha }}</div>
+                            <div class="reseña-descripcion">{{ product.descripcion }}</div>
+                            <p-rating ([NgModel])="product.rating" [readonly]="true" [cancel]="false"></p-rating>
+                            <div class="flex align-items-center gap-3">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="reseña-botones">
+                        <p-button icon="pi pi-thumbs-up-fill" [rounded]="true" [text]="true" [raised]="true"></p-button>
+                        <p-button icon="pi pi-thumbs-down-fill" [rounded]="true" [text]="true" [raised]="true"></p-button>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </p-dataView>
+</div>

@@ -26,10 +26,10 @@ export class TicketsTableComponent {
 
 	products: object[] = [
 		{ id: '#2345', usuario: 'Jose L.', asunto: 'Pedido Tardio', prioridad: 'ALTA', estatus: 'REVISADO', fecha: '29/03/2023' },
-		{ id: '#4567', usuario: 'Julian o.', asunto: 'Pedido Tardio', prioridad: 'ALTA', estatus: 'REVISION', fecha: '25/03/2023' },
-		{ id: '#4576', usuario: 'Moises h.', asunto: 'Pedido Tardio', prioridad: 'BAJA', estatus: 'REVISION', fecha: '22/03/2023' },
-		{ id: '#4532', usuario: 'Penelope p.', asunto: 'Pedido Tardio', prioridad: 'MEDIA', estatus: 'REVISION', fecha: '20/03/2023' },
-		{ id: '#1297', usuario: 'Miguel e.', asunto: 'Pedido Tardio', prioridad: 'BAJA', estatus: 'REVISION', fecha: '2/03/2023' },
+		{ id: '#4567', usuario: 'Julian o.', asunto: 'Pedido Tardio', prioridad: 'ALTA', estatus: 'ESPERA', fecha: '25/03/2023' },
+		{ id: '#4576', usuario: 'Moises h.', asunto: 'Pedido Tardio', prioridad: 'BAJA', estatus: 'RESUELTO', fecha: '22/03/2023' },
+		{ id: '#4532', usuario: 'Penelope p.', asunto: 'Pedido Tardio', prioridad: 'MEDIA', estatus: 'ESPERA', fecha: '20/03/2023' },
+		{ id: '#1297', usuario: 'Miguel e.', asunto: 'Pedido Tardio', prioridad: 'BAJA', estatus: 'REVISADO', fecha: '2/03/2023' },
 	];
 
 	clear(table: Table) {
@@ -48,17 +48,18 @@ export class TicketsTableComponent {
 				return 'unknown';
 		}
 	}
+
 	getSeverity(estatus: string): string {
 		switch (estatus) {
-			case 'REVISADO':
-				return 'success';
-			case 'LOWSTOCK':
-				return 'warning';
-			case 'OUTOFSTOCK':
-				return 'danger';
-			default:
-				return 'unknown';
+		  case 'REVISADO':
+			return 'info';
+		  case 'ESPERA':
+			return 'warning';
+		  case 'RESUELTO':
+			return 'success';
+		  default:
+			return 'unknown';
 		}
-	}
+	  }
 
 }

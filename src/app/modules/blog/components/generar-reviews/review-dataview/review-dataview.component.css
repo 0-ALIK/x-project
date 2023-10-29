@@ -1,0 +1,67 @@
+.reseña-container{
+  display: flex;
+  flex-flow: row;
+  color: var(--text-color);
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.reseña-nombre{
+  font-size: 18px;
+  margin-left: 20px;
+}
+
+.reseña-fecha{
+  color: rgb(123, 122, 122);
+  margin-top: 5px;
+  font-size: 15px;
+  margin-bottom: 10px;
+  font-weight: lighter;
+  margin-left: 20px;
+
+}
+
+.reseña-descripcion{
+  font-size: 15px;
+  margin-bottom: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+  text-align: justify;
+}
+
+img{
+  border-radius: 50%;
+  margin-left: 50px!important;
+}
+
+.reseña-botones {
+  display: flex;
+  justify-content: flex-end; 
+  gap: 10px; 
+  align-items: center;
+  height: 100%;
+  margin-right: 60px;
+  align-self: self-end;
+}
+
+.reseña-info-container{
+  width: -webkit-fill-available;
+}
+
+.card h3{
+  margin-top: 10px;
+  margin-bottom: 20px;
+  margin-left: 60px;
+}
+
+.card{
+  border-radius: 0px;
+  margin-right: 3px;
+  margin-left: 3px;
+  margin-bottom: 20px;
+  border-radius: bottom 5px;
+  background-color:var(--surface-a);
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+}

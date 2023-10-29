@@ -1,0 +1,24 @@
+<p-sidebar [(visible)]="sidebarVisible" position="right" [style]="{ width: '450px' }">
+    <div class="formulario">
+        <h3>Valora tu experiencia con nosotros</h3>
+        <h4>Recuerda valorarnos de forma honesta y objetiva. Sus opiniones contribuyen a que sigamos mejorando. </h4>
+        <div class="stars-client">
+            <form [formGroup]="formGroup">
+                <h5>{{ratingText}} </h5>
+                <p-rating formControlName="value" [cancel]="false"></p-rating>
+            </form>
+        </div>
+    <h3>Cuéntanos más sobre tu experiencia</h3>
+    <h4>Queremos asegurarnos de que tengas la mejor experiencia posible. ¿Tienes algún comentario?"</h4>
+    <textarea placeholder="..." rows="8" cols="40" pInputTextarea [autoResize]="true"></textarea>
+    <p-button icon="pi pi-send" label="Enviar" [raised]="true" severity="info"></p-button>
+    </div>
+</p-sidebar>
+
+<!-- Para desplegar el sidebar del formulario de reseñas -->
+<div class="boton-form">
+<p-button icon="pi pi-plus" [rounded]="true" (onClick)="sidebarVisible = true"></p-button>
+</div>
+<p-panel *ngIf="mostrarCalificacion" [style]="{ position: 'fixed', bottom: '20px', right: '20px', zIndex: '9999' }">
+<div class="stars"></div>
+</p-panel>
