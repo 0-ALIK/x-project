@@ -1,7 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Table } from 'primeng/table';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ConfirmationService, MessageService, ConfirmEventType } from 'primeng/api'
+import { Categoria, Marca, Producto } from 'src/app/interfaces/producto.iterface';
+import { Router } from '@angular/router';
+import { categorias, marcas, productos } from 'src/app/interfaces/data';
 
 @Component({
     selector: 'app-table-inventario',
@@ -9,22 +12,28 @@ import { ConfirmationService, MessageService, ConfirmEventType } from 'primeng/a
     styleUrls: ['./table-inventario.component.css']
 })
 
-export class TableInventarioComponent {
+export class TableInventarioComponent implements OnInit {
 
     public ref: DynamicDialogRef | undefined;
 
-    public products = [
-        { id: 1, name: 'Coca Cola', category: 'Bebidas', type: 'Refresco', price_unit: 10.00, stock: 15, photo: 'null', p_reorden: 'null' },
-        { id: 2, name: 'Pepsi', category: 'Bebidas', type: 'Refresco', price_unit: 12.00, stock: 20, photo: 'null', p_reorden: 'null' },
-        { id: 3, name: 'Sprite', category: 'Bebidas', type: 'Refresco', price_unit: 11.00, stock: 18, photo: 'null', p_reorden: 'null' }
-    ];
+    public selectedProducto: Producto | undefined;
+
+    public categorias: Categoria[] = categorias;
+
+    public marcas: Marca[] = marcas;
+
+    public productos: Producto[] = productos;
 
     public constructor(
         private confirmationService: ConfirmationService,
         private messageService: MessageService,
-        public dialogService: DialogService
+        public dialogService: DialogService,
+        private router: Router
     ) { }
 
+    public ngOnInit(): void {
+        throw new Error('Method not implemented.');
+    }
 
     public onEliminarProducto( product: any ): void {
         this.confirmationService.confirm({
@@ -52,6 +61,25 @@ export class TableInventarioComponent {
 
     public clear(table: Table): void {
         table.clear();
+    }
+
+    public aplicaReordenValue( producto: Producto, values: string[] ): string {
+        if(!producto?.cantidad_cajas || !producto?.punto_reorden) {
+            throw new Error('Campos necesarios no presentes en objeto');
+        }
+
+        if(producto.cantidad_cajas <= producto.punto_reorden) {
+            return values[0];
+        }
+
+        return values[1];
+    }
+
+    public onRowSelect( event: any ): void {
+        this.router.navigate([
+            '/dashboard/inventario/editar-producto/',
+            this.selectedProducto?.id_producto
+        ]);
     }
 
     private eliminarProducto = (): void => {

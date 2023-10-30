@@ -10,6 +10,11 @@
 
 .div-body {
     display: flex;
+    width: 100%;
+}
+
+.div-body form {
+    width: 100%;
 }
 
 .flex {
@@ -35,4 +40,13 @@
     & .btn-agregar {
         margin-right: var(--spacing-3);
     }
+}
+
+/* Estilo para dispositivos móviles */
+@media (max-width: 767px) {
+
+    .div-contenedor {
+        flex-direction: column;
+    }
+
 }

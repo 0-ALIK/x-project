@@ -27,6 +27,12 @@ th {
     justify-content: space-between;
 }
 
+.avatar-cel {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+}
+
 /* Estilo para dispositivos móviles */
 @media (max-width: 767px) {
     .header-table {

@@ -11,12 +11,15 @@
 
     <p-table
         #prd
-        [value]="products"
+        [value]="productos"
         [rows]="5"
         [paginator]="true"
         styleClass="p-datatable-gridlines"
         [tableStyle]="{ 'min-width': '50rem'}"
         [scrollable]="true"
+        selectionMode="single"
+        [(selection)]="selectedProducto"
+        (onRowSelect)="onRowSelect( $event )"
         >
 
         <ng-template pTemplate="caption">
@@ -47,7 +50,7 @@
                 </th>
                 <th>
                     <div class="flex align-items-center">
-                        Tipo <p-columnFilter field="type" display="menu"></p-columnFilter>
+                        Marca <p-columnFilter field="type" display="menu"></p-columnFilter>
                     </div>
                 </th>
                 <th>
@@ -78,20 +81,31 @@
             </tr>
         </ng-template>
 
-        <ng-template pTemplate="body" let-product>
-            <tr>
-                <td>{{ product.name }}</td>
-                <td>{{ product.category }}</td>
-                <td>{{ product.type }}</td>
-                <td>{{ product.price_unit }}</td>
-                <td>{{ product.stock }}</td>
-                <td>{{ product.photo }}</td>
-                <td>{{ product.p_reorden }}</td>
+        <ng-template pTemplate="body" let-producto>
+            <tr [pSelectableRow]="producto">
+                <td>{{ producto.nombre }}</td>
+                <td>{{ producto.categoria.nombre }}</td>
+                <td class="avatar-cel">
+                    <p-avatar [image]="producto.marca.logo"></p-avatar>
+                    <span>{{ producto.marca.nombre }}</span>
+                </td>
+                <td>${{ producto.precio_unit | number }}</td>
+                <td>{{ producto.cantidad_cajas }}</td>
+                <td>
+                    <p-avatar [image]="producto.foto"></p-avatar>
+                </td>
+                <td>
+                    <p-tag
+                        [icon]="aplicaReordenValue(producto, ['pi pi-exclamation-triangle', 'pi pi-check'])"
+                        [severity]="aplicaReordenValue(producto, ['danger', 'success'])"
+                        [value]="aplicaReordenValue(producto, ['Aplica', 'No aplica'])">
+                    </p-tag>
+                </td>
                 <td class="td-buttons">
                     <p-button
                         icon="pi pi-trash"
                         severity="danger"
-                        (click)="onEliminarProducto( product )"
+                        (click)="onEliminarProducto( producto )"
                         [text]="true"
                         [raised]="true">
                     </p-button>

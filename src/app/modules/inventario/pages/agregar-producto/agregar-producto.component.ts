@@ -1,17 +1,15 @@
-import { Component } from '@angular/core';
+import { Location } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
-
-interface Category {
-    name: string,
-}
-
-interface Types {
-    name: string,
-}
+import { productos } from 'src/app/interfaces/data';
+import { Producto } from 'src/app/interfaces/producto.iterface';
 
 interface UploadEvent {
     originalEvent: Event;
     files: File[];
+    currentFiles: File[];
 }
 
 @Component({
@@ -19,45 +17,47 @@ interface UploadEvent {
     templateUrl: './agregar-producto.component.html',
     styleUrls: ['./agregar-producto.component.css']
 })
-export class AgregarProductoComponent {
+export class AgregarProductoComponent implements OnInit {
 
-    categories!: Category[];
-    types!: Types[];
+    public imagePreview: string | undefined = '12asdsa';
 
-    selectedCategories!: Category[]
-    selectedTypes!: Types[]
+    public foto: File | undefined;
 
-    name: string | undefined;
-    price_unit: string | undefined;
-    stock: string | undefined;
-    p_reorden: string | undefined;
+    public currentProducto: Producto | undefined;
 
-    uploadedFiles: any[] = [];
+    public form = this.formBuilder.group([]);
 
-    constructor(private messageService: MessageService) {}
+    public constructor(
+        private messageService: MessageService,
+        private activatedRoute: ActivatedRoute,
+        private formBuilder: FormBuilder,
+        private location: Location
+    ) {}
 
-    ngOnInit() {
-        this.categories = [
-            {name: 'Bebidas'},
-            {name: 'Sodas'},
-            {name: 'Aguas'},
-            {name: 'Alguito'}
-        ];
-
-        this.types = [
-            {name: 'Refresco'},
-            {name: 'Refresquito'},
-            {name: 'No Refresca'},
-            {name: 'Mucho refresco'}
-        ];
-    }
-
-    onUpload(event:any) {
-        for(let file of event.files) {
-            this.uploadedFiles.push(file);
+    public ngOnInit(): void {
+        if( this.esEdicion() ) {
+            this.obtenerProductoEditar();
         }
 
-        this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
+        console.log('on init no implementado');
     }
 
+    public selectFile( event: UploadEvent ): void {
+        this.foto = event.currentFiles[0]
+        this.imagePreview = URL.createObjectURL( this.foto );
+    }
+
+    private obtenerProductoEditar(): void {
+        this.activatedRoute.params.subscribe({
+            next: ({id}) => {
+                this.currentProducto = productos.find( p => { p.id_producto === id } );
+            }
+        });
+    }
+
+    private esEdicion(): boolean {
+        const parts = this.location.path().split('/');
+        const lastPart = parts[ parts.length - 1 ];
+        return /^-?\d*\.?\d+$/.test(lastPart);
+    }
 }

@@ -16,7 +16,6 @@ export class AgregarMarcaComponent {
     name: string | undefined;
     description: string | undefined;
 
-
     uploadedFiles: any[] = [];
 
     constructor(private messageService: MessageService) {}

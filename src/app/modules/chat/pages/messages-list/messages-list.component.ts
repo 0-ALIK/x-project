@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-messages-list',
@@ -16,4 +17,13 @@ export class MessagesListComponent {
             remitente: 'admin'
         },
     ];
+
+    public constructor (
+        private router: Router
+    ) {}
+
+    @HostListener('document:keydown.escape', ['$event'])
+    public onCLickEsc(): void {
+        this.router.navigate(['/dashboard/chat']);
+    }
 }
