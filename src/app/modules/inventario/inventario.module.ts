@@ -33,6 +33,7 @@ import { AvatarModule } from 'primeng/avatar';
 import { TagModule } from 'primeng/tag';
 import { ImageModule } from 'primeng/image';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
     declarations: [
@@ -66,7 +67,8 @@ import { ReactiveFormsModule } from '@angular/forms';
         AvatarModule,
         TagModule,
         ImageModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        SharedModule
     ],
     providers: [ ConfirmationService, MessageService, DialogService ]
 })

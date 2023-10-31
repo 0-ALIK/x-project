@@ -4,36 +4,41 @@
 <div class="div-contenedor">
 
     <div class="add-photo">
-        <div [style]="{'display': 'flex', 'justifyContent': 'center'}">
-            <p-image
-                [src]="imagePreview"
-                alt="Image"
-                width="250"
-                [preview]="true">
-            </p-image>
+        <div>
+            <div [style]="{'display': 'flex', 'justifyContent': 'center'}">
+                <alik-image-preview *ngIf="!imagePreview"></alik-image-preview>
+                <p-image
+                    *ngIf="imagePreview"
+                    [src]="imagePreview"
+                    alt="Image"
+                    width="250"
+                    [preview]="true">
+                </p-image>
+            </div>
+            <p-fileUpload
+                (onSelect)="selectFile( $event )"
+                [multiple]="false"
+                accept="image/*"
+                [maxFileSize]="1000000">
+            </p-fileUpload>
         </div>
-        <p-fileUpload
-            (onSelect)="selectFile( $event )"
-            [multiple]="false"
-            accept="image/*"
-            [maxFileSize]="1000000">
-        </p-fileUpload>
     </div>
 
     <div class="div-body">
         <form class="div-form" [formGroup]="form">
-            <h2>Datos del Tipo de Producto</h2>
+            <h2>Información general del Producto</h2>
 
             <hr>
 
             <div class="flex-column gap-2">
                 <label>Nombre</label>
-                <input pInputText>
+                <input pInputText formControlName="nombre">
             </div>
 
             <div class="flex-column">
                 <label>Precio Unitario</label>
                 <p-inputNumber
+                    formControlName="precio_unit"
                     inputId="currency-us"
                     mode="currency"
                     currency="USD"
@@ -43,25 +48,52 @@
 
             <div class="flex-column">
                 <label>Cantidad de cajas</label>
-                <p-inputNumber inputId="integeronly"></p-inputNumber>
+                <p-inputNumber
+                    formControlName="cantidad_cajas"
+                    inputId="integeronly">
+                </p-inputNumber>
             </div>
 
 
             <div class="flex-column">
                 <label>Categoría</label>
-                <p-dropdown optionLabel="name"></p-dropdown>
+                <p-dropdown
+                    formControlName="categoria"
+                    [options]="categorias"
+                    optionLabel="nombre">
+                </p-dropdown>
             </div>
 
 
             <div class="flex-column">
                 <label>Marca</label>
-                <p-dropdown optionLabel="name"></p-dropdown>
+                <p-dropdown
+                    formControlName="marca"
+                    [options]="marcas"
+                    optionLabel="nombre">
+                    <ng-template let-marca pTemplate="item">
+                        <div [style]="{'display': 'flex', 'alignItems': 'center', 'gap': 'var(--spacing-2)'}" >
+                            <img [src]="marca.logo" style="width: 18px">
+                            <div>{{ marca.nombre }}</div>
+                        </div>
+                    </ng-template>
+                </p-dropdown>
             </div>
 
             <div class="flex-column">
                 <label>P. Reorden</label>
-                <p-inputNumber inputId="integeronly"></p-inputNumber>
+                <p-inputNumber
+                    formControlName="punto_reorden"
+                    inputId="integeronly">
+                </p-inputNumber>
             </div>
+
+            <p-button
+                [label]="labelButton"
+                [loading]="estaCargando"
+                [disabled]="!form.valid"
+                (onClick)="enviarFormulario()">
+            </p-button>
         </form>
 
     </div>

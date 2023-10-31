@@ -1,9 +1,15 @@
-import { Component } from '@angular/core';
+import { Location } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { marcas } from 'src/app/interfaces/data';
+import { Marca } from 'src/app/interfaces/producto.iterface';
 
 interface UploadEvent {
     originalEvent: Event;
     files: File[];
+    currentFiles: File[];
 }
 
 @Component({
@@ -11,23 +17,46 @@ interface UploadEvent {
     templateUrl: './agregar-marca.component.html',
     styleUrls: ['./agregar-marca.component.css']
 })
-export class AgregarMarcaComponent {
+export class AgregarMarcaComponent implements OnInit {
 
-    name: string | undefined;
-    description: string | undefined;
+    public imagePreview: string | undefined;
 
-    uploadedFiles: any[] = [];
+    public currentMarca: Marca | undefined;
 
-    constructor(private messageService: MessageService) {}
+    public form: FormGroup = this.formBuilder.group({
+        nombre: ['', [Validators.required]],
+        desc: ['', [Validators.required]],
 
-    ngOnInit() {}
+    });
 
-    onUpload(event:any) {
-        for(let file of event.files) {
-            this.uploadedFiles.push(file);
+    constructor(
+        private messageService: MessageService,
+        private activatedRoute: ActivatedRoute,
+        private formBuilder: FormBuilder,
+        private location: Location
+    ) {}
+
+    public ngOnInit(): void {
+        if( this.esEdicion() ) {
+
         }
-
-        this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
     }
 
+    public selectFile(event: UploadEvent): void {
+
+    }
+
+    private obtenerProductoEditar(): void {
+        this.activatedRoute.params.subscribe({
+            next: ({id}) => {
+                this.currentMarca = marcas.find( m => m.id_marca === Number(id) );
+            }
+        });
+    }
+
+    private esEdicion(): boolean {
+        const parts = this.location.path().split('/');
+        const lastPart = parts[ parts.length - 1 ];
+        return /^-?\d*\.?\d+$/.test(lastPart);
+    }
 }

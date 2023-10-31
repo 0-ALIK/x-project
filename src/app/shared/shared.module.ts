@@ -7,16 +7,19 @@ import { ButtonModule } from 'primeng/button';
 import { AvatarModule } from 'primeng/avatar';
 import { MenuModule } from 'primeng/menu';
 import { SidebarModule } from 'primeng/sidebar';
+import { ImagePreviewComponent } from './components/image-preview/image-preview.component';
 
 
 @NgModule({
     declarations: [
         SidebarComponent,
-        NavComponent
+        NavComponent,
+        ImagePreviewComponent
     ],
     exports: [
         SidebarComponent,
-        NavComponent
+        NavComponent,
+        ImagePreviewComponent
     ],
     imports: [
         CommonModule,

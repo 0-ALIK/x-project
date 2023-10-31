@@ -32,7 +32,7 @@ export class TableInventarioComponent implements OnInit {
     ) { }
 
     public ngOnInit(): void {
-        throw new Error('Method not implemented.');
+        console.log("xd");
     }
 
     public onEliminarProducto( product: any ): void {
