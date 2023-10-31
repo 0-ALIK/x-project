@@ -1,8 +1,8 @@
 .card-gallery {
     width: 100%;
     margin-top: var(--spacing-4);
-    padding-left: calc(var(--spacing-8) + var(--spacing-5));
-    padding-right: calc(var(--spacing-8) + var(--spacing-5));
+    padding-left: calc(var(--spacing-8) + var(--spacing-4));
+    padding-right: calc(var(--spacing-8) + var(--spacing-4));
     display: flex;
     
     flex-wrap: wrap;
@@ -22,7 +22,7 @@
 
 .button-content i {
     margin-bottom: 10px; /* Espacio entre el icono y el texto (ajusta según sea necesario) */
-    font-size: var(--text-7xl);
+    font-size: var(--text-6xl);
 }
 
 span {
@@ -44,13 +44,13 @@ p-button:hover {
 
 @media (max-width: 767px) {
     .card-gallery {
-        padding-left: 6%;
-        padding-right: 6%;
+        padding-left: 10%;
+        padding-right: 10%;
     }
 
     .button-content {
-        width: 100px;
-        height: 100px;
+        width: 105px;
+        height: 105px;
         display: flex;
         align-items: center;
         text-align: center;
@@ -59,19 +59,19 @@ p-button:hover {
 
     .button-content i {
         margin-bottom: 10px; /* Espacio entre el icono y el texto (ajusta según sea necesario) */
-        font-size: var(--text-xl);
+        font-size: var(--text-2xl);
     }
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
     .card-gallery {
-        padding-left: 20%;
-        padding-right: 20%;
+        padding-left: 14%;
+        padding-right: 14%;
     }
 
     .button-content {
-        width: 110px;
-        height: 110px;
+        width: 115px;
+        height: 115px;
         display: flex;
         align-items: center;
         text-align: center;
@@ -80,14 +80,14 @@ p-button:hover {
 
     .button-content i {
         margin-bottom: 10px; /* Espacio entre el icono y el texto (ajusta según sea necesario) */
-        font-size: var(--text-4xl);
+        font-size: var(--text-5xl);
     }
 }
 
 @media (min-width: 1200px) {
     .card-gallery {
-        padding-left: 25%;
-        padding-right: 25%;
+        padding-left: 17%;
+        padding-right: 17%;
     }
 
     .button-content {
