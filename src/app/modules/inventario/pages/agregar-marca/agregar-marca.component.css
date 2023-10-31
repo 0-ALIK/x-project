@@ -28,12 +28,4 @@
     margin-bottom: var(--spacing-3);
 }
 
-.buttons {
-    display: flex;
-    justify-content: flex-end;
-
-    & .btn-agregar {
-        margin-right: var(--spacing-3);
-    }
-}
 

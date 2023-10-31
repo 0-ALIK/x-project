@@ -19,6 +19,8 @@ interface UploadEvent {
 })
 export class AgregarProductoComponent implements OnInit {
 
+    public titulo: string = 'Agregar nuevo producto'
+
     public imagePreview: string | undefined;
 
     public foto: File | undefined;
@@ -81,6 +83,8 @@ export class AgregarProductoComponent implements OnInit {
                 this.currentProducto = productos.find( p => p.id_producto === Number(id) );
 
                 if(!this.currentProducto) return;
+
+                this.titulo = 'Editar producto ' + this.currentProducto.nombre;
 
                 this.form.setValue({
                     nombre: this.currentProducto.nombre,

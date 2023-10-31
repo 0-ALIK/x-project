@@ -1,6 +1,6 @@
 <p-toast></p-toast>
 
-<h1 [style]="{'fontSize': 'var(--text-3xl)'}">Producto x</h1>
+<h1 [style]="{'fontSize': 'var(--text-3xl)'}">{{titulo}}</h1>
 <div class="div-contenedor">
 
     <div class="add-photo">
@@ -46,5 +46,12 @@
                 pInputText>
             </textarea>
         </div>
+
+        <p-button
+            [label]="labelButton"
+            [loading]="estaCargando"
+            [disabled]="!form.valid"
+            (onClick)="enviarFormulario()">
+        </p-button>
     </form>
 </div>

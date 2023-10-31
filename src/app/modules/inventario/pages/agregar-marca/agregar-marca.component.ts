@@ -19,14 +19,21 @@ interface UploadEvent {
 })
 export class AgregarMarcaComponent implements OnInit {
 
+    public titulo: string = 'Agregar nueva marca';
+
     public imagePreview: string | undefined;
 
     public currentMarca: Marca | undefined;
 
+    public foto: File | undefined;
+
+    public estaCargando: boolean = false;
+
+    public labelButton: string = 'Agregar marca';
+
     public form: FormGroup = this.formBuilder.group({
         nombre: ['', [Validators.required]],
-        desc: ['', [Validators.required]],
-
+        descripcion: ['', [Validators.required]],
     });
 
     constructor(
@@ -38,18 +45,37 @@ export class AgregarMarcaComponent implements OnInit {
 
     public ngOnInit(): void {
         if( this.esEdicion() ) {
-
+            this.labelButton = 'Guardar cambios';
+            this.obtenerMarcaEditar()
         }
     }
 
-    public selectFile(event: UploadEvent): void {
-
+    public enviarFormulario(): void {
+        this.estaCargando = true;
+        setTimeout(() => {
+            this.estaCargando = false;
+        }, 2000);
     }
 
-    private obtenerProductoEditar(): void {
+    public selectFile(event: UploadEvent): void {
+        this.foto = event.currentFiles[0]
+        this.imagePreview = URL.createObjectURL( this.foto );
+    }
+
+    private obtenerMarcaEditar(): void {
         this.activatedRoute.params.subscribe({
             next: ({id}) => {
                 this.currentMarca = marcas.find( m => m.id_marca === Number(id) );
+
+                if(!this.currentMarca) return;
+
+                this.titulo = 'Editar marca ' + this.currentMarca.nombre;
+
+                this.form.setValue({
+                    nombre: this.currentMarca.nombre,
+                    descripcion: this.currentMarca.descripcion
+                });
+                this.imagePreview = this.currentMarca.logo;
             }
         });
     }
