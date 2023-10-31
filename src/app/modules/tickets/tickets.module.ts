@@ -15,10 +15,10 @@ import { CompraTableComponent } from './components/detalles-compra/compra-table/
 @NgModule({
 	declarations: [
 		VerTicketsComponent,
-  VerDetalleComponent,
-  TicketsTableComponent,
-  GenerarTicketComponent,
-  CompraTableComponent,
+		VerDetalleComponent,
+		TicketsTableComponent,
+		GenerarTicketComponent,
+		CompraTableComponent,
 	],
 	imports: [
 		CommonModule,
