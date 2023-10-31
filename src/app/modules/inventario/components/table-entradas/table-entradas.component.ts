@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Table } from 'primeng/table';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { DialogGenerarReporteComponent } from '../dialog-generar-reporte/dialog-generar-reporte.component';
 
 @Component({
     selector: 'app-table-entradas',
@@ -22,7 +21,7 @@ export class TableEntradasComponent {
 
     // Esto abre dialog-generar-reporte
     showGenerarReporte() {
-        this.ref = this.dialogService.open(DialogGenerarReporteComponent, { header: 'Generar Reporte' });
+        /* this.ref = this.dialogService.open(DialogGenerarReporteComponent, { header: 'Generar Reporte' }); */
     }
 
     // Metodo que limpia los filtros ingresados por el usuario

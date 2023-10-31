@@ -1,7 +1,7 @@
 /* Tamaño del fieldset */
 p-fieldset {
     display: flex;
-    justify-content: center;
+    gap: var(--spacing-2);
 }
 
 /* Tamaño y padding del titulo */
@@ -10,14 +10,8 @@ p-fieldset {
     padding: var(--spacing-1);
 }
 
-/* Cuerpo del fieldet (form y photo) */
-.div-body {
-    display: flex;
-}
-
-/* Marigon del div del upload */
-.add-photo {
-    margin-left: var(--spacing-8);
+.div-form {
+    width: 100%;
 }
 
 .flex {
@@ -36,14 +30,4 @@ p-fieldset {
     margin-bottom: var(--spacing-3);
 }
 
-/* Diseño de los botones agregar y cancelar */
-.buttons {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: var(--spacing-3);
-
-    & .btn-agregar {
-        margin-right: var(--spacing-3);
-    }
-}
 

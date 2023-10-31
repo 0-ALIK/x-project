@@ -7,13 +7,11 @@ import { InventarioRoutingModule } from './inventario-routing.module';
 import { VerInventarioComponent } from './pages/ver-inventario/ver-inventario.component';
 import { AgregarMarcaComponent } from './pages/agregar-marca/agregar-marca.component';
 import { AgregarProductoComponent } from './pages/agregar-producto/agregar-producto.component';
-import { EditarMarcaComponent } from './pages/editar-marca/editar-marca.component';
 
 import { TableInventarioComponent } from './components/table-inventario/table-inventario.component';
 import { TableEntradasComponent } from './components/table-entradas/table-entradas.component';
 import { DialogAgregarCategoriaComponent } from './components/dialog-agregar-categoria/dialog-agregar-categoria.component';
 import { DialogRealizarCompraComponent } from './components/dialog-realizar-compra/dialog-realizar-compra.component';
-import { DialogGenerarReporteComponent } from './components/dialog-generar-reporte/dialog-generar-reporte.component';
 
 import { MenuModule } from 'primeng/menu';
 import { TableModule } from 'primeng/table';
@@ -31,39 +29,47 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { DynamicDialogModule, DialogService } from 'primeng/dynamicdialog';
+import { AvatarModule } from 'primeng/avatar';
+import { TagModule } from 'primeng/tag';
+import { ImageModule } from 'primeng/image';
+import { ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
-  declarations: [
-    VerInventarioComponent,
-    TableInventarioComponent,
-    TableEntradasComponent,
-    AgregarMarcaComponent,
-    AgregarProductoComponent,
-    EditarMarcaComponent,
-    DialogAgregarCategoriaComponent,
-    DialogRealizarCompraComponent,
-    DialogGenerarReporteComponent
-  ],
-  imports: [
-    RouterModule,
-    CommonModule,
-    InventarioRoutingModule,
-    TableModule,
-    PaginatorModule,
-    ButtonModule,
-    InputTextModule,
-    TabMenuModule,
-    MenuModule,
-    DialogModule,
-    ToastModule,
-    ConfirmDialogModule,
-    DynamicDialogModule,
-    FileUploadModule,
-    FieldsetModule,
-    MultiSelectModule,
-    InputNumberModule,
-    InputTextareaModule
-  ],
-  providers: [ ConfirmationService, MessageService, DialogService ]
+    declarations: [
+        VerInventarioComponent,
+        TableInventarioComponent,
+        TableEntradasComponent,
+        AgregarMarcaComponent,
+        AgregarProductoComponent,
+        DialogAgregarCategoriaComponent,
+        DialogRealizarCompraComponent,
+    ],
+    imports: [
+        RouterModule,
+        CommonModule,
+        InventarioRoutingModule,
+        TableModule,
+        PaginatorModule,
+        ButtonModule,
+        InputTextModule,
+        TabMenuModule,
+        MenuModule,
+        DialogModule,
+        ToastModule,
+        ConfirmDialogModule,
+        DynamicDialogModule,
+        FileUploadModule,
+        FieldsetModule,
+        MultiSelectModule,
+        InputNumberModule,
+        InputTextareaModule,
+        AvatarModule,
+        TagModule,
+        ImageModule,
+        ReactiveFormsModule,
+        SharedModule
+    ],
+    providers: [ ConfirmationService, MessageService, DialogService ]
 })
 export class InventarioModule { }

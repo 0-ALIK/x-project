@@ -1,0 +1,50 @@
+<p-table #dt1
+    [value]="products"
+    styleClass="p-datatable-gridlines"
+    selectionMode="single"
+    [(selection)]="selectedProduct" dataKey="id" [rows]="10"
+    [showCurrentPageReport]="true"
+    [paginator]="true"
+    currentPageReportTemplate="Hay un total de {totalRecords} registros"
+    class="custom-table"
+    (onRowSelect)="onSeleccion( $event )">
+
+    <ng-template pTemplate="caption">
+        <section class="caption">
+            <div class="p-buttonset">
+                <button pButton label="Limpiar" class="p-button-outlined" icon="pi pi-filter-slash"></button>
+                <button pButton label="Reporte" icon="pi pi-file-export"></button>
+            </div>
+            <span class="p-input-icon-left ml-auto">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" placeholder="Buscar producto..." />
+            </span>
+        </section>
+    </ng-template>
+
+    <ng-template pTemplate="header">
+        <tr>
+            <th>ID</th>
+            <th>Usuariorio</th>
+            <th>Asuntoto</th>
+            <th>Prioridad</th>
+            <th>Estatustus</th>
+            <th>Fecha</th>
+            <th>Acciones</th>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-product>
+        <tr [pSelectableRow]="product">
+            <td>{{product.id}}</td>
+            <td> <i class="pi pi-user"></i> {{product.usuario}}</td>
+            <td>{{product.asunto}}</td>
+            <td><p-tag [value]="product.prioridad" [severity]="getPriority(product.prioridad)"></p-tag></td>
+            <td><p-tag [value]="product.estatus" [severity]="getSeverity(product.estatus)"></p-tag></td>
+            <td>{{product.fecha}}</td>
+            <td>
+                <p-button icon="pi pi-trash" [rounded]="true" severity="danger" [outlined]="true"></p-button>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>

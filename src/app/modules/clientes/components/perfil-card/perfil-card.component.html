@@ -1,0 +1,42 @@
+<section class="section">
+    <article class="article a1">
+        <div class="image">
+            <p-image
+                src="https://primefaces.org/cdn/primeng/images/galleria/galleria1.jpg"
+                alt="Perfil"
+                width="300"
+                [preview]="true">
+            </p-image>
+        </div>
+
+        <p-fileUpload
+            name="demo[]"
+            (onUpload)="onUpload($event)"
+            [multiple]="false" accept="image/*"
+            [maxFileSize]="1000000">
+            <ng-template pTemplate="content">
+                <ul *ngIf="uploadedFiles.length">
+                    <li *ngFor="let file of uploadedFiles">{{ file.name }} - {{ file.size }} bytes</li>
+                </ul>
+            </ng-template>
+        </p-fileUpload>
+    </article>
+
+    <article class="article a2">
+        <form>
+            <div class="input">
+                <label htmlFor="username">Nombre</label>
+                <input pInputText id="username" aria-describedby="username-help">
+            </div>
+            <div class="input">
+                <label htmlFor="username">Apellido</label>
+                <input pInputText id="username" aria-describedby="username-help">
+            </div>
+            <div class="input">
+                <label htmlFor="username">Telefono</label>
+                <input pInputText id="username" aria-describedby="username-help">
+            </div>
+        </form>
+    </article>
+</section>
+

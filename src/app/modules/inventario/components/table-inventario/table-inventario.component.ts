@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Table } from 'primeng/table';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ConfirmationService, MessageService, ConfirmEventType } from 'primeng/api'
-import { DialogGenerarReporteComponent } from '../dialog-generar-reporte/dialog-generar-reporte.component';
+import { Categoria, Marca, Producto } from 'src/app/interfaces/producto.iterface';
+import { Router } from '@angular/router';
+import { categorias, marcas, productos } from 'src/app/interfaces/data';
 
 @Component({
     selector: 'app-table-inventario',
@@ -10,60 +12,78 @@ import { DialogGenerarReporteComponent } from '../dialog-generar-reporte/dialog-
     styleUrls: ['./table-inventario.component.css']
 })
 
-export class TableInventarioComponent {
+export class TableInventarioComponent implements OnInit {
 
-    // La variable position es utilizada para que el p-confirmDialog salga en el centro
-    position: string = 'center';
-    ref: DynamicDialogRef | undefined;
+    public ref: DynamicDialogRef | undefined;
 
-    constructor(private confirmationService: ConfirmationService, private messageService: MessageService, public dialogService: DialogService) { }
+    public selectedProducto: Producto | undefined;
 
-    // Datos de los Productos
-    public products = [
-        { id: 1, name: 'Coca Cola', category: 'Bebidas', type: 'Refresco', price_unit: 10.00, stock: 15, photo: 'null', p_reorden: 'null' },
-        { id: 2, name: 'Pepsi', category: 'Bebidas', type: 'Refresco', price_unit: 12.00, stock: 20, photo: 'null', p_reorden: 'null' },
-        { id: 3, name: 'Sprite', category: 'Bebidas', type: 'Refresco', price_unit: 11.00, stock: 18, photo: 'null', p_reorden: 'null' }
-    ];
+    public categorias: Categoria[] = categorias;
 
-    // Metodo del boton trash ubicado en la columna "Acciones" que recibe 2 parametros, la posicion donde aparece el p-confirmDialog y el id del producto a eliminar
-    confirmPosition(position: string, productId: number) {
-        this.position = position;
+    public marcas: Marca[] = marcas;
 
-        // Constante que obtiene toda la informacion del producto filtrandolo por el id
-        const product = this.products.find((p) => p.id === productId);
+    public productos: Producto[] = productos;
 
-        // Esta condicion es la que hace aparecer el p-confirmDialog con el nombre del producto y botones de Si, No y (X)->Cancelar
-        if (product) {
-            this.confirmationService.confirm({
-                message: `¿Quieres eliminar el registro de ${product.name}?`,
-                header: 'Confirmar Eliminación',
-                icon: 'pi pi-info-circle',
-                accept: () => {
-                    this.messageService.add({ severity: 'info', summary: 'Operación Exitosa', detail: 'Registro eliminado' });
-                },
-                reject: (type: ConfirmEventType) => {
-                    switch (type) {
-                        case ConfirmEventType.REJECT:
-                            this.messageService.add({ severity: 'error', summary: 'Operación Fallida', detail: 'Registro no eliminado' });
-                            break;
-                        case ConfirmEventType.CANCEL:
-                            this.messageService.add({ severity: 'warn', summary: 'Operación Cancelada', detail: 'Cancelado' });
-                            break;
-                    }
-                },
-                key: 'positionDialog'
-            });
-        }
+    public constructor(
+        private confirmationService: ConfirmationService,
+        private messageService: MessageService,
+        public dialogService: DialogService,
+        private router: Router
+    ) { }
+
+    public ngOnInit(): void {
+        console.log("xd");
     }
 
-    // Esto abre dialog-generar-reporte
-    showGenerarReporte() {
-        this.ref = this.dialogService.open(DialogGenerarReporteComponent, { header: 'Generar Reporte' });
+    public onEliminarProducto( product: any ): void {
+        this.confirmationService.confirm({
+            message: `¿Quieres eliminar el registro de ${product.name}?`,
+            header: 'Confirmar Eliminación',
+            icon: 'pi pi-info-circle',
+            accept: this.eliminarProducto,
+            reject: (type: ConfirmEventType) => {
+                switch (type) {
+                    case ConfirmEventType.REJECT:
+                        this.messageService.add({ severity: 'error', summary: 'Operación Fallida', detail: 'Registro no eliminado' });
+                        break;
+                    case ConfirmEventType.CANCEL:
+                        this.messageService.add({ severity: 'warn', summary: 'Operación Cancelada', detail: 'Cancelado' });
+                        break;
+                }
+            },
+            key: 'confirmDialog'
+        });
     }
 
-    // Metodo que limpia los filtros ingresados por el usuario
-    clear(table: Table) {
+    public showGenerarReporte(): void {
+        /* this.ref = this.dialogService.open(DialogGenerarReporteComponent, { header: 'Generar Reporte' }); */
+    }
+
+    public clear(table: Table): void {
         table.clear();
+    }
+
+    public aplicaReordenValue( producto: Producto, values: string[] ): string {
+        if(!producto?.cantidad_cajas || !producto?.punto_reorden) {
+            throw new Error('Campos necesarios no presentes en objeto');
+        }
+
+        if(producto.cantidad_cajas <= producto.punto_reorden) {
+            return values[0];
+        }
+
+        return values[1];
+    }
+
+    public onRowSelect( event: any ): void {
+        this.router.navigate([
+            '/dashboard/inventario/editar-producto/',
+            this.selectedProducto?.id_producto
+        ]);
+    }
+
+    private eliminarProducto = (): void => {
+        this.messageService.add({ severity: 'info', summary: 'Operación Exitosa', detail: 'Registro eliminado' });
     }
 
 }

@@ -9,17 +9,21 @@ import { DialogRealizarCompraComponent } from '../../components/dialog-realizar-
     templateUrl: './ver-inventario.component.html',
     styleUrls: ['./ver-inventario.component.css']
 })
-
 export class VerInventarioComponent {
-    items: MenuItem[];
-    tabs: MenuItem[];
-    activeItem: MenuItem;
 
-    visibleCompra: boolean = false;
-    ref: DynamicDialogRef | undefined;
+    public items: MenuItem[];
 
-    constructor(public dialogService: DialogService, public messageService: MessageService) {
+    public tabs: MenuItem[];
 
+    public activeItem: MenuItem;
+
+    public visibleCompra: boolean = false;
+
+    public titulo: string | undefined = 'Inventario';
+
+    private ref: DynamicDialogRef | undefined;
+
+    public constructor(public dialogService: DialogService, public messageService: MessageService) {
         this.items = [
             { label: 'Marca', routerLink: ['agregar-marca'] },
             { label: 'Producto', routerLink: ['agregar-producto'] },
@@ -36,15 +40,25 @@ export class VerInventarioComponent {
         this.activeItem = this.tabs[0];
     }
 
-    onActiveItemChange(event: MenuItem) {
+    public onActiveItemChange(event: MenuItem): void {
         this.activeItem = event;
+        this.titulo = event.label;
     }
 
-    showAgregarCategoria() {
+    public showAgregarCategoria(): void {
         this.ref = this.dialogService.open(DialogAgregarCategoriaComponent, { header: 'Agregar Categoría' });
+
+        this.ref.onClose.subscribe((categoria: any) => {
+            if(!categoria) {
+                // agrega mensaje de error
+                return;
+            }
+
+            // agrega mensaje de realizad
+        });
     }
 
-    showRealizarCompra() {
+    public showRealizarCompra(): void {
         this.ref = this.dialogService.open(DialogRealizarCompraComponent, { header: 'Realizar Compra' });
     }
 

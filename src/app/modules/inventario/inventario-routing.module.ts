@@ -4,16 +4,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { VerInventarioComponent } from './pages/ver-inventario/ver-inventario.component';
 import { AgregarMarcaComponent } from './pages/agregar-marca/agregar-marca.component';
 import { AgregarProductoComponent } from './pages/agregar-producto/agregar-producto.component';
-import { EditarMarcaComponent } from './pages/editar-marca/editar-marca.component';
 
 const routes: Routes = [
     {
         path: '',
         pathMatch: 'full',
-        component: VerInventarioComponent
-    },
-    {
-        path: 'ver-inventario',
         component: VerInventarioComponent
     },
     {
@@ -25,8 +20,12 @@ const routes: Routes = [
         component: AgregarProductoComponent
     },
     {
-        path: 'editar-marca',
-        component: EditarMarcaComponent
+        path: 'editar-marca/:id',
+        component: AgregarMarcaComponent
+    },
+    {
+        path: 'editar-producto/:id',
+        component: AgregarProductoComponent
     }
 ];
 

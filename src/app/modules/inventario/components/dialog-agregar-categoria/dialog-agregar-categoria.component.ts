@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MessageService } from 'primeng/api';
+import { DynamicDialogRef } from 'primeng/dynamicdialog';
 
 @Component({
     selector: 'app-dialog-agregar-categoria',
@@ -8,47 +8,22 @@ import { MessageService } from 'primeng/api';
 })
 export class DialogAgregarCategoriaComponent {
 
-    // Esta variable contiene lo que el usuario ingresa en el input
-    value: string = '';
+    public value: string = '';
 
-    // Esta variable activa el loading del button
-    loading: boolean = false;
+    public loading: boolean = false;
 
-    constructor(private messageService: MessageService) {}
+    public constructor(
+        public ref: DynamicDialogRef
+    ) {}
 
-    // El metodo load del boton
-    load() {
-        // El load del boton de activa y Se establece un tiempo de 2 seg de duracion para el loading
+    public agregar(): void {
         this.loading = true;
-        setTimeout(() => {
-            // Si lo ingresado por el usuario es "hola" se activa el metodo showSuccessToast con el mensaje
-            // Categoria agregada, < Esto solo lo hice para testear el mensaje >
-            if (this.value === "hola") {
-                this.showSuccessToast('Categoría agregada');
-            } else {
-                this.showErrorToast('Categoría no agregada');
-            }
-            //El loading se detiene y se blanquea lo ingresado por el usuario
-            this.loading = false;
-            this.value = '';
-        }, 2000);
+        this.loading = false;
+        this.cerrarDynamicDialog();
     }
 
-    // Método de Success
-    private showSuccessToast(message: string) {
-        this.messageService.add({
-            severity: 'success',
-            summary: 'Éxito',
-            detail: message,
-        });
+    public cerrarDynamicDialog( categoria?: any ): void {
+        this.ref.close( categoria );
     }
 
-    // Método de Error
-    private showErrorToast(message: string) {
-        this.messageService.add({
-            severity: 'error',
-            summary: 'Error',
-            detail: message,
-        });
-    }
 }

@@ -1,42 +1,57 @@
+<p-toast></p-toast>
+
+<h1 [style]="{'fontSize': 'var(--text-3xl)'}">{{titulo}}</h1>
 <div class="div-contenedor">
-    <p-fieldset>
-        <ng-template pTemplate="header">
-            <div class="flex align-items-center text-secondary">
-                <span class="font-bold text-lg tittle">Agregar Marca</span>
-            </div>
-        </ng-template>
 
-        <div class="div-body">
-            <div class="div-form">
-                <h2>Información General de la Marca</h2>
-                <div class="flex-column gap-2">
-                    <label>Nombre</label>
-                    <input pInputText id="name" [(ngModel)]="name" />
-                </div>
-
-                <div class="flex-column">
-                    <label>Descripcion</label>
-                    <textarea rows="5" cols="30" pInputTextarea [autoResize]="true" pInputText id="description"
-                        [(ngModel)]="description"></textarea>
-                </div>
+    <div class="add-photo">
+        <div>
+            <div [style]="{'display': 'flex', 'justifyContent': 'center'}">
+                <alik-image-preview *ngIf="!imagePreview"></alik-image-preview>
+                <p-image
+                    *ngIf="imagePreview"
+                    [src]="imagePreview"
+                    alt="Image"
+                    width="250"
+                    [preview]="true">
+                </p-image>
             </div>
-
-            <div class="add-photo">
-                <h2>Logo de la Marca</h2>
-                <p-toast></p-toast>
-                <p-fileUpload name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php"
-                    (onUpload)="onUpload($event)" [multiple]="true" accept="image/*" [maxFileSize]="1000000">
-                    <ng-template pTemplate="content">
-                        <ul *ngIf="uploadedFiles.length">
-                            <li *ngFor="let file of uploadedFiles">{{ file.name }} - {{ file.size }} bytes</li>
-                        </ul>
-                    </ng-template>
-                </p-fileUpload>
-            </div>
+            <p-fileUpload
+                (onSelect)="selectFile( $event )"
+                [multiple]="false"
+                accept="image/*"
+                [maxFileSize]="1000000">
+            </p-fileUpload>
         </div>
-        <div class="buttons">
-            <p-button label="Agregar" [raised]="true" severity="success" class="btn-agregar"></p-button>
-            <p-button label="Cancelar" [raised]="true" severity="danger" [routerLink]="['../']"></p-button>
+    </div>
+
+
+    <form class="div-form" [formGroup]="form">
+        <h2>Información general de la Marca</h2>
+
+        <hr>
+
+        <div class="flex-column gap-2">
+            <label>Nombre</label>
+            <input pInputText formControlName="nombre">
         </div>
-    </p-fieldset>
+
+        <div class="flex-column">
+            <label>Descripcion</label>
+            <textarea
+                formControlName="descripcion"
+                rows="5"
+                cols="30"
+                pInputTextarea
+                [autoResize]="true"
+                pInputText>
+            </textarea>
+        </div>
+
+        <p-button
+            [label]="labelButton"
+            [loading]="estaCargando"
+            [disabled]="!form.valid"
+            (onClick)="enviarFormulario()">
+        </p-button>
+    </form>
 </div>

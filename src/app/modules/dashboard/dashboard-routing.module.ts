@@ -13,27 +13,31 @@ const routes: Routes = [
             },
             {
                 path: 'ventas',
-                redirectTo: ''
+                loadChildren: () => import('../ventas/ventas.module').then(m => m.VentasModule)
             },
             {
                 path: 'clientes',
-                redirectTo: ''
+                loadChildren: () => import('../clientes/clientes.module').then(m => m.ClientesModule)
             },
             {
                 path: 'tickets',
-                redirectTo: ''
+                loadChildren: () => import('../tickets/tickets.module').then(m => m.TicketsModule)
             },
             {
                 path: 'chat',
-                redirectTo: ''
+                loadChildren: () => import('../chat/chat.module').then(m => m.ChatModule)
             },
             {
                 path: 'blog',
-                redirectTo: ''
+                loadChildren: () => import('../blog/blog.module').then(m => m.BlogModule)
             },
             {
                 path: 'usuarios',
                 redirectTo: ''
+            },
+            {
+                path: 'analitica',
+                loadChildren: () => import('../analitica/analitica.module').then(m => m.AnaliticaModule)
             }
         ]
     }
