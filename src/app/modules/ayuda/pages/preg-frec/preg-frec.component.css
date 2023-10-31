@@ -5,6 +5,10 @@
     position: relative;
 }
 
+.container-options{
+    width: 100%;
+}
+
 p {
     text-align: center;
 }
