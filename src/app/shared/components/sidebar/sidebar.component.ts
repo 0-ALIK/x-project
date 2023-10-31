@@ -68,6 +68,11 @@ export class SidebarComponent implements OnInit {
                 label: 'Analíticas',
                 icon: 'pi pi-fw pi-chart-pie',
                 route: '/dashboard/analitica'
+            },
+            {
+                label: 'Vista de prueba(Ayuda)',
+                icon: 'pi pi-fw pi-chart-pie',
+                route: '/dashboard/ayuda'
             }
         ];
     }
