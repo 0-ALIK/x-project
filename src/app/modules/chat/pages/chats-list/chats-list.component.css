@@ -16,8 +16,16 @@
 
 .messages-list {
     flex: 2;
+    position: relative;
 }
 
+app-chat-input {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: var(--spacing-2);
+}
 
 /* Estilo para dispositivos móviles */
 @media (max-width: 767px) {

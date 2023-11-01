@@ -11,6 +11,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { TagModule } from 'primeng/tag';
 import { MessageBubbleComponent } from './components/message-bubble/message-bubble.component';
+import { ChatInputComponent } from './components/chat-input/chat-input.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,13 +20,16 @@ import { MessageBubbleComponent } from './components/message-bubble/message-bubb
     MessagesListComponent,
     NoOpenChatComponent,
     UsuarioChatCardComponent,
-    MessageBubbleComponent
+    MessageBubbleComponent,
+    ChatInputComponent
   ],
   imports: [
     CommonModule,
     ChatRoutingModule,
     AvatarModule,
-    TagModule
+    TagModule,
+    FormsModule,
+    ButtonModule
   ]
 })
 export class ChatModule { }

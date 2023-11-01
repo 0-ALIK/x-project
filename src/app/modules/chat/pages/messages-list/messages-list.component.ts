@@ -8,11 +8,11 @@ import { Component } from '@angular/core';
 export class MessagesListComponent {
     public mensajes: any[] = [
         {
-            mensaje: 'Hola como estas, yo muy bien',
+            mensaje: 'Hola como estas, yo muy bien,Hola como estas, yo muy bien,Hola como estas, yo muy bien,Hola como estas, yo muy bien,Hola como estas, yo muy bien,',
             remitente: 'cliente'
         },
         {
-            mensaje: 'Callate',
+            mensaje: 'Callate,fuck nito',
             remitente: 'admin'
         },
     ];
