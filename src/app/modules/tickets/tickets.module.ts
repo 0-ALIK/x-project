@@ -10,11 +10,15 @@ import { InputTextModule } from 'primeng/inputtext';
 import { VerDetalleComponent } from './pages/ver-detalle/ver-detalle.component';
 import { SplitButtonModule } from 'primeng/splitbutton';
 import { TicketsTableComponent } from './components/tickets-table/tickets-table.component';
+import { GenerarTicketComponent } from './components/detalles-ticket/generar-ticket/generar-ticket.component';
+import { CompraTableComponent } from './components/detalles-compra/compra-table/compra-table.component';
 @NgModule({
 	declarations: [
 		VerTicketsComponent,
-  VerDetalleComponent,
-  TicketsTableComponent,
+		VerDetalleComponent,
+		TicketsTableComponent,
+		GenerarTicketComponent,
+		CompraTableComponent,
 	],
 	imports: [
 		CommonModule,

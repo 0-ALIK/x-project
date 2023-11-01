@@ -1,0 +1,10 @@
+.card {
+    /*background-color: var(--surface-card);*/
+    padding: var(--spacing-2);
+    margin: var(--spacing-2);
+    position: relative;
+}
+
+p {
+    text-align: center;
+}

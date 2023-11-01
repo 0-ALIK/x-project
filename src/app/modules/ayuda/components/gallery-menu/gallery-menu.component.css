@@ -1,0 +1,75 @@
+.card-gallery {
+    width: 100%;
+    margin-top: var(--spacing-4);
+    padding-left: calc(var(--spacing-8) + var(--spacing-5));
+    padding-right: calc(var(--spacing-8) + var(--spacing-5));
+    display: flex;
+    
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.button-content {
+    width: 130px;
+    height: 130px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+
+.button-content i {
+    margin-bottom: 10px; /* Espacio entre el icono y el texto (ajusta según sea necesario) */
+    font-size: var(--text-7xl);
+}
+
+span {
+    font-size: var(--spacing-3)!important;
+}
+
+
+p-button {
+    padding: var(--spacing-2);
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+p-button:hover {
+    transition-duration: .8s;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+@media (max-width: 767px) {
+    .card-gallery {
+        padding-left: var(--spacing-0);
+        padding-right: var(--spacing-0);
+    }
+
+    .button-content {
+        width: 100px;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 1023px) {
+    .button-content {
+        width: 100px;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+    }
+
+    .button-content i {
+        margin-bottom: 10px; /* Espacio entre el icono y el texto (ajusta según sea necesario) */
+        font-size: var(--text-4xl);
+    }
+}

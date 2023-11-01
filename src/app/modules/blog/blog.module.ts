@@ -1,31 +1,41 @@
-import { NgModule} from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { BlogRoutingModule } from './blog-routing.module';
-import { VerBlogComponent } from './pages/blog/blog.component';
-import { PanelModule  } from 'primeng/panel';
 import { ButtonModule } from 'primeng/button';
-import { SidebarModule } from 'primeng/sidebar';
-import { RatingModule } from 'primeng/rating';
-import { InputTextareaModule } from 'primeng/inputtextarea';
-import { SelectButtonModule } from 'primeng/selectbutton';
 import { DataViewModule } from 'primeng/dataview';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { PanelModule } from 'primeng/panel';
+import { RatingModule } from 'primeng/rating';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { SidebarModule } from 'primeng/sidebar';
 import { TagModule } from 'primeng/tag';
+import { VerBlogComponent } from './pages/blog/blog.component';
+import { ReviewDataviewComponent } from './components/generar-reviews/review-dataview/review-dataview.component';
+import { GenerarRatingComponent } from './components/generar-rating/generar-rating/generar-rating.component';
+import { GenerarFormComponent } from './components/generar-form/generar-form/generar-form.component'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
-    VerBlogComponent
+    VerBlogComponent,
+    ReviewDataviewComponent,
+    GenerarRatingComponent,
+    GenerarFormComponent,
   ],
   imports: [
     CommonModule,
     BlogRoutingModule,
+    ButtonModule,
+    DataViewModule,
     InputTextareaModule,
     PanelModule,
-    ButtonModule,
-    SidebarModule,
     RatingModule,
     SelectButtonModule,
-    DataViewModule,
-    TagModule
+    SidebarModule,
+    TagModule,
+    FormsModule, 
+    ReactiveFormsModule,
   ]
+  
 })
 export class BlogModule { }

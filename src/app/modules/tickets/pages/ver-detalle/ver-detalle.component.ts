@@ -6,50 +6,37 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './ver-detalle.component.html',
   styleUrls: ['./ver-detalle.component.css']
 })
-export class VerDetalleComponent implements OnInit {
+export class VerDetalleComponent {
     ticketNumber: number = 12391;
-    products = [
-        { descripcion: 'Coca-Cola', cantidad: '12', precioUnitario: 2, precioTotal: 24 },
-        { descripcion: 'Pepsi', cantidad: '10', precioUnitario: 2, precioTotal: 20 },
-        { descripcion: 'Sprite', cantidad: '8', precioUnitario: 2, precioTotal: 16}
-    ];
 
-    data = [
-        { fecha: 'Coca-Cola', cliente: '12', direccion: 2, telefono: 24 },
 
-    ];
-
-    numeroMensajes: number = 0
-
-    public nombreUsuario: string = "May Medina"
-
-    public items!: any[];
-
-    public constructor(
-        private activatedRoute: ActivatedRoute
-    ) {}
-
-    public ngOnInit(): void {
-        this.items = [
-            { label: 'Cerrar Ticket', command: () => this.closeTicket() },
-            { label: 'Cambiar Status', command: () => this.changeStatus() }
-        ];
-        this.activatedRoute.params.subscribe({
-            next: ({id}) => {
-                this.ticketNumber = id;
-            }
-        });
+    prioridad: string ='ALTA';
+    estatus: string = 'REVISIÓN';
+    
+  
+    getPriority(prioridad: string): string {
+      switch (prioridad) {
+        case 'BAJA':
+          return 'success';
+        case 'MEDIA':
+          return 'warning';
+        case 'ALTA':
+          return 'danger';
+        default:
+          return 'unknown';
+      }
     }
 
-    public closeTicket(): void {
-        // Lógica para cerrar el ticket
-        console.log('Cerrar Ticket');
-        // Puedes agregar aquí la lógica específica para cerrar el ticket
-    }
-
-    public changeStatus(): void {
-        // Lógica para cambiar el estado del ticket
-        console.log('Cambiar Status');
-        // Puedes agregar aquí la lógica específica para cambiar el estado del ticket
+    getSeverity(estatus: string): string {
+      switch (estatus) {
+        case 'REVISADO':
+          return 'info';
+        case 'ESPERA':
+          return 'warning';
+        case 'RESUELTO':
+          return 'success';
+        default:
+          return 'unknown';
+      }
     }
 }

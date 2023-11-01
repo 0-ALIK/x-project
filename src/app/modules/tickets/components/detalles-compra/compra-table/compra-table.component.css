@@ -1,0 +1,36 @@
+p-table{
+    width: 65%;
+    margin-left: 0px;
+    margin-left: 15px;
+    text-align: left;
+}
+
+.compra-detail{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin-left: 0px;
+    z-index: 1;
+    background-color: var(--surface-a);
+    border-bottom-left-radius: 5px; 
+    border-bottom-right-radius: 5px;
+    padding: 10px;
+    margin-right: 0px;
+}
+
+h3{
+    margin-left: 15px;
+    color: #5472d4;
+}
+
+.productos-table{
+    margin-left: 0px;
+    margin-bottom: 20px;
+}
+
+p-table.p-element.compra-table {
+    border-left: none;
+    border-right:none;
+    margin-bottom: 10px;
+    border-color: var(--text-color);
+}
