@@ -1,5 +1,4 @@
 <section class="mensajes-list">
-
     <div
         *ngFor="let mensaje of mensajes"
         [ngClass]="{'right': mensaje.remitente === 'admin', 'left':  mensaje.remitente !== 'admin'}">
@@ -9,5 +8,4 @@
             [mensaje]="mensaje">
         </app-message-bubble>
     </div>
-
 </section>

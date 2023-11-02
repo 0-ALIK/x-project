@@ -1,0 +1,6 @@
+<div class="chat-input">
+    <form (ngSubmit)="enviarMensaje()">
+        <input type="text" placeholder="Escribe tu mensaje..." [(ngModel)]="nuevoMensaje" name="nuevoMensaje" />
+        <p-button ><i class="pi pi-send" style="font-size: 1.5rem;color: 'var(--primary-color)'"></i></p-button>
+    </form>
+</div>
