@@ -1,0 +1,73 @@
+<div class="order-admin">
+    <h2 class="page-title">Pedidos | Vista Admin</h2>
+
+    <div class="filter-search-container">
+      <div class="filter">
+        <label for="categoryFilter">Categorizacion:</label>
+        <p-listbox [options]="categories" [(ngModel)]="selectedCategory" optionLabel="name" [filter]="true" [style]="{ width: '15rem' }" [listStyle]="{ 'max-height': '220px' }" id="categoryFilter" ></p-listbox>
+      </div>
+
+      <div class="search">
+        <label for="orderSearch">Buscador [Name/ID]:</label>
+        <input type="text" pInputText [(ngModel)]="searchText" id="orderSearch"/>
+      </div>
+    </div>
+
+    <div class="table-container">
+      <table class="order-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Cantidad</th>
+            <th>Precio/u</th>
+            <th>Precio/doc?</th>
+            <th>Estado</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <!-- requiere remplazamiento de datos correctos -->
+          <tr *ngFor="let order of filteredOrders">
+            <td>{{ order.id }}</td>
+            <td>{{ order.nombre }}</td>
+            <td>{{ order.descripcion }}</td>
+            <td>{{ order.cantidad }}</td>
+            <td>{{ order.precio }}</td>
+            <td>{{ order.preciodoc }}</td>
+            <td>{{ order.estado }}</td>
+            <td>
+              <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success" (click)="editOrder(order)">Editar</button>
+              <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="deleteOrder(order)">Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card flex justify-content-center">
+    <p-overlayPanel #op>
+      <ng-template pTemplate="content">
+        <h3>Editar Orden</h3>
+        <form (submit)="updateOrder()">
+          <div>
+            <label for="edit-nombre">Nombre:</label>
+            <input type="text" id="edit-nombre" [(ngModel)]="editingOrder.nombre" />
+          </div>
+          <div>
+            <label for="edit-descripcion">Descripción:</label>
+            <input type="text" id="edit-descripcion" [(ngModel)]="editingOrder.descripcion" />
+          </div>
+          <!-- falta mas campos -->
+
+          <button type="submit">Guardar</button>
+          <button (click)="cancelEdit()">Cancelar</button>
+        </form>
+      </ng-template>
+    </p-overlayPanel>
+    <p-button (click)="editOrder(order, $event)" icon="pi pi-image" label="Show"></p-button>
+  </div>
+

@@ -1,0 +1,20 @@
+
+/* Add styles for the page title */
+.page-title {
+    margin-left: 20px; /* Adjust the margin*/
+  }
+
+  /* Add styles for the filter and search bar container */
+  .filter-search-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px; /* Adjust the margin */
+  }
+
+  /* Add styles for the table container */
+  .table-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
