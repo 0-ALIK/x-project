@@ -10,6 +10,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { AvatarModule } from 'primeng/avatar';
 import { TagModule } from 'primeng/tag';
+import { AccordionModule } from 'primeng/accordion';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { TagModule } from 'primeng/tag';
         InputTextModule,
         TabMenuModule,
         AvatarModule,
-        TagModule
+        TagModule,
+        AccordionModule
     ]
 })
 export class VentasModule { }

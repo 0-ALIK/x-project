@@ -34,6 +34,8 @@ import { TagModule } from 'primeng/tag';
 import { ImageModule } from 'primeng/image';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { CalendarModule } from 'primeng/calendar';
+import { ChartModule } from 'primeng/chart';
 
 @NgModule({
     declarations: [
@@ -68,7 +70,9 @@ import { SharedModule } from 'src/app/shared/shared.module';
         TagModule,
         ImageModule,
         ReactiveFormsModule,
-        SharedModule
+        SharedModule,
+        CalendarModule,
+        ChartModule
     ],
     providers: [ ConfirmationService, MessageService, DialogService ]
 })

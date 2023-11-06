@@ -42,11 +42,22 @@
     }
 }
 
+.graficos {
+    margin: var(--spacing-3) 0;
+    background-color: var(--surface-card);
+    padding: var(--spacing-2);
+    border-radius: var(--border-radius);
+}
+
+.graficos div {
+    width: 100%;
+}
+
+
 /* Estilo para dispositivos móviles */
 @media (max-width: 767px) {
 
     .div-contenedor {
         flex-direction: column;
     }
-
 }

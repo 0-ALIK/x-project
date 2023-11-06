@@ -1,5 +1,20 @@
-<p-table #prs [value]="persons" [rows]="5" [paginator]="true" styleClass="p-datatable-gridlines"
-    [tableStyle]="{ 'min-width': '50rem'}" [scrollable]="true" [scrollHeight]="'400px'">
+<p-confirmDialog
+    key="confirmDialog"
+    [style]="{ width: '50vw' }"
+    rejectButtonStyleClass="p-button-outlined"
+    acceptLabel="Si"
+    rejectLabel="No">
+</p-confirmDialog>
+
+<p-table
+    #prs
+    [value]="compras"
+    [rows]="5"
+    [paginator]="true"
+    styleClass="p-datatable-gridlines"
+    [tableStyle]="{ 'min-width': '50rem'}"
+    [scrollable]="true"
+    [scrollHeight]="'400px'">
 
     <ng-template pTemplate="caption">
         <div class="flex header-table" scrollable>
@@ -43,26 +58,34 @@
             </th>
             <th>
                 <div class="flex align-items-center">
-                    Tipo <p-columnFilter field="type" display="menu"></p-columnFilter>
-                </div>
-            </th>
-            <th>
-                <div class="flex align-items-center">
-                    P. reorden <p-columnFilter field="p_reorden" display="menu"></p-columnFilter>
+                    Acciones
                 </div>
             </th>
         </tr>
     </ng-template>
 
-    <ng-template pTemplate="body" let-person>
+    <ng-template pTemplate="body" let-compra>
         <tr>
-            <td>{{ person.id }}</td>
-            <td>{{ person.admin }}</td>
-            <td>{{ person.date }}</td>
-            <td>{{ person.quantity }}</td>
-            <td>{{ person.product }}</td>
-            <td>{{ person.type }}</td>
-            <td>{{ person.p_reorden }}</td>
+            <td>{{ compra.id_compra }}</td>
+            <td class="avatar-cel">
+                <p-avatar [image]="compra.admin.foto" shape="circle"></p-avatar>
+                <span>{{ compra.admin.nombre + ' ' + compra.admin.apellido }}</span>
+            </td>
+            <td>{{ compra.fecha | date }}</td>
+            <td>{{ compra.cantidad }}</td>
+            <td class="avatar-cel">
+                <p-avatar [image]="compra.producto.foto"></p-avatar>
+                <span>{{ compra.producto.nombre }}</span>
+            </td>
+            <td class="td-buttons">
+                <p-button
+                    icon="pi pi-trash"
+                    severity="danger"
+                    (click)="onEliminarProducto( compra )"
+                    [text]="true"
+                    [raised]="true">
+                </p-button>
+            </td>
         </tr>
     </ng-template>
 </p-table>

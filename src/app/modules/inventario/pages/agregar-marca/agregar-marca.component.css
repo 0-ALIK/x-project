@@ -29,3 +29,35 @@
 }
 
 
+.productos {
+    background-color: var(--surface-overlay);
+    padding: var(--spacing-2);
+    border-radius: var(--border-radius);
+}
+
+.productos ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.productos ul li {
+    display: flex;
+    justify-content: space-between;
+}
+
+.productos ul li div {
+    display: flex;
+    gap: var(--spacing-2);
+}
+
+
+
+/* Estilo para dispositivos móviles */
+@media (max-width: 767px) {
+
+    .div-contenedor {
+        flex-direction: column;
+    }
+
+}

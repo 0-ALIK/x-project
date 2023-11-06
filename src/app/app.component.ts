@@ -26,6 +26,8 @@ export class AppComponent implements OnInit {
             'equals': 'Es igual a',
             'notEquals': 'No es igual a'
         });
+
+        this.applySavedTheme();
     }
 
     /**

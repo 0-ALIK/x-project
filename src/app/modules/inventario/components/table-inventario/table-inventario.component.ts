@@ -35,9 +35,9 @@ export class TableInventarioComponent implements OnInit {
         console.log("xd");
     }
 
-    public onEliminarProducto( product: any ): void {
+    public onEliminarProducto( producto: Producto ): void {
         this.confirmationService.confirm({
-            message: `¿Quieres eliminar el registro de ${product.name}?`,
+            message: `¿Quieres eliminar el registro de ${producto.nombre}?`,
             header: 'Confirmar Eliminación',
             icon: 'pi pi-info-circle',
             accept: this.eliminarProducto,
