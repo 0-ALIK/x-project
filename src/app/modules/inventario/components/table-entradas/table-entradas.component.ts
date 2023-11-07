@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Table } from 'primeng/table';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Compra } from 'src/app/interfaces/pedido.interface';
@@ -10,7 +10,7 @@ import { ConfirmEventType, ConfirmationService, MessageService } from 'primeng/a
     templateUrl: './table-entradas.component.html',
     styleUrls: ['./table-entradas.component.css']
 })
-export class TableEntradasComponent {
+export class TableEntradasComponent implements OnInit {
 
     ref: DynamicDialogRef | undefined;
 
@@ -20,7 +20,13 @@ export class TableEntradasComponent {
         private messageService: MessageService,
     ) { }
 
-    public compras: Compra[] = compras;
+    public compras: Compra[] | undefined;
+
+    public ngOnInit(): void {
+        setTimeout(() => {
+            this.compras = compras;
+        }, 5000);
+    }
 
     public onEliminarProducto( compra: Compra ): void {
         this.confirmationService.confirm({

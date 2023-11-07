@@ -36,6 +36,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CalendarModule } from 'primeng/calendar';
 import { ChartModule } from 'primeng/chart';
+import { SkeletonModule } from 'primeng/skeleton';
 
 @NgModule({
     declarations: [
@@ -72,7 +73,8 @@ import { ChartModule } from 'primeng/chart';
         ReactiveFormsModule,
         SharedModule,
         CalendarModule,
-        ChartModule
+        ChartModule,
+        SkeletonModule
     ],
     providers: [ ConfirmationService, MessageService, DialogService ]
 })

@@ -22,7 +22,7 @@ export class TableInventarioComponent implements OnInit {
 
     public marcas: Marca[] = marcas;
 
-    public productos: Producto[] = productos;
+    public productos: Producto[] | undefined;
 
     public constructor(
         private confirmationService: ConfirmationService,
@@ -32,7 +32,9 @@ export class TableInventarioComponent implements OnInit {
     ) { }
 
     public ngOnInit(): void {
-        console.log("xd");
+        setTimeout(() => {
+            this.productos = productos;
+        }, 3000);
     }
 
     public onEliminarProducto( producto: Producto ): void {

@@ -11,6 +11,7 @@ import { TabMenuModule } from 'primeng/tabmenu';
 import { AvatarModule } from 'primeng/avatar';
 import { TagModule } from 'primeng/tag';
 import { AccordionModule } from 'primeng/accordion';
+import { ClientesModule } from '../clientes/clientes.module';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { AccordionModule } from 'primeng/accordion';
         TabMenuModule,
         AvatarModule,
         TagModule,
-        AccordionModule
+        AccordionModule,
+        ClientesModule
     ]
 })
 export class VentasModule { }
