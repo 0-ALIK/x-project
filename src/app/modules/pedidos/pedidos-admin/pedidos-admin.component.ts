@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { OverlayPanel } from 'primeng/overlaypanel';
+import { Button } from 'primeng/button';
 
 @Component({
   selector: 'app-pedidos-admin',
@@ -35,6 +36,7 @@ export class PedidosAdminComponent {
 
     // Function to show overlaypanel and form
     editingOrder: any = null;
+    order: any;
     editOrder(order: any, event: Event) {
         this.editingOrder = { ...order };
         this.overlayPanel.show(event);

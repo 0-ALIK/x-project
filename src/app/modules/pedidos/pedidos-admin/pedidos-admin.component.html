@@ -39,7 +39,7 @@
             <td>{{ order.preciodoc }}</td>
             <td>{{ order.estado }}</td>
             <td>
-              <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success" (click)="editOrder(order)">Editar</button>
+                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success" (click)="editOrder(order, $event)">Editar</button>
               <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="deleteOrder(order)">Eliminar</button>
             </td>
           </tr>
