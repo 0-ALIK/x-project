@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { AnaliticaRoutingModule } from './analitica-routing.module';
 import { VerDashboardComponent } from './pages/ver-dashboard/ver-dashboard.component';
+import { IndicadoresRendimientoComponent } from './components/indicadores-rendimiento/indicadores-rendimiento.component';
+import { GraficoBarrasComponent } from './components/grafico-barras/grafico-barras.component';
 
 import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule } from '@angular/forms';
@@ -16,11 +18,14 @@ import { GenerarReportesVentasComponent } from './components/generar-reportes-ve
 import { CalendarModule } from 'primeng/calendar';
 import { ChartModule } from 'primeng/chart';
 
+
 @NgModule({
     declarations: [
         VerDashboardComponent,
         GenerarReportesInventarioComponent,
-        GenerarReportesVentasComponent
+        GenerarReportesVentasComponent,
+        IndicadoresRendimientoComponent,
+        GraficoBarrasComponent
     ],
     imports: [
         CommonModule,

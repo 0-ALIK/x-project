@@ -1,0 +1,11 @@
+.reset{
+    margin: 0%;
+    padding: 0%;
+}
+.graficas-ondas{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 430px;
+    width: 500px;
+    height: 100px;
+}
