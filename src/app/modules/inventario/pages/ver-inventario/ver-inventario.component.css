@@ -1,0 +1,29 @@
+/* Posiciona el boton de agregar al final */
+.split-menu  {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: var(--spacing-3);
+}
+
+/* Define un fondo para la tabla */
+.table_background {
+    background-color: var(--surface-card);
+    padding: var(--spacing-2);
+    border-radius: var(--border-radius);
+}
+
+/* Acomoda el subtitulo */
+.subtittle {
+    margin: var(--spacing-0);
+    padding: var(--spacing-0);
+    padding-left: var(--spacing-3);
+    padding-top: var(--spacing-5);
+    padding-bottom: var(--spacing-4);
+    color: var(--text-color);
+}
+
+.title-split-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

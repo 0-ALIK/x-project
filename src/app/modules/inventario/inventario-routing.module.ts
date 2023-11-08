@@ -1,7 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { VerInventarioComponent } from './pages/ver-inventario/ver-inventario.component';
-import { AgregarEditarProductoComponent } from './pages/agregar-editar-producto/agregar-editar-producto.component';
+import { AgregarMarcaComponent } from './pages/agregar-marca/agregar-marca.component';
+import { AgregarProductoComponent } from './pages/agregar-producto/agregar-producto.component';
+import { NotFoundComponent } from 'src/app/not-found/not-found.component';
 
 const routes: Routes = [
     {
@@ -10,17 +13,29 @@ const routes: Routes = [
         component: VerInventarioComponent
     },
     {
+        path: 'agregar-marca',
+        component: AgregarMarcaComponent
+    },
+    {
         path: 'agregar-producto',
-        component: AgregarEditarProductoComponent
+        component: AgregarProductoComponent
+    },
+    {
+        path: 'editar-marca/:id',
+        component: AgregarMarcaComponent
     },
     {
         path: 'editar-producto/:id',
-        component: AgregarEditarProductoComponent
+        component: AgregarProductoComponent
+    },
+    {
+        path: '**',
+        component: NotFoundComponent
     }
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forChild(routes)],
+    exports: [RouterModule]
 })
 export class InventarioRoutingModule { }

@@ -1,0 +1,15 @@
+.card > p-button {
+    margin-left: var(--spacing-2);
+}
+
+.list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.list-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

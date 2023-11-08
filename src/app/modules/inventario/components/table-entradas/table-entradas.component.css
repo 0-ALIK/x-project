@@ -1,0 +1,40 @@
+/* Le da un padding a la tabla para que se vea el fondo */
+p-table {
+    padding: var(--spacing-0) var(--spacing-1) var(--spacing-1) var(--spacing-1);
+    display: block;
+}
+
+/* Acomoda los botones y la barra de busqueda */
+.header-table {
+    display: flex;
+    justify-content: space-between;
+}
+
+.avatar-cel {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+}
+
+/* Acomoda los titulos de las tablas */
+th {
+    min-width: max-content;
+
+    & .flex {
+        display: flex;
+        min-width: max-content;
+        align-items: center;
+    }
+}
+
+/* Estilo para dispositivos móviles */
+@media (max-width: 767px) {
+    .header-table {
+        flex-direction: column;
+        align-items: center;
+
+        & div {
+            margin-bottom: var(--spacing-3);
+        }
+    }
+}

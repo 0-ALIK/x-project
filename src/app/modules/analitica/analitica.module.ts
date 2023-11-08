@@ -14,6 +14,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { GenerarReportesInventarioComponent } from './components/generar-reportes-inventario/generar-reportes-inventario.component';
 import { GenerarReportesVentasComponent } from './components/generar-reportes-ventas/generar-reportes-ventas.component';
 import { CalendarModule } from 'primeng/calendar';
+import { ChartModule } from 'primeng/chart';
 
 @NgModule({
     declarations: [
@@ -31,7 +32,8 @@ import { CalendarModule } from 'primeng/calendar';
         MultiSelectModule,
         InputNumberModule,
         CalendarModule,
-        AnaliticaRoutingModule
+        AnaliticaRoutingModule,
+        ChartModule
     ],
     // Recuerden exportar sus componentes aquí para que los otros módulos puedas acceder a ellos
     exports: [

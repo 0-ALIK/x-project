@@ -1,0 +1,25 @@
+
+<p-tabMenu (activeItemChange)="onChange($event)" [model]="items" [activeItem]="activeItem"></p-tabMenu>
+
+<div class="card">
+    <h1 [style]="{'fontSize': 'var(--text-3xl)'}">{{ titulo }}</h1>
+
+    <ng-container *ngIf="activeItem?.label && activeItem?.label === 'Clientes'">
+        <app-clientes-table></app-clientes-table>
+    </ng-container>
+    <ng-container *ngIf="activeItem?.label && activeItem?.label === 'Empresas'">
+        <app-empresas-table></app-empresas-table>
+    </ng-container>
+    <ng-container *ngIf="activeItem?.label && activeItem?.label === 'Solicitudes'">
+        <section class="list-cards-solicitud">
+            <app-solicitud-card></app-solicitud-card>
+            <app-solicitud-card></app-solicitud-card>
+            <app-solicitud-card></app-solicitud-card>
+            <app-solicitud-card></app-solicitud-card>
+        </section>
+
+        <section class="">
+            <p-paginator [first]="0" [rows]="10" [totalRecords]="120" [rowsPerPageOptions]="[10, 20, 30]"></p-paginator>
+        </section>
+    </ng-container>
+</div>
