@@ -26,14 +26,14 @@ export class GraficoBarrasComponent implements OnInit {
 
 
         this.basicData = {
-            labels: ['Producto1', 'Producto2', 'Producto3', 'Producto4', 'Producto5', 'Producto6', 'Producto7', 'Producto8'],
+            labels: ['Coca-cola', 'Squirt', 'Vitamina C', 'Colageno', 'Agua Dasani', 'Kiss'],
             datasets: [
                 {
-                    label: 'Productos totales',
-                    data: [540, 325, 702, 620, 700, 896, 530,444],
+                    label: 'Productos Totales',
+                    data: [540, 325, 702, 620, 700, 896],
                     backgroundColor: ['#a855f7'],
-                    borderColor: [],
-                    borderWidth: 1.5
+                    borderColor: ['#ffffff'],
+                    borderWidth: 1
                 }
             ]
         };
@@ -111,7 +111,6 @@ export class GraficoBarrasComponent implements OnInit {
         this.options2 = {
             stacked: false,
             maintainAspectRatio: false,
-            aspectRatio: 1.5,
             plugins: {
                 legend: {
                     labels: {
