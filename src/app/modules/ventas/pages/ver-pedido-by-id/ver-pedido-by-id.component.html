@@ -2,22 +2,29 @@
 
 <div class="flex flex-column md:flex-row gap-2">
     <div class="w-full">
-        <alik-card-user [cliente]="cliente"></alik-card-user>
+        <div class="mb-2">
+            <alik-card-user [cliente]="cliente"></alik-card-user>
+        </div>
+        <ng-container *ngIf="tieneEmpresa">
+            <div class="mb-2">
+                <h2 class="text-lg m-0 p-0">Empresa asociada</h2>
+                <alik-card-empresa [empresa]="empresa"></alik-card-empresa>
+            </div>
+        </ng-container>
+        <div>
+            <h2 class="text-lg m-0 p-0">Dirección de envio</h2>
+            <alik-card-direccion [direccion]="pedido?.direccion"></alik-card-direccion>
+        </div>
     </div>
 
     <div class="w-full">
         <p-accordion [activeIndex]="0">
             <p-accordionTab header="Productos">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                </p>
+                <app-productos-pedidos></app-productos-pedidos>
             </p-accordionTab>
+
             <p-accordionTab header="Pagos">
-                <p>
-                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim
-                    ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius modi.
-                </p>
+                <app-pagos-list [pagos]="pedido?.pagos"></app-pagos-list>
             </p-accordionTab>
         </p-accordion>
     </div>

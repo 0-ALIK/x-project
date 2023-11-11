@@ -42,11 +42,15 @@ export class VentasTableComponent implements OnInit {
             return cont + (pago.monto || 0);
         }, 0 );
 
+        return this.calcularTotal( productosPedidos ) - pagado;
+    }
+
+    public calcularTotal( productosPedidos: PedidoProductos[] ): number {
         return productosPedidos.reduce( (cont, pedidoProductos) =>  {
             const cantidad_por_caja = pedidoProductos.producto?.cantidad_por_caja || 0;
             const precio_unit = pedidoProductos.producto?.precio_unit || 0;
             return cont + (cantidad_por_caja * precio_unit);
-        }, 0 ) - pagado;
+        }, 0 );
     }
 
     public onRowSelect( event: any ): void {

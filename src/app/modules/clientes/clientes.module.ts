@@ -30,6 +30,7 @@ import { ColaboradorCardComponent } from './components/colaborador-card/colabora
 import { CardUserComponent } from './components/card-user/card-user.component';
 import { SkeletonModule } from 'primeng/skeleton';
 import { CardEmpresaComponent } from './components/card-empresa/card-empresa.component';
+import { CardDireccionComponent } from './components/card-direccion/card-direccion.component';
 
 @NgModule({
     declarations: [
@@ -45,6 +46,7 @@ import { CardEmpresaComponent } from './components/card-empresa/card-empresa.com
         ColaboradorCardComponent,
         CardUserComponent,
         CardEmpresaComponent,
+        CardDireccionComponent,
     ],
     imports: [
         CommonModule,
@@ -68,7 +70,9 @@ import { CardEmpresaComponent } from './components/card-empresa/card-empresa.com
         SkeletonModule
     ],
     exports: [
-        CardUserComponent
+        CardUserComponent,
+        CardEmpresaComponent,
+        CardDireccionComponent
     ]
 })
 export class ClientesModule {}

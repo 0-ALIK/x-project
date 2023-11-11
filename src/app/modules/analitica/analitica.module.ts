@@ -15,12 +15,15 @@ import { GenerarReportesInventarioComponent } from './components/generar-reporte
 import { GenerarReportesVentasComponent } from './components/generar-reportes-ventas/generar-reportes-ventas.component';
 import { CalendarModule } from 'primeng/calendar';
 import { ChartModule } from 'primeng/chart';
+import { TagModule } from 'primeng/tag';
+import { DashboardCardComponent } from './components/dashboard-card/dashboard-card.component';
 
 @NgModule({
     declarations: [
         VerDashboardComponent,
         GenerarReportesInventarioComponent,
-        GenerarReportesVentasComponent
+        GenerarReportesVentasComponent,
+        DashboardCardComponent
     ],
     imports: [
         CommonModule,
@@ -33,7 +36,8 @@ import { ChartModule } from 'primeng/chart';
         InputNumberModule,
         CalendarModule,
         AnaliticaRoutingModule,
-        ChartModule
+        ChartModule,
+        TagModule
     ],
     // Recuerden exportar sus componentes aquí para que los otros módulos puedas acceder a ellos
     exports: [

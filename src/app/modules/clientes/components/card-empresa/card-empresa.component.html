@@ -1,9 +1,25 @@
-<div [style]="{'backgroundColor': 'var(--surface-card)'}">
+<div [style]="{'backgroundColor': 'var(--surface-card)', 'borderRadius': 'var(--border-radius)'}">
     <ng-container *ngIf="empresa">
-        <alik-image-preview></alik-image-preview>
+        <div class="flex flex-row">
+            <img
+                width="150px"
+                height="160px"
+                class="border-round-left"
+                [src]="empresa.foto" alt="foto">
+            <div class="p-2">
+                <h2 class="m-0 p-0 text-xl">{{empresa.nombre}}</h2>
+                <p class="m-0 mb-2 p-0">{{empresa.RUC}}</p>
+                <p class="m-0 p-0">{{empresa.detalles}}</p>
+            </div>
+        </div>
     </ng-container>
-
     <ng-container *ngIf="!empresa">
-
+        <div class="flex flex-row">
+            <p-skeleton width="150px" height="160px"></p-skeleton>
+            <div class="p-2 w-full">
+                <p-skeleton styleClass="mb-2 w-full"></p-skeleton>
+                <p-skeleton width="12rem" styleClass="mb-2"></p-skeleton>
+            </div>
+        </div>
     </ng-container>
 </div>

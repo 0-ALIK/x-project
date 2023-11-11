@@ -1,0 +1,28 @@
+<div>
+    <p-table
+        [value]="pagos || []"
+        styleClass="p-datatable-gridlines"
+        [scrollable]="true"
+        [scrollHeight]="'400px'">
+
+        <ng-template pTemplate="caption">
+            <p>{{pagos?.length}} pagos realizados</p>
+        </ng-template>
+
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Monto</th>
+                <th>Fecha</th>
+                <th>Forma de pago</th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-pago>
+            <tr>
+                <td>{{pago.monto | currency:'USD':'symbol':'1.2-2' }}</td>
+                <td>{{pago.fecha | date}}</td>
+                <td><p-tag [value]="pago.forma_pago.nombre"></p-tag></td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

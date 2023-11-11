@@ -29,6 +29,7 @@
             <th>Cliente</th>
             <th>Fecha</th>
             <th>Estado</th>
+            <th>Importe de la venta</th>
             <th>Importe pagado</th>
             <th>Importe debido</th>
             <th>Empresa</th>
@@ -53,6 +54,10 @@
 
             <td>
                 <p-tag [value]="pedido.estado.estado"></p-tag>
+            </td>
+
+            <td>
+                {{ calcularTotal( pedido.pedido_producto ) | currency:'USD':'symbol':'1.2-2' }}
             </td>
 
             <td>

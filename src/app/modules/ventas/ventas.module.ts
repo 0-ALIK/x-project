@@ -12,13 +12,17 @@ import { AvatarModule } from 'primeng/avatar';
 import { TagModule } from 'primeng/tag';
 import { AccordionModule } from 'primeng/accordion';
 import { ClientesModule } from '../clientes/clientes.module';
+import { ProductosPedidosComponent } from './components/productos-pedidos/productos-pedidos.component';
+import { PagosListComponent } from './components/pagos-list/pagos-list.component';
 
 
 @NgModule({
     declarations: [
         VerVentasComponent,
         VentasTableComponent,
-        VerPedidoByIdComponent
+        VerPedidoByIdComponent,
+        ProductosPedidosComponent,
+        PagosListComponent
     ],
     imports: [
         CommonModule,
