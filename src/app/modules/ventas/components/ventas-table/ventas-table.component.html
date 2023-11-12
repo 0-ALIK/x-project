@@ -57,15 +57,15 @@
             </td>
 
             <td>
-                {{ calcularTotal( pedido.pedido_producto ) | currency:'USD':'symbol':'1.2-2' }}
+                {{ importesCalc.calcularImporte( pedido.pedido_producto ) | currency:'USD':'symbol':'1.2-2' }}
             </td>
 
             <td>
-                {{ calcularImportePagado( pedido.pagos ) | currency:'USD':'symbol':'1.2-2' }}
+                {{ importesCalc.calcularImportePagado( pedido.pagos ) | currency:'USD':'symbol':'1.2-2' }}
             </td>
 
             <td>
-                {{ calcularImporteDebido( pedido.pedido_producto, pedido.pagos ) | currency:'USD':'symbol':'1.2-2' }}
+                {{ importesCalc.calcularImporteDebido( pedido.pedido_producto, pedido.pagos ) | currency:'USD':'symbol':'1.2-2' }}
             </td>
 
             <td>

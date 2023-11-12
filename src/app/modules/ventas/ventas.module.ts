@@ -14,6 +14,13 @@ import { AccordionModule } from 'primeng/accordion';
 import { ClientesModule } from '../clientes/clientes.module';
 import { ProductosPedidosComponent } from './components/productos-pedidos/productos-pedidos.component';
 import { PagosListComponent } from './components/pagos-list/pagos-list.component';
+import { ImportesCalcService } from './services/importes-calc.service';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { FormsModule } from '@angular/forms';
+import { MessageService } from 'primeng/api';
+import { DialogService } from 'primeng/dynamicdialog';
+import { AgregarEditarPagoComponent } from './components/agregar-editar-pago/agregar-editar-pago.component';
+import { DropdownModule } from 'primeng/dropdown';
 
 
 @NgModule({
@@ -22,7 +29,8 @@ import { PagosListComponent } from './components/pagos-list/pagos-list.component
         VentasTableComponent,
         VerPedidoByIdComponent,
         ProductosPedidosComponent,
-        PagosListComponent
+        PagosListComponent,
+        AgregarEditarPagoComponent
     ],
     imports: [
         CommonModule,
@@ -34,7 +42,11 @@ import { PagosListComponent } from './components/pagos-list/pagos-list.component
         AvatarModule,
         TagModule,
         AccordionModule,
-        ClientesModule
-    ]
+        ClientesModule,
+        InputNumberModule,
+        FormsModule,
+        DropdownModule
+    ],
+    providers: [ImportesCalcService, MessageService, DialogService]
 })
 export class VentasModule { }

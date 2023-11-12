@@ -1,4 +1,9 @@
-<h1 class="text-3xl">Pedido con id: id</h1>
+<div class="flex align-items-center gap-2">
+    <h1 class="text-3xl">Pedido con id: id</h1>
+    <p-tag [value]="pedido?.estado?.estado"></p-tag>
+</div>
+
+
 
 <div class="flex flex-column md:flex-row gap-2">
     <div class="w-full">
@@ -11,9 +16,20 @@
                 <alik-card-empresa [empresa]="empresa"></alik-card-empresa>
             </div>
         </ng-container>
-        <div>
+        <div class="mb-2">
             <h2 class="text-lg m-0 p-0">Dirección de envio</h2>
             <alik-card-direccion [direccion]="pedido?.direccion"></alik-card-direccion>
+        </div>
+        <div class="mb-2">
+            <h2 class="text-lg m-0 p-0">Impote de la venta</h2>
+            <p-inputNumber
+                [(ngModel)]="importe"
+                [readonly]="true"
+                inputId="currency-us"
+                mode="currency"
+                currency="USD"
+                locale="en-US">
+            </p-inputNumber>
         </div>
     </div>
 
@@ -24,7 +40,7 @@
             </p-accordionTab>
 
             <p-accordionTab header="Pagos">
-                <app-pagos-list [pagos]="pedido?.pagos"></app-pagos-list>
+                <app-pagos-list [importeDebido]="importeDebido" [pagos]="pedido?.pagos"></app-pagos-list>
             </p-accordionTab>
         </p-accordion>
     </div>
