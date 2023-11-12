@@ -79,7 +79,7 @@ export class TableInventarioComponent implements OnInit {
 
     public onRowSelect( event: any ): void {
         this.router.navigate([
-            '/dashboard/inventario/editar-producto/',
+            '/app/inventario/editar-producto/',
             this.selectedProducto?.id_producto
         ]);
     }

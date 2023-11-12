@@ -24,6 +24,6 @@ export class MessagesListComponent {
 
     @HostListener('document:keydown.escape', ['$event'])
     public onCLickEsc(): void {
-        this.router.navigate(['/dashboard/chat']);
+        this.router.navigate(['/app/chat']);
     }
 }

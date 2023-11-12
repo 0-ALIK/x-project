@@ -25,49 +25,44 @@ export class SidebarComponent implements OnInit {
     private rellenarMenuItem(): void {
         this.menuItems = [
             {
-                label: 'Home',
-                icon: 'pi pi-fw pi-home',
-                route: '/dashboard'
-            },
-            {
                 label: 'Inventario',
                 icon: 'pi pi-fw pi-box',
-                route: '/dashboard/inventario'
+                route: '/app/inventario'
             },
             {
                 label: 'Ventas',
                 icon: 'pi pi-fw pi-shopping-bag',
-                route: '/dashboard/ventas'
+                route: '/app/ventas'
             },
             {
                 label: 'Clientes',
                 icon: 'pi pi-fw pi-users',
-                route: '/dashboard/clientes'
+                route: '/app/clientes'
             },
             {
                 label: 'Tickets',
                 icon: 'pi pi-fw pi-ticket',
-                route: '/dashboard/tickets'
+                route: '/app/tickets'
             },
             {
                 label: 'chat',
                 icon: 'pi pi-fw pi-comments',
-                route: '/dashboard/chat'
+                route: '/app/chat'
             },
             {
                 label: 'Blog',
                 icon: 'pi pi-fw pi-globe',
-                route: '/dashboard/blog'
+                route: '/app/blog'
             },
             {
                 label: 'Usuarios',
                 icon: 'pi pi-fw pi-user-edit',
-                route: '/dashboard/usuarios'
+                route: '/app/usuarios'
             },
             {
                 label: 'Analíticas',
                 icon: 'pi pi-fw pi-chart-pie',
-                route: '/dashboard/analitica'
+                route: '/app/analitica'
             }
         ];
     }

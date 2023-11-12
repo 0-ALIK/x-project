@@ -55,7 +55,7 @@ export class VentasTableComponent implements OnInit {
 
     public onRowSelect( event: any ): void {
         this.router.navigate([
-            '/dashboard/ventas',
+            '/app/ventas',
             this.selectedPedido?.id_pedido
         ]);
     }

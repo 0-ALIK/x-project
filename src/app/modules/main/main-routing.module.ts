@@ -1,12 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardComponent } from './dashboard.component';
+import { MainComponent } from './main.component';
 
 const routes: Routes = [
     {
         path: '',
-        component: DashboardComponent,
+        component: MainComponent,
         children: [
+            {
+                path: '',
+                redirectTo: 'inventario',
+                pathMatch: 'full'
+            },
             {
                 path: 'inventario',
                 loadChildren: () => import('../inventario/inventario.module').then(m => m.InventarioModule)
@@ -47,4 +52,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class DashboardRoutingModule { }
+export class MainRoutingModule { }
