@@ -38,6 +38,9 @@ export class DashboardCardComponent implements OnInit {
         const crecimiento = this.numero - this.valorAnterior;
         const porcentaje = (crecimiento / this.valorAnterior) * 100;
 
+        console.log( porcentaje );
+
+
         if(porcentaje < 0) {
             this.porcentaje = porcentaje * -1;
             this.peligro = true;
