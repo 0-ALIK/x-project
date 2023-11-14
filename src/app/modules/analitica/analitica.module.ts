@@ -23,13 +23,9 @@ import { DashboardCardComponent } from './components/dashboard-card/dashboard-ca
     declarations: [
         VerDashboardComponent,
         GenerarReportesInventarioComponent,
-<<<<<<< HEAD
-        GenerarReportesVentasComponent
-
-=======
         GenerarReportesVentasComponent,
         DashboardCardComponent
->>>>>>> main
+
     ],
     imports: [
         CommonModule,
