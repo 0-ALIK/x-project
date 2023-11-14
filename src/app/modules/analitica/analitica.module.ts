@@ -17,13 +17,15 @@ import { CalendarModule } from 'primeng/calendar';
 import { ChartModule } from 'primeng/chart';
 import { TagModule } from 'primeng/tag';
 import { DashboardCardComponent } from './components/dashboard-card/dashboard-card.component';
+import { InventarioDashboardComponent } from './pages/inventario-dashboard/inventario-dashboard.component';
 
 @NgModule({
     declarations: [
         VerDashboardComponent,
         GenerarReportesInventarioComponent,
         GenerarReportesVentasComponent,
-        DashboardCardComponent
+        DashboardCardComponent,
+        InventarioDashboardComponent
     ],
     imports: [
         CommonModule,
