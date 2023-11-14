@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'app-dashboard',
+    selector: 'app-main',
     template: `
 
         <alik-nav></alik-nav>
@@ -27,7 +27,7 @@ import { Component } from '@angular/core';
 
     `]
 })
-export class DashboardComponent {
+export class MainComponent {
 
 }
 

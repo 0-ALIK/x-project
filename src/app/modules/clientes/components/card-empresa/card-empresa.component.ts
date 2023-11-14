@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Empresa } from 'src/app/interfaces/usuario.inteface';
 
 @Component({
-  selector: 'app-card-empresa',
+  selector: 'alik-card-empresa',
   templateUrl: './card-empresa.component.html',
   styles: [
   ]

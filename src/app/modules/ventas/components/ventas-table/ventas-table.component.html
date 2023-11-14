@@ -29,6 +29,7 @@
             <th>Cliente</th>
             <th>Fecha</th>
             <th>Estado</th>
+            <th>Importe de la venta</th>
             <th>Importe pagado</th>
             <th>Importe debido</th>
             <th>Empresa</th>
@@ -56,11 +57,15 @@
             </td>
 
             <td>
-                {{ calcularImportePagado( pedido.pagos ) | currency:'USD':'symbol':'1.2-2' }}
+                {{ importesCalc.calcularImporte( pedido.pedido_producto ) | currency:'USD':'symbol':'1.2-2' }}
             </td>
 
             <td>
-                {{ calcularImporteDebido( pedido.pedido_producto, pedido.pagos ) | currency:'USD':'symbol':'1.2-2' }}
+                {{ importesCalc.calcularImportePagado( pedido.pagos ) | currency:'USD':'symbol':'1.2-2' }}
+            </td>
+
+            <td>
+                {{ importesCalc.calcularImporteDebido( pedido.pedido_producto, pedido.pagos ) | currency:'USD':'symbol':'1.2-2' }}
             </td>
 
             <td>
