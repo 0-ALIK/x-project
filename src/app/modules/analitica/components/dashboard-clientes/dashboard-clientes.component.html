@@ -1,46 +1,39 @@
-<main class="flex flex-column">
-
-    <section class="flex flex-row m-3 align-content-start justify-content-start font-medium text-200">
-        <span class="p-float-label m-3">
+<main >
+    <!-- Filtros -->
+    <section class="flex flex-row align-content-start justify-content-start mb-1">
+        <span class="p-float-label m-1">
             <p-dropdown [options]="filtroProvincia" [(ngModel)]="selectedProvincia" placeholder="Seleccione una provincia" optionLabel="nombre" inputId="float-label"></p-dropdown>
                 <label for="float-label">Provincia</label>
         </span>
 
-        <span class="p-float-label m-3">
+        <span class="p-float-label m-1">
             <p-dropdown [options]="filtroFecha" [(ngModel)]="selectedFecha" placeholder="Seleccione una fecha" optionLabel="nombre" inputId="float-label"></p-dropdown>
                 <label for="float-label">Fecha de entrada</label>
         </span >
 
-        <span class="p-float-label m-3">
+        <span class="p-float-label my-1">
             <p-dropdown [options]="filtroEmpresa" [(ngModel)]="selectedEmpresa" placeholder="Selecciones una empresa" optionLabel="nombre" inputId="float-label"></p-dropdown>
                 <label for="float-label">Empresa Asocioda </label>
         </span>
 
-        <span class="p-float-label m-3">
+        <span class="p-float-label m-1">
             <p-dropdown [options]="filtroTiempo" [(ngModel)]="selectedTiempo" placeholder="Seleccione un géner" optionLabel="nombre" inputId="float-label"></p-dropdown>
                 <label for="float-label">Tiempo</label>
         </span>
 
     </section>
-
-    <section >
+    <!-- Cards superiores -->
+    <section>
         <div class="flex flex-row justify-content-between">
-            <alik-dashboard-card class="m-2" titulo="Clientes Totales" icon="pi-" [numero]="120" tipo="numero" [valorAnterior]="85" ></alik-dashboard-card>
-            <alik-dashboard-card class="m-2" titulo="Empresas Totales" icon="" [numero]="58" tipo="numero" [valorAnterior]="49" ></alik-dashboard-card>
-            <alik-dashboard-card class="m-2" titulo="Crecimiento" icon="" [numero]="54" tipo="numero" [valorAnterior]="24" ></alik-dashboard-card>
+            <alik-dashboard-card class="mx-2" titulo="Clientes Totales" icon="pi-" [numero]="120" tipo="numero" [valorAnterior]="85" ></alik-dashboard-card>
+            <alik-dashboard-card class="mx-2" titulo="Empresas Totales" icon="" [numero]="58" tipo="numero" [valorAnterior]="49" ></alik-dashboard-card>
+            <alik-dashboard-card class="mx-2" titulo="Crecimiento" icon="" [numero]="54" tipo="numero" [valorAnterior]="24" ></alik-dashboard-card>
         </div>
     </section>
 
-    <section class="flex flex-row p-3 m-3">
-
-        <div class="pie flex flex-column w-20rem h-20rem flex-1 justify-content-start">
-            <p-chart type="pie" [data]="data2" [options]="options2"></p-chart>
-            <p-chart type="pie" [data]="data2" [options]="options2"></p-chart>
-        </div>
-
-        <div class="bar flex flex-column w-30rem h-30rem flex-order-2 justify-content-end">
-            <p-chart  type="bar" [data]="data1" [options]="options1"></p-chart>
-            <p-chart type="bar" [data]="data1" [options]="options1"></p-chart>
-        </div>
+    <section class="flex flex-row">
+            <div class=" m-2 border-round h-19rem" [style]="{'background': 'var(--surface-card)'}"><p-chart class="h-10rem" type="line" [data]="data1" [options]="options1"></p-chart></div>
+            <div class=" m-2 border-round h-19rem" [style]="{'background': 'var(--surface-card)'}"><p-chart class="h-10rem" type="line" [data]="data1" [options]="options1"></p-chart></div>
     </section>
 </main>
+

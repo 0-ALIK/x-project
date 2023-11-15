@@ -105,7 +105,7 @@ export class DashboardClientesComponent implements OnInit {
                     data: [28, 48, 40, 19, 86, 27, 90]
                 }
             ]
-        };
+        }
 
         this.options1 = {
             indexAxis: 'y',
