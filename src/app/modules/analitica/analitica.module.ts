@@ -18,6 +18,8 @@ import { ChartModule } from 'primeng/chart';
 import { TagModule } from 'primeng/tag';
 import { DashboardCardComponent } from './components/dashboard-card/dashboard-card.component';
 import { InventarioDashboardComponent } from './pages/inventario-dashboard/inventario-dashboard.component';
+import { IndicadorRendimientoComponent } from './pages/indicador-rendimiento/indicador-rendimiento.component';
+import { TabMenuModule } from 'primeng/tabmenu';
 
 @NgModule({
     declarations: [
@@ -25,7 +27,8 @@ import { InventarioDashboardComponent } from './pages/inventario-dashboard/inven
         GenerarReportesInventarioComponent,
         GenerarReportesVentasComponent,
         DashboardCardComponent,
-        InventarioDashboardComponent
+        InventarioDashboardComponent,
+        IndicadorRendimientoComponent
     ],
     imports: [
         CommonModule,
@@ -39,7 +42,8 @@ import { InventarioDashboardComponent } from './pages/inventario-dashboard/inven
         CalendarModule,
         AnaliticaRoutingModule,
         ChartModule,
-        TagModule
+        TagModule,
+        TabMenuModule
     ],
     // Recuerden exportar sus componentes aquí para que los otros módulos puedas acceder a ellos
     exports: [

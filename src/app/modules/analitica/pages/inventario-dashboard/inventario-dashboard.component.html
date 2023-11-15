@@ -50,8 +50,8 @@
         ></alik-dashboard-card>
     </section>
 
-    <section class="flex gap-2 h-24rem">
-        <div class="p-2 border-round w-full" [style]="{'background': 'var(--surface-card)'}">
+    <section class="flex gap-2 mb-2">
+        <div class="p-2 border-round w-full" [style]="{'background': 'var(--surface-card)', 'flex': '2'}">
             <p-chart
                 type="bar"
                 [options]="options"
@@ -59,13 +59,21 @@
             ></p-chart>
         </div>
 
-        <div class="p-2 border-round w-full" [style]="{'background': 'var(--surface-card)'}">
-            <p-chart
-                type="bar"
-                [options]="options"
-                [data]="stockData"
-            ></p-chart>
+        <div class="p-2 border-round w-full flex flex-column justify-content-center align-items-center" [style]="{'background': 'var(--surface-card)', 'flex': '1'}">
+            <h2>Indicador de rendimiento</h2>
+            <ana-speedometer
+                [total]="5400"
+                [valorActual]="5345"
+            ></ana-speedometer>
         </div>
+
     </section>
 
+    <div class="p-2 border-round w-full mb-2" [style]="{'background': 'var(--surface-card)'}">
+        <p-chart
+            type="bar"
+            [options]="options"
+            [data]="stockData"
+        ></p-chart>
+    </div>
 </main>
