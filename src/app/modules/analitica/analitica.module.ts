@@ -17,6 +17,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { ChartModule } from 'primeng/chart';
 import { TagModule } from 'primeng/tag';
 import { DashboardCardComponent } from './components/dashboard-card/dashboard-card.component';
+import { DashboardClientesComponent } from './components/dashboard-clientes/dashboard-clientes.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { DashboardCardComponent } from './components/dashboard-card/dashboard-ca
         VerDashboardComponent,
         GenerarReportesInventarioComponent,
         GenerarReportesVentasComponent,
-        DashboardCardComponent
+        DashboardCardComponent,
+        DashboardClientesComponent
 
     ],
     imports: [
