@@ -1,1 +1,14 @@
+<<<<<<< HEAD
 <app-dashboard-ventas>
+=======
+<p-tabMenu
+    (activeItemChange)="onChange($event)"
+    [model]="items"
+    [activeItem]="activeItem"
+    styleClass="mb-2">
+</p-tabMenu>
+
+<div *ngIf="activeItem?.label && activeItem?.label === 'Inventario'">
+    <app-inventario-dashboard></app-inventario-dashboard>
+</div>
+>>>>>>> coordi
