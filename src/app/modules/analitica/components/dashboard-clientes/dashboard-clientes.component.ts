@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Empresa, Tiempo, Fecha, Provincia} from 'src/app/interfaces/ventas.interface';
 interface Filtro {
     nombre: string;
     code: string;
@@ -12,18 +13,10 @@ interface Filtro {
 })
 export class DashboardClientesComponent implements OnInit {
 
-
-    filtroProvincia: Filtro[] | undefined;
-    selectedProvincia: Filtro  | undefined;
-
-    filtroFecha: Filtro[] | undefined;
-    selectedFecha: Filtro  | undefined;
-
-    filtroEmpresa: Filtro[] | undefined;
-    selectedEmpresa: Filtro  | undefined;
-
-    filtroTiempo: Filtro[] | undefined;
-    selectedTiempo: Filtro  | undefined;
+    filtroProvincia: Provincia[] | undefined;
+    filtroFecha: Fecha[] | undefined;
+    filtroEmpresa: Empresa[] | undefined;
+    filtroTiempo: Tiempo[] | undefined;
 
     data1: any;
     options1: any;
@@ -37,50 +30,50 @@ export class DashboardClientesComponent implements OnInit {
         this.definirFiltroProvincia();
         this.definirFiltroFecha();
         this.definirFiltroEmpresa();
-        this.definirFiltroTiempo();
+        // this.definirFiltroTiempo();
         this.definirGraficaPastel();
         this.definirGraficaBarras();
     }
 
     definirFiltroProvincia(): void{
         this.filtroProvincia = [
-            { nombre: 'Filtro1', code: "code1"},
-            { nombre: 'Filtro2', code: "code2"},
-            { nombre: 'Filtro3', code: "code3" },
-            { nombre: 'Filtro4', code: "code4" },
-            { nombre: 'Filtro5', code: "code5" }
+            { nombre: 'Panamá' },
+            { nombre: 'Coclé' },
+            { nombre: 'Colón' },
+            { nombre: 'Bocas del Toro' }
         ];
     }
 
     definirFiltroFecha(): void{
         this.filtroFecha = [
-            { nombre: 'Filtro1', code: "code1"},
-            { nombre: 'Filtro2', code: "code2"},
-            { nombre: 'Filtro3', code: "code3" },
-            { nombre: 'Filtro4', code: "code4" },
-            { nombre: 'Filtro5', code: "code5" }
+            { nombre: 'Filtro1' },
+            { nombre: 'Filtro2' },
+            { nombre: 'Filtro3' },
+            { nombre: 'Filtro4' },
+            { nombre: 'Filtro5' }
         ];
     }
 
     definirFiltroEmpresa(): void{
         this.filtroEmpresa = [
-            { nombre: 'Filtro1', code: "code1"},
-            { nombre: 'Filtro2', code: "code2"},
-            { nombre: 'Filtro3', code: "code3" },
-            { nombre: 'Filtro4', code: "code4" },
-            { nombre: 'Filtro5', code: "code5" }
+            { nombre: 'Empresa1' },
+            { nombre: 'Empresa2' },
+            { nombre: 'Empresa3' },
+            { nombre: 'Empresa4' },
+            { nombre: 'Empresa5' }
         ];
     }
 
-    definirFiltroTiempo(): void{
-        this.filtroTiempo = [
-            { nombre: 'Filtro1', code: "code1"},
-            { nombre: 'Filtro2', code: "code2"},
-            { nombre: 'Filtro3', code: "code3" },
-            { nombre: 'Filtro4', code: "code4" },
-            { nombre: 'Filtro5', code: "code5" }
-        ];
-    }
+    // definirFiltroTiempo(): void{
+    //     this.filtroTiempo = [
+    //         { nombre: 'Año', code: "code1"},
+    //         { nombre: 'Mes', code: "code2"},
+    //         { nombre: 'Filtro3', code: "code3" },
+    //         { nombre: 'Filtro4', code: "code4" },
+    //         { nombre: 'Filtro5', code: "code5" }
+    //     ];
+    // }
+
 
 
     definirGraficaPastel(): void{

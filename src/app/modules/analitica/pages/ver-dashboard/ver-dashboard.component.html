@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-<app-dashboard-ventas>
-=======
 <p-tabMenu
     (activeItemChange)="onChange($event)"
     [model]="items"
@@ -11,4 +8,9 @@
 <div *ngIf="activeItem?.label && activeItem?.label === 'Inventario'">
     <app-inventario-dashboard></app-inventario-dashboard>
 </div>
->>>>>>> coordi
+<div *ngIf="activeItem?.label && activeItem?.label === 'Clientes'">
+    <app-dashboard-clientes> </app-dashboard-clientes>
+</div>
+<div *ngIf="activeItem?.label && activeItem?.label === 'Ventas'">
+    <app-dashboard-ventas></app-dashboard-ventas>
+</div>

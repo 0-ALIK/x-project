@@ -35,18 +35,17 @@ export class DashboardVentasComponent implements OnInit {
         this.definirFiltroProvincia();
         this.definirFiltroFecha();
         this.definirFiltroEmpresa();
-        this.definirFiltroTiempo();
+        // this.definirFiltroTiempo();
         this.definirGraficaPastel();
         this.definirGraficaBarras();
     }
 
     definirFiltroProvincia(): void{
         this.filtroProvincia = [
-            { nombre: 'Filtro1', code: "code1"},
-            { nombre: 'Filtro2', code: "code2"},
-            { nombre: 'Filtro3', code: "code3"},
-            { nombre: 'Filtro4', code: "code4"},
-            { nombre: 'Filtro5', code: "code5"}
+            { nombre: 'Panamá', code: "code1"},
+            { nombre: 'Coclé', code: "code2"},
+            { nombre: 'Colón', code: "code3"},
+            { nombre: 'Bocas del Toro', code: "code4"},
         ];
     }
 
@@ -62,23 +61,23 @@ export class DashboardVentasComponent implements OnInit {
 
     definirFiltroEmpresa(): void{
         this.filtroEmpresa = [
-            { nombre: 'Filtro1', code: "code1"},
-            { nombre: 'Filtro2', code: "code2"},
-            { nombre: 'Filtro3', code: "code3" },
-            { nombre: 'Filtro4', code: "code4" },
-            { nombre: 'Filtro5', code: "code5" }
+            { nombre: 'Empresa1', code: "code1"},
+            { nombre: 'Empresa2', code: "code2"},
+            { nombre: 'Empresa3', code: "code3" },
+            { nombre: 'Empresa4', code: "code4" },
+            { nombre: 'Empresa5', code: "code5" }
         ];
     }
 
-    definirFiltroTiempo(): void{
-        this.filtroTiempo = [
-            { nombre: 'Filtro1', code: "code1"},
-            { nombre: 'Filtro2', code: "code2"},
-            { nombre: 'Filtro3', code: "code3" },
-            { nombre: 'Filtro4', code: "code4" },
-            { nombre: 'Filtro5', code: "code5" }
-        ];
-    }
+    // definirFiltroTiempo(): void{
+    //     this.filtroTiempo = [
+    //         { nombre: 'Año', code: "code1"},
+    //         { nombre: 'Mes', code: "code2"},
+    //         { nombre: 'Filtro3', code: "code3" },
+    //         { nombre: 'Filtro4', code: "code4" },
+    //         { nombre: 'Filtro5', code: "code5" }
+    //     ];
+    // }
 
 
     definirGraficaPastel(): void{
@@ -88,10 +87,10 @@ export class DashboardVentasComponent implements OnInit {
         const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
 
         this.data1 = {
-            labels: ['Cliente1', 'Cliente2', 'Cliente3', 'Cliente4', 'Cliente5', 'Cliente6', 'Cliente7'],
+            labels: ['Venta1', 'Venta2', 'Venta3', 'Venta4', 'Venta5', 'Venta6', 'Venta7'],
             datasets: [
                 {
-                    label: 'My First dataset',
+                    label: 'Ventas',
                     fill:false,
                     backgroundColor: documentStyle.getPropertyValue('--blue-500'),
                     borderColor: documentStyle.getPropertyValue('--blue-500'),
