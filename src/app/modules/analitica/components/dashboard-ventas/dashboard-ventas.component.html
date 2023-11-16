@@ -1,1 +1,46 @@
-<p>dashboard-ventas works!</p>
+<main >
+    <!-- Filtros -->
+    <section class="flex flex-row align-content-start justify-content-start mb-1">
+        <span class="p-float-label m-1">
+            <p-dropdown [options]="filtroProvincia" [(ngModel)]="selectedProvincia" placeholder="Seleccione una provincia" optionLabel="nombre" inputId="float-label"></p-dropdown>
+                <label for="float-label">Provincia</label>
+        </span>
+
+        <span class="p-float-label m-1">
+            <p-dropdown [options]="filtroFecha" [(ngModel)]="selectedFecha" placeholder="Seleccione una fecha" optionLabel="nombre" inputId="float-label"></p-dropdown>
+                <label for="float-label">Fecha de entrada</label>
+        </span >
+
+        <span class="p-float-label my-1">
+            <p-dropdown [options]="filtroEmpresa" [(ngModel)]="selectedEmpresa" placeholder="Selecciones una empresa" optionLabel="nombre" inputId="float-label"></p-dropdown>
+                <label for="float-label">Empresa Asocioda </label>
+        </span>
+
+        <span class="p-float-label m-1">
+            <p-dropdown [options]="filtroTiempo" [(ngModel)]="selectedTiempo" placeholder="Seleccione un géner" optionLabel="nombre" inputId="float-label"></p-dropdown>
+                <label for="float-label">Tiempo</label>
+        </span>
+
+    </section>
+    <!-- Cards superiores -->
+    <section>
+        <div class="flex flex-row justify-content-between">
+            <alik-dashboard-card class="mx-2" titulo="Clientes Totales" icon="pi-" [numero]="120" tipo="numero" [valorAnterior]="85" ></alik-dashboard-card>
+            <alik-dashboard-card class="mx-2" titulo="Empresas Totales" icon="" [numero]="58" tipo="numero" [valorAnterior]="49" ></alik-dashboard-card>
+            <alik-dashboard-card class="mx-2" titulo="Crecimiento" icon="" [numero]="54" tipo="numero" [valorAnterior]="24" ></alik-dashboard-card>
+        </div>
+    </section>
+
+    <section class="flex flex-row">
+            <div class="flex flex-column align-content-center m-2 border-round h-19rem w-full" [style]="{'background': 'var(--surface-card)'}">
+                <label for="lineal1" class="text-center p-2">Comportamiento de las ventas</label>
+                <p-chart class="h-10rem p-2" type="line" [data]="data1" [options]="options1" id="lineal1"></p-chart>
+            </div>
+
+            <div class="flex flex-column align-content-center m-2 border-round h-19rem w-full" [style]="{'background': 'var(--surface-card)'}">
+                <label for="lineal2" class="text-center p-2">Ventas según: filtro</label>
+                <p-chart class="h-11rem mt-1 mx-1" type="line" [data]="data1" [options]="options1" id="lineal2"></p-chart>
+            </div>
+    </section>
+</main>
+
