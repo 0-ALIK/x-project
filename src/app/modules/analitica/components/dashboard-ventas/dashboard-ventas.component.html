@@ -1,12 +1,10 @@
 <main >
     <!-- Filtros -->
-     <!-- Filtros -->
      <section class="flex flex-row align-content-start justify-content-start mb-1 gap-2">
         <p-dropdown [options]="filtroProvincia"  placeholder="Provincia" optionLabel="nombre"></p-dropdown>
         <p-dropdown [options]="filtroFecha" placeholder="Fecha" optionLabel="nombre" ></p-dropdown>
         <p-dropdown [options]="filtroEmpresa" placeholder="Empresa" optionLabel="nombre" ></p-dropdown>
         <p-dropdown [options]="filtroTiempo" placeholder="Género" optionLabel="nombre" ></p-dropdown>
-
     </section>
     <!-- Cards superiores -->
     <section>
@@ -16,10 +14,7 @@
             <alik-dashboard-card class="mx-2" titulo="Promedio de pedidos" icon="pi-chart-line" [numero]="54" tipo="numero" [valorAnterior]="24" ></alik-dashboard-card>
             <div class=" border-round w-full flex flex-column justify-content-center align-items-center" [style]="{'background': 'var(--surface-card)'}">
                 <p>Rendimiento</p>
-                <ana-speedometer
-                    [total]="5400"
-                    [valorActual]="5345"
-                ></ana-speedometer>
+                <ana-speedometer [total]="5400" [valorActual]="5345"></ana-speedometer>
             </div>
         </div>
     </section>

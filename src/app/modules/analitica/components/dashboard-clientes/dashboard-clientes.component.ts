@@ -86,13 +86,13 @@ export class DashboardClientesComponent implements OnInit {
             labels: ['Cliente1', 'Cliente2', 'Cliente3', 'Cliente4', 'Cliente5', 'Cliente6', 'Cliente7'],
             datasets: [
                 {
-                    label: 'My First dataset',
+                    label: 'Clientes màs compran',
                     backgroundColor: documentStyle.getPropertyValue('--blue-500'),
                     borderColor: documentStyle.getPropertyValue('--blue-500'),
                     data: [65, 59, 80, 81, 56, 55, 40]
                 },
                 {
-                    label: 'My Second dataset',
+                    label: 'Clientes menos compran',
                     backgroundColor: documentStyle.getPropertyValue('--purple-500'),
                     borderColor: documentStyle.getPropertyValue('--purple-500'),
                     data: [28, 48, 40, 19, 86, 27, 90]
