@@ -87,14 +87,14 @@ export class DashboardClientesComponent implements OnInit {
             datasets: [
                 {
                     label: 'Clientes màs compran',
-                    backgroundColor: documentStyle.getPropertyValue('--blue-500'),
-                    borderColor: documentStyle.getPropertyValue('--blue-500'),
+                    backgroundColor: documentStyle.getPropertyValue('--green-500'),
+                    borderColor: documentStyle.getPropertyValue('--yellow-500'),
                     data: [65, 59, 80, 81, 56, 55, 40]
                 },
                 {
                     label: 'Clientes menos compran',
-                    backgroundColor: documentStyle.getPropertyValue('--purple-500'),
-                    borderColor: documentStyle.getPropertyValue('--purple-500'),
+                    backgroundColor: documentStyle.getPropertyValue('--blue-500'),
+                    borderColor: documentStyle.getPropertyValue('--orange-500'),
                     data: [28, 48, 40, 19, 86, 27, 90]
                 }
             ]
@@ -149,8 +149,8 @@ export class DashboardClientesComponent implements OnInit {
             datasets: [
                 {
                     data: [540, 325, 702],
-                    backgroundColor: [documentStyle.getPropertyValue('--green-400'), documentStyle.getPropertyValue('--green-500'), documentStyle.getPropertyValue('--green-600')],
-                    hoverBackgroundColor: [documentStyle.getPropertyValue('--blue-400'), documentStyle.getPropertyValue('--yellow-400'), documentStyle.getPropertyValue('--green-400')]
+                    backgroundColor: [documentStyle.getPropertyValue('--yellow-500'), documentStyle.getPropertyValue('--green-500'), documentStyle.getPropertyValue('--orange-500')],
+                    hoverBackgroundColor: [documentStyle.getPropertyValue('--yellow-300'), documentStyle.getPropertyValue('--green-300'), documentStyle.getPropertyValue('--orange-300')]
                 }
             ]
         };
