@@ -39,8 +39,8 @@ export class InventarioDashboardComponent implements OnInit {
                 {
                     label: 'Productos más comprados',
                     data: [540, 325, 702, 620, 442],
-                    backgroundColor: ['rgba(255, 159, 64, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(75, 192, 192, 0.2)'],
-                    borderColor: ['rgb(255, 159, 64)', 'rgb(75, 192, 192)', 'rgb(54, 162, 235)', 'rgb(153, 102, 255)', 'rgb(75, 192, 192)'],
+                    backgroundColor: ['rgba(76, 208, 125, 0.2)', 'rgba(76, 208, 125, 0.2)', 'rgba(76, 208, 125, 0.2)', 'rgba(76, 208, 125 0.2)', 'rgba(76, 208, 125, 0.2)'],
+                    borderColor:['rgb(34, 197, 94)', 'rgb(34, 197, 94)', 'rgb(34, 197, 94)', 'rgb(34, 197, 94)', 'rgb(34, 197, 94)'],
                     borderWidth: 1
                 }
             ]
@@ -54,8 +54,8 @@ export class InventarioDashboardComponent implements OnInit {
                 {
                     label: 'Productos con más stock',
                     data: [540, 325, 702, 620, 220],
-                    backgroundColor: ['rgba(255, 159, 64, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(75, 192, 192, 0.2)'],
-                    borderColor: ['rgb(255, 159, 64)', 'rgb(75, 192, 192)', 'rgb(54, 162, 235)', 'rgb(153, 102, 255)', 'rgb(75, 192, 192)'],
+                    backgroundColor: ['rgba(76, 208, 125, 0.2)', 'rgba(76, 208, 125, 0.2)', 'rgba(76, 208, 125, 0.2)', 'rgba(76, 208, 125 0.2)', 'rgba(76, 208, 125, 0.2)'],
+                    borderColor: ['rgb(34, 197, 94)', 'rgb(34, 197, 94)', 'rgb(34, 197, 94)', 'rgb(34, 197, 94)', 'rgb(34, 197, 94)'],
                     borderWidth: 1
                 }
             ]

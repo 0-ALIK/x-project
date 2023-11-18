@@ -85,8 +85,8 @@ export class DashboardVentasComponent implements OnInit {
                 {
                     label: 'Ventas',
                     fill:false,
-                    backgroundColor: documentStyle.getPropertyValue('--blue-500'),
-                    borderColor: documentStyle.getPropertyValue('--blue-500'),
+                    backgroundColor: documentStyle.getPropertyValue('--green-400'),
+                    borderColor: documentStyle.getPropertyValue('--green-400'),
                     data: [65, 59, 80, 81, 56, 55, 40]
                 },
             ]

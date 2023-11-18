@@ -149,7 +149,7 @@ export class DashboardClientesComponent implements OnInit {
             datasets: [
                 {
                     data: [540, 325, 702],
-                    backgroundColor: [documentStyle.getPropertyValue('--blue-500'), documentStyle.getPropertyValue('--yellow-500'), documentStyle.getPropertyValue('--green-500')],
+                    backgroundColor: [documentStyle.getPropertyValue('--green-400'), documentStyle.getPropertyValue('--green-500'), documentStyle.getPropertyValue('--green-600')],
                     hoverBackgroundColor: [documentStyle.getPropertyValue('--blue-400'), documentStyle.getPropertyValue('--yellow-400'), documentStyle.getPropertyValue('--green-400')]
                 }
             ]
