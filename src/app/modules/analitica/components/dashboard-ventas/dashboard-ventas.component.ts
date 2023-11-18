@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-interface Filtro{
-  nombre: string;
-  code: string;
-}
+
 
 @Component({
   selector: 'app-dashboard-ventas',
@@ -11,17 +8,10 @@ interface Filtro{
 })
 export class DashboardVentasComponent implements OnInit {
 
-  filtroProvincia: Filtro[] | undefined;
-    selectedProvincia: Filtro  | undefined;
-
+    filtroProvincia: Filtro[] | undefined;
     filtroFecha: Filtro[] | undefined;
-    selectedFecha: Filtro  | undefined;
-
     filtroEmpresa: Filtro[] | undefined;
-    selectedEmpresa: Filtro  | undefined;
-
     filtroTiempo: Filtro[] | undefined;
-    selectedTiempo: Filtro  | undefined;
 
     data1: any;
     options1: any;
@@ -36,8 +26,9 @@ export class DashboardVentasComponent implements OnInit {
         this.definirFiltroFecha();
         this.definirFiltroEmpresa();
         // this.definirFiltroTiempo();
-        this.definirGraficaPastel();
-        this.definirGraficaBarras();
+        this.definirGraficaLineal();
+        this.opcionesLineal();
+
     }
 
     definirFiltroProvincia(): void{
@@ -80,7 +71,8 @@ export class DashboardVentasComponent implements OnInit {
     // }
 
 
-    definirGraficaPastel(): void{
+    definirGraficaLineal(): void{
+
         const documentStyle = getComputedStyle(document.documentElement);
         const textColor = documentStyle.getPropertyValue('--text-color');
         const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
@@ -98,6 +90,15 @@ export class DashboardVentasComponent implements OnInit {
                 },
             ]
         }
+
+    }
+
+    opcionesLineal(): void{
+
+        const documentStyle = getComputedStyle(document.documentElement);
+        const textColor = documentStyle.getPropertyValue('--text-color');
+        const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
+        const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
 
         this.options1 = {
             maintainAspectRatio: false,
@@ -135,32 +136,4 @@ export class DashboardVentasComponent implements OnInit {
 
     }
 
-    definirGraficaBarras(): void{
-        const documentStyle = getComputedStyle(document.documentElement);
-        const textColor = documentStyle.getPropertyValue('--text-color');
-        const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
-        const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
-
-        this.data2 = {
-            labels: ['A', 'B', 'C'],
-            datasets: [
-                {
-                    data: [540, 325, 702],
-                    backgroundColor: [documentStyle.getPropertyValue('--blue-500'), documentStyle.getPropertyValue('--yellow-500'), documentStyle.getPropertyValue('--green-500')],
-                    hoverBackgroundColor: [documentStyle.getPropertyValue('--blue-400'), documentStyle.getPropertyValue('--yellow-400'), documentStyle.getPropertyValue('--green-400')]
-                }
-            ]
-        };
-
-        this.options2 = {
-            plugins: {
-                legend: {
-                    labels: {
-                        usePointStyle: true,
-                        color: textColor
-                    }
-                }
-            }
-        };
-    }
 }
