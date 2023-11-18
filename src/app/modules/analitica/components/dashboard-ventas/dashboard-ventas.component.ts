@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Empresa, Tiempo, Fecha, Provincia} from 'src/app/interfaces/clientes.interface';
 
 
 @Component({
@@ -8,10 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardVentasComponent implements OnInit {
 
-    filtroProvincia: Filtro[] | undefined;
-    filtroFecha: Filtro[] | undefined;
-    filtroEmpresa: Filtro[] | undefined;
-    filtroTiempo: Filtro[] | undefined;
+    filtroProvincia: Provincia[] | undefined;
+    filtroFecha: Fecha[] | undefined;
+    filtroEmpresa: Empresa[] | undefined;
+    filtroTiempo: Tiempo[] | undefined;
 
     data1: any;
     options1: any;
@@ -33,30 +34,30 @@ export class DashboardVentasComponent implements OnInit {
 
     definirFiltroProvincia(): void{
         this.filtroProvincia = [
-            { nombre: 'Panamá', code: "code1"},
-            { nombre: 'Coclé', code: "code2"},
-            { nombre: 'Colón', code: "code3"},
-            { nombre: 'Bocas del Toro', code: "code4"},
+            { nombre: 'Panamá'},
+            { nombre: 'Coclé'},
+            { nombre: 'Colón'},
+            { nombre: 'Bocas del Toro'},
         ];
     }
 
     definirFiltroFecha(): void{
         this.filtroFecha = [
-            { nombre: 'Filtro1', code: "code1"},
-            { nombre: 'Filtro2', code: "code2"},
-            { nombre: 'Filtro3', code: "code3" },
-            { nombre: 'Filtro4', code: "code4" },
-            { nombre: 'Filtro5', code: "code5" }
+            { nombre: 'Filtro1'},
+            { nombre: 'Filtro2'},
+            { nombre: 'Filtro3'},
+            { nombre: 'Filtro4'},
+            { nombre: 'Filtro5'}
         ];
     }
 
     definirFiltroEmpresa(): void{
         this.filtroEmpresa = [
-            { nombre: 'Empresa1', code: "code1"},
-            { nombre: 'Empresa2', code: "code2"},
-            { nombre: 'Empresa3', code: "code3" },
-            { nombre: 'Empresa4', code: "code4" },
-            { nombre: 'Empresa5', code: "code5" }
+            { nombre: 'Empresa1'},
+            { nombre: 'Empresa2'},
+            { nombre: 'Empresa3'},
+            { nombre: 'Empresa4'},
+            { nombre: 'Empresa5'}
         ];
     }
 
