@@ -21,7 +21,7 @@ export class TicketsTableComponent {
 	}
 
     public onSeleccion( evento: any ): void {
-        this.router.navigate(['/dashboard/tickets', evento.data.id]);
+        this.router.navigate(['/app/tickets', evento.data.id]);
     }
 
 	products: object[] = [

@@ -1,11 +1,6 @@
 .celda-cliente {
-    cursor: pointer;
     display: flex;
     align-items: center;
-}
-
-.celda-cliente:hover {
-    background-color: var(--highlight-bg);
 }
 
 .celda-cliente-nombre {

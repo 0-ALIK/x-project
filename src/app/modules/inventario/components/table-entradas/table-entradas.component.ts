@@ -1,23 +1,56 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Table } from 'primeng/table';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { Compra } from 'src/app/interfaces/pedido.interface';
+import { compras } from 'src/app/interfaces/data';
+import { ConfirmEventType, ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
     selector: 'app-table-entradas',
     templateUrl: './table-entradas.component.html',
     styleUrls: ['./table-entradas.component.css']
 })
-export class TableEntradasComponent {
+export class TableEntradasComponent implements OnInit {
+
     ref: DynamicDialogRef | undefined;
 
-    constructor(public dialogService: DialogService) { }
+    constructor(
+        public dialogService: DialogService,
+        private confirmationService: ConfirmationService,
+        private messageService: MessageService,
+    ) { }
 
-    // Datos de las Personas
-    public persons = [
-        { id: 1, name: 'Ameth', date: '10/10/02', quantity: 62, product: 10, type: 'Type A', p_reorden: 'Low' },
-        { id: 2, name: 'Alice', date: '09/28/13', quantity: 45, product: 18, type: 'Type B', p_reorden: 'Medium' },
-        { id: 3, name: 'Eleanor', date: '08/03/05', quantity: 33, product: 7, type: 'Type C', p_reorden: 'High' }
-    ];
+    public compras: Compra[] | undefined;
+
+    public ngOnInit(): void {
+        setTimeout(() => {
+            this.compras = compras;
+        }, 5000);
+    }
+
+    public onEliminarProducto( compra: Compra ): void {
+        this.confirmationService.confirm({
+            message: `¿Quieres eliminar el registro ${compra.id_compra}?`,
+            header: 'Confirmar Eliminación',
+            icon: 'pi pi-info-circle',
+            accept: this.eliminarCompra,
+            reject: (type: ConfirmEventType) => {
+                switch (type) {
+                    case ConfirmEventType.REJECT:
+                        this.messageService.add({ severity: 'error', summary: 'Operación Fallida', detail: 'Registro no eliminado' });
+                        break;
+                    case ConfirmEventType.CANCEL:
+                        this.messageService.add({ severity: 'warn', summary: 'Operación Cancelada', detail: 'Cancelado' });
+                        break;
+                }
+            },
+            key: 'confirmDialog'
+        });
+    }
+
+    private eliminarCompra = (): void => {
+        this.messageService.add({ severity: 'info', summary: 'Operación Exitosa', detail: 'Registro eliminado' });
+    }
 
     // Esto abre dialog-generar-reporte
     showGenerarReporte() {

@@ -1,68 +1,126 @@
-<p-table #prs [value]="persons" [rows]="5" [paginator]="true" styleClass="p-datatable-gridlines"
-    [tableStyle]="{ 'min-width': '50rem'}" [scrollable]="true" [scrollHeight]="'400px'" [globalFilterFields]="['name']">
+<p-confirmDialog
+    key="confirmDialog"
+    [style]="{ width: '50vw' }"
+    rejectButtonStyleClass="p-button-outlined"
+    acceptLabel="Si"
+    rejectLabel="No">
+</p-confirmDialog>
 
-    <ng-template pTemplate="caption">
-        <div class="flex header-table" scrollable>
-            <div class="p-buttonset">
-                <button pButton label="Limpiar" class="p-button-outlined" icon="pi pi-filter-slash" (click)="clear(prs)"></button>
-                <button pButton label="Reporte" icon="pi pi-file-export" (click)="showGenerarReporte()"></button>
+<ng-container *ngIf="compras">
+
+    <p-table
+        #prs
+        [value]="compras"
+        [rows]="5"
+        [paginator]="true"
+        styleClass="p-datatable-gridlines"
+        [tableStyle]="{ 'min-width': '50rem'}"
+        [scrollable]="true"
+        [scrollHeight]="'400px'">
+
+        <ng-template pTemplate="caption">
+            <div class="flex header-table" scrollable>
+                <div class="p-buttonset">
+                    <button pButton label="Limpiar" class="p-button-outlined" icon="pi pi-filter-slash" (click)="clear(prs)"></button>
+                    <button pButton label="Reporte" icon="pi pi-file-export" (click)="showGenerarReporte()"></button>
+                </div>
+                <span class="p-input-icon-left ml-auto">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" placeholder="Buscar producto..." />
+                </span>
             </div>
-            <span class="p-input-icon-left ml-auto">
-                <i class="pi pi-search"></i>
-                <input pInputText type="text" (input)="prs.filterGlobal($any($event.target).value, 'contains')" placeholder="Buscar admin..." />
-            </span>
-        </div>
-    </ng-template>
+        </ng-template>
 
-    <ng-template pTemplate="header">
-        <tr>
-            <th>
-                <div class="flex align-items-center">
-                    Id <p-columnFilter field="id" display="menu"></p-columnFilter>
-                </div>
-            </th>
-            <th>
-                <div class="flex align-items-center">
-                    Admin <p-columnFilter field="admin" display="menu"></p-columnFilter>
-                </div>
-            </th>
-            <th>
-                <div class="flex align-items-center">
-                    Fecha <p-columnFilter field="date" display="menu"></p-columnFilter>
-                </div>
-            </th>
-            <th>
-                <div class="flex align-items-center">
-                    Cantidad <p-columnFilter field="quantity" display="menu"></p-columnFilter>
-                </div>
-            </th>
-            <th>
-                <div class="flex align-items-center">
-                    Producto <p-columnFilter field="product" display="menu"></p-columnFilter>
-                </div>
-            </th>
-            <th>
-                <div class="flex align-items-center">
-                    Tipo <p-columnFilter field="type" display="menu"></p-columnFilter>
-                </div>
-            </th>
-            <th>
-                <div class="flex align-items-center">
-                    P. reorden <p-columnFilter field="p_reorden" display="menu"></p-columnFilter>
-                </div>
-            </th>
-        </tr>
-    </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th>
+                    <div class="flex align-items-center">
+                        Id <p-columnFilter field="id" display="menu"></p-columnFilter>
+                    </div>
+                </th>
+                <th>
+                    <div class="flex align-items-center">
+                        Admin <p-columnFilter field="admin" display="menu"></p-columnFilter>
+                    </div>
+                </th>
+                <th>
+                    <div class="flex align-items-center">
+                        Fecha <p-columnFilter field="date" display="menu"></p-columnFilter>
+                    </div>
+                </th>
+                <th>
+                    <div class="flex align-items-center">
+                        Cantidad <p-columnFilter field="quantity" display="menu"></p-columnFilter>
+                    </div>
+                </th>
+                <th>
+                    <div class="flex align-items-center">
+                        Producto <p-columnFilter field="product" display="menu"></p-columnFilter>
+                    </div>
+                </th>
+                <th>
+                    <div class="flex align-items-center">
+                        Acciones
+                    </div>
+                </th>
+            </tr>
+        </ng-template>
 
-    <ng-template pTemplate="body" let-person>
-        <tr>
-            <td>{{ person.id }}</td>
-            <td>{{ person.name }}</td>
-            <td>{{ person.date }}</td>
-            <td>{{ person.quantity }}</td>
-            <td>{{ person.product }}</td>
-            <td>{{ person.type }}</td>
-            <td>{{ person.p_reorden }}</td>
-        </tr>
-    </ng-template>
-</p-table>
+        <ng-template pTemplate="body" let-compra>
+            <tr *ngIf="compras">
+                <td>{{ compra.id_compra }}</td>
+                <td class="avatar-cel">
+                    <p-avatar [image]="compra.admin.foto" shape="circle"></p-avatar>
+                    <span>{{ compra.admin.nombre + ' ' + compra.admin.apellido }}</span>
+                </td>
+                <td>{{ compra.fecha | date }}</td>
+                <td>{{ compra.cantidad }}</td>
+                <td class="avatar-cel">
+                    <p-avatar [image]="compra.producto.foto"></p-avatar>
+                    <span>{{ compra.producto.nombre }}</span>
+                </td>
+                <td class="td-buttons">
+                    <p-button
+                        icon="pi pi-trash"
+                        severity="danger"
+                        (click)="onEliminarProducto( compra )"
+                        [text]="true"
+                        [raised]="true">
+                    </p-button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</ng-container>
+
+<ng-container *ngIf="!compras">
+    <p-table
+        [value]="[1, 1, 1, 1, 1]"
+        styleClass="p-datatable-gridlines"
+        [tableStyle]="{ 'min-width': '50rem'}"
+        [scrollable]="true"
+        [scrollHeight]="'400px'">
+
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Id</th>
+                <th>Admin</th>
+                <th>Fecha</th>
+                <th>Cantidad</th>
+                <th>Producto</th>
+                <th>Acciones</th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-compra>
+            <tr>
+                <td><p-skeleton></p-skeleton></td>
+                <td><p-skeleton></p-skeleton></td>
+                <td><p-skeleton></p-skeleton></td>
+                <td><p-skeleton></p-skeleton></td>
+                <td><p-skeleton></p-skeleton></td>
+                <td><p-skeleton></p-skeleton></td>
+            </tr>
+        </ng-template>
+    </p-table>
+</ng-container>

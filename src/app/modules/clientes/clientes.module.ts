@@ -27,6 +27,10 @@ import { PerfilClienteComponent } from './pages/perfil-cliente/perfil-cliente.co
 import { PerfilEmpresaComponent } from './pages/perfil-empresa/perfil-empresa.component';
 import { DireccionCardComponent } from './components/direccion-card/direccion-card.component';
 import { ColaboradorCardComponent } from './components/colaborador-card/colaborador-card.component';
+import { CardUserComponent } from './components/card-user/card-user.component';
+import { SkeletonModule } from 'primeng/skeleton';
+import { CardEmpresaComponent } from './components/card-empresa/card-empresa.component';
+import { CardDireccionComponent } from './components/card-direccion/card-direccion.component';
 
 @NgModule({
     declarations: [
@@ -40,6 +44,9 @@ import { ColaboradorCardComponent } from './components/colaborador-card/colabora
         PerfilEmpresaComponent,
         DireccionCardComponent,
         ColaboradorCardComponent,
+        CardUserComponent,
+        CardEmpresaComponent,
+        CardDireccionComponent,
     ],
     imports: [
         CommonModule,
@@ -59,7 +66,13 @@ import { ColaboradorCardComponent } from './components/colaborador-card/colabora
         PaginatorModule,
         FileUploadModule,
         ImageModule,
-        RadioButtonModule
+        RadioButtonModule,
+        SkeletonModule
+    ],
+    exports: [
+        CardUserComponent,
+        CardEmpresaComponent,
+        CardDireccionComponent
     ]
 })
 export class ClientesModule {}
