@@ -24,6 +24,12 @@ export class DashboardClientesComponent implements OnInit {
     data2: any;
     options2: any;
 
+    data3: any;
+    options3: any;
+
+    data4: any;
+    options4: any;
+
 
 
     ngOnInit() {
@@ -31,8 +37,9 @@ export class DashboardClientesComponent implements OnInit {
         this.definirFiltroFecha();
         this.definirFiltroEmpresa();
         // this.definirFiltroTiempo();
+        this.definirGraficaBarra();
         this.definirGraficaPastel();
-        this.definirGraficaBarras();
+
     }
 
     definirFiltroProvincia(): void{
@@ -76,25 +83,26 @@ export class DashboardClientesComponent implements OnInit {
 
 
 
-    definirGraficaPastel(): void{
+    definirGraficaBarra(): void{
         const documentStyle = getComputedStyle(document.documentElement);
         const textColor = documentStyle.getPropertyValue('--text-color');
         const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
         const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
 
+        //Barra de arriba
         this.data1 = {
             labels: ['Cliente1', 'Cliente2', 'Cliente3', 'Cliente4', 'Cliente5', 'Cliente6', 'Cliente7'],
             datasets: [
                 {
-                    label: 'Clientes màs compran',
-                    backgroundColor: documentStyle.getPropertyValue('--green-500'),
-                    borderColor: documentStyle.getPropertyValue('--yellow-500'),
+                    label: 'Clientes que más compran',
+                    backgroundColor: documentStyle.getPropertyValue('--purple-500'),
+                    borderColor: documentStyle.getPropertyValue('--indigo-500'),
                     data: [65, 59, 80, 81, 56, 55, 40]
                 },
                 {
-                    label: 'Clientes menos compran',
-                    backgroundColor: documentStyle.getPropertyValue('--blue-500'),
-                    borderColor: documentStyle.getPropertyValue('--orange-500'),
+                    label: 'Clientes que menos compran',
+                    backgroundColor: documentStyle.getPropertyValue('--cyan-400'),
+                    borderColor: documentStyle.getPropertyValue('--blue-400'),
                     data: [28, 48, 40, 19, 86, 27, 90]
                 }
             ]
@@ -136,26 +144,82 @@ export class DashboardClientesComponent implements OnInit {
             }
         };
 
+        //Barra de abajo
+        this.data2 = {
+            labels: ['Cliente1', 'Cliente2', 'Cliente3', 'Cliente4', 'Cliente5', 'Cliente6', 'Cliente7'],
+            datasets: [
+                {
+                    label: 'Clientes que más compran',
+                    backgroundColor: documentStyle.getPropertyValue('--red-500'),
+                    borderColor: documentStyle.getPropertyValue('--orange-500'),
+                    data: [65, 59, 80, 81, 56, 55, 40]
+                },
+                {
+                    label: 'Clientes que menos compran',
+                    backgroundColor: documentStyle.getPropertyValue('--yellow-500'),
+                    borderColor: documentStyle.getPropertyValue('--orange-500'),
+                    data: [28, 48, 40, 19, 86, 27, 90]
+                }
+            ]
+        }
+
+        this.options2 = {
+            indexAxis: 'y',
+            maintainAspectRatio: false,
+            aspectRatio: 1,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: textColor
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        color: textColorSecondary,
+                        font: {
+                            weight: 500
+                        }
+                    },
+                    grid: {
+                        color: surfaceBorder,
+                        drawBorder: false
+                    }
+                },
+                y: {
+                    ticks: {
+                        color: textColorSecondary
+                    },
+                    grid: {
+                        color: surfaceBorder,
+                        drawBorder: false
+                    }
+                }
+            }
+        };
+
     }
 
-    definirGraficaBarras(): void{
+    definirGraficaPastel(): void{
         const documentStyle = getComputedStyle(document.documentElement);
         const textColor = documentStyle.getPropertyValue('--text-color');
         const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
         const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
 
-        this.data2 = {
+        //Circulo de arriba
+        this.data3 = {
             labels: ['A', 'B', 'C'],
             datasets: [
                 {
                     data: [540, 325, 702],
-                    backgroundColor: [documentStyle.getPropertyValue('--yellow-500'), documentStyle.getPropertyValue('--green-500'), documentStyle.getPropertyValue('--orange-500')],
-                    hoverBackgroundColor: [documentStyle.getPropertyValue('--yellow-300'), documentStyle.getPropertyValue('--green-300'), documentStyle.getPropertyValue('--orange-300')]
+                    backgroundColor: [documentStyle.getPropertyValue('--teal-500'), documentStyle.getPropertyValue('--blue-500'), documentStyle.getPropertyValue('--indigo-500')],
+                    hoverBackgroundColor: [documentStyle.getPropertyValue('--teal-400'), documentStyle.getPropertyValue('--blue-400'), documentStyle.getPropertyValue('--indigo-400')]
                 }
             ]
         };
 
-        this.options2 = {
+        this.options3 = {
             plugins: {
                 legend: {
                     labels: {
@@ -165,5 +229,29 @@ export class DashboardClientesComponent implements OnInit {
                 }
             }
         };
+
+        //Circulo de abajo
+        this.data4 = {
+            labels: ['A', 'B', 'C'],
+            datasets: [
+                {
+                    data: [540, 325, 702],
+                    backgroundColor: [documentStyle.getPropertyValue('--orange-500'), documentStyle.getPropertyValue('--yellow-500'), documentStyle.getPropertyValue('--red-500')],
+                    hoverBackgroundColor: [documentStyle.getPropertyValue('--orange-400'), documentStyle.getPropertyValue('--yellow-400'), documentStyle.getPropertyValue('--red-400')]
+                }
+            ]
+        };
+
+        this.options4 = {
+            plugins: {
+                legend: {
+                    labels: {
+                        usePointStyle: true,
+                        color: textColor
+                    }
+                }
+            }
+        };
+
     }
 }

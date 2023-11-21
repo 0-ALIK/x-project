@@ -85,8 +85,21 @@ export class DashboardVentasComponent implements OnInit {
                 {
                     label: 'Ventas',
                     fill:false,
-                    backgroundColor: documentStyle.getPropertyValue('--green-400'),
-                    borderColor: documentStyle.getPropertyValue('--green-400'),
+                    backgroundColor: documentStyle.getPropertyValue('--teal-400'),
+                    borderColor: documentStyle.getPropertyValue('--teal-400'),
+                    data: [65, 59, 80, 81, 56, 55, 40]
+                },
+            ]
+        }
+
+        this.data2 = {
+            labels: ['Venta1', 'Venta2', 'Venta3', 'Venta4', 'Venta5', 'Venta6', 'Venta7'],
+            datasets: [
+                {
+                    label: 'Ventas',
+                    fill:false,
+                    backgroundColor: documentStyle.getPropertyValue('--indigo-400'),
+                    borderColor: documentStyle.getPropertyValue('--indigo-400'),
                     data: [65, 59, 80, 81, 56, 55, 40]
                 },
             ]
