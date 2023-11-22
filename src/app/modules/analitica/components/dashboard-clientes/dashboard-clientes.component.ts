@@ -37,8 +37,10 @@ export class DashboardClientesComponent implements OnInit {
         this.definirFiltroFecha();
         this.definirFiltroEmpresa();
         // this.definirFiltroTiempo();
-        this.definirGraficaBarra();
-        this.definirGraficaPastel();
+        this.definirGraficaBarras1();
+        this.definirGraficaBarras2();
+        this.definirGraficaPastel1();
+        this.definirGraficaPastel2();
 
     }
 
@@ -83,30 +85,30 @@ export class DashboardClientesComponent implements OnInit {
 
 
 
-    definirGraficaBarra(): void{
+    definirGraficaBarras1(): void{
         const documentStyle = getComputedStyle(document.documentElement);
         const textColor = documentStyle.getPropertyValue('--text-color');
         const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
         const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
 
-        //Barra de arriba
+
         this.data1 = {
             labels: ['Cliente1', 'Cliente2', 'Cliente3', 'Cliente4', 'Cliente5', 'Cliente6', 'Cliente7'],
             datasets: [
                 {
                     label: 'Clientes que más compran',
-                    backgroundColor: documentStyle.getPropertyValue('--purple-500'),
+                    backgroundColor: documentStyle.getPropertyValue('--blue-600'),
                     borderColor: documentStyle.getPropertyValue('--indigo-500'),
                     data: [65, 59, 80, 81, 56, 55, 40]
                 },
                 {
                     label: 'Clientes que menos compran',
-                    backgroundColor: documentStyle.getPropertyValue('--cyan-400'),
+                    backgroundColor: documentStyle.getPropertyValue('--teal-300'),
                     borderColor: documentStyle.getPropertyValue('--blue-400'),
                     data: [28, 48, 40, 19, 86, 27, 90]
                 }
             ]
-        }
+        };
 
         this.options1 = {
             indexAxis: 'y',
@@ -144,20 +146,27 @@ export class DashboardClientesComponent implements OnInit {
             }
         };
 
-        //Barra de abajo
+    }
+
+    definirGraficaBarras2(): void{
+        const documentStyle = getComputedStyle(document.documentElement);
+        const textColor = documentStyle.getPropertyValue('--text-color');
+        const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
+        const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
+
         this.data2 = {
             labels: ['Cliente1', 'Cliente2', 'Cliente3', 'Cliente4', 'Cliente5', 'Cliente6', 'Cliente7'],
             datasets: [
                 {
                     label: 'Clientes que más compran',
-                    backgroundColor: documentStyle.getPropertyValue('--red-500'),
-                    borderColor: documentStyle.getPropertyValue('--orange-500'),
+                    backgroundColor: documentStyle.getPropertyValue('--pink-500'),
+                    borderColor: documentStyle.getPropertyValue('--pink-400'),
                     data: [65, 59, 80, 81, 56, 55, 40]
                 },
                 {
                     label: 'Clientes que menos compran',
-                    backgroundColor: documentStyle.getPropertyValue('--yellow-500'),
-                    borderColor: documentStyle.getPropertyValue('--orange-500'),
+                    backgroundColor: documentStyle.getPropertyValue('--red-300'),
+                    borderColor: documentStyle.getPropertyValue('--red-200'),
                     data: [28, 48, 40, 19, 86, 27, 90]
                 }
             ]
@@ -201,20 +210,20 @@ export class DashboardClientesComponent implements OnInit {
 
     }
 
-    definirGraficaPastel(): void{
+    definirGraficaPastel1(): void{
         const documentStyle = getComputedStyle(document.documentElement);
         const textColor = documentStyle.getPropertyValue('--text-color');
         const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
         const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
 
-        //Circulo de arriba
+
         this.data3 = {
             labels: ['A', 'B', 'C'],
             datasets: [
                 {
                     data: [540, 325, 702],
-                    backgroundColor: [documentStyle.getPropertyValue('--teal-500'), documentStyle.getPropertyValue('--blue-500'), documentStyle.getPropertyValue('--indigo-500')],
-                    hoverBackgroundColor: [documentStyle.getPropertyValue('--teal-400'), documentStyle.getPropertyValue('--blue-400'), documentStyle.getPropertyValue('--indigo-400')]
+                    backgroundColor: [documentStyle.getPropertyValue('--cyan-300'), documentStyle.getPropertyValue('--cyan-600'), documentStyle.getPropertyValue('--cyan-800')],
+                    hoverBackgroundColor: [documentStyle.getPropertyValue('--cyan-200'), documentStyle.getPropertyValue('--blue-400'), documentStyle.getPropertyValue('--blue-500')]
                 }
             ]
         };
@@ -230,14 +239,21 @@ export class DashboardClientesComponent implements OnInit {
             }
         };
 
-        //Circulo de abajo
+    }
+
+    definirGraficaPastel2(): void{
+        const documentStyle = getComputedStyle(document.documentElement);
+        const textColor = documentStyle.getPropertyValue('--text-color');
+        const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
+        const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
+
         this.data4 = {
             labels: ['A', 'B', 'C'],
             datasets: [
                 {
                     data: [540, 325, 702],
-                    backgroundColor: [documentStyle.getPropertyValue('--orange-500'), documentStyle.getPropertyValue('--yellow-500'), documentStyle.getPropertyValue('--red-500')],
-                    hoverBackgroundColor: [documentStyle.getPropertyValue('--orange-400'), documentStyle.getPropertyValue('--yellow-400'), documentStyle.getPropertyValue('--red-400')]
+                    backgroundColor: [documentStyle.getPropertyValue('--pink-300'), documentStyle.getPropertyValue('--pink-600'), documentStyle.getPropertyValue('--pink-800')],
+                    hoverBackgroundColor: [documentStyle.getPropertyValue('--pink-200'), documentStyle.getPropertyValue('--pink-400'), documentStyle.getPropertyValue('--pink-500')]
                 }
             ]
         };
