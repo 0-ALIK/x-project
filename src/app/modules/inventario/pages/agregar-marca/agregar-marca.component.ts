@@ -5,6 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { marcas, productos } from 'src/app/interfaces/data';
 import { Marca, Producto } from 'src/app/interfaces/producto.iterface';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DialogVerMarcasComponent } from '../../components/dialog-ver-marcas/dialog-ver-marcas.component';
 
 interface UploadEvent {
     originalEvent: Event;
@@ -29,9 +31,13 @@ export class AgregarMarcaComponent implements OnInit {
 
     public estaCargando: boolean = false;
 
-    public labelButton: string = 'Agregar marca';
+    public labelButton1: string = 'Ver marcas';
+
+    public labelButton2: string = 'Agregar marca';
 
     public productos: Producto[] = productos;
+
+    private ref: DynamicDialogRef | undefined;
 
     public form: FormGroup = this.formBuilder.group({
         nombre: ['', [Validators.required]],
@@ -42,12 +48,13 @@ export class AgregarMarcaComponent implements OnInit {
         private messageService: MessageService,
         private activatedRoute: ActivatedRoute,
         private formBuilder: FormBuilder,
-        private location: Location
+        private location: Location,
+        public dialogService: DialogService,
     ) {}
 
     public ngOnInit(): void {
         if( this.esEdicion() ) {
-            this.labelButton = 'Guardar cambios';
+            this.labelButton2 = 'Guardar cambios';
             this.obtenerMarcaEditar()
         }
     }
@@ -91,4 +98,20 @@ export class AgregarMarcaComponent implements OnInit {
         const lastPart = parts[ parts.length - 1 ];
         return /^-?\d*\.?\d+$/.test(lastPart);
     }
+
+    public verMarcas(): void {
+        this.ref = this.dialogService.open(DialogVerMarcasComponent, {
+            header: 'Marcas',
+        });
+
+        this.ref.onClose.subscribe((categoria: any) => {
+            if(!categoria) {
+                // agrega mensaje de error
+                return;
+            }
+
+            // agrega mensaje de realizad
+        });
+    }
+
 }

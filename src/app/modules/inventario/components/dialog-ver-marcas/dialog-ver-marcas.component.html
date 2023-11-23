@@ -1,0 +1,21 @@
+<div class="card flex justify-content-center">
+    <input type="text" pInputText [(ngModel)]="value" placeholder="Marca..." />
+</div>
+
+<hr>
+
+<div>
+    <ul class="list">
+        <li class="list-item" *ngFor="let marca of marcas">
+            <p>{{marca.nombre}}</p>
+            <div class="buttons">
+                <p-button icon="pi pi-pencil" severity="warning" (onClick)="editarMarca( marca )" [text]="true"
+                    [raised]="true" >
+                </p-button>
+                <p-button icon="pi pi-trash" severity="danger" (onClick)="eliminarMarca( marca )" [text]="true"
+                    [raised]="true">
+                </p-button>
+            </div>
+        </li>
+    </ul>
+</div>

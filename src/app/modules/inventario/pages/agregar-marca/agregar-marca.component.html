@@ -1,72 +1,62 @@
 <p-toast></p-toast>
+<div class="body">
+    <h1 [style]="{'fontSize': 'var(--text-3xl)'}">{{titulo}}</h1>
+    <div class="div-contenedor flex">
 
-<h1 [style]="{'fontSize': 'var(--text-3xl)'}">{{titulo}}</h1>
-<div class="div-contenedor">
-
-    <div class="add-photo">
-        <div>
-            <div [style]="{'display': 'flex', 'justifyContent': 'center'}">
-                <alik-image-preview *ngIf="!imagePreview"></alik-image-preview>
-                <p-image
-                    *ngIf="imagePreview"
-                    [src]="imagePreview"
-                    alt="Image"
-                    width="250"
-                    [preview]="true">
-                </p-image>
+        <div class="add-photo">
+            <div>
+                <div [style]="{'display': 'flex', 'justifyContent': 'center'}">
+                    <alik-image-preview *ngIf="!imagePreview"></alik-image-preview>
+                    <p-image *ngIf="imagePreview" [src]="imagePreview" alt="Image" width="250" [preview]="true">
+                    </p-image>
+                </div>
+                <p-fileUpload (onSelect)="selectFile( $event )" [multiple]="false" accept="image/*"
+                    [maxFileSize]="1000000">
+                </p-fileUpload>
             </div>
-            <p-fileUpload
-                (onSelect)="selectFile( $event )"
-                [multiple]="false"
-                accept="image/*"
-                [maxFileSize]="1000000">
-            </p-fileUpload>
-        </div>
-    </div>
-
-
-    <form class="div-form" [formGroup]="form">
-        <h2>Información general de la Marca</h2>
-
-        <hr>
-
-        <div class="flex-column gap-2">
-            <label>Nombre</label>
-            <input pInputText formControlName="nombre">
         </div>
 
-        <div class="flex-column">
-            <label>Descripcion</label>
-            <textarea
-                formControlName="descripcion"
-                rows="5"
-                cols="30"
-                pInputTextarea
-                [autoResize]="true"
-                pInputText>
+
+        <form class="div-form" [formGroup]="form">
+            <h2>Información general de la Marca</h2>
+
+            <hr>
+
+            <div class="flex-column gap-2">
+                <label>Nombre</label>
+                <input pInputText formControlName="nombre">
+            </div>
+
+            <div class="flex-column">
+                <label>Descripcion</label>
+                <textarea formControlName="descripcion" rows="5" cols="30" pInputTextarea [autoResize]="true"
+                    pInputText>
             </textarea>
+            </div>
+
+            <div class="buttons">
+                <p-button [label]="labelButton1" (onClick)="verMarcas()"></p-button>
+                <p-button [label]="labelButton2" [loading]="estaCargando" [disabled]="!form.valid"
+                    (onClick)="enviarFormulario()">
+                </p-button>
+            </div>
+
+
+        </form>
+
+        <div class="productos" *ngIf="">
+            <h3>Listado de productos de la marca</h3>
+
+            <hr>
+
+            <ul>
+                <li *ngFor="let producto of productos">
+                    <img [src]="producto.foto" alt="p" width="32">
+                    <p>{{producto.nombre}}</p>
+                </li>
+            </ul>
         </div>
 
-        <p-button
-            [label]="labelButton"
-            [loading]="estaCargando"
-            [disabled]="!form.valid"
-            (onClick)="enviarFormulario()">
-        </p-button>
-    </form>
-
-    <div class="productos">
-        <h3>Listado de productos de la marca</h3>
-
-        <hr>
-
-        <ul>
-            <li *ngFor="let producto of productos">
-                <img [src]="producto.foto" alt="p" width="32">
-                <p>{{producto.nombre}}</p>
-            </li>
-        </ul>
     </div>
-
 
 </div>

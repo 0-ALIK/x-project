@@ -37,6 +37,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { CalendarModule } from 'primeng/calendar';
 import { ChartModule } from 'primeng/chart';
 import { SkeletonModule } from 'primeng/skeleton';
+import { DialogVerMarcasComponent } from './components/dialog-ver-marcas/dialog-ver-marcas.component';
 
 @NgModule({
     declarations: [
@@ -47,6 +48,7 @@ import { SkeletonModule } from 'primeng/skeleton';
         AgregarProductoComponent,
         DialogAgregarCategoriaComponent,
         DialogRealizarCompraComponent,
+        DialogVerMarcasComponent
     ],
     imports: [
         RouterModule,
