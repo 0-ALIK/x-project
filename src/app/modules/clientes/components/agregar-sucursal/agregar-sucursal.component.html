@@ -1,0 +1,31 @@
+<form>
+
+    <div class="mb-2">
+        <label class="block">Provincia</label>
+        <p-dropdown
+            [options]="provincias"
+            [(ngModel)]="provinciaSelected"
+            optionLabel="nombre"
+            [showClear]="true"
+            placeholder="Provincia...">
+        </p-dropdown>
+    </div>
+
+    <div class="mb-2">
+        <label htmlFor="telefono" class="block">Telefono</label>
+        <input type="phone" id="telefono" pInputText>
+    </div>
+
+    <div class="mb-2">
+        <label htmlFor="code" class="block">Código postal</label>
+        <input type="text" id="code" pInputText>
+    </div>
+
+    <div class="mb-2">
+        <label htmlFor="code" class="block">Detalles</label>
+        <textarea rows="5" cols="30" pInputTextarea [autoResize]="true"></textarea>
+    </div>
+
+    <p-button label="Agregar"></p-button>
+
+</form>

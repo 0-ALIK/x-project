@@ -30,6 +30,12 @@ import { CardUserComponent } from './components/card-user/card-user.component';
 import { SkeletonModule } from 'primeng/skeleton';
 import { CardEmpresaComponent } from './components/card-empresa/card-empresa.component';
 import { CardDireccionComponent } from './components/card-direccion/card-direccion.component';
+import { SpeedDialModule } from 'primeng/speeddial';
+import { DialogService } from 'primeng/dynamicdialog';
+import { MessageService } from 'primeng/api';
+import { AgregarColaboradorComponent } from './components/agregar-colaborador/agregar-colaborador.component';
+import { AgregarSucursalComponent } from './components/agregar-sucursal/agregar-sucursal.component';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 
 @NgModule({
     declarations: [
@@ -45,6 +51,8 @@ import { CardDireccionComponent } from './components/card-direccion/card-direcci
         CardUserComponent,
         CardEmpresaComponent,
         CardDireccionComponent,
+        AgregarColaboradorComponent,
+        AgregarSucursalComponent,
     ],
     imports: [
         CommonModule,
@@ -67,12 +75,15 @@ import { CardDireccionComponent } from './components/card-direccion/card-direcci
         RadioButtonModule,
         SkeletonModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        SpeedDialModule,
+        InputTextareaModule
     ],
     exports: [
         CardUserComponent,
         CardEmpresaComponent,
         CardDireccionComponent
-    ]
+    ],
+    providers: [ MessageService, DialogService]
 })
 export class ClientesModule {}
