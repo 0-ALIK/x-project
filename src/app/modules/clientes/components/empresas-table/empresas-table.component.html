@@ -27,29 +27,28 @@
     </ng-template>
     <ng-template pTemplate="header" >
         <tr>
-            <th>Nombre</th>
-            <th>propietario</th>
+            <th>Empresa</th>
             <th>RUC</th>
+            <th>Correo</th>
             <th>Telefono</th>
-            <th>Direccion</th>
-            <th>Campo</th>
+            <th>Archivo Registro</th>
             <th>Total Pedidos</th>
             <th>Acciones</th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-empresa >
         <tr [pSelectableRow]="empresa">
-            <td class="celda-cliente">
-                <div>
+            <td >
+                <div class="celda-cliente">
                     <p-avatar [image]="empresa.foto" shape="circle"></p-avatar>
+                    <p class="celda-cliente-nombre">{{empresa.nombre}}</p>
                 </div>
-                <p class="celda-cliente-nombre">{{empresa.nombre}}</p>
+
             </td>
-            <td>{{ empresa.propietario }}</td>
             <td>{{ empresa.ruc }}</td>
+            <td>{{ empresa.correo }}</td>
             <td>{{ empresa.telefono }}</td>
-            <td>{{ empresa.direccion }}</td>
-            <td>{{ empresa.campos }}</td>
+            <td><a href="{{empresa.documento}}"> Documento </a></td>
             <td>{{ empresa.total }}</td>
             <td>
                 <p-button icon="pi pi-trash" [rounded]="true" [text]="true" severity="danger"></p-button>

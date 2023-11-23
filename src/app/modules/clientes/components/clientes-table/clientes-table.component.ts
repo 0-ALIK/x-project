@@ -1,13 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { Router } from '@angular/router';
+import { ApiClienteService } from 'src/app/services/api-cliente.service';
 
 @Component({
   selector: 'app-clientes-table',
   templateUrl: './clientes-table.component.html',
   styleUrls: ['./clientes-table.component.css']
 })
-export class ClientesTableComponent {
+export class ClientesTableComponent implements OnInit {
 
     public tabs: MenuItem[] | undefined;
 
@@ -17,23 +18,20 @@ export class ClientesTableComponent {
 
     public rows = 10;
 
-    public arregloClientes: any[] = [
-        {
-            id: 1, foto: 'https://res.cloudinary.com/duwsb7fbe/image/upload/v1697773715/xd_upxbh0.jpg', nombre: 'Flavio', apellido: 'Sánchez', cedula: 'flacio', genero: '8888888', telefono: '66782932', correo: 'asdnkasjdnk', frecuencia: 'asd', empresa: '10'
-        },
-        {
-            id: 2, foto: 'https://res.cloudinary.com/duwsb7fbe/image/upload/v1697773715/xd_upxbh0.jpg', nombre: 'Flavio', apellido: 'Sánchez', cedula: 'flacio', genero: '8888888', telefono: '66782932', correo: 'asdnkasjdnk', frecuencia: 'asd', empresa: '10'
-        },
-        {
-            id: 3, foto: 'https://res.cloudinary.com/duwsb7fbe/image/upload/v1697773715/xd_upxbh0.jpg', nombre: 'Flavio', apellido: 'Sánchez', cedula: 'flacio', genero: '8888888', telefono: '66782932', correo: 'asdnkasjdnk', frecuencia: 'asd', empresa: '10'
-        }
-    ];
+    public arregloClientes: Array<any> = [
+    ]
 
     public constructor(
-        private router: Router
-    ) {}
+        private router: Router,
+        private apiService: ApiClienteService
+    ) {
+        this.apiService.getClientes().subscribe((resp:any)=>{
+            this.arregloClientes = resp.data
+        })
+    }
 
     public ngOnInit(): void {
+
 
         this.tabs = [
             { label: 'Home', icon: 'pi pi-fw pi-home' },
@@ -77,5 +75,7 @@ export class ClientesTableComponent {
         const { id } = event.data;
         this.router.navigate(['/app/clientes/perfil', id]);
     }
+
+
 
 }

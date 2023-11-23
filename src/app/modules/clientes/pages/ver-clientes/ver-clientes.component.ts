@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
+import { SolicitudService } from 'src/app/services/solicitud.service';
 
 @Component({
   selector: 'app-ver-clientes',
@@ -9,10 +11,17 @@ import { MenuItem } from 'primeng/api';
 export class VerClientesComponent implements OnInit {
 
 
+
+    public constructor(
+        private router: Router,
+        private apiService: SolicitudService
+    ) {
+        this.apiService.getSolicitudes().subscribe((resp:any)=>{
+            this.arregloSolicitudes = resp.data
+        })
+    }
+
     public arregloSolicitudes: any[] = [
-        {
-            nombre: 'xd', propietario: 'flavio', archivo: 'flacio', foto: '8888888'
-        },
     ]
 
 

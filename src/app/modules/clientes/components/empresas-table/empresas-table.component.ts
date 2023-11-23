@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
+import { ApiEmpresaService } from 'src/app/services/api-empresa.service';
 
 @Component({
   selector: 'app-empresas-table',
@@ -18,21 +19,27 @@ export class EmpresasTableComponent {
     rows = 10;
 
     public arregloEmpresas: any[] = [
-        {
-            id: 1, foto: 'xd', nombre: 'flavio', propietario: 'flacio', ruc: '8888888', telefono: '66782932', direccion: 'asdnkasjdnk', campos: 'asd', total: '10'
-        },
-        {
-            id: 2, foto: 'xd', nombre: 'flavio', propietario: 'flacio', ruc: '8888888', telefono: '66782932', direccion: 'asdnkasjdnk', campos: 'asd', total: '10'
-        },
-        {
-            id: 3, foto: 'xd', nombre: 'flavio', propietario: 'flacio', ruc: '8888888', telefono: '66782932', direccion: 'asdnkasjdnk', campos: 'asd', total: '10'
-        }
+        // {
+        //     id: 1, foto: 'xd', nombre: 'flavio', propietario: 'flacio', ruc: '8888888', telefono: '66782932', direccion: 'asdnkasjdnk', campos: 'asd', total: '10'
+        // },
+        // {
+        //     id: 2, foto: 'xd', nombre: 'flavio', propietario: 'flacio', ruc: '8888888', telefono: '66782932', direccion: 'asdnkasjdnk', campos: 'asd', total: '10'
+        // },
+        // {
+        //     id: 3, foto: 'xd', nombre: 'flavio', propietario: 'flacio', ruc: '8888888', telefono: '66782932', direccion: 'asdnkasjdnk', campos: 'asd', total: '10'
+        // }
 
     ]
 
     public constructor (
-        private router: Router
-    ) {}
+        private router: Router,
+        private apiService: ApiEmpresaService
+        ) {
+        this.apiService.getEmpresas().subscribe((resp:any)=>{
+            //console.log(resp)
+            this.arregloEmpresas = resp.data
+        })
+    }
 
     public ngOnInit(): void {
 

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Cliente } from 'src/app/interfaces/usuario.inteface';
 
 
 @Component({
@@ -8,5 +9,8 @@ import { Component } from '@angular/core';
 })
 export class SolicitudCardComponent {
 
+
+    @Input("solicitud")
+    public solicitud: any | undefined;
 
 }
