@@ -4,6 +4,7 @@ import { Permisos } from "./permisos.interface";
 import { Categoria, Marca, Producto } from "./producto.iterface";
 import { Admin, Cliente, Empresa } from "./usuario.inteface";
 
+
 export const categorias: Categoria[] = [
     { id_categoria: 1, nombre: 'Electrónica' },
     { id_categoria: 2, nombre: 'Ropa' },
@@ -344,6 +345,7 @@ export const pedidos: Pedido[] = [
         pedido_producto: [
             { id_pedido_producto: 1, cantidad: 2, producto: productos[1] },
             { id_pedido_producto: 2, cantidad: 5, producto: productos[2] },
-        ],
-    }
+        ]
+    },
+
 ];

@@ -1,3 +1,4 @@
+import { productos } from 'src/app/interfaces/data';
 import { Injectable } from '@angular/core';
 import { Pago, PedidoProductos } from 'src/app/interfaces/pedido.interface';
 
@@ -28,4 +29,10 @@ export class ImportesCalcService {
         }, 0 );
     }
 
+
+    public calcularDescuento(): number {
+        const descuento: number = 0.17
+
+        return descuento
+    }
 }
