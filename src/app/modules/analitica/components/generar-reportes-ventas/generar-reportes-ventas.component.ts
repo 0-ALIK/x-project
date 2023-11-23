@@ -1,5 +1,6 @@
 import { CalendarModule } from 'primeng/calendar';
 import { Component, OnInit } from '@angular/core';
+import {AnaliticaService} from '../../../../services/analitica.service'
 
 interface Formato{
     nameFormato: string,
@@ -35,7 +36,10 @@ interface Formato{
   styleUrls: ['./generar-reportes-ventas.component.css']
 })
 export class GenerarReportesVentasComponent implements OnInit {
-    rangeDates: Date[] | undefined;
+  
+    constructor(private analitica: AnaliticaService) { }
+
+    dates: Date[] | undefined;
 
     public metodosPagos: Pago[] | undefined;
     public selectedMetodosPagos: Pago | undefined;
@@ -107,10 +111,14 @@ export class GenerarReportesVentasComponent implements OnInit {
 
 
     public load(): void {
+
         this.loading = true;
 
         setTimeout(() => {
             this.loading = false
         }, 2000);
+    }
+    public GenerarReporte(): void{
+      this.analitica.getPedidos();
     }
 }
