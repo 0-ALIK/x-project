@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
-import { RegistroComponent } from './pages/registro/registro.component';
+import { RegistroMayoristaComponent } from './pages/registro-mayorista/registro-mayorista.component';
 import { NotFoundComponent } from 'src/app/not-found/not-found.component';
 
 const routes: Routes = [
@@ -13,8 +13,8 @@ const routes: Routes = [
                 component: LoginComponent
             },
             {
-                path: 'registro',
-                component: RegistroComponent
+                path: 'registro-mayorista',
+                component: RegistroMayoristaComponent
             },
             {
                 path: '',

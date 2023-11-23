@@ -11,8 +11,12 @@ const routes: Routes = [
         component: VerClientesComponent
     },
     {
-        path: 'perfil/:id',
+        path: 'perfil/cliente/:id',
         component: PerfilClienteComponent
+    },
+    {
+        path: 'perfil/empresa/:id',
+        component: PerfilEmpresaComponent
     },
     {
         path: '**',

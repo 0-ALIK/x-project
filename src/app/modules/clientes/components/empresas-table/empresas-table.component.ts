@@ -76,6 +76,6 @@ export class EmpresasTableComponent {
 
     public onRowSelect(event: any): void {
         const { id } = event.data;
-        this.router.navigate(['/app/clientes/perfil', id]);
+        this.router.navigate(['/app/clientes/perfil/empresa', id]);
     }
 }

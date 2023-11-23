@@ -1,0 +1,14 @@
+.shape1 {
+    left: 5%;
+}
+
+.logo {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.shape2 {
+    top: 350px;
+    left: 40%;
+}

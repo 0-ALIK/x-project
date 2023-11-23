@@ -9,7 +9,7 @@ import { MultiSelectModule} from 'primeng/multiselect';
 import { DropdownModule } from 'primeng/dropdown';
 import { TagModule } from 'primeng/tag';
 import { SliderModule } from 'primeng/slider';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { VerClientesComponent } from './pages/ver-clientes/ver-clientes.component';
 import { ClientesTableComponent } from './components/clientes-table/clientes-table.component';
@@ -25,7 +25,6 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { PerfilCardComponent } from './components/perfil-card/perfil-card.component';
 import { PerfilClienteComponent } from './pages/perfil-cliente/perfil-cliente.component';
 import { PerfilEmpresaComponent } from './pages/perfil-empresa/perfil-empresa.component';
-import { DireccionCardComponent } from './components/direccion-card/direccion-card.component';
 import { ColaboradorCardComponent } from './components/colaborador-card/colaborador-card.component';
 import { CardUserComponent } from './components/card-user/card-user.component';
 import { SkeletonModule } from 'primeng/skeleton';
@@ -42,7 +41,6 @@ import { CardDireccionComponent } from './components/card-direccion/card-direcci
         PerfilCardComponent,
         PerfilClienteComponent,
         PerfilEmpresaComponent,
-        DireccionCardComponent,
         ColaboradorCardComponent,
         CardUserComponent,
         CardEmpresaComponent,
@@ -67,7 +65,9 @@ import { CardDireccionComponent } from './components/card-direccion/card-direcci
         FileUploadModule,
         ImageModule,
         RadioButtonModule,
-        SkeletonModule
+        SkeletonModule,
+        FormsModule,
+        ReactiveFormsModule
     ],
     exports: [
         CardUserComponent,
