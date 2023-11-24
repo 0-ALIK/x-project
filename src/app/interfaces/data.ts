@@ -3,7 +3,7 @@ import { Compra, FormaPago, Pedido, PedidoEstado } from "./pedido.interface";
 import { Permisos } from "./permisos.interface";
 import { Categoria, Marca, Producto } from "./producto.iterface";
 import { Reclamo, ReclamoCategoria, ReclamoEstado, ReclamoPrioridad } from "./raclamo.interface";
-import { Admin, Cliente, Empresa } from "./usuario.inteface";
+import { Admin, Cliente, Empresa, Notificacion } from "./usuario.inteface";
 
 
 export const categorias: Categoria[] = [
@@ -145,6 +145,37 @@ export const admins: Admin[] = [
       genero: "No especificado",
       cedula: "5555555555",
       permisos: permisosArray[2],
+    },
+];
+
+export const notificaciones: Notificacion[] = [
+    {
+      contenido: 'Nuevo mensaje recibido',
+      titulo: 'Mensaje',
+      icono: 'pi-check',
+      ruta: '/app/ventas/1',
+      usuario: admins[0]
+    },
+    {
+      contenido: 'Se ha actualizado tu perfil',
+      titulo: 'Actualización',
+      icono: 'pi-home',
+      ruta: '/app/clientes',
+      usuario: admins[0]
+    },
+    {
+      contenido: 'Tienes una solicitud de amistad',
+      titulo: 'Solicitud de amistad',
+      icono: 'pi-bell',
+      ruta: '/app',
+      usuario: admins[0]
+    },
+    {
+      contenido: 'Publicación destacada',
+      titulo: 'Destacado',
+      icono: 'pi-cog',
+      ruta: '/app/tickets',
+      usuario: admins[0]
     },
 ];
 
