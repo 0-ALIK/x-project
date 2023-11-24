@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Empresa, Tiempo, Fecha, Provincia} from 'src/app/interfaces/clientes.interface';
+import { provincias } from 'src/app/interfaces/data';
+import { Provincia } from 'src/app/interfaces/direccion.interface';
 
 
 @Component({
@@ -9,75 +10,26 @@ import { Empresa, Tiempo, Fecha, Provincia} from 'src/app/interfaces/clientes.in
 })
 export class DashboardVentasComponent implements OnInit {
 
-    filtroProvincia: Provincia[] | undefined;
-    filtroFecha: Fecha[] | undefined;
-    filtroEmpresa: Empresa[] | undefined;
-    filtroTiempo: Tiempo[] | undefined;
+    public provincias: Provincia[] = provincias;
 
-    data1: any;
-    options1: any;
+    public data1: any;
 
-    data2: any;
-    options2: any;
+    public options1: any;
 
+    public data2: any;
 
+    public options2: any;
 
     ngOnInit() {
-        this.definirFiltroProvincia();
-        this.definirFiltroFecha();
-        this.definirFiltroEmpresa();
-        // this.definirFiltroTiempo();
         this.definirGraficaLineal();
         this.opcionesLineal();
 
     }
 
-    definirFiltroProvincia(): void{
-        this.filtroProvincia = [
-            { nombre: 'Panamá'},
-            { nombre: 'Coclé'},
-            { nombre: 'Colón'},
-            { nombre: 'Bocas del Toro'},
-        ];
-    }
-
-    definirFiltroFecha(): void{
-        this.filtroFecha = [
-            { nombre: 'Filtro1'},
-            { nombre: 'Filtro2'},
-            { nombre: 'Filtro3'},
-            { nombre: 'Filtro4'},
-            { nombre: 'Filtro5'}
-        ];
-    }
-
-    definirFiltroEmpresa(): void{
-        this.filtroEmpresa = [
-            { nombre: 'Empresa1'},
-            { nombre: 'Empresa2'},
-            { nombre: 'Empresa3'},
-            { nombre: 'Empresa4'},
-            { nombre: 'Empresa5'}
-        ];
-    }
-
-    // definirFiltroTiempo(): void{
-    //     this.filtroTiempo = [
-    //         { nombre: 'Año', code: "code1"},
-    //         { nombre: 'Mes', code: "code2"},
-    //         { nombre: 'Filtro3', code: "code3" },
-    //         { nombre: 'Filtro4', code: "code4" },
-    //         { nombre: 'Filtro5', code: "code5" }
-    //     ];
-    // }
-
 
     definirGraficaLineal(): void{
 
         const documentStyle = getComputedStyle(document.documentElement);
-        const textColor = documentStyle.getPropertyValue('--text-color');
-        const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
-        const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
 
         this.data1 = {
             labels: ['Venta1', 'Venta2', 'Venta3', 'Venta4', 'Venta5', 'Venta6', 'Venta7'],

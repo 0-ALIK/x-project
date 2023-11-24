@@ -1,7 +1,8 @@
 import { Empresa } from 'src/app/interfaces/usuario.inteface';
 import { Component, OnInit } from '@angular/core';
 import { ClientesService } from 'src/app/services/clientes.service';
-import { Tiempo, Fecha, Provincia } from 'src/app/interfaces/ventas.interface';
+import { Provincia } from 'src/app/interfaces/direccion.interface';
+import { empresas, provincias } from 'src/app/interfaces/data';
 
 
 @Component({
@@ -14,10 +15,9 @@ export class DashboardClientesComponent implements OnInit {
     public empresas: any[] =[];
     public lengthEmpresas: number = 0;
 
-    filtroProvincia: Provincia[] | undefined;
-    filtroFecha: Fecha[] | undefined;
-    filtroEmpresa: Empresa[] | undefined;
-    filtroTiempo: Tiempo[] | undefined;
+    filtroProvincia: Provincia[] = provincias;
+
+    filtroEmpresa: Empresa[] = empresas;
 
     data1: any;
     options1: any;
@@ -30,10 +30,6 @@ export class DashboardClientesComponent implements OnInit {
 
     ngOnInit() {
 
-        this.definirFiltroProvincia();
-        this.definirFiltroFecha();
-        this.definirFiltroEmpresa();
-        // this.definirFiltroTiempo();
         this.definirGraficaPastel();
         this.definirGraficaBarras();
 
@@ -48,44 +44,6 @@ export class DashboardClientesComponent implements OnInit {
         })
     }
 
-    definirFiltroProvincia(): void{
-        this.filtroProvincia = [
-            { nombre: 'Panamá' },
-            { nombre: 'Coclé' },
-            { nombre: 'Colón' },
-            { nombre: 'Bocas del Toro' }
-        ];
-    }
-
-    definirFiltroFecha(): void{
-        this.filtroFecha = [
-            { nombre: 'Filtro1' },
-            { nombre: 'Filtro2' },
-            { nombre: 'Filtro3' },
-            { nombre: 'Filtro4' },
-            { nombre: 'Filtro5' }
-        ];
-    }
-
-    definirFiltroEmpresa(): void{
-        this.filtroEmpresa = [
-            { nombre: 'Empresa1' },
-            { nombre: 'Empresa2' },
-            { nombre: 'Empresa3' },
-            { nombre: 'Empresa4' },
-            { nombre: 'Empresa5' }
-        ];
-    }
-
-    // definirFiltroTiempo(): void{
-    //     this.filtroTiempo = [
-    //         { nombre: 'Año', code: "code1"},
-    //         { nombre: 'Mes', code: "code2"},
-    //         { nombre: 'Filtro3', code: "code3" },
-    //         { nombre: 'Filtro4', code: "code4" },
-    //         { nombre: 'Filtro5', code: "code5" }
-    //     ];
-    // }
 
 
     definirGraficaPastel(): void{

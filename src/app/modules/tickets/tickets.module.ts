@@ -16,6 +16,9 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { ImageModule } from 'primeng/image';
 import { InputTextModule } from 'primeng/inputtext';
 import { ClientesModule } from '../clientes/clientes.module';
+import { MessageService } from 'primeng/api';
+import { DialogService } from 'primeng/dynamicdialog';
+import { AnaliticaModule } from '../analitica/analitica.module';
 
 @NgModule({
 	declarations: [
@@ -37,8 +40,9 @@ import { ClientesModule } from '../clientes/clientes.module';
         InputTextareaModule,
         FileUploadModule,
         ImageModule,
-        ClientesModule
+        ClientesModule,
+        AnaliticaModule
 	],
-    providers: [TagsColorsService]
+    providers: [TagsColorsService, MessageService, DialogService]
 })
 export class TicketsModule { }

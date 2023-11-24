@@ -3,6 +3,8 @@ import { MenuItem } from 'primeng/api';
 import { Router } from '@angular/router';
 import { Cliente } from 'src/app/interfaces/usuario.inteface';
 import { clientes } from 'src/app/interfaces/data';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { ReporteClienteComponent } from 'src/app/modules/analitica/components/reporte-cliente.component';
 
 @Component({
   selector: 'app-clientes-table',
@@ -21,9 +23,19 @@ export class ClientesTableComponent {
 
     public arregloClientes: Cliente[] = clientes;
 
+    public ref: DynamicDialogRef | undefined;
+
     public constructor(
+        public dialogService: DialogService,
         private router: Router
-    ) {}
+    ) { }
+
+    public showGenerarReporte(): void {
+        this.ref = this.dialogService.open(ReporteClienteComponent, {
+            header: 'Generar Reporte',
+            height: '70%'
+        });
+    }
 
     public ngOnInit(): void {
 

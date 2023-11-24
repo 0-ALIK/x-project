@@ -36,6 +36,7 @@ import { MessageService } from 'primeng/api';
 import { AgregarColaboradorComponent } from './components/agregar-colaborador/agregar-colaborador.component';
 import { AgregarSucursalComponent } from './components/agregar-sucursal/agregar-sucursal.component';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { AnaliticaModule } from '../analitica/analitica.module';
 
 @NgModule({
     declarations: [
@@ -77,7 +78,8 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
         FormsModule,
         ReactiveFormsModule,
         SpeedDialModule,
-        InputTextareaModule
+        InputTextareaModule,
+        AnaliticaModule
     ],
     exports: [
         CardUserComponent,
