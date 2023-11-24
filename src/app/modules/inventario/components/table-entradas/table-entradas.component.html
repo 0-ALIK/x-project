@@ -9,10 +9,8 @@
 <ng-container *ngIf="compras">
 
     <p-table
-        #prs
+        #table
         [value]="compras"
-        [rows]="5"
-        [paginator]="true"
         styleClass="p-datatable-gridlines"
         [tableStyle]="{ 'min-width': '50rem'}"
         [scrollable]="true"
@@ -21,7 +19,7 @@
         <ng-template pTemplate="caption">
             <div class="flex header-table" scrollable>
                 <div class="p-buttonset">
-                    <button pButton label="Limpiar" class="p-button-outlined" icon="pi pi-filter-slash" (click)="clear(prs)"></button>
+                    <button pButton label="Limpiar" class="p-button-outlined" icon="pi pi-filter-slash" (click)="table.clear()"></button>
                     <button pButton label="Reporte" icon="pi pi-file-export" (click)="showGenerarReporte()"></button>
                 </div>
                 <span class="p-input-icon-left ml-auto">
@@ -34,28 +32,26 @@
         <ng-template pTemplate="header">
             <tr>
                 <th>
+                    <div class="flex align-items-center">Id</div>
+                </th>
+                <th>
                     <div class="flex align-items-center">
-                        Id <p-columnFilter field="id" display="menu"></p-columnFilter>
+                        Admin <p-columnFilter field="admin.nombre" display="menu"></p-columnFilter>
                     </div>
                 </th>
                 <th>
                     <div class="flex align-items-center">
-                        Admin <p-columnFilter field="admin" display="menu"></p-columnFilter>
+                        Fecha <p-columnFilter field="fecha" type="date" display="menu"></p-columnFilter>
                     </div>
                 </th>
                 <th>
                     <div class="flex align-items-center">
-                        Fecha <p-columnFilter field="date" display="menu"></p-columnFilter>
+                        Cantidad <p-columnFilter field="cantidad" display="menu"></p-columnFilter>
                     </div>
                 </th>
                 <th>
                     <div class="flex align-items-center">
-                        Cantidad <p-columnFilter field="quantity" display="menu"></p-columnFilter>
-                    </div>
-                </th>
-                <th>
-                    <div class="flex align-items-center">
-                        Producto <p-columnFilter field="product" display="menu"></p-columnFilter>
+                        Producto <p-columnFilter field="producto.nombre" display="menu"></p-columnFilter>
                     </div>
                 </th>
                 <th>
