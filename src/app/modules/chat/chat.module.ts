@@ -10,6 +10,9 @@ import { AvatarModule } from 'primeng/avatar';
 import { ButtonModule } from 'primeng/button';
 import { TagModule } from 'primeng/tag';
 import { MessageBubbleComponent } from './components/message-bubble/message-bubble.component';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { FormsModule } from '@angular/forms';  // Importa FormsModule
+
 
 @NgModule({
   declarations: [
@@ -25,6 +28,8 @@ import { MessageBubbleComponent } from './components/message-bubble/message-bubb
     AvatarModule,
     TagModule,
     ButtonModule,
+    InputTextareaModule,
+    FormsModule
   ]
 })
 export class ChatModule { }

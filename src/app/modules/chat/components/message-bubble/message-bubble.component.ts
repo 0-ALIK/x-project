@@ -8,8 +8,14 @@ import { Component, Input } from '@angular/core';
 export class MessageBubbleComponent {
 
     @Input('posicion')
-    public pocision: string = 'right';
+    public posicion: string = 'left';
 
     @Input('mensaje')
     public mensaje!: any;
+
+    ngOnInit() {
+        console.log('Posición:', this.posicion);
+        console.log('Mensaje:', this.mensaje);
+    }
+
 }
