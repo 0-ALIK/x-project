@@ -10,23 +10,27 @@ import { InputTextModule } from 'primeng/inputtext';
 import { VerDetalleComponent } from './pages/ver-detalle/ver-detalle.component';
 import { SplitButtonModule } from 'primeng/splitbutton';
 import { TicketsTableComponent } from './components/tickets-table/tickets-table.component';
+import { AvatarModule } from 'primeng/avatar';
+import { TagsColorsService } from './services/tags-colors.service';
+import { DropdownModule } from 'primeng/dropdown';
 @NgModule({
 	declarations: [
 		VerTicketsComponent,
-  VerDetalleComponent,
-  TicketsTableComponent,
+        VerDetalleComponent,
+        TicketsTableComponent,
 	],
 	imports: [
 		CommonModule,
 		TicketsRoutingModule,
 		TableModule,
 		TagModule,
-		// RatingModule,
-		// FormsModule,
 		ButtonModule,
 		TagModule,
 		SplitButtonModule,
-        InputTextModule
+        InputTextModule,
+        AvatarModule,
+        DropdownModule
 	],
+    providers: [TagsColorsService]
 })
 export class TicketsModule { }

@@ -2,6 +2,7 @@ import { Direccion, Provincia } from "./direccion.interface";
 import { Compra, FormaPago, Pedido, PedidoEstado } from "./pedido.interface";
 import { Permisos } from "./permisos.interface";
 import { Categoria, Marca, Producto } from "./producto.iterface";
+import { Reclamo, ReclamoCategoria, ReclamoEstado, ReclamoPrioridad } from "./raclamo.interface";
 import { Admin, Cliente, Empresa } from "./usuario.inteface";
 
 export const categorias: Categoria[] = [
@@ -345,5 +346,56 @@ export const pedidos: Pedido[] = [
             { id_pedido_producto: 1, cantidad: 2, producto: productos[1] },
             { id_pedido_producto: 2, cantidad: 5, producto: productos[2] },
         ],
+    }
+];
+
+
+export const reclamosCategorias: ReclamoCategoria[] = [
+    { id_reclamo_categoria: 1, nombre: 'Demora de envio' },
+    { id_reclamo_categoria: 2, nombre: 'Daños en producto' },
+    { id_reclamo_categoria: 3, nombre: 'Facturación' },
+];
+
+  // Datos para la interfaz ReclamoPrioridad
+export const reclamosPrioridades: ReclamoPrioridad[] = [
+    { id_reclamo_prioridad: 1, prioridad: 'ALTA' },
+    { id_reclamo_prioridad: 2, prioridad: 'MEDIA' },
+    { id_reclamo_prioridad: 3, prioridad: 'BAJA' },
+  ];
+
+  // Datos para la interfaz ReclamoEstado
+export const reclamosEstados: ReclamoEstado[] = [
+    { id_reclamo_estado: 1, estado: 'Pendiente' },
+    { id_reclamo_estado: 2, estado: 'Abierto' },
+    { id_reclamo_estado: 3, estado: 'Cerrado' },
+];
+
+
+export const reclamos: Reclamo[] = [
+    {
+      id_reclamo: 1,
+      admin: admins[0],
+      pedido: pedidos[0],
+      cliente: pedidos[0].cliente,
+      categoria: reclamosCategorias[0],
+      prioridad: reclamosPrioridades[2],
+      estado: reclamosEstados[1],
+      descripcion: 'Llevo una semana esperando a que llege el pedido que les hice, ya me tienen harto, que proqueria de empresa',
+      evidencia: 'https://cdn.pixabay.com/photo/2023/11/13/10/32/fields-8385045_1280.jpg',
+      fecha: new Date('2023-11-23'),
+      fecha_cambio_estado: new Date('2023-11-25'),
+    },
+    {
+      id_reclamo: 2,
+      admin: admins[1],
+      pedido: pedidos[1],
+      cliente: pedidos[1].cliente,
+      categoria: reclamosCategorias[1],
+      prioridad: reclamosPrioridades[0],
+      estado: reclamosEstados[0],
+      descripcion: 'Esta porqueria me vino abierta, ¿Qué significa esto? Siempre me hacen lo mismo, por suerte esta vez solo fue un daño, la anterior literalmente me llego el producto ya abierto y comido, sinvergüenzas',
+      evidencia: 'https://cdn.pixabay.com/photo/2023/11/13/10/32/fields-8385045_1280.jpg',
+      fecha: new Date('2023-11-24'),
+      fecha_cambio_estado: new Date('2023-11-26'),
     }
 ];

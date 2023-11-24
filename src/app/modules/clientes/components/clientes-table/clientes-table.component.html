@@ -1,21 +1,16 @@
 <p-table
-    #tablePedidos
+    #table
     [value]="arregloClientes"
     [tableStyle]="{ 'min-width': '50rem' }"
-    [paginator]="true"
     styleClass="p-datatable-gridlines"
-    [rows]="10"
     selectionMode="single"
     (onRowSelect)="onRowSelect($event)"
-    [showCurrentPageReport]="true"
-    currentPageReportTemplate="Hay un total de {totalRecords} registros"
-    (onPage)="pageChange($event)"
-    [rowsPerPageOptions]="[10, 25, 50]">
+    (onPage)="pageChange($event)">
 
     <ng-template pTemplate="caption">
         <div class="contenido">
             <div class="p-buttonset">
-                <button pButton label="Limpiar" class="p-button-outlined" icon="pi pi-filter-slash"></button>
+                <button pButton label="Limpiar" (click)="table.clear()" class="p-button-outlined" icon="pi pi-filter-slash"></button>
                 <button pButton label="Reporte" icon="pi pi-file-export"></button>
             </div>
             <div class="input">
@@ -29,30 +24,70 @@
 
     <ng-template pTemplate="header" >
         <tr>
-            <th>Cliente</th>
-            <th>Genero</th>
-            <th>Telefono</th>
-            <th>Correo</th>
-            <th>Frecuencia</th>
-            <th>Empresa Asociada</th>
-            <th>Total Pedidos</th>
-            <th>Acciones</th>
+            <th>
+                <div class="flex align-items-center">
+                    Cliente
+                    <p-columnFilter field="nombre" display="menu"></p-columnFilter>
+                </div>
+            </th>
+            <th>
+                <div class="flex align-items-center">
+                    Genero
+                    <p-columnFilter field="genero" display="menu"></p-columnFilter>
+                </div>
+            </th>
+            <th>
+                <div class="flex align-items-center">
+                    Telefono
+                    <p-columnFilter field="telefono" display="menu"></p-columnFilter>
+                </div>
+            </th>
+            <th>
+                <div class="flex align-items-center">
+                    Correo
+                    <p-columnFilter field="correo" display="menu"></p-columnFilter>
+                </div>
+            </th>
+            <th>
+                <div class="flex align-items-center">
+                    Empresa Asociada
+                    <p-columnFilter field="empresa.nombre" display="menu"></p-columnFilter>
+                </div>
+            </th>
+            <th>
+                <div class="flex align-items-center">
+                    Total Pedidos
+                    <p-columnFilter field="pedidos" type="numeric" display="menu"></p-columnFilter>
+                </div>
+            </th>
+            <th><div class="flex align-items-center">Acciones</div></th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-cliente >
         <tr [pSelectableRow]="cliente">
-            <td class="celda-cliente">
-                <div>
-                    <p-avatar [image]="cliente.foto" shape="circle"></p-avatar>
+            <td>
+                <div class="flex align-items-center gap-1">
+                    <div>
+                        <p-avatar [image]="cliente.foto" shape="circle"></p-avatar>
+                    </div>
+                    <p class="celda-cliente-nombre">{{cliente.nombre + ' ' + cliente.apellido }}</p>
                 </div>
-                <p class="celda-cliente-nombre">{{cliente.nombre + ' ' + cliente.apellido }}</p>
             </td>
             <td>{{ cliente.genero }}</td>
             <td>{{ cliente.telefono }}</td>
             <td>{{ cliente.correo }}</td>
-            <td>{{ cliente.frecuencia }}</td>
-            <td>{{ cliente.empresa }}</td>
-            <td>24</td>
+            <td>
+                <div class="flex align-items-center gap-1" *ngIf="cliente.empresa">
+                    <div>
+                        <p-avatar [image]="cliente.empresa.foto" shape="circle"></p-avatar>
+                    </div>
+                    <p class="celda-cliente-nombre">{{ cliente.empresa.nombre }}</p>
+                </div>
+                <div *ngIf="!cliente.empresa">
+                    No tiene empresa
+                </div>
+            </td>
+            <td>{{ -1 }}</td>
             <td>
                 <p-button icon="pi pi-trash" [rounded]="true" [text]="true" severity="danger"></p-button>
             </td>

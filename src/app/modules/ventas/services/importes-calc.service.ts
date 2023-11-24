@@ -24,7 +24,8 @@ export class ImportesCalcService {
         return productosPedidos.reduce( (cont, pedidoProductos) =>  {
             const cantidad_por_caja = pedidoProductos.producto?.cantidad_por_caja || 0;
             const precio_unit = pedidoProductos.producto?.precio_unit || 0;
-            return cont + (cantidad_por_caja * precio_unit);
+            const cantidad = pedidoProductos.cantidad || 0;
+            return cont + (cantidad_por_caja * precio_unit * cantidad);
         }, 0 );
     }
 

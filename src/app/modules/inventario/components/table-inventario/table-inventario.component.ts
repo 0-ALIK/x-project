@@ -61,10 +61,6 @@ export class TableInventarioComponent implements OnInit {
         /* this.ref = this.dialogService.open(DialogGenerarReporteComponent, { header: 'Generar Reporte' }); */
     }
 
-    public clear(table: Table): void {
-        table.clear();
-    }
-
     public aplicaReordenValue( producto: Producto, values: string[] ): string {
         if(!producto?.cantidad_cajas || !producto?.punto_reorden) {
             throw new Error('Campos necesarios no presentes en objeto');
