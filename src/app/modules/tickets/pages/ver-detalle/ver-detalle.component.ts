@@ -1,27 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ReclamoPrioridad } from 'src/app/interfaces/raclamo.interface';
 
 @Component({
   selector: 'app-ver-detalle',
   templateUrl: './ver-detalle.component.html',
-  styleUrls: ['./ver-detalle.component.css']
+  styleUrls: ['./ver-detalle.component.css'],
 })
+
 export class VerDetalleComponent implements OnInit {
+    uploadedFiles: any[] = [];
+
     ticketNumber: number = 12391;
-    products = [
-        { descripcion: 'Coca-Cola', cantidad: '12', precioUnitario: 2, precioTotal: 24 },
-        { descripcion: 'Pepsi', cantidad: '10', precioUnitario: 2, precioTotal: 20 },
-        { descripcion: 'Sprite', cantidad: '8', precioUnitario: 2, precioTotal: 16}
-    ];
 
-    data = [
-        { fecha: 'Coca-Cola', cliente: '12', direccion: 2, telefono: 24 },
+    reclamoPrioridad: ReclamoPrioridad[]  | undefined
 
-    ];
-
-    numeroMensajes: number = 0
-
-    public nombreUsuario: string = "May Medina"
+    loading: boolean = false;
 
     public items!: any[];
 
@@ -52,4 +46,30 @@ export class VerDetalleComponent implements OnInit {
         console.log('Cambiar Status');
         // Puedes agregar aquí la lógica específica para cambiar el estado del ticket
     }
+
+    public cargarBoton(): void{
+        this.loading = true;
+        setTimeout(() => {
+            this.loading = false
+        }, 2000);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
