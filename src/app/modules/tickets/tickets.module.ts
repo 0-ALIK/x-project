@@ -13,7 +13,6 @@ import { AvatarModule } from 'primeng/avatar';
 import { TagsColorsService } from './services/tags-colors.service';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextareaModule } from 'primeng/inputtextarea';
-import { FileUploadModule } from 'primeng/fileupload';
 import { ImageModule } from 'primeng/image';
 import { InputTextModule } from 'primeng/inputtext';
 
