@@ -15,6 +15,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ImageModule } from 'primeng/image';
 import { InputTextModule } from 'primeng/inputtext';
+import { ClientesModule } from '../clientes/clientes.module';
 
 @NgModule({
 	declarations: [
@@ -35,7 +36,8 @@ import { InputTextModule } from 'primeng/inputtext';
         DropdownModule,
         InputTextareaModule,
         FileUploadModule,
-        ImageModule
+        ImageModule,
+        ClientesModule
 	],
     providers: [TagsColorsService]
 })
