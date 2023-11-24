@@ -1,10 +1,8 @@
+import { Empresa } from 'src/app/interfaces/usuario.inteface';
 import { Component, OnInit } from '@angular/core';
+import { ClientesService } from 'src/app/services/clientes.service';
+import { Tiempo, Fecha, Provincia } from 'src/app/interfaces/ventas.interface';
 
-import { Empresa, Tiempo, Fecha, Provincia} from 'src/app/interfaces/ventas.interface';
-interface Filtro {
-    nombre: string;
-    code: string;
-}
 
 @Component({
   selector: 'app-dashboard-clientes',
@@ -12,6 +10,9 @@ interface Filtro {
   styleUrls: ['./dashboard-clientes.component.css']
 })
 export class DashboardClientesComponent implements OnInit {
+
+    public empresas: any[] =[];
+    public lengthEmpresas: number = 0;
 
     filtroProvincia: Provincia[] | undefined;
     filtroFecha: Fecha[] | undefined;
@@ -23,16 +24,28 @@ export class DashboardClientesComponent implements OnInit {
 
     data2: any;
     options2: any;
-
-
+    constructor(
+        private clienteService: ClientesService
+      ) {}
 
     ngOnInit() {
+
         this.definirFiltroProvincia();
         this.definirFiltroFecha();
         this.definirFiltroEmpresa();
         // this.definirFiltroTiempo();
         this.definirGraficaPastel();
         this.definirGraficaBarras();
+
+        this.clienteService.getEmpresas().subscribe({
+            next: (empresas) => {
+                this.empresas = empresas;
+                this.lengthEmpresas = empresas.length;
+            },
+            error: (error) =>{
+                console.error("Error al obtener empresas:", error);
+                }
+        })
     }
 
     definirFiltroProvincia(): void{
@@ -73,7 +86,6 @@ export class DashboardClientesComponent implements OnInit {
     //         { nombre: 'Filtro5', code: "code5" }
     //     ];
     // }
-
 
 
     definirGraficaPastel(): void{

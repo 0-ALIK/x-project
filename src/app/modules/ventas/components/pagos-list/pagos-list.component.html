@@ -40,7 +40,7 @@
             </tr>
         </ng-template>
 
-        <ng-template pTemplate="summary">
+        <ng-template pTemplate="summary" let-columns>
             <div class="flex align-items-center justify-content-between">
                 Se ha pagado un total de {{ importesCalc.calcularImportePagado( pagos || [] ) | currency:'USD':'symbol':'1.2-2' }}
             </div>

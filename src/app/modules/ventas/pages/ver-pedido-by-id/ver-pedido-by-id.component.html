@@ -1,3 +1,4 @@
+
 <div class="flex align-items-center gap-2">
     <h1 class="text-3xl">Pedido con id: id</h1>
     <p-tag [value]="pedido?.estado?.estado"></p-tag>
@@ -36,7 +37,7 @@
     <div class="w-full">
         <p-accordion [activeIndex]="0">
             <p-accordionTab header="Productos">
-                <app-productos-pedidos></app-productos-pedidos>
+                <app-productos-pedidos [importeDebido]="importeDebido" [pedidoProducto]="pedido?.pedido_producto ||   []" [pagos]="pedido?.pagos" ></app-productos-pedidos>
             </p-accordionTab>
 
             <p-accordionTab header="Pagos">

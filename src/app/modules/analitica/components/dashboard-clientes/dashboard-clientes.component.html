@@ -10,7 +10,8 @@
     <!-- Cards superiores -->
     <section>
         <div class="flex flex-row justify-content-between">
-            <alik-dashboard-card class="mx-2" titulo="Clientes Totales" icon="pi-users" [numero]="120" tipo="numero" [valorAnterior]="85" ></alik-dashboard-card>
+            <h2>{{lengthEmpresas}}</h2>
+            <alik-dashboard-card class="mx-2" titulo="Clientes Totales" icon="pi-users" [numero]="lengthEmpresas" tipo="numero" [valorAnterior]="85" ></alik-dashboard-card>
             <alik-dashboard-card class="mx-2" titulo="Empresas Totales" icon="pi-building" [numero]="58" tipo="numero" [valorAnterior]="49" ></alik-dashboard-card>
             <alik-dashboard-card class="mx-2" titulo="Crecimiento" icon="pi-chart-line" [numero]="54" tipo="numero" [valorAnterior]="24" ></alik-dashboard-card>
             <div class=" border-round w-full flex flex-column justify-content-center align-items-center" [style]="{'background': 'var(--surface-card)'}">

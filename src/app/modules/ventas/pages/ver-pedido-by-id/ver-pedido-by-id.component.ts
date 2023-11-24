@@ -4,6 +4,8 @@ import { pedidos } from 'src/app/interfaces/data';
 import { Pedido } from 'src/app/interfaces/pedido.interface';
 import { Cliente, Empresa } from 'src/app/interfaces/usuario.inteface';
 import { ImportesCalcService } from '../../services/importes-calc.service';
+import { Producto } from 'src/app/interfaces/producto.iterface';
+
 
 @Component({
   selector: 'app-ver-pedido-by-id',
@@ -12,6 +14,8 @@ import { ImportesCalcService } from '../../services/importes-calc.service';
 export class VerPedidoByIdComponent implements OnInit {
 
     public cliente: Cliente | undefined;
+
+    public producto: Producto | undefined;
 
     public pedido: Pedido | undefined;
 
