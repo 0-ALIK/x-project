@@ -1,0 +1,22 @@
+.card {
+    display: flex;
+    background-color: var(--surface-50);
+    padding: var(--spacing-4);
+    border-radius: var(--border-radius);
+    align-items: center;
+    gap: var(--spacing-4);
+    justify-content: space-between;
+}
+
+.card h2, .card p{
+    margin: 0;
+    padding: 0;
+}
+
+.boton{
+    margin-left: var(--spacing-4);
+}
+
+.contenido{
+    display: flex;
+}

@@ -1,0 +1,18 @@
+<main class="main">
+
+    <section class="chat-list">
+        <div
+            *ngFor="let reclamo of reclamos"
+            [routerLink]="['/app/chat/reclamo', reclamo.id_reclamo]"
+            routerLinkActive="card-user-chat-selected">
+            <app-usuario-chat-card [reclamo]="reclamo"></app-usuario-chat-card>
+        </div>
+    </section>
+
+
+
+    <section class="messages-list">
+        <router-outlet></router-outlet>
+    </section>
+
+</main>

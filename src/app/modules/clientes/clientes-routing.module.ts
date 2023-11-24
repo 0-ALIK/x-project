@@ -1,7 +1,28 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { VerClientesComponent } from './pages/ver-clientes/ver-clientes.component';
+import { PerfilClienteComponent } from './pages/perfil-cliente/perfil-cliente.component';
+import { PerfilEmpresaComponent } from './pages/perfil-empresa/perfil-empresa.component';
+import { NotFoundComponent } from 'src/app/not-found/not-found.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+    {
+        path: '',
+        component: VerClientesComponent
+    },
+    {
+        path: 'perfil/cliente/:id',
+        component: PerfilClienteComponent
+    },
+    {
+        path: 'perfil/empresa/:id',
+        component: PerfilEmpresaComponent
+    },
+    {
+        path: '**',
+        component: NotFoundComponent
+    }
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

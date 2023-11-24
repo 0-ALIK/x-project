@@ -1,1 +1,29 @@
-<p>ver-inventario works!</p>
+<p-toast></p-toast>
+
+<div class="card div-p-tabMenu">
+    <p-tabMenu
+        [model]="tabs"
+        [activeItem]="activeItem"
+        (activeItemChange)="onActiveItemChange($event)">
+    </p-tabMenu>
+</div>
+
+<div class="table_background">
+
+    <div class="title-split-container">
+        <h1 [style]="{'fontSize': 'var(--text-3xl)'}">{{ titulo }}</h1>
+        <div class="split-menu">
+            <p-menu #menu [model]="items" [popup]="true"></p-menu>
+            <button pButton type="button" (click)="menu.toggle($event)" icon="pi pi-angle-down" label="Agregar" ></button>
+        </div>
+    </div>
+
+
+    <ng-container *ngIf="activeItem.label === 'Inventario'">
+        <app-table-inventario></app-table-inventario>
+    </ng-container>
+
+    <ng-container *ngIf="activeItem.label === 'Entradas'">
+        <app-table-entradas></app-table-entradas>
+    </ng-container>
+</div>

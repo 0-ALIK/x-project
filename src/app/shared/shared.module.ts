@@ -7,16 +7,20 @@ import { ButtonModule } from 'primeng/button';
 import { AvatarModule } from 'primeng/avatar';
 import { MenuModule } from 'primeng/menu';
 import { SidebarModule } from 'primeng/sidebar';
+import { ImagePreviewComponent } from './components/image-preview/image-preview.component';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 
 
 @NgModule({
     declarations: [
         SidebarComponent,
-        NavComponent
+        NavComponent,
+        ImagePreviewComponent
     ],
     exports: [
         SidebarComponent,
-        NavComponent
+        NavComponent,
+        ImagePreviewComponent
     ],
     imports: [
         CommonModule,
@@ -24,7 +28,8 @@ import { SidebarModule } from 'primeng/sidebar';
         ButtonModule,
         AvatarModule,
         MenuModule,
-        SidebarModule
+        SidebarModule,
+        OverlayPanelModule
     ]
 })
 export class SharedModule { }

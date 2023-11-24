@@ -1,0 +1,184 @@
+<p-tabMenu class="tabMenu" (activeItemChange)="onChange($event)" [model]="items" [activeItem]="activeItem"></p-tabMenu>
+
+<div class="card">
+    <div class="mb-4">
+        <div class="p-buttonset">
+            <button pButton label="Agregar colaborador" class="p-button-outlined" (click)="agregarColaborador()"></button>
+            <button pButton label="Agregar Sucursal" (click)="agregarSucursal()"></button>
+        </div>
+    </div>
+
+    <ng-container *ngIf="activeItem?.label && activeItem?.label === 'Informacion'">
+        <app-perfil-card></app-perfil-card>
+    </ng-container>
+
+    <ng-container *ngIf="activeItem?.label && activeItem?.label === 'Sucursales'" >
+        <div class="top mb-2">
+            <p-dropdown
+                [options]="provincias"
+                [(ngModel)]="provinciaSelected"
+                optionLabel="nombre"
+                [showClear]="true"
+                placeholder="Filtra por provincia">
+            </p-dropdown>
+        </div>
+        <div class="claseboba">
+            <alik-card-direccion
+                *ngFor="let direccion of direcciones"
+                [direccion]="direccion"
+                [fondo]="true">
+            </alik-card-direccion>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="activeItem?.label && activeItem?.label === 'Colaboradores'" >
+        <div class="top ">
+            <div>
+                <input type="text" pInputText placeholder="Nombre del cliente"/>
+                <p-dropdown
+                    [options]="provincias"
+                    [(ngModel)]="provinciaSelected"
+                    optionLabel="nombre"
+                    [showClear]="true"
+                    placeholder="Filtra por provincia">
+                </p-dropdown>
+            </div>
+        </div>
+        <div class="claseboba">
+            <app-colaborador-card></app-colaborador-card>
+            <app-colaborador-card></app-colaborador-card>
+            <app-colaborador-card></app-colaborador-card>
+            <app-colaborador-card></app-colaborador-card>
+            <app-colaborador-card></app-colaborador-card>
+            <app-colaborador-card></app-colaborador-card>
+            <app-colaborador-card></app-colaborador-card>
+            <app-colaborador-card></app-colaborador-card>
+            <app-colaborador-card></app-colaborador-card>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="activeItem?.label && activeItem?.label === 'Pedidos'" >
+    </ng-container>
+</div>
+
+
+<!-- <ng-container *ngIf="activeItem?.label && activeItem?.label === 'Informacion'">
+    <app-perfil-card></app-perfil-card>
+</ng-container>
+<ng-container  *ngIf="activeItem?.label && activeItem?.label === 'Colaboradores'" >
+    <div class="top">
+        <p-avatar icon="pi pi-user" shape="circle" size="large"></p-avatar>
+        <h2>Empresa</h2>
+        <h2>RUC: </h2> <h3 >8-888-8888</h3>
+        <h2>Telefono:</h2> <h3 >507 6555-5555</h3>
+    </div>
+    <hr>
+    <div class="top_medio">
+        <div>
+            <p>Filtrar por Nombre</p>
+            <div class="card flex justify-content-center">
+                <p-dropdown  placeholder="A a la Z..." [group]="true">
+                    <ng-template let-group pTemplate="group">
+                        <div class="flex align-items-center">
+                            <img src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png" [class]="'mr-2 flag flag-' + group.value" style="width: 20px" />
+                            <span>{{ group.label }}</span>
+                        </div>
+                    </ng-template>
+                </p-dropdown>
+            </div>
+        </div>
+        <div>
+            <p>Filtrar por cantidad de pedidos</p>
+            <div class="card flex justify-content-center">
+                <p-dropdown  placeholder="mayor a menor..." [group]="true">
+                    <ng-template let-group pTemplate="group">
+                        <div class="flex align-items-center">
+                            <img src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png" [class]="'mr-2 flag flag-' + group.value" style="width: 20px" />
+                            <span>{{ group.label }}</span>
+                        </div>
+                    </ng-template>
+                </p-dropdown>
+            </div>
+        </div>
+        <div>
+            <p>Filtrar por antiguedad</p>
+            <div class="card flex justify-content-center">
+                <p-dropdown  placeholder="Fecha descendiente" [group]="true">
+                    <ng-template let-group pTemplate="group">
+                        <div class="flex align-items-center">
+                            <img src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png" [class]="'mr-2 flag flag-' + group.value" style="width: 20px" />
+                            <span>{{ group.label }}</span>
+                        </div>
+                    </ng-template>
+                </p-dropdown>
+            </div>
+        </div>
+
+
+        <p-button class="boton">Limpiar Filtros</p-button>
+    </div>
+
+    <div class="colaboradores">
+        <div class="column">
+            <app-colaborador-card></app-colaborador-card>
+            <app-colaborador-card></app-colaborador-card>
+            <app-colaborador-card></app-colaborador-card>
+        </div>
+        <div class="column">
+            <app-colaborador-card></app-colaborador-card>
+            <app-colaborador-card></app-colaborador-card>
+            <app-colaborador-card></app-colaborador-card>
+        </div>
+        <div class="column">
+            <app-colaborador-card></app-colaborador-card>
+            <app-colaborador-card></app-colaborador-card>
+            <app-colaborador-card></app-colaborador-card>
+        </div>
+    </div>
+
+</ng-container>
+
+<ng-container  *ngIf="activeItem?.label && activeItem?.label === 'Sucursales'" >
+    <div class="top">
+        <p-avatar icon="pi pi-user" shape="circle" size="large"></p-avatar>
+        <h2>Empresa</h2>
+        <h2>RUC: </h2> <h3 >8-888-8888</h3>
+        <h2>Telefono:</h2> <h3 >507 6555-5555</h3>
+    </div>
+    <hr>
+    <div class="top_medio">
+        <div>
+            <p>Filtrar por Nombre</p>
+            <div class="card flex justify-content-center">
+                <p-dropdown  placeholder="A a la Z..." [group]="true">
+                    <ng-template let-group pTemplate="group">
+                        <div class="flex align-items-center">
+                            <img src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png" [class]="'mr-2 flag flag-' + group.value" style="width: 20px" />
+                            <span>{{ group.label }}</span>
+                        </div>
+                    </ng-template>
+                </p-dropdown>
+            </div>
+        </div>
+
+
+
+        <p-button class="boton">Limpiar Filtros</p-button>
+    </div>
+
+    <div class="direcciones">
+
+
+    </div>
+</ng-container>
+
+<ng-container  *ngIf="activeItem?.label && activeItem?.label === 'Pedidos'" >
+    <div class="top">
+        <p-avatar icon="pi pi-user" shape="circle" size="large"></p-avatar>
+        <h2>Empresa</h2>
+        <h2>RUC: </h2> <h3 >8-888-8888</h3>
+        <h2>Telefono:</h2> <h3 >507 6555-5555</h3>
+    </div>
+    <hr>
+</ng-container>
+ -->

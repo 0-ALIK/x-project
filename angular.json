@@ -26,6 +26,7 @@
             ],
             "styles": [
                 "src/styles.css",
+                "node_modules/primeflex/primeflex.css",
                 {
                     "input": "src/themes/theme-viva-dark.css",
                     "bundleName": "viva-dark",
@@ -37,7 +38,8 @@
                     "inject": false
                 }
             ],
-            "scripts": []
+            "scripts": [
+            ]
           },
           "configurations": {
             "production": {

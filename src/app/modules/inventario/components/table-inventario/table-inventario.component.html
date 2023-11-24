@@ -1,0 +1,141 @@
+
+<p-confirmDialog
+    key="confirmDialog"
+    [style]="{ width: '50vw' }"
+    rejectButtonStyleClass="p-button-outlined"
+    acceptLabel="Si"
+    rejectLabel="No">
+</p-confirmDialog>
+
+<ng-container *ngIf="productos">
+    <p-table
+        #tabla
+        [value]="productos"
+        styleClass="p-datatable-gridlines"
+        [tableStyle]="{ 'min-width': '50rem'}"
+        [scrollable]="true"
+        selectionMode="single"
+        [(selection)]="selectedProducto"
+        (onRowSelect)="onRowSelect( $event )">
+
+        <ng-template pTemplate="caption">
+            <div class="flex header-table" scrollable>
+                <div class="p-buttonset">
+                    <button pButton label="Limpiar" class="p-button-outlined" icon="pi pi-filter-slash" (click)="tabla.clear()"></button>
+                    <button pButton label="Reporte" icon="pi pi-file-export" (click)="showGenerarReporte()"></button>
+                </div>
+                <span class="p-input-icon-left ml-auto">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" placeholder="Buscar producto..." />
+                </span>
+            </div>
+        </ng-template>
+
+        <ng-template pTemplate="header">
+            <tr>
+                <th>
+                    <div class="flex align-items-center">
+                        Producto
+                        <p-columnFilter field="nombre" display="menu"></p-columnFilter>
+                    </div>
+                </th>
+                <th>
+                    <div class="flex align-items-center">
+                        Categoría <p-columnFilter field="categoria.nombre" display="menu"></p-columnFilter>
+                    </div>
+                </th>
+                <th>
+                    <div class="flex align-items-center">
+                        Marca
+                        <p-columnFilter field="marca.nombre" display="menu"></p-columnFilter>
+                    </div>
+                </th>
+                <th>
+                    <div class="flex align-items-center">
+                        Precio Unit <p-columnFilter field="precio_unit" type="numeric" currency="USD" display="menu"></p-columnFilter>
+                    </div>
+                </th>
+                <th>
+                    <div class="flex align-items-center">
+                        Stock <p-columnFilter field="cantidad_cajas" type="numeric"  display="menu"></p-columnFilter>
+                    </div>
+                </th>
+                <th>
+                    <div class="flex align-items-center">Foto</div>
+                </th>
+                <th>
+                    <div class="flex align-items-center">
+                        P. reorden <p-columnFilter field="name" display="menu"></p-columnFilter>
+                    </div>
+                </th>
+                <th>
+                    <div class="flex align-items-center">Acciones</div>
+                </th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-producto>
+            <tr [pSelectableRow]="producto">
+                <td>{{ producto.nombre }}</td>
+                <td>{{ producto.categoria.nombre }}</td>
+                <td class="avatar-cel">
+                    <p-avatar [image]="producto.marca.logo"></p-avatar>
+                    <span>{{ producto.marca.nombre }}</span>
+                </td>
+                <td>{{ producto.precio_unit | currency:'USD':'symbol':'1.2-2' }}</td>
+                <td>{{ producto.cantidad_cajas }}</td>
+                <td>
+                    <p-avatar [image]="producto.foto"></p-avatar>
+                </td>
+                <td>
+                    <p-tag
+                        [icon]="aplicaReordenValue(producto, ['pi pi-exclamation-triangle', 'pi pi-check'])"
+                        [severity]="aplicaReordenValue(producto, ['danger', 'success'])"
+                        [value]="aplicaReordenValue(producto, ['Aplica', 'No aplica'])">
+                    </p-tag>
+                </td>
+                <td class="td-buttons">
+                    <p-button
+                        icon="pi pi-trash"
+                        severity="danger"
+                        (click)="onEliminarProducto( producto )"
+                        [text]="true"
+                        [raised]="true">
+                    </p-button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</ng-container>
+
+<ng-container *ngIf="!productos">
+    <p-table
+        [value]="[1, 1, 1, 1, 1]"
+        styleClass="p-datatable-gridlines"
+        [tableStyle]="{ 'min-width': '50rem'}"
+        [scrollable]="true"
+        [scrollHeight]="'400px'">
+
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Id</th>
+                <th>Admin</th>
+                <th>Fecha</th>
+                <th>Cantidad</th>
+                <th>Producto</th>
+                <th>Acciones</th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-compra>
+            <tr>
+                <td><p-skeleton></p-skeleton></td>
+                <td><p-skeleton></p-skeleton></td>
+                <td><p-skeleton></p-skeleton></td>
+                <td><p-skeleton></p-skeleton></td>
+                <td><p-skeleton></p-skeleton></td>
+                <td><p-skeleton></p-skeleton></td>
+            </tr>
+        </ng-template>
+    </p-table>
+</ng-container>

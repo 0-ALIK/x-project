@@ -1,0 +1,27 @@
+.contenido{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--spacing-2);
+}
+
+.celda-cliente {
+    display: flex;
+    align-items: center;
+}
+
+.celda-cliente-nombre {
+    font-size: var(--text-md);
+    margin-left: var(--spacing-1);
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+/* Estilo para dispositivos móviles */
+@media (max-width: 767px) {
+
+    .contenido {
+        flex-direction: column;
+    }
+
+}

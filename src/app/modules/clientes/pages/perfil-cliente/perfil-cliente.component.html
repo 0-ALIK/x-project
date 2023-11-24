@@ -1,0 +1,35 @@
+<p-tabMenu
+    (activeItemChange)="onChange($event)"
+    [model]="items"
+    [activeItem]="activeItem">
+</p-tabMenu>
+
+<div class="card">
+
+    <ng-container *ngIf="activeItem?.label && activeItem?.label === 'Informacion'">
+        <app-perfil-card></app-perfil-card>
+    </ng-container>
+
+    <ng-container *ngIf="activeItem?.label && activeItem?.label === 'Direcciones'" >
+        <div class="top">
+            <p-dropdown
+                [options]="provincias"
+                [(ngModel)]="provinciaSelected"
+                optionLabel="nombre"
+                [showClear]="true"
+                placeholder="Filtra por provincia">
+            </p-dropdown>
+        </div>
+        <div class="claseboba">
+            <alik-card-direccion
+                *ngFor="let direccion of direcciones"
+                [direccion]="direccion"
+                [fondo]="true">
+            </alik-card-direccion>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="activeItem?.label && activeItem?.label === 'Reclamos'" >
+    </ng-container>
+    <ng-container *ngIf="activeItem?.label && activeItem?.label === 'Pedidos'" ></ng-container>
+</div>

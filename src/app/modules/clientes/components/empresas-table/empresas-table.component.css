@@ -1,0 +1,16 @@
+.contenido{
+    display: flex;
+    justify-content: space-between;
+}
+
+.celda-cliente {
+    display: flex;
+    align-items: center;
+}
+
+.celda-cliente-nombre {
+    font-size: var(--text-md);
+    margin-left: var(--spacing-1);
+    margin-top: 0;
+    margin-bottom: 0;
+}

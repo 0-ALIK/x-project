@@ -1,0 +1,54 @@
+.tabMenu label{
+    padding-left: var(--spacing-4);
+}
+.card {
+    background-color: var(--surface-card);
+    padding: var(--spacing-2);
+    border-radius: var(--border-radius);
+}
+
+
+.claseboba {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: var(--spacing-2);
+}
+
+.top {
+    display: flex;
+    align-items: center;
+}
+
+.top h2{
+    padding: var(--spacing-1) 1% 0px 10%;
+}
+
+.top h3{
+    padding: var(--spacing-1) 1% 0px 0%;
+    font-weight: normal;
+}
+
+.top_medio{
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: var(--spacing-4) ;
+}
+
+.boton{
+    align-self: end;
+}
+
+.direcciones{
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.colaboradores{
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    align-self: center;
+}
+
+.column{
+    align-items: center;
+}

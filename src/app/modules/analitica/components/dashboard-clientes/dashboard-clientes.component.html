@@ -1,0 +1,39 @@
+<main >
+    <!-- Filtros -->
+    <section class="flex flex-row align-content-start justify-content-start mb-1 gap-2">
+        <p-dropdown [options]="filtroProvincia"  placeholder="Provincia" optionLabel="nombre"></p-dropdown>
+        <p-dropdown [options]="filtroFecha" placeholder="Fecha" optionLabel="nombre" ></p-dropdown>
+        <p-dropdown [options]="filtroEmpresa" placeholder="Empresa" optionLabel="nombre" ></p-dropdown>
+        <p-dropdown [options]="filtroTiempo" placeholder="Género" optionLabel="nombre" ></p-dropdown>
+
+    </section>
+    <!-- Cards superiores -->
+    <section>
+        <div class="flex flex-row justify-content-between">
+            <h2>{{lengthEmpresas}}</h2>
+            <alik-dashboard-card class="mx-2" titulo="Clientes Totales" icon="pi-users" [numero]="lengthEmpresas" tipo="numero" [valorAnterior]="85" ></alik-dashboard-card>
+            <alik-dashboard-card class="mx-2" titulo="Empresas Totales" icon="pi-building" [numero]="58" tipo="numero" [valorAnterior]="49" ></alik-dashboard-card>
+            <alik-dashboard-card class="mx-2" titulo="Crecimiento" icon="pi-chart-line" [numero]="54" tipo="numero" [valorAnterior]="24" ></alik-dashboard-card>
+            <div class=" border-round w-full flex flex-column justify-content-center align-items-center" [style]="{'background': 'var(--surface-card)'}">
+                <p>Rendimiento</p>
+                <ana-speedometer
+                    [total]="5400"
+                    [valorActual]="5345"
+                ></ana-speedometer>
+            </div>
+        </div>
+    </section>
+
+    <section class="flex flex-row">
+        <div class=" flex flex-column m">
+            <div class="flex w-17rem h-19rem m-2 border-round justify-content-center align-items-center" [style]="{'background': 'var(--surface-card)'}"><p-chart class="w-17rem h-17rem" type="pie" [data]="data2" [options]="options2"></p-chart></div>
+            <div class="flex w-17rem h-19rem m-2 border-round justify-content-center align-items-center" [style]="{'background': 'var(--surface-card)'}"><p-chart type="pie" [data]="data2" [options]="options2"></p-chart></div>
+        </div>
+
+        <div class="pie flex flex-column">
+            <div class=" m-2 border-round h-19rem" [style]="{'background': 'var(--surface-card)'}"><p-chart class="h-10rem" type="bar" [data]="data1" [options]="options1"></p-chart></div>
+            <div class=" m-2 border-round h-19rem" [style]="{'background': 'var(--surface-card)'}"><p-chart class="h-10rem" type="bar" [data]="data1" [options]="options1"></p-chart></div>
+        </div>
+    </section>
+</main>
+

@@ -1,0 +1,28 @@
+.message {
+    padding: var(--spacing-2);
+    border-radius: var(--border-radius);
+
+    max-width: 65%;
+}
+
+.message-right {
+    background-color: var(--primary-color);
+    color: var(--primary-color-text);
+    border-bottom-right-radius: 0;
+}
+
+.message-left {
+    background-color: var(--highlight-bg	);
+    color: var(--highlight-text-color);
+    border-bottom-left-radius: 0;
+}
+
+.message p {
+    margin: 0;
+}
+
+/* Estilo para dispositivos móviles */
+@media (max-width: 767px) {}
+
+/* Estilo para tablets y dispositivos con pantallas medianas */
+@media (max-width: 1023px) {}

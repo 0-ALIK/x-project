@@ -1,0 +1,34 @@
+.card-user-chat {
+    position: relative;
+    padding: var(--spacing-2);
+    background-color: var(--surface-50);
+    border-radius: var(--border-radius);
+    display: flex;
+    align-items: center;
+}
+
+.card-user-chat:hover {
+    background-color: var(--highlight-bg);
+    color: var(--highlight-text-color);
+}
+
+.card-user-chat-text {
+    margin-left: var(--spacing-2);
+}
+
+.card-user-chat-text h2, .card-user-chat-text p {
+    margin: 0;
+    padding: 0;
+}
+
+.card-user-chat-text h2 {
+    font-size: var(--text-lg);
+    color: var(--highlight-text-color);
+
+}
+
+.tag-position {
+    top: var(--spacing-2);
+    right: var(--spacing-2);
+    position: absolute;
+}

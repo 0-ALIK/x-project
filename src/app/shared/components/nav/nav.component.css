@@ -9,6 +9,12 @@
     align-items: center;
     top: 0;
     background-color: transparent;
+    z-index: 980;
+}
+
+.backdrop {
+    background-color: rgba(var(--surface-ground), 0.9);
+    backdrop-filter: blur(8px);
 }
 
 .nav-actions {

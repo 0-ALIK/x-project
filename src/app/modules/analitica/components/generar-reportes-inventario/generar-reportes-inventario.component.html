@@ -1,0 +1,50 @@
+<form action="" class="">
+    <div>
+        <h1>REPORTE DE INVENTARIO</h1>
+        <!-- Nombre del informe -->
+        <article >
+            <span class="p-float-label">
+            <input pInputText id="nameInforme" />
+            <label htmlFor="username">Nombre del Informe</label>
+            </span>
+        </article>
+
+        <h2>Formato del informe</h2>
+        <p-multiSelect [ngModelOptions]="{standalone: true}" [options]="formatos" [(ngModel)]="selectedFormato" optionLabel="nameFormato"></p-multiSelect><br>
+    </div>
+    <!-- SEGMENTOS -->
+    <section><!-- PRECIO -->
+
+        <h2>Segmentar según: </h2>
+        <h3>Precio</h3><br>
+        <span class="p-float-label  ">
+            <p-inputNumber inputId="currency-us" mode="currency" currency="USD" locale="en-US"> </p-inputNumber>
+            <label htmlFor="number-input">Minimo</label>
+        </span><br><br>
+        <span class="p-float-label">
+            <p-inputNumber inputId="currency-us" mode="currency" currency="USD" locale="en-US"> </p-inputNumber>
+            <label htmlFor="number-input">Máximo</label>
+        </span>
+
+        <!-- CANTIDA -->
+        <article class="card flex flex-wrap gap-3 p-fluid">
+            <h3>Cantidad en Stock</h3>
+            <label class="mb-2 block font-bold" for="stacked">Minima</label>
+            <p-inputNumber [showButtons]="true" inputId="stacked" > </p-inputNumber>
+            <br><br>
+            <label class="mb-2 block font-bold" for="stacked">Máxima</label>
+            <p-inputNumber [showButtons]="true" inputId="stacked" > </p-inputNumber>
+        </article>
+
+        <article> <!-- TIPO CATEGORIA -->
+            <h3>Categoria</h3>
+            <p-multiSelect [ngModelOptions]="{standalone: true}" [options]="categorias" [(ngModel)]="selectedCategorias" defaultLabel="Elija una Categoria" optionLabel="nameCategoria" display="chip" [filter]="true" [virtualScroll]="true" [virtualScrollItemSize]="25"></p-multiSelect>
+        </article>
+
+        <article> <!-- TIPO MARCA -->
+            <h3>Marca</h3>
+            <p-multiSelect [ngModelOptions]="{standalone: true}" [options]="marcas" [(ngModel)]="selectedMarcas" defaultLabel="Elija una Marca" optionLabel="nameMarca" display="chip" [filter]="true" [virtualScroll]="true" [virtualScrollItemSize]="25"></p-multiSelect>
+        </article>
+        <p-button label="Generar Informe" [loading]="loading" loadingIcon="pi pi-spinner" (onClick)="load()" [style]="{'margin-top': 'var(--spacing-5)'}"></p-button>
+    </section>
+</form>

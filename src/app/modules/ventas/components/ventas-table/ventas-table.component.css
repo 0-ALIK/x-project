@@ -1,0 +1,21 @@
+.celda-cliente {
+    display: flex;
+    align-items: center;
+}
+
+.celda-cliente-nombre {
+    font-size: var(--text-md);
+    margin-left: var(--spacing-1);
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.caption {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.separacion {
+    margin-left: var(--spacing-3);
+}

@@ -1,0 +1,48 @@
+
+<div class="flex align-items-center gap-2">
+    <h1 class="text-3xl">Pedido con id: id</h1>
+    <p-tag [value]="pedido?.estado?.estado"></p-tag>
+</div>
+
+
+
+<div class="flex flex-column md:flex-row gap-2">
+    <div class="w-full">
+        <div class="mb-2">
+            <alik-card-user [cliente]="cliente"></alik-card-user>
+        </div>
+        <ng-container *ngIf="tieneEmpresa">
+            <div class="mb-2">
+                <h2 class="text-lg m-0 p-0">Empresa asociada</h2>
+                <alik-card-empresa [empresa]="empresa"></alik-card-empresa>
+            </div>
+        </ng-container>
+        <div class="mb-2">
+            <h2 class="text-lg m-0 p-0">Dirección de envio</h2>
+            <alik-card-direccion [direccion]="pedido?.direccion"></alik-card-direccion>
+        </div>
+        <div class="mb-2">
+            <h2 class="text-lg m-0 p-0">Impote de la venta</h2>
+            <p-inputNumber
+                [(ngModel)]="importe"
+                [readonly]="true"
+                inputId="currency-us"
+                mode="currency"
+                currency="USD"
+                locale="en-US">
+            </p-inputNumber>
+        </div>
+    </div>
+
+    <div class="w-full">
+        <p-accordion [activeIndex]="0">
+            <p-accordionTab header="Productos">
+                <app-productos-pedidos [importeDebido]="importeDebido" [pedidoProducto]="pedido?.pedido_producto ||   []" [pagos]="pedido?.pagos" ></app-productos-pedidos>
+            </p-accordionTab>
+
+            <p-accordionTab header="Pagos">
+                <app-pagos-list [importeDebido]="importeDebido" [pagos]="pedido?.pagos"></app-pagos-list>
+            </p-accordionTab>
+        </p-accordion>
+    </div>
+</div>

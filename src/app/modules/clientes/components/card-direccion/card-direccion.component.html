@@ -1,0 +1,19 @@
+<div
+    [style.backgroundColor]="fondo ? 'var(--surface-50)' : 'var(--surface-card)'"
+    [style]="{'borderRadius': 'var(--border-radius)'}">
+
+    <ng-container *ngIf="direccion">
+        <div class="p-2">
+            <h2 class="m-0 p-0 text-xl">{{direccion.provincia?.nombre}}</h2>
+            <p class="m-0 mb-2 p-0">{{direccion.telefono}}</p>
+            <p class="m-0 p-0">{{direccion.detalles}}</p>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="!direccion">
+        <div class="p-2">
+            <p-skeleton styleClass="mb-2 w-full"></p-skeleton>
+            <p-skeleton width="12rem" styleClass="mb-2"></p-skeleton>
+        </div>
+    </ng-container>
+</div>

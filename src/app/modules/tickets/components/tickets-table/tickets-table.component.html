@@ -1,0 +1,81 @@
+<p-table
+    #tabla
+    [value]="reclamos"
+    styleClass="p-datatable-gridlines"
+    selectionMode="single"
+    [(selection)]="selectedProduct" dataKey="id" [rows]="10"
+    (onRowSelect)="onSeleccion( $event )">
+
+    <ng-template pTemplate="caption">
+        <section class="caption">
+            <div class="p-buttonset">
+                <button pButton label="Limpiar" class="p-button-outlined" (click)="tabla.clear()" icon="pi pi-filter-slash"></button>
+                <button pButton label="Reporte" icon="pi pi-file-export"></button>
+            </div>
+            <span class="p-input-icon-left ml-auto">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" placeholder="Buscar producto..." />
+            </span>
+        </section>
+    </ng-template>
+
+    <ng-template pTemplate="header">
+        <tr>
+            <th>
+                <div class="flex align-items-center">
+                    Cliente
+                    <p-columnFilter field="nombre" display="menu"></p-columnFilter>
+                </div>
+            </th>
+            <th>
+                <div class="flex align-items-center">
+                    Categoria
+                    <p-columnFilter field="categoria.nombre" display="menu"></p-columnFilter>
+                </div>
+            </th>
+            <th>
+                <div class="flex align-items-center">
+                    Prioridad
+                    <p-columnFilter field="prioridad.prioridad" display="menu"></p-columnFilter>
+                </div>
+            </th>
+            <th>
+                <div class="flex align-items-center">
+                    Estado
+                    <p-columnFilter field="estado.estado" display="menu"></p-columnFilter>
+                </div>
+            </th>
+            <th>
+                <div class="flex align-items-center">
+                    Fecha
+                    <p-columnFilter field="fecha" type="date" display="menu"></p-columnFilter>
+                </div>
+            </th>
+            <th>Acciones</th>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-reclamo>
+        <tr [pSelectableRow]="reclamo">
+            <td>
+                <div class="flex align-items-center gap-1">
+                    <div>
+                        <p-avatar [image]="reclamo.cliente.foto" shape="circle"></p-avatar>
+                    </div>
+                    <p>{{ reclamo.cliente.nombre + ' ' + reclamo.cliente.apellido }}</p>
+                </div>
+            </td>
+            <td>{{ reclamo.categoria.nombre }}</td>
+            <td>
+                <p-tag [value]="reclamo.prioridad.prioridad" [severity]="tagsColorsService.getPriority(reclamo.prioridad.prioridad)"></p-tag>
+            </td>
+            <td>
+                <p-tag [value]="reclamo.estado.estado" [severity]="tagsColorsService.getSeverity(reclamo.estado.estado)"></p-tag>
+            </td>
+            <td>{{ reclamo.fecha | date }}</td>
+            <td>
+                <p-button icon="pi pi-trash" [rounded]="true" severity="danger" [outlined]="true"></p-button>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>

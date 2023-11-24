@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ThemesService } from './services/themes.service';
+import { PrimeNGConfig } from 'primeng/api';
 
 @Component({
     selector: 'app-root',
@@ -10,10 +11,26 @@ import { ThemesService } from './services/themes.service';
 export class AppComponent implements OnInit {
 
     public constructor(
-        private themesService: ThemesService
+        private themesService: ThemesService,
+        private primeConfig: PrimeNGConfig,
     ) {}
 
     public ngOnInit(): void {
+        this.primeConfig.setTranslation({
+            'matchAll': 'Encontrar todos',
+            'matchAny': 'Encontrar cualquiera',
+            'startsWith': 'Empieza con',
+            'contains': 'Contiene',
+            'notContains': 'No contiene',
+            'endsWith': 'Termina con',
+            'equals': 'Es igual a',
+            'notEquals': 'No es igual a',
+            'lt': 'Menor que',
+            'lte': 'Menor o igual que',
+            'gt': 'Mayor que',
+            'gte': 'Mayor o igual que'
+        });
+
         this.applySavedTheme();
     }
 
