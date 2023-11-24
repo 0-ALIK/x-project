@@ -47,7 +47,8 @@ import { AnaliticaModule } from '../analitica/analitica.module';
         InputNumberModule,
         FormsModule,
         DropdownModule,
-        AnaliticaModule
+        AnaliticaModule,
+        DropdownModule
     ],
     providers: [ImportesCalcService, MessageService, DialogService]
 })
