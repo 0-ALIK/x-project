@@ -5,7 +5,7 @@ import { AnaliticaRoutingModule } from './analitica-routing.module';
 import { VerDashboardComponent } from './pages/ver-dashboard/ver-dashboard.component';
 
 import { DropdownModule } from 'primeng/dropdown';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CheckboxModule } from 'primeng/checkbox';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
@@ -16,29 +16,35 @@ import { ChartModule } from 'primeng/chart';
 import { TagModule } from 'primeng/tag';
 import { TabMenuModule } from 'primeng/tabmenu';
 
-import { GenerarReportesInventarioComponent } from './components/generar-reportes-inventario/generar-reportes-inventario.component';
-import { GenerarReportesVentasComponent } from './components/generar-reportes-ventas/generar-reportes-ventas.component';
 import { DashboardCardComponent } from './components/dashboard-card/dashboard-card.component';
 import { DashboardClientesComponent } from './components/dashboard-clientes/dashboard-clientes.component';
 import { DashboardVentasComponent } from './components/dashboard-ventas/dashboard-ventas.component';
 import { InventarioDashboardComponent } from './pages/inventario-dashboard/inventario-dashboard.component';
 import { IndicadorRendimientoComponent } from './pages/indicador-rendimiento/indicador-rendimiento.component';
+import { ReporteInventarioComponent } from './components/reporte-inventario.component';
+import { ReporteClienteComponent } from './components/reporte-cliente.component';
+import { ReporteVentaComponent } from './components/reporte-venta.component';
+import { ReporteTicketsComponent } from './components/reporte-tickets.component';
+import { RadioButtonModule } from 'primeng/radiobutton';
 
 
 @NgModule({
     declarations: [
         VerDashboardComponent,
-        GenerarReportesInventarioComponent,
-        GenerarReportesVentasComponent,
         DashboardCardComponent,
         DashboardClientesComponent,
         DashboardVentasComponent,
         InventarioDashboardComponent,
-        IndicadorRendimientoComponent
+        IndicadorRendimientoComponent,
+        ReporteInventarioComponent,
+        ReporteClienteComponent,
+        ReporteVentaComponent,
+        ReporteTicketsComponent
     ],
     imports: [
         CommonModule,
         FormsModule,
+        ReactiveFormsModule,
         DropdownModule,
         CheckboxModule,
         InputTextModule,
@@ -49,12 +55,15 @@ import { IndicadorRendimientoComponent } from './pages/indicador-rendimiento/ind
         AnaliticaRoutingModule,
         ChartModule,
         TagModule,
-        TabMenuModule
+        TabMenuModule,
+        RadioButtonModule,
+        MultiSelectModule
     ],
-    // Recuerden exportar sus componentes aquí para que los otros módulos puedas acceder a ellos
     exports: [
-        GenerarReportesInventarioComponent,
-        GenerarReportesVentasComponent
+        ReporteClienteComponent,
+        ReporteInventarioComponent,
+        ReporteTicketsComponent,
+        ReporteVentaComponent
     ]
 })
 export class AnaliticaModule { }

@@ -55,8 +55,4 @@ export class TableEntradasComponent implements OnInit {
     showGenerarReporte() {
         /* this.ref = this.dialogService.open(DialogGenerarReporteComponent, { header: 'Generar Reporte' }); */
     }
-
-    clear(table: Table) {
-        table.clear();
-    }
 }

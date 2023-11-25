@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { Router } from '@angular/router';
+import { Cliente } from 'src/app/interfaces/usuario.inteface';
+import { clientes } from 'src/app/interfaces/data';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { ReporteClienteComponent } from 'src/app/modules/analitica/components/reporte-cliente.component';
 
 @Component({
   selector: 'app-clientes-table',
@@ -17,21 +21,21 @@ export class ClientesTableComponent {
 
     public rows = 10;
 
-    public arregloClientes: any[] = [
-        {
-            id: 1, foto: 'https://res.cloudinary.com/duwsb7fbe/image/upload/v1697773715/xd_upxbh0.jpg', nombre: 'Flavio', apellido: 'Sánchez', cedula: 'flacio', genero: '8888888', telefono: '66782932', correo: 'asdnkasjdnk', frecuencia: 'asd', empresa: '10'
-        },
-        {
-            id: 2, foto: 'https://res.cloudinary.com/duwsb7fbe/image/upload/v1697773715/xd_upxbh0.jpg', nombre: 'Flavio', apellido: 'Sánchez', cedula: 'flacio', genero: '8888888', telefono: '66782932', correo: 'asdnkasjdnk', frecuencia: 'asd', empresa: '10'
-        },
-        {
-            id: 3, foto: 'https://res.cloudinary.com/duwsb7fbe/image/upload/v1697773715/xd_upxbh0.jpg', nombre: 'Flavio', apellido: 'Sánchez', cedula: 'flacio', genero: '8888888', telefono: '66782932', correo: 'asdnkasjdnk', frecuencia: 'asd', empresa: '10'
-        }
-    ];
+    public arregloClientes: Cliente[] = clientes;
+
+    public ref: DynamicDialogRef | undefined;
 
     public constructor(
+        public dialogService: DialogService,
         private router: Router
-    ) {}
+    ) { }
+
+    public showGenerarReporte(): void {
+        this.ref = this.dialogService.open(ReporteClienteComponent, {
+            header: 'Generar Reporte',
+            height: '70%'
+        });
+    }
 
     public ngOnInit(): void {
 
@@ -74,8 +78,8 @@ export class ClientesTableComponent {
     }
 
     public onRowSelect(event: any): void {
-        const { id } = event.data;
-        this.router.navigate(['/app/clientes/perfil', id]);
+        const { id_cliente } = event.data;
+        this.router.navigate(['/app/clientes/perfil/cliente', id_cliente]);
     }
 
 }

@@ -1,4 +1,11 @@
-<article class="message"
-    [ngClass]="{'message-left' : pocision !== 'right', 'message-right' : pocision === 'right'}">
-    <p>{{ mensaje.mensaje }}</p>
-</article>
+<div class="" >
+    <article class="flex flex-column p-2 message"
+        [ngClass]="{'message-left' : posicion === 'left', 'message-right' : posicion === 'right'}">
+        <p>{{ mensaje.mensaje }}</p>
+    </article>
+</div>
+
+
+
+
+

@@ -8,6 +8,8 @@ import { FileUploadEvent } from 'primeng/fileupload';
 })
 export class PerfilCardComponent {
 
+    public genero: string = "M";
+
     public uploadedFiles: File[] = [];
 
     public extenPerminitas: string[] = ['png', 'jpg'];

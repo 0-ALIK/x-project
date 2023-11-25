@@ -1,4 +1,7 @@
-<div [style]="{'backgroundColor': 'var(--surface-card)', 'borderRadius': 'var(--border-radius)'}">
+<div
+    [style.backgroundColor]="fondo ? 'var(--surface-50)' : 'var(--surface-card)'"
+    [style]="{'borderRadius': 'var(--border-radius)'}">
+
     <ng-container *ngIf="direccion">
         <div class="p-2">
             <h2 class="m-0 p-0 text-xl">{{direccion.provincia?.nombre}}</h2>

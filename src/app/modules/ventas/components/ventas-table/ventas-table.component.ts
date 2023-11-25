@@ -4,6 +4,8 @@ import { Table } from 'primeng/table';
 import { pedidos } from 'src/app/interfaces/data';
 import { Pedido } from 'src/app/interfaces/pedido.interface';
 import { ImportesCalcService } from '../../services/importes-calc.service';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { ReporteVentaComponent } from 'src/app/modules/analitica/components/reporte-venta.component';
 
 @Component({
   selector: 'app-ventas-table',
@@ -19,10 +21,20 @@ export class VentasTableComponent implements OnInit {
 
     public selectedPedido: Pedido | undefined;
 
+    public ref: DynamicDialogRef | undefined;
+
     public constructor(
+        public dialogService: DialogService,
         private router: Router,
         public importesCalc: ImportesCalcService
-    ) {}
+    ) { }
+
+    public showGenerarReporte(): void {
+        this.ref = this.dialogService.open(ReporteVentaComponent, {
+            header: 'Generar Reporte',
+            height: '70%'
+        });
+    }
 
     public ngOnInit(): void {
         if(!this.tablePedidos) return;
