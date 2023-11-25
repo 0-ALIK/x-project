@@ -1,4 +1,35 @@
-<p-sidebar [(visible)]="sidebarVisible" position="right" [style]="{ width: '450px' }">
+<main parent class="bg-bluegray-400 flex p-2 m-2 gap-2 flex-column surface-overlay justify-content-center align-items-center border-round w-auto "  >
+    <h1>Experiencia de los clientes</h1>
+    <p>Valoracion de los clientes</p>
+    <p-rating  [cancel]="false"></p-rating>
+        <div class="flex flex-column justify-content-center  align-items-center" style="width: calc(80vh);">
+            <p-divider></p-divider>
+            <p-progressBar class="h-2rem w-30rem "  [value]="50"></p-progressBar>
+            <p-progressBar class="h-2rem w-30rem  "  [value]="20"></p-progressBar>
+            <p-progressBar class="h-2rem w-30rem  "  [value]="70"></p-progressBar>
+            <p-progressBar class="h-2rem w-30rem  "  [value]="99"></p-progressBar>
+            <p-progressBar class="h-2rem w-30rem  "  [value]="35"></p-progressBar>
+            <p-divider></p-divider>
+        </div>
+
+    <section class="flex flex-wrap justify-content-center gap-2">
+        <app-card-blog-usuario [clientes]="usuario"> </app-card-blog-usuario>
+        <app-card-blog-usuario [clientes]="usuario"> </app-card-blog-usuario>
+        <app-card-blog-usuario [clientes]="usuario"> </app-card-blog-usuario>
+        <app-card-blog-usuario [clientes]="usuario"> </app-card-blog-usuario>
+        <app-card-blog-usuario [clientes]="usuario"> </app-card-blog-usuario>
+        <app-card-blog-usuario [clientes]="usuario"> </app-card-blog-usuario>
+        <app-card-blog-usuario [clientes]="usuario"> </app-card-blog-usuario>
+        <app-card-blog-usuario [clientes]="usuario"> </app-card-blog-usuario>
+
+    </section>
+    <p-scrollTop target="parent" styleClass="custom-scrolltop" [threshold]="1" icon="pi pi-arrow-up"></p-scrollTop>
+</main>
+<p-divider></p-divider>
+
+
+
+<!-- <p-sidebar [(visible)]="sidebarVisible" position="right" [style]="{ width: '450px' }">
         <h3>Valora tu experiencia con nosotros</h3>
         <div class="stars-client">
             <form>
@@ -76,10 +107,9 @@
     </p-dataView>
 </div>
 
-<!-- Para desplegar el sidebar del formulario de reseñas -->
 <div class="boton-form">
     <p-button icon="pi pi-plus" [rounded]="true" (onClick)="sidebarVisible = true"></p-button>
 </div>
 <p-panel *ngIf="mostrarCalificacion" [style]="{ position: 'fixed', bottom: '20px', right: '20px', zIndex: '9999' }">
     <div class="stars"></div>
-</p-panel>
+</p-panel> -->

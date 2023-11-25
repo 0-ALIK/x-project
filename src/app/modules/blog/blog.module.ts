@@ -10,10 +10,21 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { DataViewModule } from 'primeng/dataview';
 import { TagModule } from 'primeng/tag';
+import { CardBlogUsuarioComponent } from './components/card-blog-usuario/card-blog-usuario.component';
+import { AvatarModule } from 'primeng/avatar';
+import { AvatarGroupModule } from 'primeng/avatargroup';
+import { ProgressBarModule } from 'primeng/progressbar';
+import { ToastModule } from 'primeng/toast'
+import { ScrollTopModule } from 'primeng/scrolltop';
+import { ScrollPanelModule } from 'primeng/scrollpanel';
+import { DividerModule } from 'primeng/divider';
+
+
 
 @NgModule({
   declarations: [
-    VerBlogComponent
+    VerBlogComponent,
+    CardBlogUsuarioComponent
   ],
   imports: [
     CommonModule,
@@ -25,7 +36,14 @@ import { TagModule } from 'primeng/tag';
     RatingModule,
     SelectButtonModule,
     DataViewModule,
-    TagModule
+    TagModule,
+    AvatarGroupModule,
+    AvatarModule,
+    ProgressBarModule,
+    ToastModule,
+    ScrollTopModule,
+    ScrollPanelModule,
+    DividerModule
   ]
 })
 export class BlogModule { }
