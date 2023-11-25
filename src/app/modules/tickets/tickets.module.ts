@@ -12,7 +12,6 @@ import { AvatarModule } from 'primeng/avatar';
 import { TagsColorsService } from './services/tags-colors.service';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextareaModule } from 'primeng/inputtextarea';
-import { FileUploadModule } from 'primeng/fileupload';
 import { ImageModule } from 'primeng/image';
 import { InputTextModule } from 'primeng/inputtext';
 import { ClientesModule } from '../clientes/clientes.module';
@@ -20,6 +19,7 @@ import { MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { AnaliticaModule } from '../analitica/analitica.module';
 import { TicketCardComponent } from './components/ticket-card.component';
+import { FileUploadModule } from 'primeng/fileupload';
 
 @NgModule({
 	declarations: [

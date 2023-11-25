@@ -1,13 +1,22 @@
 .mensajes-list {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-2);
+    gap: var(--spacing-4);
+    padding: var(--spacing-4);
 }
 
+
+
 .left {
+
     align-items: flex-start;
 }
 
 .right {
     align-self: flex-end
 }
+
+/* Estilo para dispositivos móviles */
+@media (max-width: 767px) {}
+
+/* Estilo para tablets y dispositivos con pantallas medianas */
+@media (max-width: 1023px) {}
+
