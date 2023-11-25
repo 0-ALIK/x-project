@@ -12,7 +12,7 @@
         <h3 class="m-0 p-0 text-3xl" *ngIf="tipo === 'dinero'">{{numero | currency:'USD':'symbol':'1.2-2'}}</h3>
         <div *ngIf="valorAnterior">
             <p-tag
-                [value]="(peligro) ? 'Bajo crecimiento' : 'Buen crecimiento'"
+                [value]="(peligro) ? 'Malo' : 'Bueno'"
                 [severity]="!peligro ? 'success' : 'danger'"></p-tag>
         </div>
     </div>

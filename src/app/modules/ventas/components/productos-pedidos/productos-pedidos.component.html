@@ -1,1 +1,34 @@
-<p>productos-pedidos works!</p>
+<main>
+    <p-table [value]="pedidoProducto || []" [scrollable]="true" [scrollHeight]="'400px'">
+        <ng-template pTemplate="header" class="m-0">
+            <tr>
+                <th>   </th>
+                <th>    </th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Total</th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-pedidoProducto >
+            <tr>
+                <td><p-avatar [image]=" pedidoProducto?.producto?.foto" ></p-avatar></td>
+                <td>{{ pedidoProducto?.producto?.nombre }}</td>
+                <td>{{ pedidoProducto?.producto?.precio_unit * pedidoProducto.producto?.cantidad_por_caja | currency:'USD':'symbol':'1.2-2'  }}</td>
+                <td>{{ pedidoProducto?.cantidad }}</td>
+                <td>{{ pedidoProducto?.cantidad * pedidoProducto.producto?.cantidad_por_caja * pedidoProducto.producto?.precio_unit| currency:'USD':'symbol':'1.2-2'  }}</td>
+            </tr>
+        </ng-template>
+
+            <ng-template pTemplate="summary" let-pago>
+                <tr class="flex flex-column">
+                    <section class="flex flex-column align-items-end gap-1 ">
+                        <small>Sub Total {{ importesCalc.calcularImporte(pedidoProducto || [] ) | currency:'USD':'symbol':'1.2-2'}}</small>
+                        <small>Descuento {{ importesCalc.calcularDescuento() | percent: '1.2' }} </small>
+                        <small>Total {{ importesCalc.calcularImporte(pedidoProducto || [] )-importesCalc.calcularDescuento()| currency:'USD':'symbol':'1.2-2'}}</small>
+                    </section>
+                </tr>
+        </ng-template>
+
+    </p-table>
+  </main>

@@ -35,7 +35,7 @@ export class DashboardCardComponent implements OnInit {
     public ngOnInit(): void {
         if(!this.valorAnterior) return;
 
-        const crecimiento = this.numero - this.valorAnterior;
+        const crecimiento = (this.numero / this.valorAnterior)-1;
         const porcentaje = (crecimiento / this.valorAnterior) * 100;
 
         console.log( porcentaje );

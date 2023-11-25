@@ -38,6 +38,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { ChartModule } from 'primeng/chart';
 import { SkeletonModule } from 'primeng/skeleton';
 import { DialogVerMarcasComponent } from './components/dialog-ver-marcas/dialog-ver-marcas.component';
+import { AnaliticaModule } from '../analitica/analitica.module';
 
 @NgModule({
     declarations: [
@@ -76,7 +77,8 @@ import { DialogVerMarcasComponent } from './components/dialog-ver-marcas/dialog-
         SharedModule,
         CalendarModule,
         ChartModule,
-        SkeletonModule
+        SkeletonModule,
+        AnaliticaModule
     ],
     providers: [ ConfirmationService, MessageService, DialogService ]
 })

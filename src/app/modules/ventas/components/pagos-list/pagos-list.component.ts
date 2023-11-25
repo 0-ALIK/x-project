@@ -4,6 +4,7 @@ import { ImportesCalcService } from '../../services/importes-calc.service';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { AgregarEditarPagoComponent } from '../agregar-editar-pago/agregar-editar-pago.component';
 
+
 @Component({
     selector: 'app-pagos-list',
     templateUrl: './pagos-list.component.html',
@@ -26,6 +27,7 @@ export class PagosListComponent {
     public agregarPago(): void {
         this.ref = this.dialogService.open(AgregarEditarPagoComponent, {
             header: 'Agregar pago',
+            height: '70%'
         });
 
         this.ref.onClose.subscribe((categoria: any) => {

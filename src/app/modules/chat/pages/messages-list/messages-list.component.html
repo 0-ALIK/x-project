@@ -1,13 +1,20 @@
-<section class="mensajes-list">
-
-    <div
+<section class=" flex overflow-y-auto  flex-column mensajes-list" style="height: 36rem;">
+    <div class="  "
         *ngFor="let mensaje of mensajes"
-        [ngClass]="{'right': mensaje.remitente === 'admin', 'left':  mensaje.remitente !== 'admin'}">
+        [ngClass]="{'right': mensaje.remitente === 'admin', 'left':  mensaje.remitente === 'admin'}">
 
         <app-message-bubble
             [posicion]="mensaje.remitente === 'admin' ? 'right' : 'left'"
             [mensaje]="mensaje">
         </app-message-bubble>
     </div>
-
 </section>
+
+ <section class=" h-3rem w-auto " style= "position:fixed; bottom: 3%;" >
+    <div class="flex flex-row justify-content-between gap-2  ">
+
+        <textarea class="overflow-y-auto" rows="2" cols="35" pInputTextarea [autoResize]="true" [(ngModel)]="mensaje" placeholder="Escribe un mensaje"></textarea>
+        <p-button class="right-50" label="Submit" [disabled]="!mensaje"  (click)="enviarMensaje()"></p-button>
+    </div>
+ </section>
+
