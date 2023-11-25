@@ -22,8 +22,7 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { AgregarEditarPagoComponent } from './components/agregar-editar-pago/agregar-editar-pago.component';
 import { DropdownModule } from 'primeng/dropdown';
 import { AnaliticaModule } from '../analitica/analitica.module';
-import { TicketsModule } from '../tickets/tickets.module';
-
+import { TicketCardComponent } from '../tickets/components/ticket-card.component';
 
 @NgModule({
     declarations: [
@@ -32,7 +31,7 @@ import { TicketsModule } from '../tickets/tickets.module';
         VerPedidoByIdComponent,
         ProductosPedidosComponent,
         PagosListComponent,
-        AgregarEditarPagoComponent
+        AgregarEditarPagoComponent,
     ],
     imports: [
         CommonModule,
@@ -50,7 +49,7 @@ import { TicketsModule } from '../tickets/tickets.module';
         DropdownModule,
         AnaliticaModule,
         DropdownModule,
-        TicketsModule
+        TicketCardComponent
     ],
     providers: [ImportesCalcService, MessageService, DialogService]
 })

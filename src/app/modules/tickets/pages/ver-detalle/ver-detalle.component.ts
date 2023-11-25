@@ -1,6 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { clientes } from 'src/app/interfaces/data';
+import { clientes, pedidos } from 'src/app/interfaces/data';
+import { Pedido } from 'src/app/interfaces/pedido.interface';
 import { ReclamoPrioridad } from 'src/app/interfaces/raclamo.interface';
 import { Cliente } from 'src/app/interfaces/usuario.inteface';
 
@@ -17,6 +18,8 @@ export class VerDetalleComponent implements OnInit {
     uploadedFiles: any[] = [];
 
     ticketNumber: number = 12391;
+
+    public pedido: Pedido = pedidos[0];
 
     reclamoPrioridad: ReclamoPrioridad[]  | undefined
 
@@ -59,23 +62,5 @@ export class VerDetalleComponent implements OnInit {
             this.loading = false
         }, 2000);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

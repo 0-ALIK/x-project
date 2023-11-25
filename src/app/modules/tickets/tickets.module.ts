@@ -18,15 +18,13 @@ import { ClientesModule } from '../clientes/clientes.module';
 import { MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { AnaliticaModule } from '../analitica/analitica.module';
-import { TicketCardComponent } from './components/ticket-card.component';
-import { FileUploadModule } from 'primeng/fileupload';
+import { VentaCardComponent } from 'src/app/components/venta-card.component';
 
 @NgModule({
 	declarations: [
 		VerTicketsComponent,
         VerDetalleComponent,
-        TicketsTableComponent,
-        TicketCardComponent,
+        TicketsTableComponent
 	],
 	imports: [
 		CommonModule,
@@ -40,14 +38,11 @@ import { FileUploadModule } from 'primeng/fileupload';
         AvatarModule,
         DropdownModule,
         InputTextareaModule,
-        FileUploadModule,
         ImageModule,
         ClientesModule,
-        AnaliticaModule
+        AnaliticaModule,
+        VentaCardComponent
 	],
-    exports: [
-        TicketCardComponent
-    ],
     providers: [TagsColorsService, MessageService, DialogService]
 })
 export class TicketsModule { }

@@ -1,8 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Reclamo } from 'src/app/interfaces/raclamo.interface';
 import { TagsColorsService } from '../services/tags-colors.service';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { TagModule } from 'primeng/tag';
 
 @Component({
+    standalone: true,
+    imports: [CommonModule, RouterModule, TagModule],
+    providers: [TagsColorsService],
     selector: 'ticket-card',
     template: `
         <article

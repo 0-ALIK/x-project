@@ -21,7 +21,9 @@
                 </div>
             </div>
         </section>
-
+        <section class="mb-2">
+            <venta-card [pedido]="pedido"></venta-card>
+        </section>
         <section class="flex flex-row">
             <p-button label="Abrir chat" icon="pi pi-comments" [loading]="loading" (onClick)="cargarBoton()" [disabled]="false"></p-button>
             <p-button label="Cerrar ticket" styleClass="ml-2" icon="pi pi-exclamation-triangle" severity="danger" [disabled]="false"></p-button>

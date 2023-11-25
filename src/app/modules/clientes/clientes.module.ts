@@ -37,6 +37,9 @@ import { AgregarColaboradorComponent } from './components/agregar-colaborador/ag
 import { AgregarSucursalComponent } from './components/agregar-sucursal/agregar-sucursal.component';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { AnaliticaModule } from '../analitica/analitica.module';
+import { TicketsModule } from '../tickets/tickets.module';
+import { TicketCardComponent } from '../tickets/components/ticket-card.component';
+import { VentaCardComponent } from 'src/app/components/venta-card.component';
 
 @NgModule({
     declarations: [
@@ -79,7 +82,9 @@ import { AnaliticaModule } from '../analitica/analitica.module';
         ReactiveFormsModule,
         SpeedDialModule,
         InputTextareaModule,
-        AnaliticaModule
+        AnaliticaModule,
+        TicketCardComponent,
+        VentaCardComponent
     ],
     exports: [
         CardUserComponent,

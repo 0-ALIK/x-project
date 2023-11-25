@@ -58,6 +58,13 @@
     </ng-container>
 
     <ng-container *ngIf="activeItem?.label && activeItem?.label === 'Pedidos'" >
+        <div class="flex gap-2">
+            <venta-card
+                [style]="{'width': '50%'}"
+                *ngFor="let pedido of pedidos"
+                [pedido]="pedido">
+            </venta-card>
+        </div>
     </ng-container>
 </div>
 
