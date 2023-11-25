@@ -19,12 +19,14 @@ import { ClientesModule } from '../clientes/clientes.module';
 import { MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { AnaliticaModule } from '../analitica/analitica.module';
+import { TicketCardComponent } from './components/ticket-card.component';
 
 @NgModule({
 	declarations: [
 		VerTicketsComponent,
         VerDetalleComponent,
         TicketsTableComponent,
+        TicketCardComponent,
 	],
 	imports: [
 		CommonModule,
@@ -43,6 +45,9 @@ import { AnaliticaModule } from '../analitica/analitica.module';
         ClientesModule,
         AnaliticaModule
 	],
+    exports: [
+        TicketCardComponent
+    ],
     providers: [TagsColorsService, MessageService, DialogService]
 })
 export class TicketsModule { }

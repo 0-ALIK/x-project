@@ -22,6 +22,7 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { AgregarEditarPagoComponent } from './components/agregar-editar-pago/agregar-editar-pago.component';
 import { DropdownModule } from 'primeng/dropdown';
 import { AnaliticaModule } from '../analitica/analitica.module';
+import { TicketsModule } from '../tickets/tickets.module';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { AnaliticaModule } from '../analitica/analitica.module';
         FormsModule,
         DropdownModule,
         AnaliticaModule,
-        DropdownModule
+        DropdownModule,
+        TicketsModule
     ],
     providers: [ImportesCalcService, MessageService, DialogService]
 })

@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { pedidos } from 'src/app/interfaces/data';
+import { pedidos, reclamos } from 'src/app/interfaces/data';
 import { Pedido } from 'src/app/interfaces/pedido.interface';
 import { Cliente, Empresa } from 'src/app/interfaces/usuario.inteface';
 import { ImportesCalcService } from '../../services/importes-calc.service';
 import { Producto } from 'src/app/interfaces/producto.iterface';
+import { Reclamo } from 'src/app/interfaces/raclamo.interface';
 
 
 @Component({
@@ -27,6 +28,8 @@ export class VerPedidoByIdComponent implements OnInit {
 
     public importeDebido: number | undefined;
 
+    public reclamo: Reclamo | undefined;
+
     public constructor(
         private activatedRoute: ActivatedRoute,
         public importesCalc: ImportesCalcService
@@ -44,6 +47,9 @@ export class VerPedidoByIdComponent implements OnInit {
                 this.pedido = pedidos.find(p => p.id_pedido === Number(id));
                 this.cliente = this.pedido?.cliente;
                 this.empresa = this.cliente?.empresa;
+                this.reclamo = reclamos.find(r => r.cliente?.id_cliente === this.cliente?.id_cliente);
+
+                console.log(this.reclamo);
                 this.importe = this.importesCalc.calcularImporte( this.pedido?.pedido_producto || []);
                 this.importeDebido = this.importesCalc.calcularImporteDebido(
                     this.pedido?.pedido_producto || [],
