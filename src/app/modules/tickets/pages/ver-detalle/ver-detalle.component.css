@@ -1,16 +1,4 @@
-.ticket-container {
-    display: flex;
-    align-items: center;
+.fondo{
+    background-color: var(--surface-card);
 }
 
-.titulo{
-    margin-right: 10px;
-}
-
-.status-prioridad{
-    display: flex;
-}
-
-p-tag{
-    margin-left: 20px;
-}

@@ -25,17 +25,32 @@
     <article class="article a2">
         <form>
             <div class="input">
-                <label htmlFor="username">Nombre</label>
-                <input pInputText id="username" aria-describedby="username-help">
+                <label htmlFor="nombre">Nombre</label>
+                <input pInputText id="nombre" aria-describedby="username-help">
             </div>
             <div class="input">
-                <label htmlFor="username">Apellido</label>
-                <input pInputText id="username" aria-describedby="username-help">
+                <label htmlFor="apellido">Apellido</label>
+                <input pInputText id="apellido" aria-describedby="username-help">
             </div>
             <div class="input">
-                <label htmlFor="username">Telefono</label>
-                <input pInputText id="username" aria-describedby="username-help">
+                <label htmlFor="telefono">Telefono</label>
+                <input pInputText id="telefono" aria-describedby="username-help">
             </div>
+            <div class="input">
+                <label htmlFor="cedula">Cédula</label>
+                <input pInputText id="cedula" aria-describedby="username-help">
+            </div>
+            <div class="flex flex-wrap gap-3 mb-8">
+                <div class="flex align-items-center">
+                    <p-radioButton name="genero" value="F" [(ngModel)]="genero" inputId="genero2"></p-radioButton>
+                    <label for="genero2" class="ml-2">Mujer</label>
+                </div>
+                <div class="flex align-items-center">
+                    <p-radioButton name="genero" value="M" [(ngModel)]="genero" inputId="genero1"></p-radioButton>
+                    <label for="genero1" class="ml-2">Hombre</label>
+                </div>
+            </div>
+            <p-button label="Actualizar información"></p-button>
         </form>
     </article>
 </section>

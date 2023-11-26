@@ -1,1 +1,16 @@
-<ana-reporte-ventas></ana-reporte-ventas>
+<p-tabMenu
+    (activeItemChange)="onChange($event)"
+    [model]="items"
+    [activeItem]="activeItem"
+    styleClass="mb-2">
+</p-tabMenu>
+
+<div *ngIf="activeItem?.label && activeItem?.label === 'Inventario'">
+    <app-inventario-dashboard></app-inventario-dashboard>
+</div>
+<div *ngIf="activeItem?.label && activeItem?.label === 'Clientes'">
+    <app-dashboard-clientes> </app-dashboard-clientes>
+</div>
+<div *ngIf="activeItem?.label && activeItem?.label === 'Ventas'">
+    <app-dashboard-ventas></app-dashboard-ventas>
+</div>

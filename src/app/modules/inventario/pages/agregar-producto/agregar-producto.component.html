@@ -97,4 +97,16 @@
         </form>
 
     </div>
+
+</div>
+
+
+<div *ngIf="currentProducto" class="graficos">
+    <h2>Resumen estadístico</h2>
+    <hr>
+
+    <div>
+        <p-chart type="line" [options]="options" [data]="data"></p-chart>
+    </div>
+
 </div>

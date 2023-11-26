@@ -39,3 +39,10 @@ export interface Empresa extends Usuario {
     sucursales?: Direccion[]
 }
 
+export interface Notificacion {
+    contenido?: string;
+    titulo?: string;
+    icono?: string;
+    ruta?: string;
+    usuario?: Usuario;
+}

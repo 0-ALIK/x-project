@@ -9,7 +9,7 @@ import { MultiSelectModule} from 'primeng/multiselect';
 import { DropdownModule } from 'primeng/dropdown';
 import { TagModule } from 'primeng/tag';
 import { SliderModule } from 'primeng/slider';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { VerClientesComponent } from './pages/ver-clientes/ver-clientes.component';
 import { ClientesTableComponent } from './components/clientes-table/clientes-table.component';
@@ -25,8 +25,21 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { PerfilCardComponent } from './components/perfil-card/perfil-card.component';
 import { PerfilClienteComponent } from './pages/perfil-cliente/perfil-cliente.component';
 import { PerfilEmpresaComponent } from './pages/perfil-empresa/perfil-empresa.component';
-import { DireccionCardComponent } from './components/direccion-card/direccion-card.component';
 import { ColaboradorCardComponent } from './components/colaborador-card/colaborador-card.component';
+import { CardUserComponent } from './components/card-user/card-user.component';
+import { SkeletonModule } from 'primeng/skeleton';
+import { CardEmpresaComponent } from './components/card-empresa/card-empresa.component';
+import { CardDireccionComponent } from './components/card-direccion/card-direccion.component';
+import { SpeedDialModule } from 'primeng/speeddial';
+import { DialogService } from 'primeng/dynamicdialog';
+import { MessageService } from 'primeng/api';
+import { AgregarColaboradorComponent } from './components/agregar-colaborador/agregar-colaborador.component';
+import { AgregarSucursalComponent } from './components/agregar-sucursal/agregar-sucursal.component';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { AnaliticaModule } from '../analitica/analitica.module';
+import { TicketsModule } from '../tickets/tickets.module';
+import { TicketCardComponent } from '../tickets/components/ticket-card.component';
+import { VentaCardComponent } from 'src/app/components/venta-card.component';
 
 @NgModule({
     declarations: [
@@ -38,8 +51,12 @@ import { ColaboradorCardComponent } from './components/colaborador-card/colabora
         PerfilCardComponent,
         PerfilClienteComponent,
         PerfilEmpresaComponent,
-        DireccionCardComponent,
         ColaboradorCardComponent,
+        CardUserComponent,
+        CardEmpresaComponent,
+        CardDireccionComponent,
+        AgregarColaboradorComponent,
+        AgregarSucursalComponent,
     ],
     imports: [
         CommonModule,
@@ -59,7 +76,21 @@ import { ColaboradorCardComponent } from './components/colaborador-card/colabora
         PaginatorModule,
         FileUploadModule,
         ImageModule,
-        RadioButtonModule
-    ]
+        RadioButtonModule,
+        SkeletonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        SpeedDialModule,
+        InputTextareaModule,
+        AnaliticaModule,
+        TicketCardComponent,
+        VentaCardComponent
+    ],
+    exports: [
+        CardUserComponent,
+        CardEmpresaComponent,
+        CardDireccionComponent
+    ],
+    providers: [ MessageService, DialogService]
 })
 export class ClientesModule {}

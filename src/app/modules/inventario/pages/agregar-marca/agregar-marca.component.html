@@ -54,4 +54,19 @@
             (onClick)="enviarFormulario()">
         </p-button>
     </form>
+
+    <div class="productos">
+        <h3>Listado de productos de la marca</h3>
+
+        <hr>
+
+        <ul>
+            <li *ngFor="let producto of productos">
+                <img [src]="producto.foto" alt="p" width="32">
+                <p>{{producto.nombre}}</p>
+            </li>
+        </ul>
+    </div>
+
+
 </div>

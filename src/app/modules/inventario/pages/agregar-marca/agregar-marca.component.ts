@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
-import { marcas } from 'src/app/interfaces/data';
-import { Marca } from 'src/app/interfaces/producto.iterface';
+import { marcas, productos } from 'src/app/interfaces/data';
+import { Marca, Producto } from 'src/app/interfaces/producto.iterface';
 
 interface UploadEvent {
     originalEvent: Event;
@@ -30,6 +30,8 @@ export class AgregarMarcaComponent implements OnInit {
     public estaCargando: boolean = false;
 
     public labelButton: string = 'Agregar marca';
+
+    public productos: Producto[] = productos;
 
     public form: FormGroup = this.formBuilder.group({
         nombre: ['', [Validators.required]],
@@ -60,6 +62,10 @@ export class AgregarMarcaComponent implements OnInit {
     public selectFile(event: UploadEvent): void {
         this.foto = event.currentFiles[0]
         this.imagePreview = URL.createObjectURL( this.foto );
+    }
+
+    public eliminarProducto( producto: Producto ): void {
+
     }
 
     private obtenerMarcaEditar(): void {

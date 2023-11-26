@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Table } from 'primeng/table';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ConfirmationService, MessageService, ConfirmEventType } from 'primeng/api'
 import { Categoria, Marca, Producto } from 'src/app/interfaces/producto.iterface';
 import { Router } from '@angular/router';
 import { categorias, marcas, productos } from 'src/app/interfaces/data';
+import { ReporteInventarioComponent } from 'src/app/modules/analitica/components/reporte-inventario.component';
 
 @Component({
     selector: 'app-table-inventario',
@@ -22,7 +22,7 @@ export class TableInventarioComponent implements OnInit {
 
     public marcas: Marca[] = marcas;
 
-    public productos: Producto[] = productos;
+    public productos: Producto[] | undefined;
 
     public constructor(
         private confirmationService: ConfirmationService,
@@ -32,12 +32,14 @@ export class TableInventarioComponent implements OnInit {
     ) { }
 
     public ngOnInit(): void {
-        console.log("xd");
+        setTimeout(() => {
+            this.productos = productos;
+        }, 3000);
     }
 
-    public onEliminarProducto( product: any ): void {
+    public onEliminarProducto( producto: Producto ): void {
         this.confirmationService.confirm({
-            message: `¿Quieres eliminar el registro de ${product.name}?`,
+            message: `¿Quieres eliminar el registro de ${producto.nombre}?`,
             header: 'Confirmar Eliminación',
             icon: 'pi pi-info-circle',
             accept: this.eliminarProducto,
@@ -56,11 +58,10 @@ export class TableInventarioComponent implements OnInit {
     }
 
     public showGenerarReporte(): void {
-        /* this.ref = this.dialogService.open(DialogGenerarReporteComponent, { header: 'Generar Reporte' }); */
-    }
-
-    public clear(table: Table): void {
-        table.clear();
+        this.ref = this.dialogService.open(ReporteInventarioComponent, {
+            header: 'Generar Reporte',
+            height: '70%'
+        });
     }
 
     public aplicaReordenValue( producto: Producto, values: string[] ): string {
@@ -77,7 +78,7 @@ export class TableInventarioComponent implements OnInit {
 
     public onRowSelect( event: any ): void {
         this.router.navigate([
-            '/dashboard/inventario/editar-producto/',
+            '/app/inventario/editar-producto/',
             this.selectedProducto?.id_producto
         ]);
     }

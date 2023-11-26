@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { VerInventarioComponent } from './pages/ver-inventario/ver-inventario.component';
 import { AgregarMarcaComponent } from './pages/agregar-marca/agregar-marca.component';
 import { AgregarProductoComponent } from './pages/agregar-producto/agregar-producto.component';
+import { NotFoundComponent } from 'src/app/not-found/not-found.component';
 
 const routes: Routes = [
     {
@@ -26,6 +27,10 @@ const routes: Routes = [
     {
         path: 'editar-producto/:id',
         component: AgregarProductoComponent
+    },
+    {
+        path: '**',
+        component: NotFoundComponent
     }
 ];
 

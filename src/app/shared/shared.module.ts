@@ -8,6 +8,7 @@ import { AvatarModule } from 'primeng/avatar';
 import { MenuModule } from 'primeng/menu';
 import { SidebarModule } from 'primeng/sidebar';
 import { ImagePreviewComponent } from './components/image-preview/image-preview.component';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { ImagePreviewComponent } from './components/image-preview/image-preview.
         ButtonModule,
         AvatarModule,
         MenuModule,
-        SidebarModule
+        SidebarModule,
+        OverlayPanelModule
     ]
 })
 export class SharedModule { }
