@@ -15,17 +15,17 @@ import { CalendarModule } from 'primeng/calendar';
 import { ChartModule } from 'primeng/chart';
 import { TagModule } from 'primeng/tag';
 import { TabMenuModule } from 'primeng/tabmenu';
+import { RadioButtonModule } from 'primeng/radiobutton';
 
 import { DashboardCardComponent } from './components/dashboard-card/dashboard-card.component';
 import { DashboardClientesComponent } from './pages/dashboard-clientes/dashboard-clientes.component';
 import { DashboardVentasComponent } from './pages/dashboard-ventas/dashboard-ventas.component';
-import { InventarioDashboardComponent } from './pages/dashboar-inventario/inventario-dashboard.component';
 import { IndicadorRendimientoComponent } from './pages/indicador-rendimiento/indicador-rendimiento.component';
 import { ReporteInventarioComponent } from './components/reporte-inventario.component';
 import { ReporteClienteComponent } from './components/reporte-cliente.component';
 import { ReporteVentaComponent } from './components/reporte-venta.component';
 import { ReporteTicketsComponent } from './components/reporte-tickets.component';
-import { RadioButtonModule } from 'primeng/radiobutton';
+import { DashboardInventarioComponent } from './pages/dashboard-inventario/inventario-dashboard.component';
 
 
 @NgModule({
@@ -34,12 +34,12 @@ import { RadioButtonModule } from 'primeng/radiobutton';
         DashboardCardComponent,
         DashboardClientesComponent,
         DashboardVentasComponent,
-        InventarioDashboardComponent,
         IndicadorRendimientoComponent,
         ReporteInventarioComponent,
         ReporteClienteComponent,
         ReporteVentaComponent,
-        ReporteTicketsComponent
+        ReporteTicketsComponent,
+        DashboardInventarioComponent
     ],
     imports: [
         CommonModule,

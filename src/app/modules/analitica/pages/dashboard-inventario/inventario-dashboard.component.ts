@@ -6,7 +6,7 @@ import { Categoria, Marca } from 'src/app/interfaces/producto.iterface';
     selector: 'app-inventario-dashboard',
     templateUrl: './inventario-dashboard.component.html',
 })
-export class InventarioDashboardComponent implements OnInit {
+export class DashboardInventarioComponent implements OnInit {
 
     public options: any;
 
