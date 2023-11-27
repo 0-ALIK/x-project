@@ -21,23 +21,18 @@ export class DashboardVentasComponent implements OnInit {
     public options2: any;
 
     ngOnInit() {
-<<<<<<< HEAD
-        this.definirFiltroProvincia();
-        this.definirFiltroFecha();
-        this.definirFiltroEmpresa();
-        // this.definirFiltroTiempo();
+
         this.definirGraficaLineal1();
         this.definirGraficaLineal2();
-=======
-        this.definirGraficaLineal();
-        this.opcionesLineal();
->>>>>>> main
 
     }
 
 
     definirGraficaLineal1(): void{
         const documentStyle = getComputedStyle(document.documentElement);
+        const textColor = documentStyle.getPropertyValue('--text-color');
+        const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
+        const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
 
         this.data1 = {
             labels: ['Venta1', 'Venta2', 'Venta3', 'Venta4', 'Venta5', 'Venta6', 'Venta7'],

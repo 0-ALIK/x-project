@@ -24,7 +24,6 @@ export class DashboardClientesComponent implements OnInit {
 
     data2: any;
     options2: any;
-<<<<<<< HEAD
 
     data3: any;
     options3: any;
@@ -32,30 +31,12 @@ export class DashboardClientesComponent implements OnInit {
     data4: any;
     options4: any;
 
-
-
     ngOnInit() {
-        this.definirFiltroProvincia();
-        this.definirFiltroFecha();
-        this.definirFiltroEmpresa();
-        // this.definirFiltroTiempo();
+
         this.definirGraficaBarras1();
         this.definirGraficaBarras2();
         this.definirGraficaPastel1();
         this.definirGraficaPastel2();
-
-    }
-=======
-    constructor(
-        private clienteService: ClientesService
-      ) {}
-
-    ngOnInit() {
-
-        this.definirGraficaPastel();
-        this.definirGraficaBarras();
->>>>>>> main
-
         this.clienteService.getEmpresas().subscribe({
             next: (empresas) => {
                 this.empresas = empresas;
@@ -65,7 +46,11 @@ export class DashboardClientesComponent implements OnInit {
                 console.error("Error al obtener empresas:", error);
                 }
         })
+
     }
+    constructor(
+        private clienteService: ClientesService
+      ) {}
 
 
 
