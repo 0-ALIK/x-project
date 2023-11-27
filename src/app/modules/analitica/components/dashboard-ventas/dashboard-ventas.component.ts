@@ -5,7 +5,6 @@ import { Empresa, Tiempo, Fecha, Provincia} from 'src/app/interfaces/clientes.in
 @Component({
   selector: 'app-dashboard-ventas',
   templateUrl: './dashboard-ventas.component.html',
-  styleUrls: ['./dashboard-ventas.component.css']
 })
 export class DashboardVentasComponent implements OnInit {
 

@@ -19,9 +19,9 @@ import { TabMenuModule } from 'primeng/tabmenu';
 import { GenerarReportesInventarioComponent } from './components/generar-reportes-inventario/generar-reportes-inventario.component';
 import { GenerarReportesVentasComponent } from './components/generar-reportes-ventas/generar-reportes-ventas.component';
 import { DashboardCardComponent } from './components/dashboard-card/dashboard-card.component';
-import { DashboardClientesComponent } from './components/dashboard-clientes/dashboard-clientes.component';
-import { DashboardVentasComponent } from './components/dashboard-ventas/dashboard-ventas.component';
-import { InventarioDashboardComponent } from './pages/inventario-dashboard/inventario-dashboard.component';
+import { DashboardClientesComponent } from './pages/dashboard-clientes/dashboard-clientes.component';
+import { DashboardVentasComponent } from './pages/dashboard-ventas/dashboard-ventas.component';
+import { InventarioDashboardComponent } from './pages/dashboar-inventario/inventario-dashboard.component';
 import { IndicadorRendimientoComponent } from './pages/indicador-rendimiento/indicador-rendimiento.component';
 
 

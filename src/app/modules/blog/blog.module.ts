@@ -18,13 +18,17 @@ import { ToastModule } from 'primeng/toast'
 import { ScrollTopModule } from 'primeng/scrolltop';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
 import { DividerModule } from 'primeng/divider';
-
+import { DialogAgregarOpinionComponent } from './components/agregar-opinion/dialog-agregar-opinion.component';
+import { FormsModule } from '@angular/forms';
+import { MessageService } from 'primeng/api';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 
 @NgModule({
   declarations: [
     VerBlogComponent,
-    CardBlogUsuarioComponent
+    CardBlogUsuarioComponent,
+    DialogAgregarOpinionComponent
   ],
   imports: [
     CommonModule,
@@ -43,7 +47,14 @@ import { DividerModule } from 'primeng/divider';
     ToastModule,
     ScrollTopModule,
     ScrollPanelModule,
-    DividerModule
+    DividerModule,
+    InputTextareaModule,
+    FormsModule
+
+  ],
+  providers: [
+    DialogService,
+    MessageService
   ]
 })
 export class BlogModule { }
