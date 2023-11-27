@@ -21,6 +21,10 @@
             <h2 class="text-lg m-0 p-0">Dirección de envio</h2>
             <alik-card-direccion [direccion]="pedido?.direccion"></alik-card-direccion>
         </div>
+        <div class="mb-2" *ngIf="reclamo">
+            <h2 class="text-lg m-0 p-0">Reclamo</h2>
+            <ticket-card [reclamo]="reclamo"></ticket-card>
+        </div>
         <div class="mb-2">
             <h2 class="text-lg m-0 p-0">Impote de la venta</h2>
             <p-inputNumber

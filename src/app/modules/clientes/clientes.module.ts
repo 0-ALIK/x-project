@@ -36,6 +36,10 @@ import { MessageService } from 'primeng/api';
 import { AgregarColaboradorComponent } from './components/agregar-colaborador/agregar-colaborador.component';
 import { AgregarSucursalComponent } from './components/agregar-sucursal/agregar-sucursal.component';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { AnaliticaModule } from '../analitica/analitica.module';
+import { TicketsModule } from '../tickets/tickets.module';
+import { TicketCardComponent } from '../tickets/components/ticket-card.component';
+import { VentaCardComponent } from 'src/app/components/venta-card.component';
 
 @NgModule({
     declarations: [
@@ -77,7 +81,10 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
         FormsModule,
         ReactiveFormsModule,
         SpeedDialModule,
-        InputTextareaModule
+        InputTextareaModule,
+        AnaliticaModule,
+        TicketCardComponent,
+        VentaCardComponent
     ],
     exports: [
         CardUserComponent,
