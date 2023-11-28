@@ -21,15 +21,18 @@ export class DashboardVentasComponent implements OnInit {
     public options2: any;
 
     ngOnInit() {
-        this.definirGraficaLineal();
-        this.opcionesLineal();
+
+        this.definirGraficaLineal1();
+        this.definirGraficaLineal2();
 
     }
 
 
-    definirGraficaLineal(): void{
-
+    definirGraficaLineal1(): void{
         const documentStyle = getComputedStyle(document.documentElement);
+        const textColor = documentStyle.getPropertyValue('--text-color');
+        const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
+        const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
 
         this.data1 = {
             labels: ['Venta1', 'Venta2', 'Venta3', 'Venta4', 'Venta5', 'Venta6', 'Venta7'],
@@ -37,21 +40,12 @@ export class DashboardVentasComponent implements OnInit {
                 {
                     label: 'Ventas',
                     fill:false,
-                    backgroundColor: documentStyle.getPropertyValue('--green-400'),
-                    borderColor: documentStyle.getPropertyValue('--green-400'),
+                    backgroundColor: documentStyle.getPropertyValue('--cyan-400'),
+                    borderColor: documentStyle.getPropertyValue('--cyan-400'),
                     data: [65, 59, 80, 81, 56, 55, 40]
                 },
             ]
         }
-
-    }
-
-    opcionesLineal(): void{
-
-        const documentStyle = getComputedStyle(document.documentElement);
-        const textColor = documentStyle.getPropertyValue('--text-color');
-        const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
-        const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
 
         this.options1 = {
             maintainAspectRatio: false,
@@ -88,5 +82,61 @@ export class DashboardVentasComponent implements OnInit {
         };
 
     }
+
+    definirGraficaLineal2(){
+        const documentStyle = getComputedStyle(document.documentElement);
+        const textColor = documentStyle.getPropertyValue('--text-color');
+        const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
+        const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
+
+        this.data2 = {
+            labels: ['Venta1', 'Venta2', 'Venta3', 'Venta4', 'Venta5', 'Venta6', 'Venta7'],
+            datasets: [
+                {
+                    label: 'Ventas',
+                    fill:false,
+                    backgroundColor: documentStyle.getPropertyValue('--pink-400'),
+                    borderColor: documentStyle.getPropertyValue('--pink-400'),
+                    data: [65, 59, 80, 81, 56, 55, 40]
+                },
+            ]
+        }
+
+        this.options2 = {
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: textColor
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        color: textColorSecondary,
+                        font: {
+                            weight: 500
+                        }
+                    },
+                    grid: {
+                        color: surfaceBorder,
+                        drawBorder: false
+                    }
+                },
+                y: {
+                    ticks: {
+                        color: textColorSecondary
+                    },
+                    grid: {
+                        color: surfaceBorder,
+                        drawBorder: false
+                    }
+                }
+            }
+        };
+
+    }
+
 
 }
