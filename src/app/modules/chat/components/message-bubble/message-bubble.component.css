@@ -1,8 +1,6 @@
 .message {
-    padding: var(--spacing-2);
     border-radius: var(--border-radius);
-    overflow: hidden;
-    max-width: 65vh;
+    max-width: 65%;
 }
 
 .message-right {

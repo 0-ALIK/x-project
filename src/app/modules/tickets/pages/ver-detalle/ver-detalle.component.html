@@ -1,11 +1,33 @@
-<div class="ticket-container">
-    <div class="titulo">
-        <h1>Ticket #{{ ticketNumber }}</h1>
+<main>
+    <p class="mb-2 text-3xl font-bold">Ticket  {{ ticketNumber }}</p>
+
+    <div class="fondo flex flex-column p-2 border-round">
+
+        <section class="flex flex-column sm:flex-row align-items-center justify-content-between mb-2">
+            <alik-card-user [cliente]="cliente"></alik-card-user>
+            <p-dropdown styleClass="w-full sm:w-20rem" [options]="reclamoPrioridad" [optionLabel]="" [showClear]="true" placeholder="Prioridad"></p-dropdown>
+        </section>
+
+        <section class="flex flex-column md:flex-row gap-2 mb-2">
+            <div class="flex flex-column w-full border-round">
+                <p class="m-0 my-1 text-lg">Detalles</p>
+                <textarea class="w-full h-20rem md:h-full text-justify" [autoResize]="true" pInputTextarea ></textarea>
+            </div>
+
+            <div class="flex flex-column w-full border-round w-full" #evidenciasBox>
+                <p class="m-0 my-1 text-lg">Evidencias</p>
+                <div>
+                    <img class="w-full h-20rem md:h-full border-round" src="https://primefaces.org/cdn/primeng/images/galleria/galleria1.jpg" alt="evidencia">
+                </div>
+            </div>
+        </section>
+        <section class="mb-2">
+            <venta-card [pedido]="pedido"></venta-card>
+        </section>
+        <section class="flex flex-row">
+            <p-button label="Abrir chat" icon="pi pi-comments" [loading]="loading" (onClick)="cargarBoton()" [disabled]="false"></p-button>
+            <p-button label="Cerrar ticket" styleClass="ml-2" icon="pi pi-exclamation-triangle" severity="danger" [disabled]="false"></p-button>
+        </section>
     </div>
-    <div class="status-prioridad">
-        <p-tag [value]="prioridad" [severity]="getPriority(prioridad)"></p-tag>
-        <p-tag [value]="estatus" [severity]="getSeverity(estatus)"></p-tag>
-    </div>
-</div>
-<app-generar-ticket></app-generar-ticket>
-<app-compra-table></app-compra-table>
+
+</main>

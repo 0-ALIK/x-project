@@ -7,7 +7,6 @@ import { InventarioRoutingModule } from './inventario-routing.module';
 import { VerInventarioComponent } from './pages/ver-inventario/ver-inventario.component';
 import { AgregarMarcaComponent } from './pages/agregar-marca/agregar-marca.component';
 import { AgregarProductoComponent } from './pages/agregar-producto/agregar-producto.component';
-import { EditarMarcaComponent } from './pages/editar-marca/editar-marca.component';
 
 import { TableInventarioComponent } from './components/table-inventario/table-inventario.component';
 import { TableEntradasComponent } from './components/table-entradas/table-entradas.component';
@@ -30,6 +29,15 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { DynamicDialogModule, DialogService } from 'primeng/dynamicdialog';
+import { AvatarModule } from 'primeng/avatar';
+import { TagModule } from 'primeng/tag';
+import { ImageModule } from 'primeng/image';
+import { ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { CalendarModule } from 'primeng/calendar';
+import { ChartModule } from 'primeng/chart';
+import { SkeletonModule } from 'primeng/skeleton';
+import { AnaliticaModule } from '../analitica/analitica.module';
 
 @NgModule({
     declarations: [
@@ -38,7 +46,6 @@ import { DynamicDialogModule, DialogService } from 'primeng/dynamicdialog';
         TableEntradasComponent,
         AgregarMarcaComponent,
         AgregarProductoComponent,
-        EditarMarcaComponent,
         DialogAgregarCategoriaComponent,
         DialogRealizarCompraComponent,
     ],
@@ -60,7 +67,16 @@ import { DynamicDialogModule, DialogService } from 'primeng/dynamicdialog';
         FieldsetModule,
         MultiSelectModule,
         InputNumberModule,
-        InputTextareaModule
+        InputTextareaModule,
+        AvatarModule,
+        TagModule,
+        ImageModule,
+        ReactiveFormsModule,
+        SharedModule,
+        CalendarModule,
+        ChartModule,
+        SkeletonModule,
+        AnaliticaModule
     ],
     providers: [ ConfirmationService, MessageService, DialogService ]
 })

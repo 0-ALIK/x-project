@@ -24,8 +24,14 @@ export class AppComponent implements OnInit {
             'notContains': 'No contiene',
             'endsWith': 'Termina con',
             'equals': 'Es igual a',
-            'notEquals': 'No es igual a'
+            'notEquals': 'No es igual a',
+            'lt': 'Menor que',
+            'lte': 'Menor o igual que',
+            'gt': 'Mayor que',
+            'gte': 'Mayor o igual que'
         });
+
+        this.applySavedTheme();
     }
 
     /**

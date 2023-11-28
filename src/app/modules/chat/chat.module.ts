@@ -7,12 +7,13 @@ import { MessagesListComponent } from './pages/messages-list/messages-list.compo
 import { NoOpenChatComponent } from './pages/no-open-chat/no-open-chat.component';
 import { UsuarioChatCardComponent } from './components/usuario-chat-card/usuario-chat-card.component';
 import { AvatarModule } from 'primeng/avatar';
-import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { TagModule } from 'primeng/tag';
 import { MessageBubbleComponent } from './components/message-bubble/message-bubble.component';
 import { ChatInputComponent } from './components/chat-input/chat-input.component';
-import { FormsModule } from '@angular/forms';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { FormsModule } from '@angular/forms';  // Importa FormsModule
+
 
 @NgModule({
   declarations: [
@@ -29,7 +30,9 @@ import { FormsModule } from '@angular/forms';
     AvatarModule,
     TagModule,
     FormsModule,
-    ButtonModule
+    ButtonModule,
+    InputTextareaModule,
+    FormsModule
   ]
 })
 export class ChatModule { }
