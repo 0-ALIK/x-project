@@ -1,0 +1,57 @@
+<p-sidebar [(visible)]="sidebarVisible2" position="right">
+    <div class="opciones">
+        <div class="modulos">
+            <ul>
+                <a href="#" class="etiqueta-a">
+                    <li>Registrarse</li>
+                    <li>Iniciar Sesion</li>
+                    <li *ngFor="let item of menuItems">{{ item }}</li>
+                </a>
+            </ul>
+        </div>
+    </div>
+    <div class="tema">
+        <p-button *ngIf="isSunButtonVisible" icon="pi pi-sun" [text]="true"
+            (onClick)="toggleThemeAndButtons('viva-light')"></p-button>
+        <p-button *ngIf="!isSunButtonVisible" icon="pi pi-moon" [text]="true"
+            (onClick)="toggleThemeAndButtons('viva-dark')"></p-button>
+    </div>
+</p-sidebar>
+
+
+<nav>
+    <div class="logo">
+        <img src="assets/logo.png" alt="logo">
+        <a href="#" class="etiqueta-a">
+            <h1>Cosmos ERP</h1>
+        </a>
+    </div>
+
+    <div class="opciones">
+        <p-button *ngIf="isSidebarButtonVisible" type="button" class="mr-2" (click)="sidebarVisible2 = true"
+            icon="pi pi-bars" [text]="true"></p-button>
+
+        <div *ngIf="!isSidebarButtonVisible" class="modulos">
+            <ul>
+                <a href="#" class="etiqueta-a">
+                    <li *ngFor="let item of menuItems">{{ item }}</li>
+                </a>
+            </ul>
+        </div>
+
+        <div *ngIf="!isSidebarButtonVisible" class="tema">
+            <!-- Primer botón (sol) -->
+            <p-button *ngIf="isSunButtonVisible" icon="pi pi-sun" [text]="true"
+                (onClick)="toggleThemeAndButtons('viva-light')"></p-button>
+
+            <!-- Segundo botón (luna) -->
+            <p-button *ngIf="!isSunButtonVisible" icon="pi pi-moon" [text]="true"
+                (onClick)="toggleThemeAndButtons('viva-dark')"></p-button>
+
+        </div>
+        <div *ngIf="!isSidebarButtonVisible" class="acciones">
+            <a href="#" class="etiqueta-a">Registrarse</a>
+            <a href="#" class="etiqueta-a">Iniciar Sesion</a>
+        </div>
+    </div>
+</nav>

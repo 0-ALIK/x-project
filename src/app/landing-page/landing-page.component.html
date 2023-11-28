@@ -1,37 +1,4 @@
-<div class="container">
-    <nav>
-        <div class="logo">
-            <img src="assets/logo.png" alt="logo">
-            <a href="#" class="etiqueta-a">
-                <h1>Cosmos ERP</h1>
-            </a>
-        </div>
-        <div class="opciones">
-            <div class="modulos">
-                <ul>
-                    <a href="#" class="etiqueta-a">
-                        <li *ngFor="let item of menuItems">{{ item }}</li>
-                    </a>
-                </ul>
-            </div>
-
-            <div class="tema">
-                <!-- Primer botón (sol) -->
-                <p-button *ngIf="isSunButtonVisible" icon="pi pi-sun" [text]="true"
-                    (onClick)="toggleThemeAndButtons('viva-light')"></p-button>
-
-                <!-- Segundo botón (luna) -->
-                <p-button *ngIf="!isSunButtonVisible" icon="pi pi-moon" [text]="true"
-                    (onClick)="toggleThemeAndButtons('viva-dark')"></p-button>
-
-            </div>
-            <div class="acciones">
-                <a href="#" class="etiqueta-a">Registrarse</a>
-                <a href="#" class="etiqueta-a">Iniciar Sesion</a>
-            </div>
-        </div>
-    </nav>
-</div>
+<app-nav-landing-page></app-nav-landing-page>
 
 <div class="background-image">
     <div class="eslogan">
@@ -42,8 +9,5 @@
         <p-button label="Comenzar" [raised]="true" size="large" class="btn-comenzar" routerLink="app"></p-button>
         <i class="pi pi-angle-down flecha-abajo" style="font-size: var(--text-6xl)"></i>
     </div>
-
-
-
 
 </div>

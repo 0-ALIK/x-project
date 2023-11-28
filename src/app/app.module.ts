@@ -8,12 +8,14 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ButtonModule } from 'primeng/button';
 import { SidebarModule } from 'primeng/sidebar';
+import { NavLandingPageComponent } from './components/nav-landing-page/nav-landing-page.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         LandingPageComponent,
-        NotFoundComponent
+        NotFoundComponent,
+        NavLandingPageComponent
     ],
     imports: [
         BrowserModule,
