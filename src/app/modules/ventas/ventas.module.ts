@@ -25,6 +25,7 @@ import { AnaliticaModule } from '../analitica/analitica.module';
 import { TicketCardComponent } from '../tickets/components/ticket-card.component';
 import { CardCarritoComprasComponent } from './components/card-carrito-compras/card-carrito-compras.component';
 import { ImageModule } from 'primeng/image';
+import { CarritoPageComponent } from './pages/carrito-page.component';
 
 @NgModule({
     declarations: [
@@ -35,6 +36,7 @@ import { ImageModule } from 'primeng/image';
         PagosListComponent,
         AgregarEditarPagoComponent,
         CardCarritoComprasComponent,
+        CarritoPageComponent,
     ],
     imports: [
         CommonModule,
