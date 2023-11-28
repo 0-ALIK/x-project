@@ -26,7 +26,7 @@
                 </div>
                 <span class="p-input-icon-left ml-auto">
                     <i class="pi pi-search"></i>
-                    <input pInputText type="text" (input)="prd.filterGlobal($any($event.target).value, 'contains')" placeholder="Buscar producto..." />
+                    <input pInputText type="text" (input)="tabla.filterGlobal($any($event.target).value, 'contains')" placeholder="Buscar producto..." />
                 </span>
             </div>
         </ng-template>

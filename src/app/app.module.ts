@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ButtonModule } from 'primeng/button';
+import { SidebarModule } from 'primeng/sidebar';
 
 @NgModule({
     declarations: [
@@ -17,7 +19,9 @@ import { HttpClientModule } from '@angular/common/http';
         BrowserModule,
         BrowserAnimationsModule,
         AppRoutingModule,
-        HttpClientModule
+        HttpClientModule,
+        ButtonModule,
+        SidebarModule
     ],
     providers: [],
     bootstrap: [AppComponent]

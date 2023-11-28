@@ -1,3 +1,49 @@
-<!-- Eliminar esto luego -->
-<h2> AQUI DEBEMOS HACER EL LANDING PAGE</h2>
-<p>RUTA: /</p>
+<div class="container">
+    <nav>
+        <div class="logo">
+            <img src="assets/logo.png" alt="logo">
+            <a href="#" class="etiqueta-a">
+                <h1>Cosmos ERP</h1>
+            </a>
+        </div>
+        <div class="opciones">
+            <div class="modulos">
+                <ul>
+                    <a href="#" class="etiqueta-a">
+                        <li *ngFor="let item of menuItems">{{ item }}</li>
+                    </a>
+                </ul>
+            </div>
+
+            <div class="tema">
+                <!-- Primer botón (sol) -->
+                <p-button *ngIf="isSunButtonVisible" icon="pi pi-sun" [text]="true"
+                    (onClick)="toggleThemeAndButtons('viva-light')"></p-button>
+
+                <!-- Segundo botón (luna) -->
+                <p-button *ngIf="!isSunButtonVisible" icon="pi pi-moon" [text]="true"
+                    (onClick)="toggleThemeAndButtons('viva-dark')"></p-button>
+
+            </div>
+            <div class="acciones">
+                <a href="#" class="etiqueta-a">Registrarse</a>
+                <a href="#" class="etiqueta-a">Iniciar Sesion</a>
+            </div>
+        </div>
+    </nav>
+</div>
+
+<div class="background-image">
+    <div class="eslogan">
+        <h2>Eleva tu negocio a nuevas alturas.</h2>
+        <hr>
+        <p>Desde la optimización de las operaciones logísticas hasta la visión completa de la distribución, nuestro
+            software diseñado para empresas distribuidoras es la solución integral que tu negocio necesita.</p>
+        <p-button label="Comenzar" [raised]="true" size="large" class="btn-comenzar" routerLink="app"></p-button>
+        <i class="pi pi-angle-down flecha-abajo" style="font-size: var(--text-6xl)"></i>
+    </div>
+
+
+
+
+</div>

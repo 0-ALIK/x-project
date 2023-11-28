@@ -1,0 +1,142 @@
+nav {
+    background-color: var(--surface-overlay);
+    width: 100%;
+    position: sticky;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    top: 0;
+    height: var(--nav-height);
+    z-index: 980;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+
+    & img {
+        width: 45px;
+        height: 45px;
+        margin-left: var(--spacing-3);
+    }
+
+    & a h1 {
+        font-size: var(--text-2xl);
+        margin-left: var(--spacing-3);
+    }
+}
+
+.etiqueta-a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 600;
+}
+
+.opciones {
+    display: flex;
+    align-items: center;
+}
+
+.modulos ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    & a {
+        display: flex;
+
+        & li {
+            margin-left: var(--spacing-3);
+        }
+
+    }
+}
+
+.tema {
+    margin-left: var(--spacing-3);
+    border-right: 4px solid var(--text-color);
+}
+
+.acciones {
+    margin-inline: var(--spacing-3);
+
+    & a {
+        font-weight: 600;
+        margin-left: var(--spacing-3);
+    }
+}
+
+.background-image {
+    position: relative;
+    height: calc(100vh - var(--nav-height));
+}
+
+.background-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: url('/assets/fondo2.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 0.5;
+    z-index: -1;
+    /* Asegura que el fondo esté detrás del contenido */
+}
+
+.eslogan {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - var(--nav-height));
+    justify-content: center;
+
+    & h2 {
+        font-size: var(--text-6xl);
+        margin: 0;
+        margin-bottom: var(--spacing-3);
+    }
+
+    & hr {
+        width: 60%;
+    }
+
+    & p {
+        font-size: var(--text-3xl);
+        margin-inline: var(--spacing-9);
+        font-style: italic;
+    }
+
+    & .btn-comenzar {
+        margin-top: var(--spacing-3);
+        font-size: var(--text-2xl);
+        margin-bottom: var(--spacing-6);
+    }
+
+    & .flecha-abajo {
+        position: absolute;
+        bottom: 0;
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        animation: moveUpDown 2s 2;
+    }
+}
+
+@keyframes moveUpDown {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+/* Estilo para tablets y dispositivos con pantallas medianas */
+@media (max-width: 1023px) {}
