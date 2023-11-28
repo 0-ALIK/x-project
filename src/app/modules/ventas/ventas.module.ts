@@ -23,6 +23,8 @@ import { AgregarEditarPagoComponent } from './components/agregar-editar-pago/agr
 import { DropdownModule } from 'primeng/dropdown';
 import { AnaliticaModule } from '../analitica/analitica.module';
 import { TicketCardComponent } from '../tickets/components/ticket-card.component';
+import { EcommerceComponent } from './pages/ecommerce.component';
+import { CardModule } from 'primeng/card';
 
 @NgModule({
     declarations: [
@@ -32,6 +34,7 @@ import { TicketCardComponent } from '../tickets/components/ticket-card.component
         ProductosPedidosComponent,
         PagosListComponent,
         AgregarEditarPagoComponent,
+        EcommerceComponent
     ],
     imports: [
         CommonModule,
@@ -49,7 +52,8 @@ import { TicketCardComponent } from '../tickets/components/ticket-card.component
         DropdownModule,
         AnaliticaModule,
         DropdownModule,
-        TicketCardComponent
+        TicketCardComponent,
+        CardModule
     ],
     providers: [ImportesCalcService, MessageService, DialogService]
 })

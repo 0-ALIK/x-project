@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { VerVentasComponent } from './pages/ver-ventas/ver-ventas.component';
 import { VerPedidoByIdComponent } from './pages/ver-pedido-by-id/ver-pedido-by-id.component';
 import { NotFoundComponent } from 'src/app/not-found/not-found.component';
+import { EcommerceComponent } from './pages/ecommerce.component';
 
 const routes: Routes = [
     {
@@ -12,6 +13,10 @@ const routes: Routes = [
     {
         path: ':id',
         component: VerPedidoByIdComponent
+    },
+    {
+        path: 'c/ecommerce',
+        component: EcommerceComponent
     },
     {
         path: '**',
