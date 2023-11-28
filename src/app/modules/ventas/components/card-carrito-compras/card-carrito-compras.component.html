@@ -1,0 +1,21 @@
+<h1>Hii</h1>
+
+<section class="flex w-9 p-2 m-2 gap-2 surface-card border-round align-items-center " *ngIf="pedidoProductos" >
+
+    <p-image src="../../../../../assets/fondo-chat2.jpg" alt="Image" width="220" class="align-self-center" ></p-image>
+
+    <div class="flex flex-column w-full p-2 m-2 gap-4 justify-content-evenly ">
+
+        <div class=" flex gap-2 justify-content-between align-items-center" >
+            <p class=" font-bold text-2xl ">Sunset Valley</p>
+            <input type="text" pInputText [(ngModel)]="cantidad" pKeyFilter="int" placeholder="Cantidad"  style="width: 120px; height: 30px ;" />
+            <p class=" text-2xl">$888</p>
+        </div>
+
+        <div class="flex justify-content-between">
+            <article class=" text-1xl w-7">No se porgramar, que locura. espero todo lo demás esté bien ajjsjaja, buenas noches salu2 aqui va la descripcion</article>
+            <p-button label="Borrar" icon="pi pi-trash"></p-button>
+        </div>
+
+    </div>
+</section>

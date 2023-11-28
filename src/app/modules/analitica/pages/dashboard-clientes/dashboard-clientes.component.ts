@@ -1,7 +1,8 @@
-import { Cliente, Empresa, Usuario } from 'src/app/interfaces/usuario.inteface';
+import { Usuario } from 'src/app/interfaces/usuario.inteface';
 import { Component, OnInit } from '@angular/core';
 import { ClientesService } from 'src/app/services/clientes.service';
 import { Direccion } from 'src/app/interfaces/direccion.interface';
+import { clientes, empresas } from 'src/app/interfaces/data';
 
 
 @Component({
@@ -35,21 +36,11 @@ export class DashboardClientesComponent implements OnInit {
         this.definirGraficaPastel1();
         this.definirGraficaPastel2();
         this.definirFiltroFecha();
+        this.cargarDatos();
 
-        this.clienteService.getEmpresas().subscribe({
-            next: (empresas) => {
-                this.usuario = empresas;
-                this.lengthEmpresas = empresas.length;
-            },
-            error: (error) =>{
-                console.error("Error al obtener empresas:", error);
-                }
-        })
 
     }
-    constructor(
-        private clienteService: ClientesService
-      ) {}
+    constructor() {}
 
     totalEmpresas(): void{
         // this.lengthEmpresas = this.usuario.length;
@@ -63,6 +54,11 @@ export class DashboardClientesComponent implements OnInit {
             { nombre: 'Filtro4' },
             { nombre: 'Filtro5' }
         ];
+    }
+
+    private cargarDatos(){
+        this.usuario = empresas;
+        this.direccion = clientes;
     }
 
     definirGraficaBarras1(): void{
