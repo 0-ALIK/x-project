@@ -1,0 +1,52 @@
+<main class="h-screen w-screen flex p-4 md:p-0">
+
+    <section class="border-round py-2 px-4 md:px-8 h-screen w-full" [style]="{'background': 'var(--surface-card)'}">
+
+        <h1 class="text-center">Registro de solicitud</h1>
+
+        <form>
+
+            <div class="mb-4">
+                <label htmlFor="nombre">Nombre</label>
+                <input type="text" id="nombre" pInputText class="w-full">
+            </div>
+
+            <div class="mb-4">
+                <label htmlFor="ruc">Ruc</label>
+                <input type="text" id="ruc" pInputText class="w-full">
+            </div>
+
+            <div class="mb-4">
+                <label htmlFor="correo">Correo</label>
+                <input type="text" id="correo" pInputText class="w-full">
+            </div>
+
+            <div class="mb-4">
+                <label htmlFor="pass">Contraseña</label>
+                <input type="password" id="pass" pInputText class="w-full">
+            </div>
+
+            <div class="mb-4">
+                <label htmlFor="ruc">Ruc</label>
+                <input type="text" id="ruc" pInputText class="w-full">
+            </div>
+
+            <div class="mb-4">
+                <label htmlFor="razon">Razón social</label>
+                <input type="text" id="razon" pInputText class="w-full">
+            </div>
+
+            <p-button styleClass="w-full mb-4" label="Enviar datos"></p-button>
+
+        </form>
+
+    </section>
+
+    <section class="w-full hidden md:block relative">
+
+        <img src="assets/temp.jpg" class="w-full h-full" alt="">
+
+
+    </section>
+
+</main>

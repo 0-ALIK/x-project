@@ -1,0 +1,49 @@
+<div>
+    <p-table
+        [value]="pagos || []"
+        styleClass="p-datatable-gridlines"
+        [scrollable]="true"
+        [scrollHeight]="'400px'">
+
+        <ng-template pTemplate="caption">
+            <div class="flex justify-content-between align-items-center">
+                <div>
+                    <p>{{pagos?.length}} pagos realizados</p>
+                    <p>{{importeDebido | currency:'USD':'symbol':'1.2-2'}} de deuda</p>
+                </div>
+                <p-button label="Agregar pago" (onClick)="agregarPago()"></p-button>
+            </div>
+        </ng-template>
+
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Monto</th>
+                <th>Fecha</th>
+                <th>Forma de pago</th>
+                <th>Acciones</th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-pago>
+            <tr>
+                <td>{{pago.monto | currency:'USD':'symbol':'1.2-2' }}</td>
+                <td>{{pago.fecha | date}}</td>
+                <td><p-tag [value]="pago.forma_pago.nombre"></p-tag></td>
+                <td>
+                    <p-button
+                        icon="pi pi-trash"
+                        severity="danger"
+                        [text]="true"
+                        [raised]="true">
+                    </p-button>
+                </td>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="summary" let-columns>
+            <div class="flex align-items-center justify-content-between">
+                Se ha pagado un total de {{ importesCalc.calcularImportePagado( pagos || [] ) | currency:'USD':'symbol':'1.2-2' }}
+            </div>
+        </ng-template>
+    </p-table>
+</div>

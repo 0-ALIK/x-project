@@ -1,0 +1,6 @@
+.image {
+    background-color: var(--surface-300);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -10,13 +10,28 @@ import { InputTextModule } from 'primeng/inputtext';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { AvatarModule } from 'primeng/avatar';
 import { TagModule } from 'primeng/tag';
-
+import { AccordionModule } from 'primeng/accordion';
+import { ClientesModule } from '../clientes/clientes.module';
+import { ProductosPedidosComponent } from './components/productos-pedidos/productos-pedidos.component';
+import { PagosListComponent } from './components/pagos-list/pagos-list.component';
+import { ImportesCalcService } from './services/importes-calc.service';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { FormsModule } from '@angular/forms';
+import { MessageService } from 'primeng/api';
+import { DialogService } from 'primeng/dynamicdialog';
+import { AgregarEditarPagoComponent } from './components/agregar-editar-pago/agregar-editar-pago.component';
+import { DropdownModule } from 'primeng/dropdown';
+import { AnaliticaModule } from '../analitica/analitica.module';
+import { TicketCardComponent } from '../tickets/components/ticket-card.component';
 
 @NgModule({
     declarations: [
         VerVentasComponent,
         VentasTableComponent,
-        VerPedidoByIdComponent
+        VerPedidoByIdComponent,
+        ProductosPedidosComponent,
+        PagosListComponent,
+        AgregarEditarPagoComponent,
     ],
     imports: [
         CommonModule,
@@ -26,7 +41,16 @@ import { TagModule } from 'primeng/tag';
         InputTextModule,
         TabMenuModule,
         AvatarModule,
-        TagModule
-    ]
+        TagModule,
+        AccordionModule,
+        ClientesModule,
+        InputNumberModule,
+        FormsModule,
+        DropdownModule,
+        AnaliticaModule,
+        DropdownModule,
+        TicketCardComponent
+    ],
+    providers: [ImportesCalcService, MessageService, DialogService]
 })
 export class VentasModule { }

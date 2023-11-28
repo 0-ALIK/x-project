@@ -1,30 +1,47 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, HostListener, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { clientes, pedidos } from 'src/app/interfaces/data';
+import { Pedido } from 'src/app/interfaces/pedido.interface';
+import { ReclamoPrioridad } from 'src/app/interfaces/raclamo.interface';
+import { Cliente } from 'src/app/interfaces/usuario.inteface';
 
 @Component({
   selector: 'app-ver-detalle',
   templateUrl: './ver-detalle.component.html',
-  styleUrls: ['./ver-detalle.component.css']
+  styleUrls: ['./ver-detalle.component.css'],
 })
-export class VerDetalleComponent {
+
+export class VerDetalleComponent implements OnInit {
+
+    public cliente: Cliente = clientes[0];
+
+    uploadedFiles: any[] = [];
+
     ticketNumber: number = 12391;
 
+    public pedido: Pedido = pedidos[0];
 
-    prioridad: string ='ALTA';
-    estatus: string = 'REVISIÓN';
-    
-  
-    getPriority(prioridad: string): string {
-      switch (prioridad) {
-        case 'BAJA':
-          return 'success';
-        case 'MEDIA':
-          return 'warning';
-        case 'ALTA':
-          return 'danger';
-        default:
-          return 'unknown';
-      }
+    reclamoPrioridad: ReclamoPrioridad[]  | undefined
+
+    loading: boolean = false;
+
+    public items!: any[];
+
+    public constructor(
+        private activatedRoute: ActivatedRoute
+    ) {}
+
+    public ngOnInit(): void {
+        this.items = [
+            { label: 'Cerrar Ticket', command: () => this.closeTicket() },
+            { label: 'Cambiar Status', command: () => this.changeStatus() }
+        ];
+        this.activatedRoute.params.subscribe({
+            next: ({id}) => {
+                this.ticketNumber = id;
+            }
+        });
+
     }
 
     getSeverity(estatus: string): string {
@@ -39,4 +56,12 @@ export class VerDetalleComponent {
           return 'unknown';
       }
     }
+
+    public cargarBoton(): void{
+        this.loading = true;
+        setTimeout(() => {
+            this.loading = false
+        }, 2000);
+    }
+
 }

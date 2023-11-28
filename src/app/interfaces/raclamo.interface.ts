@@ -20,7 +20,8 @@ export interface Reclamo {
     id_reclamo?: number;
     admin?: Admin;
     pedido?: Pedido;
-    categora?: ReclamoCategoria;
+    cliente?: Cliente;
+    categoria?: ReclamoCategoria;
     prioridad?: ReclamoPrioridad;
     estado?: ReclamoEstado;
     descripcion?: string;

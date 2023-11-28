@@ -2,3 +2,20 @@
     <input type="text" pInputText [(ngModel)]="value" placeholder="Categoria..." />
     <p-button label="Agregar" [loading]="loading" (onClick)="agregar()" [disabled]="!value"></p-button>
 </div>
+
+<hr>
+
+<div>
+    <ul class="list">
+        <li class="list-item" *ngFor="let categoria of categorias">
+            <p>{{categoria.nombre}}</p>
+            <p-button
+                icon="pi pi-trash"
+                severity="danger"
+                (onClick)="eliminarCategoria( categoria )"
+                [text]="true"
+                [raised]="true">
+            </p-button>
+        </li>
+    </ul>
+</div>

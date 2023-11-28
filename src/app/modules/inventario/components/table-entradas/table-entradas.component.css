@@ -10,6 +10,12 @@ p-table {
     justify-content: space-between;
 }
 
+.avatar-cel {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+}
+
 /* Acomoda los titulos de las tablas */
 th {
     min-width: max-content;

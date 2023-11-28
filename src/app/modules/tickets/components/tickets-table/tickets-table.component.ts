@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Table } from 'primeng/table';
+import { reclamos } from 'src/app/interfaces/data';
+import { Reclamo } from 'src/app/interfaces/raclamo.interface';
+import { TagsColorsService } from '../../services/tags-colors.service';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { ReporteTicketsComponent } from 'src/app/modules/analitica/components/reporte-tickets.component';
 
 @Component({
   selector: 'app-tickets-table',
@@ -8,20 +13,23 @@ import { Table } from 'primeng/table';
   styleUrls: ['./tickets-table.component.css']
 })
 export class TicketsTableComponent {
-    activityValues: number[] = [0, 100];
 
-    selectedProduct!: any;
+    public activityValues: number[] = [0, 100];
 
-	constructor(
-        private router: Router
+    public selectedProduct!: any;
+
+    public reclamos: Reclamo[] = reclamos;
+
+    public ref: DynamicDialogRef | undefined;
+
+    public constructor(
+        public dialogService: DialogService,
+        private router: Router,
+        public tagsColorsService: TagsColorsService
     ) { }
 
-	redirectToAnotherPage(productId: string) {
-        //this.router.navigate(['/dashboard/tickets', 12]);
-	}
-
-    public onSeleccion( evento: any ): void {
-        this.router.navigate(['/dashboard/tickets', evento.data.id]);
+    public showGenerarReporte(): void {
+        this.ref = this.dialogService.open(ReporteTicketsComponent, { header: 'Generar Reporte' });
     }
 
 	products: object[] = [
@@ -61,5 +69,9 @@ export class TicketsTableComponent {
 			return 'unknown';
 		}
 	  }
+	  
+    public onSeleccion( evento: any ): void {
+        this.router.navigate(['/app/tickets', evento.data.id_reclamo]);
+    }
 
 }
