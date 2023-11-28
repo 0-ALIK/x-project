@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { provincias } from 'src/app/interfaces/data';
-import { Provincia } from 'src/app/interfaces/direccion.interface';
+import { Direccion } from 'src/app/interfaces/direccion.interface';
+import { Usuario } from 'src/app/interfaces/usuario.inteface';
 
 
 @Component({
@@ -9,7 +9,10 @@ import { Provincia } from 'src/app/interfaces/direccion.interface';
 })
 export class DashboardVentasComponent implements OnInit {
 
-    public provincias: Provincia[] = provincias;
+    direccion: Direccion[] | undefined;
+    lengthEmpresas: number = 20;
+    fecha: any[] | undefined;
+    usuario:Usuario [] | undefined;
 
     public data1: any;
 
@@ -26,6 +29,15 @@ export class DashboardVentasComponent implements OnInit {
 
     }
 
+    definirFiltroFecha(): void{
+        this.fecha = [
+            { nombre: 'Filtro1' },
+            { nombre: 'Filtro2' },
+            { nombre: 'Filtro3' },
+            { nombre: 'Filtro4' },
+            { nombre: 'Filtro5' }
+        ];
+    }
 
     definirGraficaLineal1(): void{
         const documentStyle = getComputedStyle(document.documentElement);

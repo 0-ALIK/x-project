@@ -34,16 +34,7 @@ export class DashboardClientesComponent implements OnInit {
         this.definirGraficaBarras2();
         this.definirGraficaPastel1();
         this.definirGraficaPastel2();
-
-        // this.clienteService.getEmpresas().subscribe({
-        //     next: (empresas) => {
-        //         this.empresa = empresas;
-        //         this.lengthEmpresas = empresa.length;
-        //     },
-        //     error: (error) =>{
-        //         console.error("Error al obtener empresas:", error);
-        //         }
-        // })
+        this.definirFiltroFecha();
 
         this.clienteService.getEmpresas().subscribe({
             next: (empresas) => {
