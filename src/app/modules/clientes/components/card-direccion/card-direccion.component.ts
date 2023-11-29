@@ -6,6 +6,11 @@ import { Direccion } from 'src/app/interfaces/direccion.interface';
     templateUrl: './card-direccion.component.html'
 })
 export class CardDireccionComponent {
+
     @Input('direccion')
     public direccion: Direccion | undefined;
+
+    @Input('fondo')
+    public fondo: boolean = false;
+
 }

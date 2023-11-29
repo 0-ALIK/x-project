@@ -1,3 +1,4 @@
+
 <div class="flex align-items-center gap-2">
     <h1 class="text-3xl">Pedido con id: id</h1>
     <p-tag [value]="pedido?.estado?.estado"></p-tag>
@@ -20,6 +21,10 @@
             <h2 class="text-lg m-0 p-0">Dirección de envio</h2>
             <alik-card-direccion [direccion]="pedido?.direccion"></alik-card-direccion>
         </div>
+        <div class="mb-2" *ngIf="reclamo">
+            <h2 class="text-lg m-0 p-0">Reclamo</h2>
+            <ticket-card [reclamo]="reclamo"></ticket-card>
+        </div>
         <div class="mb-2">
             <h2 class="text-lg m-0 p-0">Impote de la venta</h2>
             <p-inputNumber
@@ -36,7 +41,7 @@
     <div class="w-full">
         <p-accordion [activeIndex]="0">
             <p-accordionTab header="Productos">
-                <app-productos-pedidos></app-productos-pedidos>
+                <app-productos-pedidos [importeDebido]="importeDebido" [pedidoProducto]="pedido?.pedido_producto ||   []" [pagos]="pedido?.pagos" ></app-productos-pedidos>
             </p-accordionTab>
 
             <p-accordionTab header="Pagos">

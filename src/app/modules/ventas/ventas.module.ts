@@ -21,7 +21,10 @@ import { MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { AgregarEditarPagoComponent } from './components/agregar-editar-pago/agregar-editar-pago.component';
 import { DropdownModule } from 'primeng/dropdown';
-
+import { AnaliticaModule } from '../analitica/analitica.module';
+import { TicketCardComponent } from '../tickets/components/ticket-card.component';
+import { EcommerceComponent } from './pages/ecommerce.component';
+import { CardModule } from 'primeng/card';
 
 @NgModule({
     declarations: [
@@ -30,7 +33,8 @@ import { DropdownModule } from 'primeng/dropdown';
         VerPedidoByIdComponent,
         ProductosPedidosComponent,
         PagosListComponent,
-        AgregarEditarPagoComponent
+        AgregarEditarPagoComponent,
+        EcommerceComponent
     ],
     imports: [
         CommonModule,
@@ -45,7 +49,11 @@ import { DropdownModule } from 'primeng/dropdown';
         ClientesModule,
         InputNumberModule,
         FormsModule,
-        DropdownModule
+        DropdownModule,
+        AnaliticaModule,
+        DropdownModule,
+        TicketCardComponent,
+        CardModule
     ],
     providers: [ImportesCalcService, MessageService, DialogService]
 })
