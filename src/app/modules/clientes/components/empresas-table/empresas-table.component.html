@@ -1,20 +1,16 @@
 <p-table
+    #table
     [value]="arregloEmpresas"
-    [paginator]="true"
     styleClass="p-datatable-gridlines"
-    [rows]="5"
-    [showCurrentPageReport]="true"
     [tableStyle]="{ 'min-width': '50rem' }"
-    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
     (onPage)="pageChange($event)"
-    [rowsPerPageOptions]="[10, 25, 50]"
     selectionMode="single"
     (onRowSelect)="onRowSelect( $event )">
 
     <ng-template pTemplate="caption">
         <div class="contenido">
             <div class="p-buttonset">
-                <button pButton label="Limpiar" class="p-button-outlined" icon="pi pi-filter-slash"></button>
+                <button pButton label="Limpiar" (click)="table.clear()" class="p-button-outlined" icon="pi pi-filter-slash"></button>
                 <button pButton label="Reporte" icon="pi pi-file-export"></button>
             </div>
             <div class="input">
@@ -27,29 +23,53 @@
     </ng-template>
     <ng-template pTemplate="header" >
         <tr>
-            <th>Empresa</th>
-            <th>RUC</th>
-            <th>Correo</th>
-            <th>Telefono</th>
-            <th>Archivo Registro</th>
-            <th>Total Pedidos</th>
-            <th>Acciones</th>
+            <th>
+                <div class="flex align-items-center">
+                    Nombre
+                    <p-columnFilter field="nombre" display="menu"></p-columnFilter>
+                </div>
+            </th>
+            <th>
+                <div class="flex align-items-center">
+                    RUC
+                    <p-columnFilter field="RUC" display="menu"></p-columnFilter>
+                </div>
+            </th>
+            <th>
+                <div class="flex align-items-center">
+                    Telefono
+                    <p-columnFilter field="telefono" display="menu"></p-columnFilter>
+                </div>
+            </th>
+            <th>
+                <div class="flex align-items-center">
+                    Razón social
+                    <p-columnFilter field="razon_social" display="menu"></p-columnFilter>
+                </div>
+            </th>
+            <th>
+                <div class="flex align-items-center">
+                    Total Pedidos
+                    <p-columnFilter field="nombre" type="numeric" display="menu"></p-columnFilter>
+                </div>
+            </th>
+            <th><div class="flex align-items-center">Acciones</div></th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-empresa >
         <tr [pSelectableRow]="empresa">
-            <td >
-                <div class="celda-cliente">
-                    <p-avatar [image]="empresa.foto" shape="circle"></p-avatar>
+            <td>
+                <div class="flex align-items-center gap-1">
+                    <div>
+                        <p-avatar [image]="empresa.foto" shape="circle"></p-avatar>
+                    </div>
                     <p class="celda-cliente-nombre">{{empresa.nombre}}</p>
                 </div>
-
             </td>
-            <td>{{ empresa.ruc }}</td>
-            <td>{{ empresa.correo }}</td>
+            <td>{{ empresa.RUC }}</td>
             <td>{{ empresa.telefono }}</td>
-            <td><a href="{{empresa.documento}}"> Documento </a></td>
-            <td>{{ empresa.total }}</td>
+            <td>{{ empresa.razon_social }}</td>
+            <td>{{ -1 }}</td>
             <td>
                 <p-button icon="pi pi-trash" [rounded]="true" [text]="true" severity="danger"></p-button>
             </td>

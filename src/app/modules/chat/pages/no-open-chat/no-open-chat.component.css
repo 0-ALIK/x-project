@@ -1,0 +1,21 @@
+.fondo{
+    background: linear-gradient(0deg, rgba(22, 29, 33, 0.793) 0%, rgba(22, 29, 33, 0.637) 100%), url(../../../../../assets/cuadros.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 90vh;
+}
+
+.caja-blur{
+    width: 94%;
+    height: 80%;
+    border-radius: 15px;
+    background: rgba(14, 19, 21, 0.12);
+    backdrop-filter: blur(9.300000190734863px);
+    overflow-y:auto ;
+}
+
+
+.caja-blur-fuentes{
+    line-height: normal;
+}

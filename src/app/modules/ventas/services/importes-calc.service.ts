@@ -1,3 +1,4 @@
+import { productos } from 'src/app/interfaces/data';
 import { Injectable } from '@angular/core';
 import { Pago, PedidoProductos } from 'src/app/interfaces/pedido.interface';
 
@@ -24,8 +25,15 @@ export class ImportesCalcService {
         return productosPedidos.reduce( (cont, pedidoProductos) =>  {
             const cantidad_por_caja = pedidoProductos.producto?.cantidad_por_caja || 0;
             const precio_unit = pedidoProductos.producto?.precio_unit || 0;
-            return cont + (cantidad_por_caja * precio_unit);
+            const cantidad = pedidoProductos.cantidad || 0;
+            return cont + (cantidad_por_caja * precio_unit * cantidad);
         }, 0 );
     }
 
+
+    public calcularDescuento(): number {
+        const descuento: number = 0.17
+
+        return descuento
+    }
 }

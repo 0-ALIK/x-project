@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
+import { empresas } from 'src/app/interfaces/data';
+import { Empresa } from 'src/app/interfaces/usuario.inteface';
 import { ApiEmpresaService } from 'src/app/services/api-empresa.service';
 
 @Component({
@@ -18,18 +20,7 @@ export class EmpresasTableComponent {
 
     rows = 10;
 
-    public arregloEmpresas: any[] = [
-        // {
-        //     id: 1, foto: 'xd', nombre: 'flavio', propietario: 'flacio', ruc: '8888888', telefono: '66782932', direccion: 'asdnkasjdnk', campos: 'asd', total: '10'
-        // },
-        // {
-        //     id: 2, foto: 'xd', nombre: 'flavio', propietario: 'flacio', ruc: '8888888', telefono: '66782932', direccion: 'asdnkasjdnk', campos: 'asd', total: '10'
-        // },
-        // {
-        //     id: 3, foto: 'xd', nombre: 'flavio', propietario: 'flacio', ruc: '8888888', telefono: '66782932', direccion: 'asdnkasjdnk', campos: 'asd', total: '10'
-        // }
-
-    ]
+    public arregloEmpresas: Empresa[] = [];
 
     public constructor (
         private router: Router,
@@ -82,7 +73,7 @@ export class EmpresasTableComponent {
     }
 
     public onRowSelect(event: any): void {
-        const { id } = event.data;
-        this.router.navigate(['/app/clientes/perfil', id]);
+        const { id_empresa } = event.data;
+        this.router.navigate(['/app/clientes/perfil/empresa', id_empresa]);
     }
 }

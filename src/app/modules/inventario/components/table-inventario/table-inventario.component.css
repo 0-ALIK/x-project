@@ -24,7 +24,7 @@ th {
 /* Separa los botones de ACCION */
 .td-buttons {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .avatar-cel {

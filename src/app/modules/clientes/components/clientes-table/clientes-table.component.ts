@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { Router } from '@angular/router';
-import { ApiClienteService } from 'src/app/services/api-cliente.service';
+import { Cliente } from 'src/app/interfaces/usuario.inteface';
+import { clientes } from 'src/app/interfaces/data';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { ReporteClienteComponent } from 'src/app/modules/analitica/components/reporte-cliente.component';
 
 @Component({
   selector: 'app-clientes-table',
@@ -18,16 +21,20 @@ export class ClientesTableComponent implements OnInit {
 
     public rows = 10;
 
-    public arregloClientes: Array<any> = [
-    ]
+    public arregloClientes: Cliente[] = clientes;
+
+    public ref: DynamicDialogRef | undefined;
 
     public constructor(
-        private router: Router,
-        private apiService: ApiClienteService
-    ) {
-        this.apiService.getClientes().subscribe((resp:any)=>{
-            this.arregloClientes = resp.data
-        })
+        public dialogService: DialogService,
+        private router: Router
+    ) { }
+
+    public showGenerarReporte(): void {
+        this.ref = this.dialogService.open(ReporteClienteComponent, {
+            header: 'Generar Reporte',
+            height: '70%'
+        });
     }
 
     public ngOnInit(): void {
@@ -72,8 +79,8 @@ export class ClientesTableComponent implements OnInit {
     }
 
     public onRowSelect(event: any): void {
-        const { id } = event.data;
-        this.router.navigate(['/app/clientes/perfil', id]);
+        const { id_cliente } = event.data;
+        this.router.navigate(['/app/clientes/perfil/cliente', id_cliente]);
     }
 
 

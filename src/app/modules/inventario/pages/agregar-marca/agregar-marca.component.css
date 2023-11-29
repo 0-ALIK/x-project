@@ -1,8 +1,10 @@
-.div-contenedor {
+/* Tamaño del fieldset */
+p-fieldset {
     display: flex;
     gap: var(--spacing-2);
 }
 
+/* Tamaño y padding del titulo */
 .tittle {
     font-size: var(--text-3xl);
     padding: var(--spacing-1);

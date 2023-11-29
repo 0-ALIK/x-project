@@ -1,7 +1,5 @@
 .message {
-    padding: var(--spacing-2);
     border-radius: var(--border-radius);
-
     max-width: 65%;
 }
 
