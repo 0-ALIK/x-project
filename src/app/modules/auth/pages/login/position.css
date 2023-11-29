@@ -1,4 +1,4 @@
-.shape1 {
+/* .shape1 {
     left: 5%;
 }
 
@@ -11,4 +11,20 @@
 .shape2 {
     top: 350px;
     left: 40%;
+} */
+
+main {
+    display: flex;
+}
+
+.section-form {
+    width: 50%;
+}
+
+.section-image {
+    width: 50%;
+
+    & img {
+        width: 100%;
+    }
 }

@@ -1,4 +1,4 @@
-<main class="h-screen w-screen flex p-4 md:p-0">
+<!-- <main class="h-screen w-screen flex p-4 md:p-0">
 
     <section class="border-round py-2 px-4 md:px-8 h-screen w-full" [style]="{'background': 'var(--surface-card)'}">
 
@@ -19,24 +19,46 @@
                 <p-checkbox value="New York" inputId="ny"></p-checkbox>
                 <label for="ny">Recordar usuario</label>
             </div>
-
             <p-button styleClass="w-full mb-4" label="Iniciar sesión"></p-button>
-
             <div>
                 <p class="m-0 text-center p-0 text-lg">¿Aún no tienes cuenta?</p>
                 <a class="text-lg text-center block" [routerLink]="['/auth/registro-mayorista']">Registrate como mayorista</a>
                 <a class="text-lg text-center block" [routerLink]="['/auth/registro-minorista']">Registrate como minorista  </a>
             </div>
-
         </form>
-
     </section>
-
     <section class="w-full hidden md:block relative">
-
-        <img src="assets/temp.jpg" class="w-full h-full" alt="">
-
-
+        <img src="assets/cosmos.jpg" class="w-full h-full" alt="">
     </section>
+</main> -->
 
+<main>
+    <section style="background-image: url('assets/universo.jpg'); background-size: cover; background-position: center;">
+        <form>
+            <h1>Iniciar Sesión</h1>
+
+            <div>
+                <label htmlFor="correo">Correo</label>
+                <input type="text" id="correo" pInputText class="w-full">
+            </div>
+
+            <div>
+                <label htmlFor="pass">Contraseña</label>
+                <input type="password" id="pass" pInputText class="w-full">
+            </div>
+
+            <div>
+                <p-checkbox value="New York" inputId="ny"></p-checkbox>
+                <label for="ny">Recordar usuario</label>
+            </div>
+            <p-button  label="Iniciar sesión"></p-button>
+            <div>
+                <p>¿Aún no tienes cuenta?</p>
+                <a [routerLink]="['/auth/registro-mayorista']">Registrate como mayorista</a>
+            </div>
+        </form>
+    </section>
+    <!-- <section class="section-image">
+        <img src="assets/universo.jpg">
+    </section> -->
 </main>
