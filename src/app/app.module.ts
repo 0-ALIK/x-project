@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ButtonModule } from 'primeng/button';
 import { SidebarModule } from 'primeng/sidebar';
 import { NavLandingPageComponent } from './components/nav-landing-page/nav-landing-page.component';
+import { CarouselModule } from 'primeng/carousel';
 
 @NgModule({
     declarations: [
@@ -23,7 +24,8 @@ import { NavLandingPageComponent } from './components/nav-landing-page/nav-landi
         AppRoutingModule,
         HttpClientModule,
         ButtonModule,
-        SidebarModule
+        SidebarModule,
+        CarouselModule
     ],
     providers: [],
     bootstrap: [AppComponent]

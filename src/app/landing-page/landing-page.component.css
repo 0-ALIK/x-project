@@ -61,6 +61,75 @@
     }
 }
 
+.tablas {
+    display: flex;
+    margin-top: var(--spacing-6);
+    padding-bottom: var(--spacing-3);
+}
+
+.tablas-info {
+    width: 40%;
+    padding-left: var(--spacing-5);
+
+    & h3 {
+        font-size: var(--text-4xl);
+        margin: 0;
+    }
+
+    & .tablas-subtitulo {
+        font-size: var(--text-4xl);
+    }
+
+    & .tablas-texto {
+        font-size: var(--text-xl);
+    }
+}
+
+.tablas-ejemplo {
+    width: 60%;
+    display: flex;
+    align-items: center;
+}
+
+.imagen-tablas img {
+    width: 100%;
+}
+
+.dashboard {
+    display: flex;
+    margin: 0;
+    background-color: var(--surface-overlay);
+    padding: var(--spacing-6) var(--spacing-4) var(--spacing-3) var(--spacing-3);
+}
+
+.dashboard-info {
+    width: 40%;
+    padding-left: var(--spacing-3);
+
+    & h3 {
+        font-size: var(--text-4xl);
+        margin: 0;
+    }
+
+    & .dashboard-subtitulo {
+        font-size: var(--text-4xl);
+    }
+
+    & .dashboard-texto {
+        font-size: var(--text-xl);
+    }
+}
+
+.dashboard-ejemplo {
+    width: 60%;
+    display: flex;
+    align-items: center;
+}
+
+.imagen-dashboard img {
+    width: 100%;
+}
+
 @keyframes moveUpDown {
 
     0%,
@@ -109,5 +178,55 @@
             font-size: var(--text-l);
         }
 
+    }
+
+    .tablas {
+        flex-direction: column;
+    }
+
+    .tablas-info {
+        width: 100%;
+
+        & h3 {
+            font-size: var(--text-xl);
+        }
+
+        & .tablas-subtitulo {
+            font-size: var(--text-2xl);
+        }
+
+        & .tablas-texto {
+            margin-right: var(--spacing-5);
+            font-size: var(--text-base);
+        }
+    }
+
+    .tablas-ejemplo {
+        width: 100%;
+    }
+
+    .dashboard {
+        flex-direction: column-reverse;
+    }
+
+    .dashboard-info {
+        width: 100%;
+
+        & h3 {
+            font-size: var(--text-xl);
+        }
+
+        & .dashboard-subtitulo {
+            font-size: var(--text-2xl);
+        }
+
+        & .dashboard-texto {
+            margin-right: var(--spacing-5);
+            font-size: var(--text-base);
+        }
+    }
+
+    .dashboard-ejemplo {
+        width: 100%;
     }
 }

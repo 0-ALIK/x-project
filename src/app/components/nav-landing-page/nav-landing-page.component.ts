@@ -23,7 +23,7 @@ export class NavLandingPageComponent {
     }
 
     private rellenarMenuItem(): void {
-        this.menuItems = ['Inventario', 'Ventas', 'Clientes', 'Usuarios', 'Analítica'];
+        this.menuItems = ['Tablas', 'Dashboard', 'Opiniones'];
       }
 
     // Método para cambiar el tema y alternar la visibilidad de los botones
