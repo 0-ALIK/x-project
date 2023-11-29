@@ -5,6 +5,7 @@ import { Cliente } from 'src/app/interfaces/usuario.inteface';
 import { clientes } from 'src/app/interfaces/data';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ReporteClienteComponent } from 'src/app/modules/analitica/components/reporte-cliente.component';
+import { ApiClienteService } from 'src/app/services/api-cliente.service';
 
 @Component({
   selector: 'app-clientes-table',
@@ -21,14 +22,22 @@ export class ClientesTableComponent implements OnInit {
 
     public rows = 10;
 
-    public arregloClientes: Cliente[] = clientes;
+
 
     public ref: DynamicDialogRef | undefined;
 
+    public arregloClientes: Cliente[] = [];
+
     public constructor(
         public dialogService: DialogService,
-        private router: Router
-    ) { }
+        private router: Router,
+        private apiService: ApiClienteService
+    ) {
+        this.apiService.getClientes().subscribe((resp:any)=>{
+            //console.log(resp)
+            this.arregloClientes = resp.data
+        })
+    }
 
     public showGenerarReporte(): void {
         this.ref = this.dialogService.open(ReporteClienteComponent, {
