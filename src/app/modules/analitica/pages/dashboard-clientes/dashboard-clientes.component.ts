@@ -1,8 +1,8 @@
-import { Empresa } from 'src/app/interfaces/usuario.inteface';
+import { Usuario } from 'src/app/interfaces/usuario.inteface';
 import { Component, OnInit } from '@angular/core';
 import { ClientesService } from 'src/app/services/clientes.service';
-import { Provincia } from 'src/app/interfaces/direccion.interface';
-import { empresas, provincias } from 'src/app/interfaces/data';
+import { Direccion } from 'src/app/interfaces/direccion.interface';
+import { clientes, empresas } from 'src/app/interfaces/data';
 
 
 @Component({
@@ -12,12 +12,10 @@ import { empresas, provincias } from 'src/app/interfaces/data';
 })
 export class DashboardClientesComponent implements OnInit {
 
-    public empresas: any[] =[];
-    public lengthEmpresas: number = 0;
-
-    filtroProvincia: Provincia[] = provincias;
-
-    filtroEmpresa: Empresa[] = empresas;
+    direccion: Direccion[] | undefined;
+    lengthEmpresas: number = 20;
+    fecha: any[] | undefined;
+    usuario:Usuario [] | undefined;
 
     data1: any;
     options1: any;
@@ -37,22 +35,31 @@ export class DashboardClientesComponent implements OnInit {
         this.definirGraficaBarras2();
         this.definirGraficaPastel1();
         this.definirGraficaPastel2();
-        this.clienteService.getEmpresas().subscribe({
-            next: (empresas) => {
-                this.empresas = empresas;
-                this.lengthEmpresas = empresas.length;
-            },
-            error: (error) =>{
-                console.error("Error al obtener empresas:", error);
-                }
-        })
+        this.definirFiltroFecha();
+        this.cargarDatos();
+
 
     }
-    constructor(
-        private clienteService: ClientesService
-      ) {}
+    constructor() {}
 
+    totalEmpresas(): void{
+        // this.lengthEmpresas = this.usuario.length;
+    }
 
+    definirFiltroFecha(): void{
+        this.fecha = [
+            { nombre: 'Filtro1' },
+            { nombre: 'Filtro2' },
+            { nombre: 'Filtro3' },
+            { nombre: 'Filtro4' },
+            { nombre: 'Filtro5' }
+        ];
+    }
+
+    private cargarDatos(){
+        this.usuario = empresas;
+        this.direccion = clientes;
+    }
 
     definirGraficaBarras1(): void{
         const documentStyle = getComputedStyle(document.documentElement);
