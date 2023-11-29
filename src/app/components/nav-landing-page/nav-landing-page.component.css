@@ -1,13 +1,10 @@
 nav {
     background-color: var(--surface-overlay);
     width: 100%;
-    position: sticky;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    top: 0;
     height: var(--nav-height);
-    z-index: 980;
 }
 
 .logo {
@@ -45,45 +42,47 @@ nav {
     list-style: none;
     margin: 0;
     padding: 0;
+    display: flex;
 
-    & a {
-        display: flex;
-
-        & li {
-            padding: var(--spacing-2) var(--spacing-2);
-            border-radius: var(--border-radius);
-        }
-
+    & li {
+        padding: var(--spacing-2) var(--spacing-2);
+        border-radius: var(--border-radius);
     }
 }
 
 .tema {
-    margin-left: var(--spacing-3);
     border-right: 4px solid var(--text-color);
+}
+
+.acciones ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+
+    & li {
+        padding: var(--spacing-2) var(--spacing-2);
+        border-radius: var(--border-radius);
+    }
 }
 
 .acciones {
     margin-inline: var(--spacing-3);
-
-    & a {
-        font-weight: 600;
-        margin-left: var(--spacing-3);
-    }
 }
 
 /* Estilo para tablets y dispositivos con pantallas medianas */
 @media (max-width: 1023px) {
 
-    .modulos ul a {
+    .modulos ul {
         flex-direction: column;
-    }
-
-    .etiqueta-a {
-        font-size: var(--text-xl);
 
         & li {
             padding-inline: var(--spacing-3);
             color: var(--surface-900);
+
+            & .etiqueta-a {
+                font-size: var(--text-xl);
+            }
         }
     }
 

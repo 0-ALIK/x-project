@@ -130,6 +130,23 @@
     width: 100%;
 }
 
+.cards {
+    text-align: center;
+
+    & h3 {
+        font-size: var(--text-4xl);
+    }
+
+    & .cards-texto {
+        font-size: var(--text-xl);
+    }
+
+}
+
+footer {
+    background-color: var(--surface-overlay);
+}
+
 @keyframes moveUpDown {
 
     0%,

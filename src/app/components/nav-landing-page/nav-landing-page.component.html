@@ -2,24 +2,20 @@
     <div class="opciones">
         <div class="modulos">
             <ul>
-                <a href="#" class="etiqueta-a">
-                    <li>Registrarse</li>
-                    <li>Iniciar Sesion</li>
-                    <li *ngFor="let item of menuItems">{{ item }}</li>
-                </a>
+                <li *ngFor="let item of loginItems"><a href="#{{ item.toLowerCase() }}" class="etiqueta-a">{{ item }}</a></li>
+                <li *ngFor="let item of menuItems"><a href="#{{ item.toLowerCase() }}" class="etiqueta-a">{{ item }}</a></li>
             </ul>
         </div>
     </div>
     <div class="tema">
-        <p-button *ngIf="isSunButtonVisible" icon="pi pi-sun" [text]="true"
-            (onClick)="toggleThemeAndButtons('viva-light')"></p-button>
-        <p-button *ngIf="!isSunButtonVisible" icon="pi pi-moon" [text]="true"
-            (onClick)="toggleThemeAndButtons('viva-dark')"></p-button>
+        <p-button *ngIf="isSunButtonVisible" icon="pi pi-sun" [text]="true"(onClick)="toggleThemeAndButtons('viva-light')"></p-button>
+        <p-button *ngIf="!isSunButtonVisible" icon="pi pi-moon" [text]="true"(onClick)="toggleThemeAndButtons('viva-dark')"></p-button>
     </div>
 </p-sidebar>
 
 
 <nav>
+    <!-- Logo y Nombre -->
     <div class="logo">
         <img src="assets/logo.png" alt="logo">
         <a href="#" class="etiqueta-a">
@@ -28,30 +24,30 @@
     </div>
 
     <div class="opciones">
-        <p-button *ngIf="isSidebarButtonVisible" type="button" class="mr-2" (click)="sidebarVisible2 = true"
-            icon="pi pi-bars" [text]="true"></p-button>
 
+        <!-- Boton del Menu del Sidebar -->
+        <p-button *ngIf="isSidebarButtonVisible" type="button" class="mr-2" (click)="sidebarVisible2 = true"icon="pi pi-bars" [text]="true"></p-button>
+
+        <!-- Tablas - Dashboard - Cards -->
         <div *ngIf="!isSidebarButtonVisible" class="modulos">
             <ul>
-                <a href="#" class="etiqueta-a">
-                    <li *ngFor="let item of menuItems">{{ item }}</li>
-                </a>
+                <li *ngFor="let item of menuItems"><a href="#{{ item.toLowerCase() }}" class="etiqueta-a">{{ item }}</a></li>
             </ul>
         </div>
 
+        <!-- Boton que cambia de tema -->
         <div *ngIf="!isSidebarButtonVisible" class="tema">
             <!-- Primer botón (sol) -->
-            <p-button *ngIf="isSunButtonVisible" icon="pi pi-sun" [text]="true"
-                (onClick)="toggleThemeAndButtons('viva-light')"></p-button>
-
+            <p-button *ngIf="isSunButtonVisible" icon="pi pi-sun" [text]="true"(onClick)="toggleThemeAndButtons('viva-light')"></p-button>
             <!-- Segundo botón (luna) -->
-            <p-button *ngIf="!isSunButtonVisible" icon="pi pi-moon" [text]="true"
-                (onClick)="toggleThemeAndButtons('viva-dark')"></p-button>
-
+            <p-button *ngIf="!isSunButtonVisible" icon="pi pi-moon" [text]="true"(onClick)="toggleThemeAndButtons('viva-dark')"></p-button>
         </div>
+
+        <!-- Registrarse - Iniciar Sesion -->
         <div *ngIf="!isSidebarButtonVisible" class="acciones">
-            <a href="#" class="etiqueta-a">Registrarse</a>
-            <a href="#" class="etiqueta-a">Iniciar Sesion</a>
+            <ul>
+                <li *ngFor="let item of loginItems"><a href="#{{ item.toLowerCase() }}" class="etiqueta-a">{{ item }}</a></li>
+            </ul>
         </div>
     </div>
 </nav>
