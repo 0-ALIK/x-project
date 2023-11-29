@@ -8,13 +8,20 @@ export class DashboardService {
 
     public host: string = 'http://localhost:8000';
 
-
     constructor(
         private http: HttpClient
     ) {}
 
-    public getEmpresas(): Observable<Empresa[]> {
-
-        return this.http.get<Empresa[]>(this.host + '/api/empresa');
+    public getClientes(): Observable<any> {
+        return this.http.get<any>(this.host + '/api/clientes');
     }
+
+    public getProvincias(): Observable<any>{
+        return this.http.get<any>(this.host + '/api/clientes')
+    }
+
+    public getPedidos(): Observable<any>{
+        return this.http.get<any>(this.host + '/api/pedidos')
+    }
+
 }
