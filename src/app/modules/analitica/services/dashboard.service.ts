@@ -1,12 +1,11 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Empresa } from '../interfaces/usuario.inteface'
+import { Empresa } from 'src/app/interfaces/usuario.inteface';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class ClientesService {
+@Injectable()
+export class DashboardService {
+
     public host: string = 'http://localhost:8000';
 
 

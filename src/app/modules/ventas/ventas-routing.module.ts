@@ -4,6 +4,7 @@ import { VerVentasComponent } from './pages/ver-ventas/ver-ventas.component';
 import { VerPedidoByIdComponent } from './pages/ver-pedido-by-id/ver-pedido-by-id.component';
 import { NotFoundComponent } from 'src/app/not-found/not-found.component';
 import { EcommerceComponent } from './pages/ecommerce.component';
+import { CarritoPageComponent } from './pages/carrito-page.component';
 
 const routes: Routes = [
     {
@@ -17,6 +18,10 @@ const routes: Routes = [
     {
         path: 'c/ecommerce',
         component: EcommerceComponent
+    },
+    {
+        path: 'c/carrito',
+        component: CarritoPageComponent
     },
     {
         path: '**',

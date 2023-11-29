@@ -1,16 +1,14 @@
 <main >
     <!-- Filtros -->
     <section class="flex flex-row align-content-start justify-content-start mb-1 gap-2">
-        <p-dropdown [options]="filtroProvincia"  placeholder="Provincia" optionLabel="nombre"></p-dropdown>
-        <!-- <p-dropdown [options]="filtroFecha" placeholder="Fecha" optionLabel="nombre" ></p-dropdown> -->
-        <p-dropdown [options]="filtroEmpresa" placeholder="Empresa" optionLabel="nombre" ></p-dropdown>
-        <!-- <p-dropdown [options]="filtroTiempo" placeholder="Género" optionLabel="nombre" ></p-dropdown> -->
+        <p-dropdown [options]="direccion"  placeholder="provincia" optionLabel="provincia"></p-dropdown>
+        <p-dropdown [options]="fecha" placeholder="Fecha" optionLabel="nombre" ></p-dropdown>
+        <p-dropdown [options]="usuario" placeholder="Empresa" optionLabel="nombre" ></p-dropdown>
 
     </section>
     <!-- Cards superiores -->
     <section>
         <div class="flex flex-row justify-content-between">
-            <h2>{{lengthEmpresas}}</h2>
             <alik-dashboard-card class="mx-2" titulo="Clientes Totales" icon="pi-users" [numero]="lengthEmpresas" tipo="numero" [valorAnterior]="85" ></alik-dashboard-card>
             <alik-dashboard-card class="mx-2" titulo="Empresas Totales" icon="pi-building" [numero]="58" tipo="numero" [valorAnterior]="49" ></alik-dashboard-card>
             <alik-dashboard-card class="mx-2" titulo="Crecimiento" icon="pi-chart-line" [numero]="54" tipo="numero" [valorAnterior]="24" ></alik-dashboard-card>
