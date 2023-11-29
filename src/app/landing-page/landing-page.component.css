@@ -1,8 +1,10 @@
+/* Calcula la distacia entre el Nav y el resto de la pantalla */
 .background-image {
     position: relative;
     height: calc(100vh - var(--nav-height));
 }
 
+/* Coloca la imagen de fondo */
 .background-image::before {
     content: '';
     position: absolute;
@@ -15,9 +17,9 @@
     background-size: cover;
     background-repeat: no-repeat;
     z-index: -1;
-    /* Asegura que el fondo esté detrás del contenido */
 }
 
+/* Texto que esta encima de la imagen de fondo */
 .eslogan {
     text-align: center;
     color: white;
@@ -61,6 +63,7 @@
     }
 }
 
+/* Diseño de la parte de Tablas */
 .tablas {
     display: flex;
     margin-top: var(--spacing-6);
@@ -94,6 +97,8 @@
 .imagen-tablas img {
     width: 100%;
 }
+
+/* Diseño de la parte de Dashboard */
 
 .dashboard {
     display: flex;
@@ -130,6 +135,8 @@
     width: 100%;
 }
 
+/* Diseño de la parte de Cards */
+
 .cards {
     text-align: center;
 
@@ -139,14 +146,18 @@
 
     & .cards-texto {
         font-size: var(--text-xl);
+        margin-inline: var(--spacing-8);
     }
 
 }
+
+/* Diseño del footer */
 
 footer {
     background-color: var(--surface-overlay);
 }
 
+/* Animacion de la flecha */
 @keyframes moveUpDown {
 
     0%,
@@ -179,6 +190,7 @@ footer {
 /* Estilo para dispositivos móviles */
 @media (max-width: 767px) {
 
+    /* Texto que esta encima de la imagen de fondo */
     .eslogan {
 
         & h2 {
@@ -197,6 +209,7 @@ footer {
 
     }
 
+    /* Diseño de la parte de Tablas */
     .tablas {
         flex-direction: column;
     }
@@ -222,6 +235,7 @@ footer {
         width: 100%;
     }
 
+    /* Diseño de la parte de Dashboard */
     .dashboard {
         flex-direction: column-reverse;
     }
@@ -245,5 +259,16 @@ footer {
 
     .dashboard-ejemplo {
         width: 100%;
+    }
+
+    /* Diseño de la parte de Cards */
+    p-card {
+        display: flex;
+        width: 300px;
+    }
+
+    .cards .cards-texto {
+        font-size: var(--text-base);
+        margin-inline: var(--spacing-4);
     }
 }
