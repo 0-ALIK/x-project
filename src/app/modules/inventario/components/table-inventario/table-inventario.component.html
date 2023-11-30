@@ -76,14 +76,14 @@
 
         <ng-template pTemplate="body" let-producto>
             <tr [pSelectableRow]="producto">
-                <td>{{ producto.nombre }}</td>
-                <td>{{ producto.categoria.nombre }}</td>
+                <td>{{ producto?.nombre }}</td>
+                <td>{{ producto?.categoria?.nombre }}</td>
                 <td class="avatar-cel">
                     <p-avatar [image]="producto.marca.logo"></p-avatar>
-                    <span>{{ producto.marca.nombre }}</span>
+                    <span>{{ producto.marca?.nombre }}</span>
                 </td>
-                <td>{{ producto.precio_unit | currency:'USD':'symbol':'1.2-2' }}</td>
-                <td>{{ producto.cantidad_cajas }}</td>
+                <td>{{ producto?.precio_unit | currency:'USD':'symbol':'1.2-2' }}</td>
+                <td>{{ producto?.cantidad_cajas }}</td>
                 <td>
                     <p-avatar [image]="producto.foto"></p-avatar>
                 </td>
