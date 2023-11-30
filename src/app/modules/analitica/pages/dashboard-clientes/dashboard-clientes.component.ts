@@ -1,10 +1,8 @@
-
-    import { clientes } from './../../../../interfaces/data';
-    import { DashboardService } from './../../services/dashboard.service';
-    import { Cliente, Usuario } from 'src/app/interfaces/usuario.inteface';
-    import { Component, OnInit } from '@angular/core';
-    import { Direccion } from 'src/app/interfaces/direccion.interface';
-    import {  empresas } from 'src/app/interfaces/data';
+import { Direccion } from './../../../../interfaces/direccion.interface';
+import { clientes, direcciones, provincias, productos, pedidos } from './../../../../interfaces/data';
+import { DashboardService } from './../../services/dashboard.service';
+import { Cliente, Usuario } from 'src/app/interfaces/usuario.inteface';
+import { Component, OnInit } from '@angular/core';
 
 
     @Component({
@@ -14,86 +12,107 @@
     })
     export class DashboardClientesComponent implements OnInit {
 
-        provincias: Direccion[] | undefined;
-        lengthEmpresas: number = 20;
+        provincia: any[] | undefined;
+        provincias: Direccion[] | undefined
+
         usuario:Usuario [] | undefined;
+
         clientes: Cliente[] | undefined;
+        idCliente: any | undefined;
         nombreCliente: any[] | undefined;
+        provinciaCliente: any[] | undefined
+        pedidoCliente: any[] | undefined;
+
         fecha: any | undefined;
 
         data1: any;
-        options1: any;
-
         data2: any;
-        options2: any;
-
         data3: any;
-
         data4: any;
 
+        options1: any;
+        options2: any;
+
         ngOnInit() {
-            this.definirClientes();
-            this.cargarDatos();
-            this.filtroProvincia();
+            // this.definirClientes();
+            this.definirEmpresaProvincias();
+            this.optionsGrafica();
         }
 
-        constructor(
-            private dashboardService: DashboardService) {
-          }
+        constructor(private dashboardService: DashboardService) {}
 
-        definirClientes(): void {
-            this.dashboardService.getClientes().subscribe({
-                next: (clientes) => {
-                   this.clientes = clientes.data
-                   this.filtroNombres();
-                   this.graficaClientesMas();
-                   this.graficaClientesMenos();
-                   this.graficaSegmentacion();
-                   this.grafiaProvincias();
-                  console.log(this.clientes)
-                },
-                error: () => {
-                }
-              })
-        }
+        // definirClientes(): void {
+        //     this.dashboardService.getClientes().subscribe({
+        //         next: (clientes) => {
+        //            this.clientes = clientes.data;
+        //            this.filtroNombres();
+        //            this.graficaClientesMas();
+        //           console.log(this.clientes);
+        //         },
+        //         error: (error) => {
+        //             console.error(error);
+        //         }
+        //       })
+        // }
 
-        filtroProvincia(): void{
-            //logica del filtro
-        }
-
-        obtenerProvincias(): void {
-            this.dashboardService.getProvincias().subscribe({
-                next: (provincias) => {
-                    console.log('Datos recibidos:', provincias);
+        definirEmpresaProvincias(): void{
+            this.dashboardService.getClientesProvincias().subscribe({
+                next:(provincias) => {
                     this.provincias = provincias.data;
-                    console.log(this.provincias);
+                    this.graficaProvincias();
+                    this.graficaSegmentacion();
+                    this.graficaClientesMas();
+                    this.graficaClientesMenos();
+                    this.filtroProvincias();
+                    this.filtroProvinciaCliente();
+                    this.filtroComprasClientes();
                 },
                 error: (error) => {
                     console.error(error);
-
                 }
             })
         }
 
-        filtroNombres(): void {
-            this.nombreCliente = clientes.map(function(cliente) {
-                return cliente.nombre + ' ' + cliente.apellido; // Acceder a la propiedad "nombre" de cada cliente
+        // filtroNombres(): void {
+        //     this.nombreCliente = clientes.map(function(cliente) {
+        //         return cliente.nombre + ' ' + cliente.apellido; // Acceder a la propiedad "nombre" de cada cliente
+        //     });
+        // }
+
+        filtroIdCliente(): void {
+            this.idCliente = clientes.map(function(id){
+                return id.id_cliente;
             });
+            console.log(this.idCliente);
         }
 
+        filtroProvincias(): void {
+            this.provincia = direcciones.map(function(provincia){
+                return provincia.provincia?.nombre;
+            });
+            console.log(this.provincia);
+        }
 
-        private cargarDatos(){
-            this.usuario = empresas;
+        filtroProvinciaCliente(): void {
+            this.provinciaCliente = clientes.map(function(clienteProvincia){
+                return clienteProvincia.direcciones;
+            });
+            console.log(this.provinciaCliente);
+        }
+
+        filtroComprasClientes(): void {
+            this.pedidoCliente = pedidos.map(function (pedidoCliente) {
+                return pedidoCliente.cliente
+            });
+
+
         }
 
         graficaClientesMas(): void{
             const documentStyle = getComputedStyle(document.documentElement);
-            const textColor = documentStyle.getPropertyValue('--text-color');
-            const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
-            const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
 
             this.data1 = {
-                labels: this.nombreCliente,
+                labels:  ['luis'],
                 datasets: [
                     {
                         label: 'Clientes que más compran',
@@ -104,52 +123,13 @@
                 ]
             };
 
-            this.options1 = {
-                indexAxis: 'y',
-                maintainAspectRatio: false,
-                aspectRatio: 1,
-                plugins: {
-                    legend: {
-                        labels: {
-                            color: textColor
-                        }
-                    }
-                },
-                scales: {
-                    x: {
-                        ticks: {
-                            color: textColorSecondary,
-                            font: {
-                                weight: 500
-                            }
-                        },
-                        grid: {
-                            color: surfaceBorder,
-                            drawBorder: false
-                        }
-                    },
-                    y: {
-                        ticks: {
-                            color: textColorSecondary
-                        },
-                        grid: {
-                            color: surfaceBorder,
-                            drawBorder: false
-                        }
-                    }
-                }
-            };
-
         }
 
         graficaClientesMenos(): void{
             const documentStyle = getComputedStyle(document.documentElement);
-            const textColor = documentStyle.getPropertyValue('--text-color');
-            const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
-            const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
 
             this.data2 = {
-                labels: this.nombreCliente,
+                labels: ['pepiniloos', 'locos', 'pepinilos'],
                 datasets: [
                     {
                         label: 'Clientes que menos compran',
@@ -160,50 +140,10 @@
                 ]
             }
 
-            this.options1 = {
-                indexAxis: 'y',
-                maintainAspectRatio: false,
-                aspectRatio: 1,
-                plugins: {
-                    legend: {
-                        labels: {
-                            color: textColor
-                        }
-                    }
-                },
-                scales: {
-                    x: {
-                        ticks: {
-                            color: textColorSecondary,
-                            font: {
-                                weight: 500
-                            }
-                        },
-                        grid: {
-                            color: surfaceBorder,
-                            drawBorder: false
-                        }
-                    },
-                    y: {
-                        ticks: {
-                            color: textColorSecondary
-                        },
-                        grid: {
-                            color: surfaceBorder,
-                            drawBorder: false
-                        }
-                    }
-                }
-            };
-
         }
 
         graficaSegmentacion(): void{
             const documentStyle = getComputedStyle(document.documentElement);
-            const textColor = documentStyle.getPropertyValue('--text-color');
-            const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
-            const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
-
 
             this.data3 = {
                 labels: ['A', 'B', 'C'],
@@ -215,28 +155,13 @@
                     }
                 ]
             };
-
-            this.options2 = {
-                plugins: {
-                    legend: {
-                        labels: {
-                            usePointStyle: true,
-                            color: textColor
-                        }
-                    }
-                }
-            };
-
         }
 
-        grafiaProvincias(): void{
+        graficaProvincias(): void{
             const documentStyle = getComputedStyle(document.documentElement);
-            const textColor = documentStyle.getPropertyValue('--text-color');
-            const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
-            const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
 
             this.data4 = {
-                labels: ['A', 'B', 'C'],
+                labels: this.provincia,
                 datasets: [
                     {
                         data: [540, 325, 702],
@@ -245,7 +170,13 @@
                     }
                 ]
             };
+        }
 
+        optionsGrafica(): void {
+            const documentStyle = getComputedStyle(document.documentElement);
+            const textColor = documentStyle.getPropertyValue('--text-color');
+            const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
+            const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
             this.options2 = {
                 plugins: {
                     legend: {
@@ -257,5 +188,39 @@
                 }
             };
 
+            this.options1 = {
+                indexAxis: 'y',
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: textColor
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: {
+                            color: textColorSecondary,
+                            font: {
+                                weight: 500
+                            }
+                        },
+                        grid: {
+                            color: surfaceBorder,
+                            drawBorder: false
+                        }
+                    },
+                    y: {
+                        ticks: {
+                            color: textColorSecondary
+                        },
+                        grid: {
+                            color: surfaceBorder,
+                            drawBorder: false
+                        }
+                    }
+                }
+            };
         }
     }

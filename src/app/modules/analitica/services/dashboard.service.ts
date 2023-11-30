@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Empresa } from 'src/app/interfaces/usuario.inteface';
 
 @Injectable()
 export class DashboardService {
@@ -16,12 +15,11 @@ export class DashboardService {
         return this.http.get<any>(this.host + '/api/clientes');
     }
 
-    public getProvincias(): Observable<any>{
-        return this.http.get<any>(this.host + '/api/clientes')
+
+    public getClientesProvincias(): Observable<any> {
+        return this.http.get<any>(this.host + '/api/clientes/{id}/direcciones');
     }
 
-    public getPedidos(): Observable<any>{
-        return this.http.get<any>(this.host + '/api/pedidos')
-    }
+
 
 }
