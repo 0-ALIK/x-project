@@ -14,6 +14,8 @@ import { MessageService } from 'primeng/api';
 
 export class VerBlogComponent {
 
+    estrellas:number = 5
+
     public usuario: Usuario[] | undefined;
 
     private ref: DynamicDialogRef | undefined;
