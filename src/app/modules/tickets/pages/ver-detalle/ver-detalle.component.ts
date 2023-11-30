@@ -44,17 +44,16 @@ export class VerDetalleComponent implements OnInit {
 
     }
 
-    getSeverity(estatus: string): string {
-      switch (estatus) {
-        case 'REVISADO':
-          return 'info';
-        case 'ESPERA':
-          return 'warning';
-        case 'RESUELTO':
-          return 'success';
-        default:
-          return 'unknown';
-      }
+    public closeTicket(): void {
+        // Lógica para cerrar el ticket
+        console.log('Cerrar Ticket');
+        // Puedes agregar aquí la lógica específica para cerrar el ticket
+    }
+
+    public changeStatus(): void {
+        // Lógica para cambiar el estado del ticket
+        console.log('Cambiar Status');
+        // Puedes agregar aquí la lógica específica para cambiar el estado del ticket
     }
 
     public cargarBoton(): void{

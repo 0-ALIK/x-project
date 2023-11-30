@@ -23,8 +23,6 @@ import { VentaCardComponent } from 'src/app/components/venta-card.component';
 @NgModule({
 	declarations: [
 		VerTicketsComponent,
-		VerDetalleComponent,
-		TicketsTableComponent,
         VerDetalleComponent,
         TicketsTableComponent
 	],

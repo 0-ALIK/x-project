@@ -43,10 +43,6 @@ const routes: Routes = [
             {
                 path: 'analitica',
                 loadChildren: () => import('../analitica/analitica.module').then(m => m.AnaliticaModule)
-            },
-            {
-                path: 'ayuda',
-                loadChildren: () => import('../ayuda/ayuda.module').then(m => m.AyudaModule)
             }
         ]
     }

@@ -37,6 +37,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { CalendarModule } from 'primeng/calendar';
 import { ChartModule } from 'primeng/chart';
 import { SkeletonModule } from 'primeng/skeleton';
+import { DialogVerMarcasComponent } from './components/dialog-ver-marcas/dialog-ver-marcas.component';
 import { AnaliticaModule } from '../analitica/analitica.module';
 
 @NgModule({
@@ -48,6 +49,7 @@ import { AnaliticaModule } from '../analitica/analitica.module';
         AgregarProductoComponent,
         DialogAgregarCategoriaComponent,
         DialogRealizarCompraComponent,
+        DialogVerMarcasComponent
     ],
     imports: [
         RouterModule,

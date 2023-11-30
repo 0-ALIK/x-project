@@ -52,7 +52,13 @@ export class TableEntradasComponent implements OnInit {
         this.messageService.add({ severity: 'info', summary: 'Operación Exitosa', detail: 'Registro eliminado' });
     }
 
+    // Esto abre dialog-generar-reporte
     showGenerarReporte() {
         /* this.ref = this.dialogService.open(DialogGenerarReporteComponent, { header: 'Generar Reporte' }); */
+    }
+
+    // Metodo que limpia los filtros ingresados por el usuario
+    clear(table: Table) {
+        table.clear();
     }
 }

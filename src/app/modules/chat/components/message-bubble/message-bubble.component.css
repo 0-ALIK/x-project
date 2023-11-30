@@ -7,20 +7,17 @@
     background-color: var(--primary-color);
     color: var(--primary-color-text);
     border-bottom-right-radius: 0;
-    text-align: right; 
 }
 
 .message-left {
-    background-color: var(--highlight-bg);
+    background-color: var(--highlight-bg	);
     color: var(--highlight-text-color);
     border-bottom-left-radius: 0;
-    text-align: left; 
 }
 
 .message p {
     margin: 0;
 }
-
 
 /* Estilo para dispositivos móviles */
 @media (max-width: 767px) {}

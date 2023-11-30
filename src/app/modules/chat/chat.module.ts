@@ -10,7 +10,6 @@ import { AvatarModule } from 'primeng/avatar';
 import { ButtonModule } from 'primeng/button';
 import { TagModule } from 'primeng/tag';
 import { MessageBubbleComponent } from './components/message-bubble/message-bubble.component';
-import { ChatInputComponent } from './components/chat-input/chat-input.component';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { FormsModule } from '@angular/forms';  // Importa FormsModule
 
@@ -21,15 +20,13 @@ import { FormsModule } from '@angular/forms';  // Importa FormsModule
     MessagesListComponent,
     NoOpenChatComponent,
     UsuarioChatCardComponent,
-    MessageBubbleComponent,
-    ChatInputComponent
+    MessageBubbleComponent
   ],
   imports: [
     CommonModule,
     ChatRoutingModule,
     AvatarModule,
     TagModule,
-    FormsModule,
     ButtonModule,
     InputTextareaModule,
     FormsModule

@@ -1,40 +1,299 @@
-.p-rating-icon{
-  width: 50px;
-  color: cornflowerblue;
-}
+  .rating-section {
+      display: flex;
+      align-items: center;
+      height: 120px;
+      margin-top: 0;
+      margin-bottom: 0;
+  }
+  
+  .rating-section-coment {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+  }
+  
+  .user-info{
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .panel{
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  
 
-button.p-ripple.p-element.p-button.p-component.p-button-icon-only.p-button-raised.p-button-rounded.p-button-text{
-  color: cornflowerblue;
-}  
-
-button.p-ripple.p-element.p-button.p-component.p-button-info.p-button-raised {
-  background-color: cornflowerblue;
-}
-
-.p-sidebar .p-rating-icon:last-child {
-  width: 70px;
-  color: cornflowerblue;
-  block-size: 30px;
-}
-
-/* Estilo para tablets y dispositivos con pantallas medianas */
-@media (max-width: 1024px) {
-  .right-section{
-    display: none;
-    margin-left: 0;
+  
+  .stars {
+      display: block;
+      flex-direction: column;
+      align-items: center;
+  }
+  
+  .rating-description {
+      text-align: center;
+      margin-top: 5px;
+  }
+  
+  
+  .star-description {
+    margin-left: 10px; /* Ajusta el margen izquierdo según tus preferencias */
+  }
+  
+  .star {
+      width: 10px;
+      height: 10px;
+      background-color: transparent;
+      margin-bottom: 10px;
+  }
+  
+  .p{
+    margin-top: 5px;
+    margin-bottom: 0;
   }
 
-  .left-section{
-    margin-top: 20px;
+  .star1 {
+      width: 10px;
+      height: 10px;
+      background-color: transparent;
+      margin-bottom: 10px;
+      margin-top: 0;
+      margin-bottom: 0;
+  }
+  .div2{
+    height: 125px;
+    width: 100%;
+  }
+  
+  .starbotton {
+      width: 40px;
+      height: 30px;
+      background-color: transparent;
+      margin-bottom: 10px;
+      position: relative;
+  }
+  
+  .starbotton::before {
+      content: "★";
+      font-size: 50px;
+      color: cornflowerblue;
+      text-shadow: 1px 1px 1px rgba(89, 89, 89, 0.7);
+  }
+  
+  .send-button {
+      display: block;
+      margin: 20px auto;
+      /* Centra horizontalmente y agrega espacio superior e inferior */
+  }
+  
+  .star::before {
+      content: "★";
+      font-size: 70px;
+      color: cornflowerblue;
+      text-shadow: 1px 1px 1px rgba(89, 89, 89, 0.7);
+
+  }
+  
+  .star1::before {
+      content: "★";
+      font-size: 30px;
+      color: cornflowerblue;
+      text-shadow: 1px 1px 1px rgba(89, 89, 89, 0.7);
+
+  }
+  
+  .star.filled::before {
+      content: "★";
+      color: cornflowerblue;
+      text-shadow: 1px 1px 1px rgba(89, 89, 89, 0.7);
+
+  }
+  
+  
+  .text-section {
+      padding: 10px;
+  }
+  
+  .user-name {
+      text-align: left;
+      /* Alinea el texto a la izquierda */
+      margin-left: 30px;
+  }
+  
+
+  .star-text {
+    display: block;
+    flex-direction: column;
+  }
+  
+  
+
+
+
+  p-sidebar h3{
+    margin-top: 0;
+    margin-bottom: 20px;
+  }
+  
+  p-sidebar{
+    text-align: center;
+  }
+
+  textarea{
+    margin-bottom: 20px;
+  }
+
+  .stars-client{
+    font-size: x-large;
+    margin-bottom: 20px;
+  }
+
+  p-sidebar{
     align-items: center;
-    justify-content: center;
-    margin-left: 0px;
   }
 
-  .rating-div{
-    margin-left: 0px;
-    display: flex!important;
-    align-items: center;
-    justify-content: center;
+  .p-rating-icon{
+    width: 50px;
+    color: cornflowerblue;
   }
+
+  .boton-form {
+    display: flex;
+}
+  
+.boton-form p-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px; 
+    z-index: 8;
+  }
+
+.title-container{
+    text-align: center;
+    margin-bottom: 5%;
+}
+
+.rating-div{
+    text-align: center;
+    justify-content: center;
+    background-color:var(--surface-a);
+    margin-left: 120px;
+}
+
+.valoraciones, .card{
+    margin-left: 20px;
+    margin-right: 20px;
+    background-color:var(--surface-a);
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    padding-bottom: 60px;
+}
+
+.progress-bar-container {
+  background: rgb(225, 223, 223);
+  width: 40%;
+  height: 25px;
+  border-radius: 5px;
+  overflow: hidden; 
+  text-shadow: 1px 1px 1px rgba(89, 89, 89, 0.7);
+
+}
+
+.filled-rectangle {
+  width: 100%;
+  height: 100%;
+  text-shadow: 1px 1px 1px rgba(89, 89, 89, 0.7);
+}
+
+.star-icon{
+    color: cornflowerblue;
+    font-size: 18px;
+    text-shadow: 1px 1px 1px rgba(89, 89, 89, 0.7);
+}
+
+.rating-description h3{
+    font-weight: lighter;
+}
+
+.seccionstart {
+  width: 80px;
+  font-size: 15px;
+  margin-right: 10px;
+}
+
+.right-section-item {
+  display: flex;
+  align-items: center;
+  width: 70%px;
+  height: 40px;
+}
+
+.rating-text {
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.right-section {
+  flex: 1;
+  text-align: right;
+  margin-left: 200px;
+  margin-bottom: 30px;
+}
+
+.right-section h4{
+  font-weight: lighter!important;
+  margin-left: 10px;
+}
+
+.left-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left:50px;
+}
+
+.reseñas-container{
+  display: flex;
+  flex-flow: row;
+  color: black;
+  margin-bottom: 20px;
+}
+
+.reseña-nombre{
+  font-size: 18px;
+  margin-left: 20px;
+}
+
+.reseña-fecha{
+  color: rgb(123, 122, 122);
+  margin-top: 5px;
+  font-size: 15px;
+  margin-bottom: 10px;
+  font-weight: lighter;
+  margin-left: 20px;
+
+}
+
+.reseña-descripcion{
+  font-size: 15px;
+  margin-bottom: 20px;
+  margin-left: 20px;
+  text-align: justify;
+}
+
+.img{
+  margin-left: 60px;
+}
+
+.reseña-botones {
+  display: flex;
+  justify-content: flex-end; /* Esto alinea los botones a la derecha */
+  gap: 10px; /* Espacio entre los botones */
+  align-items: center;
+  height: 100%;
+  margin-right: 60px;
+}
+
+.reseñas-info{
+  width: 90%;
 }

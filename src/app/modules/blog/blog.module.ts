@@ -1,41 +1,60 @@
+import { NgModule} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
 import { BlogRoutingModule } from './blog-routing.module';
-import { ButtonModule } from 'primeng/button';
-import { DataViewModule } from 'primeng/dataview';
-import { InputTextareaModule } from 'primeng/inputtextarea';
-import { PanelModule } from 'primeng/panel';
-import { RatingModule } from 'primeng/rating';
-import { SelectButtonModule } from 'primeng/selectbutton';
-import { SidebarModule } from 'primeng/sidebar';
-import { TagModule } from 'primeng/tag';
 import { VerBlogComponent } from './pages/blog/blog.component';
-import { ReviewDataviewComponent } from './components/generar-reviews/review-dataview/review-dataview.component';
-import { GenerarRatingComponent } from './components/generar-rating/generar-rating/generar-rating.component';
-import { GenerarFormComponent } from './components/generar-form/generar-form/generar-form.component'
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PanelModule  } from 'primeng/panel';
+import { ButtonModule } from 'primeng/button';
+import { SidebarModule } from 'primeng/sidebar';
+import { RatingModule } from 'primeng/rating';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { DataViewModule } from 'primeng/dataview';
+import { TagModule } from 'primeng/tag';
+import { CardBlogUsuarioComponent } from './components/card-blog-usuario/card-blog-usuario.component';
+import { AvatarModule } from 'primeng/avatar';
+import { AvatarGroupModule } from 'primeng/avatargroup';
+import { ProgressBarModule } from 'primeng/progressbar';
+import { ToastModule } from 'primeng/toast'
+import { ScrollTopModule } from 'primeng/scrolltop';
+import { ScrollPanelModule } from 'primeng/scrollpanel';
+import { DividerModule } from 'primeng/divider';
+import { DialogAgregarOpinionComponent } from './components/agregar-opinion/dialog-agregar-opinion.component';
+import { FormsModule } from '@angular/forms';
+import { MessageService } from 'primeng/api';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+
 
 @NgModule({
   declarations: [
     VerBlogComponent,
-    ReviewDataviewComponent,
-    GenerarRatingComponent,
-    GenerarFormComponent,
+    CardBlogUsuarioComponent,
+    DialogAgregarOpinionComponent
   ],
   imports: [
     CommonModule,
     BlogRoutingModule,
-    ButtonModule,
-    DataViewModule,
     InputTextareaModule,
     PanelModule,
+    ButtonModule,
+    SidebarModule,
     RatingModule,
     SelectButtonModule,
-    SidebarModule,
+    DataViewModule,
     TagModule,
-    FormsModule, 
-    ReactiveFormsModule,
+    AvatarGroupModule,
+    AvatarModule,
+    ProgressBarModule,
+    ToastModule,
+    ScrollTopModule,
+    ScrollPanelModule,
+    DividerModule,
+    InputTextareaModule,
+    FormsModule
+
+  ],
+  providers: [
+    DialogService,
+    MessageService
   ]
-  
 })
 export class BlogModule { }

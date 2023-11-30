@@ -1,6 +1,6 @@
 .mensajes-list {
-    gap: var(--spacing-4);
-    padding: var(--spacing-4);
+    gap: var(--spacing-3);
+    padding: var(--spacing-2);
 }
 
 
