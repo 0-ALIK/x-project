@@ -1,0 +1,249 @@
+.background-image {
+    position: relative;
+    height: calc(100vh - var(--nav-height));
+}
+
+.background-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: url('/assets/fondo2.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: -1;
+    /* Asegura que el fondo esté detrás del contenido */
+}
+
+.eslogan {
+    text-align: center;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - var(--nav-height));
+    justify-content: center;
+    background: transparent;
+    backdrop-filter: blur(5px);
+
+    & h2 {
+        font-size: var(--text-6xl);
+        margin: 0;
+        margin-bottom: var(--spacing-3);
+    }
+
+    & hr {
+        width: 60%;
+    }
+
+    & p {
+        font-size: var(--text-3xl);
+        margin-inline: var(--spacing-9);
+        font-style: italic;
+    }
+
+    & .btn-comenzar {
+        margin-top: var(--spacing-3);
+        font-size: var(--text-2xl);
+        margin-bottom: var(--spacing-6);
+    }
+
+    & .flecha-abajo {
+        position: absolute;
+        bottom: 0;
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        animation: moveUpDown 2s 2;
+        color: var(--surface);
+    }
+}
+
+.tablas {
+    display: flex;
+    margin-top: var(--spacing-6);
+    padding-bottom: var(--spacing-3);
+}
+
+.tablas-info {
+    width: 40%;
+    padding-left: var(--spacing-5);
+
+    & h3 {
+        font-size: var(--text-4xl);
+        margin: 0;
+    }
+
+    & .tablas-subtitulo {
+        font-size: var(--text-4xl);
+    }
+
+    & .tablas-texto {
+        font-size: var(--text-xl);
+    }
+}
+
+.tablas-ejemplo {
+    width: 60%;
+    display: flex;
+    align-items: center;
+}
+
+.imagen-tablas img {
+    width: 100%;
+}
+
+.dashboard {
+    display: flex;
+    margin: 0;
+    background-color: var(--surface-overlay);
+    padding: var(--spacing-6) var(--spacing-4) var(--spacing-3) var(--spacing-3);
+}
+
+.dashboard-info {
+    width: 40%;
+    padding-left: var(--spacing-3);
+
+    & h3 {
+        font-size: var(--text-4xl);
+        margin: 0;
+    }
+
+    & .dashboard-subtitulo {
+        font-size: var(--text-4xl);
+    }
+
+    & .dashboard-texto {
+        font-size: var(--text-xl);
+    }
+}
+
+.dashboard-ejemplo {
+    width: 60%;
+    display: flex;
+    align-items: center;
+}
+
+.imagen-dashboard img {
+    width: 100%;
+}
+
+.cards {
+    text-align: center;
+
+    & h3 {
+        font-size: var(--text-4xl);
+    }
+
+    & .cards-texto {
+        font-size: var(--text-xl);
+    }
+
+}
+
+footer {
+    background-color: var(--surface-overlay);
+}
+
+@keyframes moveUpDown {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+/* Estilo para tablets y dispositivos con pantallas medianas */
+@media (max-width: 1023px) {
+
+    .eslogan {
+
+        & h2 {
+            font-size: var(--text-4xl);
+        }
+
+        & p {
+            font-size: var(--text-2xl);
+            margin-inline: var(--spacing-5);
+        }
+
+    }
+}
+
+/* Estilo para dispositivos móviles */
+@media (max-width: 767px) {
+
+    .eslogan {
+
+        & h2 {
+            font-size: var(--text-2xl);
+            margin-bottom: var(--spacing-3);
+        }
+
+        & p {
+            font-size: var(--text-xl);
+            margin-inline: var(--spacing-5);
+        }
+
+        & .btn-comenzar {
+            font-size: var(--text-l);
+        }
+
+    }
+
+    .tablas {
+        flex-direction: column;
+    }
+
+    .tablas-info {
+        width: 100%;
+
+        & h3 {
+            font-size: var(--text-xl);
+        }
+
+        & .tablas-subtitulo {
+            font-size: var(--text-2xl);
+        }
+
+        & .tablas-texto {
+            margin-right: var(--spacing-5);
+            font-size: var(--text-base);
+        }
+    }
+
+    .tablas-ejemplo {
+        width: 100%;
+    }
+
+    .dashboard {
+        flex-direction: column-reverse;
+    }
+
+    .dashboard-info {
+        width: 100%;
+
+        & h3 {
+            font-size: var(--text-xl);
+        }
+
+        & .dashboard-subtitulo {
+            font-size: var(--text-2xl);
+        }
+
+        & .dashboard-texto {
+            margin-right: var(--spacing-5);
+            font-size: var(--text-base);
+        }
+    }
+
+    .dashboard-ejemplo {
+        width: 100%;
+    }
+}

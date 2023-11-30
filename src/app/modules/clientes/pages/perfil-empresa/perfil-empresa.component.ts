@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { direcciones, provincias } from 'src/app/interfaces/data';
+import { direcciones, pedidos, provincias } from 'src/app/interfaces/data';
 import { Direccion, Provincia } from 'src/app/interfaces/direccion.interface';
 import { AgregarColaboradorComponent } from '../../components/agregar-colaborador/agregar-colaborador.component';
 import { AgregarSucursalComponent } from '../../components/agregar-sucursal/agregar-sucursal.component';
+import { Pedido } from 'src/app/interfaces/pedido.interface';
 
 @Component({
   selector: 'app-perfil-empresa',
@@ -12,6 +13,8 @@ import { AgregarSucursalComponent } from '../../components/agregar-sucursal/agre
   styleUrls: ['./perfil-empresa.component.css']
 })
 export class PerfilEmpresaComponent {
+
+    public pedidos: Pedido[] = pedidos;
 
     public items: MenuItem[] | undefined;
     public activeItem: MenuItem | undefined;

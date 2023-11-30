@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
-import { direcciones, provincias } from 'src/app/interfaces/data';
+import { direcciones, pedidos, provincias, reclamos } from 'src/app/interfaces/data';
 import { Direccion, Provincia } from 'src/app/interfaces/direccion.interface';
+import { Pedido } from 'src/app/interfaces/pedido.interface';
+import { Reclamo } from 'src/app/interfaces/raclamo.interface';
 
 
 @Component({
@@ -20,6 +22,10 @@ export class PerfilClienteComponent implements OnInit{
     public provinciaSelected: Provincia | undefined;
 
     public direcciones: Direccion[] = direcciones;
+
+    public reclamos: Reclamo[] = reclamos;
+
+    public pedidos: Pedido[] = pedidos;
 
     public ngOnInit():void {
         this.items = [

@@ -1,6 +1,11 @@
 <main class="main">
 
     <section class="chat-list">
+            <span class="p-input-icon-left mt-2">
+                <i class="pi pi-search"></i>
+                <input type="text" pInputText placeholder="Buscar un chat" class="text-center border-round surface-50 h-2rem w-full" />
+            </span>
+
         <div
             *ngFor="let reclamo of reclamos"
             [routerLink]="['/app/chat/reclamo', reclamo.id_reclamo]"
@@ -9,10 +14,10 @@
         </div>
     </section>
 
-
-
     <section class="messages-list">
         <router-outlet></router-outlet>
     </section>
 
+
 </main>
+

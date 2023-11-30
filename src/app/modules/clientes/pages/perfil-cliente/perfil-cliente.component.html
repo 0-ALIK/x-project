@@ -30,6 +30,21 @@
     </ng-container>
 
     <ng-container *ngIf="activeItem?.label && activeItem?.label === 'Reclamos'" >
+        <div class="flex gap-2">
+            <ticket-card
+                [style]="{'width': '50%'}"
+                *ngFor="let reclamo of reclamos"
+                [reclamo]="reclamo">
+            </ticket-card>
+        </div>
     </ng-container>
-    <ng-container *ngIf="activeItem?.label && activeItem?.label === 'Pedidos'" ></ng-container>
+    <ng-container *ngIf="activeItem?.label && activeItem?.label === 'Pedidos'" >
+        <div class="flex gap-2">
+            <venta-card
+                [style]="{'width': '50%'}"
+                *ngFor="let pedido of pedidos"
+                [pedido]="pedido">
+            </venta-card>
+        </div>
+    </ng-container>
 </div>

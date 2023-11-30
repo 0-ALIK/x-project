@@ -7,7 +7,7 @@ import { Empresa } from '../interfaces/usuario.inteface'
   providedIn: 'root'
 })
 export class ClientesService {
-    public host: string = 'http://localhost:3000';
+    public host: string = 'http://localhost:8000';
 
 
     constructor(
@@ -16,6 +16,6 @@ export class ClientesService {
 
     public getEmpresas(): Observable<Empresa[]> {
 
-        return this.http.get<Empresa[]>(this.host + '/Empresa');
+        return this.http.get<Empresa[]>(this.host + '/api/empresa');
     }
 }

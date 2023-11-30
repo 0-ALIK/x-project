@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, HostListener, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { clientes, pedidos } from 'src/app/interfaces/data';
+import { Pedido } from 'src/app/interfaces/pedido.interface';
 import { ReclamoPrioridad } from 'src/app/interfaces/raclamo.interface';
+import { Cliente } from 'src/app/interfaces/usuario.inteface';
 
 @Component({
   selector: 'app-ver-detalle',
@@ -9,9 +12,14 @@ import { ReclamoPrioridad } from 'src/app/interfaces/raclamo.interface';
 })
 
 export class VerDetalleComponent implements OnInit {
+
+    public cliente: Cliente = clientes[0];
+
     uploadedFiles: any[] = [];
 
     ticketNumber: number = 12391;
+
+    public pedido: Pedido = pedidos[0];
 
     reclamoPrioridad: ReclamoPrioridad[]  | undefined
 
@@ -33,6 +41,7 @@ export class VerDetalleComponent implements OnInit {
                 this.ticketNumber = id;
             }
         });
+
     }
 
     public closeTicket(): void {
@@ -53,23 +62,5 @@ export class VerDetalleComponent implements OnInit {
             this.loading = false
         }, 2000);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }
