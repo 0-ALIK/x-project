@@ -41,7 +41,7 @@ export class ProductoService {
 
     //eliminar producto
     public deleteProducto(id: number): Observable<any> {
-        const url = `${this.apiUrl}/api/productos/${id}`;
+        const url = `${this.apiUrl}/api/producto/${id}`;
         return this.http.delete(url);
     }
 }
