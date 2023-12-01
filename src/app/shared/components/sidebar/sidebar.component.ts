@@ -45,7 +45,7 @@ export class SidebarComponent implements OnInit {
                 route: '/app/tickets'
             },
             {
-                label: 'chat',
+                label: 'Chat',
                 icon: 'pi pi-fw pi-comments',
                 route: '/app/chat'
             },
