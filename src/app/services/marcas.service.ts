@@ -28,7 +28,7 @@ export class MarcasService {
 
 
     //actualizar marca
-    public updateMarca(id: number, marca: Marca): Observable<any> {
+    public updateMarca(marca: Marca, id: number): Observable<any> {
         const url = `${this.apiUrl}/api/marca/${id}`;
         const headers = new HttpHeaders({
             'Accept': 'application/json',
