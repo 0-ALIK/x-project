@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {AnaliticaService} from '../../../../services/analitica.service'
+import * as XLSX from 'xlsx';
 
 interface Formato{
     nameFormato: string,
@@ -22,6 +24,10 @@ interface Formato{
     nameCategoria: string,
     codeCategoria: string
   }
+  interface PuntoReorden{
+    namePuntoReorden: string,
+    codePuntoReorden: string
+  }
 
 
 @Component({
@@ -31,6 +37,12 @@ interface Formato{
 })
 export class GenerarReportesInventarioComponent implements OnInit {
 
+    constructor(private analitica: AnaliticaService) { }
+
+    public precio_min: string | undefined;
+    public precio_max: string | undefined;
+
+    public nameInforme: string | undefined;
     public marcas: Marca[] | undefined;
     public selectedMarcas: Marca | undefined;
 
@@ -46,44 +58,53 @@ export class GenerarReportesInventarioComponent implements OnInit {
     public tiposReportes: TiposReportes[] | undefined;
     public selectedReportes: TiposReportes | undefined;
 
+    public puntoReorden: PuntoReorden[] | undefined;
+    public selectedPuntoReorden: PuntoReorden | undefined;
+
     public loading: boolean = false;
 
     public ngOnInit(): void {
         this.formatos = [
-            { nameFormato: '.txt', codeFormato: 'txt' },
-            { nameFormato: '.doc', codeFormato: 'doc' },
-            { nameFormato: '.docx', codeFormato: 'docx' },
-            { nameFormato: '.pdf', codeFormato: 'pdf' },
             { nameFormato: '.xls', codeFormato: 'xls' },
-            { nameFormato: 'xlsx', codeFormato: 'xlsx' },
+            { nameFormato: '.xlsx', codeFormato: 'xlsx' },
             { nameFormato: '.xlsm', codeFormato: 'xlsm' },
-            { nameFormato: '.png', codeFormato: 'png' },
-            { nameFormato: '.ods', codeFormato: 'ods' },
-            { nameFormato: '.xps', codeFormato: 'xps' }
+            { nameFormato: '.csv', codeFormato: 'csv' }
         ];
 
-        this.tiposReportes = [
-            { nameReportes: 'Inventario', codeReportes: 'I' },
-            { nameReportes: 'Compras', codeReportes: 'C' },
-            { nameReportes: 'Otro', codeReportes: 'O' }
-        ];
+        this.puntoReorden = [
+          {namePuntoReorden: 'Por debajo', codePuntoReorden: 'Por%20debajo'},
+          {namePuntoReorden: 'Por encima', codePuntoReorden: 'Por%20encima'},
+          {namePuntoReorden: 'En la raya', codePuntoReorden: 'En%20la%20raya'}
+      ];
+
+
         this.marcas = [
-            { nameMarca: 'Coca Cola', codeMarca: 'S' },
-            { nameMarca: 'Pepsi', codeMarca: 'T' },
-            { nameMarca: 'Fanta', codeMarca: 'C' },
-            { nameMarca: 'etc', codeMarca: 'P' },
-            { nameMarca: 'etc', codeMarca: 'M' }
+            { nameMarca: 'Coca Cola', codeMarca: 'Coca%20Cola' },
+            { nameMarca: 'Pepsi', codeMarca: 'Pepsi' },
+            { nameMarca: 'Fanta', codeMarca: 'Fanta' },
         ];
         this.categorias = [
-            { nameCategoria: 'Suplementos', codeCategoria: 'S' },
-            { nameCategoria: 'refrescos', codeCategoria: 'T' },
-            { nameCategoria: 'etc', codeCategoria: 'C' },
-            { nameCategoria: 'etc', codeCategoria: 'P' },
-            { nameCategoria: 'etc', codeCategoria: 'M' }
+            { nameCategoria: 'Sodas', codeCategoria: 'Sodas' },
+            { nameCategoria: 'Suplementos', codeCategoria: 'Suplementos' },
         ];
     }
 
+    public GenerarReporte() {
+      this.analitica.getInventario(this.selectedCategorias?.codeCategoria, this.selectedMarcas?.codeMarca, this.precio_max, this.precio_min, this.selectedPuntoReorden?.namePuntoReorden)
+      .subscribe(respuesta => {
+      const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(respuesta);
+      const wb: XLSX.WorkBook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
 
+      if(this.nameInforme == undefined){
+        XLSX.writeFile(wb, 'Inventario' + this.selectedFormato?.nameFormato);
+      }
+      else{
+        XLSX.writeFile(wb, this.nameInforme + this.selectedFormato?.nameFormato);
+      }
+      // Guardar el archivo
+    })
+    }
 
     public load(): void {
         this.loading = true;

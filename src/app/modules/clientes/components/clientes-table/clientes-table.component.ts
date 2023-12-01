@@ -1,13 +1,18 @@
 import { Component } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { Router } from '@angular/router';
+import { VerReporteClientesComponent } from 'src/app/modules/analitica/pages/ver-reporte-clientes/ver-reporte-clientes.component';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'app-clientes-table',
   templateUrl: './clientes-table.component.html',
-  styleUrls: ['./clientes-table.component.css']
+  styleUrls: ['./clientes-table.component.css'],
+  providers: [DialogService]
+
 })
 export class ClientesTableComponent {
+    public ref: DynamicDialogRef | undefined;
 
     public tabs: MenuItem[] | undefined;
 
@@ -30,7 +35,9 @@ export class ClientesTableComponent {
     ];
 
     public constructor(
-        private router: Router
+        private router: Router,
+        public dialogService: DialogService
+
     ) {}
 
     public ngOnInit(): void {
@@ -78,4 +85,7 @@ export class ClientesTableComponent {
         this.router.navigate(['/app/clientes/perfil/cliente', id]);
     }
 
+    public showGenerarReporte(): void {
+        this.ref = this.dialogService.open(VerReporteClientesComponent, { header: 'Generar Reporte'});
+    }
 }

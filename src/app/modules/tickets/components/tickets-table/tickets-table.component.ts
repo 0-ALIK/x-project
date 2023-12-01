@@ -1,19 +1,26 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Table } from 'primeng/table';
+import { VerReportesTicketsComponent } from 'src/app/modules/analitica/pages/ver-reportes-tickets/ver-reportes-tickets.component';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'app-tickets-table',
   templateUrl: './tickets-table.component.html',
-  styleUrls: ['./tickets-table.component.css']
+  styleUrls: ['./tickets-table.component.css'],
+  providers: [DialogService]
 })
 export class TicketsTableComponent {
+    public ref: DynamicDialogRef | undefined;
+
     activityValues: number[] = [0, 100];
 
     selectedProduct!: any;
 
 	constructor(
-        private router: Router
+        private router: Router,
+        public dialogService: DialogService
+
     ) { }
 
 	redirectToAnotherPage(productId: string) {
@@ -60,5 +67,8 @@ export class TicketsTableComponent {
 				return 'unknown';
 		}
 	}
+	public showGenerarReporte(): void {
+        this.ref = this.dialogService.open(VerReportesTicketsComponent, { header: 'Generar Reporte'});
+    }
 
 }
