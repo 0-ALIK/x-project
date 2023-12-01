@@ -13,6 +13,10 @@ export class ChatService {
 
   constructor(private http: HttpClient, private pusherService: PusherService) {}
 
+  getAllChats(): Observable<any>{
+    return this.http.get(`${this.apiUrl}/api/chat`);
+  }
+
   getChatMessages(reclamoId: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/api/chat/${reclamoId}`);
   }
@@ -29,10 +33,6 @@ export class ChatService {
     channel.bind('chat', (data: any) => {
         observer.next(data);
       });
-
-    // return () => {
-    //     channel.unbind('chat'); 
-    //   };
 
     });
   }

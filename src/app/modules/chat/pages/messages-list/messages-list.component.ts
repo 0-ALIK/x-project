@@ -1,6 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { Router } from '@angular/router'; 
+import { Router, ActivatedRoute, Params } from '@angular/router'; 
 import { ChatService } from '../../chat.service';  
+import { ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-messages-list',
@@ -10,30 +11,34 @@ import { ChatService } from '../../chat.service';
 
 export class MessagesListComponent implements OnInit {
 
-    reclamoId = '1';
+    reclamoId:any = '';
     mensajes: any[] = [];
     newMessage: string = '';
 
     mensaje: string = '';
 
-    constructor(private chatService: ChatService) {}
+    constructor(private chatService: ChatService, private route: ActivatedRoute) {}
 
     ngOnInit(): void {
-        this.chatService.getChatMessages(this.reclamoId).subscribe((data) => {
-            this.mensajes = data;
+        this.route.params.subscribe((params : Params)=>{
+            this.reclamoId = params["id"];
+
+            this.chatService.getChatMessages(this.reclamoId).subscribe((data) => {
+                this.mensajes = data;
+            });
         });
 
         this.chatService.receiveMessages().subscribe({
         next: (payload) => {
-            console.log('Received payload:', payload);
             const receivedMessage = payload.message;
-
+            
             this.mensajes.push({
-            reclamo: receivedMessage.reclamo,
-            cliente: receivedMessage.cliente,
-            mensaje: receivedMessage.mensaje,
-            admin: receivedMessage.admin,
+                reclamo_id: receivedMessage.reclamo,
+                cliente_id: receivedMessage.cliente,
+                admin_id:   receivedMessage.admin,
+                mensaje:    receivedMessage.mensaje
             });
+
         },
         error: (error) => {
             console.error('Error receiving messages:', error);
@@ -45,14 +50,15 @@ export class MessagesListComponent implements OnInit {
     }
 
     sendMessage() {
+
         const messageData = {
             reclamo: this.reclamoId,
-            cliente: '0',
+            cliente: null,
             mensaje: this.newMessage,
             admin: '1',
         };
 
-            this.chatService.sendMessage(messageData).subscribe(() => {
+        this.chatService.sendMessage(messageData).subscribe(() => {
             this.newMessage = '';
         });
     }
