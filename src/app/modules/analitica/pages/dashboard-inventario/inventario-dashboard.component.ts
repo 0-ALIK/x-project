@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { categorias, marcas } from 'src/app/interfaces/data';
+import { categorias, marcas, productos } from 'src/app/interfaces/data';
 import { Categoria, Marca, Producto} from 'src/app/interfaces/producto.iterface';
 import { DashboardService } from '../../services/dashboard.service';
 
@@ -28,14 +28,13 @@ export class DashboardInventarioComponent implements OnInit {
         this.defineOptions();
         this.obtenerMarcasCategoria();
         this.definirProductosMasComprados();
-
+        this.graficaSegmentacion();
+        this.graficaProductos();
     }
 
     constructor(
         private dashboardService: DashboardService
     ){}
-
-    
 
     private obtenerMarcasCategoria(): void {
         setTimeout(() => {
@@ -46,11 +45,9 @@ export class DashboardInventarioComponent implements OnInit {
 
     definirProductosMasComprados(): void{
         this.dashboardService.getProductosMasComprados().subscribe({
-            next:(productos) => {
-                this.graficaProductos;
-                this.graficaSegmentacion;
-                this.filtroCategoria;
-                this.filtroMarca;
+            next:(Producto) => {
+                this.filtroCategoria();
+                this.filtroMarca();
             },
             error: (error) => {
                 console.error(error);
