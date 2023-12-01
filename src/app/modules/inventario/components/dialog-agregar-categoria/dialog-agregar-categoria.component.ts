@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
-import { categorias } from 'src/app/interfaces/data';
 import { Categoria } from 'src/app/interfaces/producto.iterface';
 import { CategoriaService } from 'src/app/services/categoria.service';
 
@@ -15,7 +14,7 @@ export class DialogAgregarCategoriaComponent implements OnInit {
 
     public loading: boolean = false;
 
-    public categorias: Categoria[] = categorias;
+    public categorias: Categoria[] | undefined;
 
     public constructor(
         public ref: DynamicDialogRef,
@@ -24,8 +23,8 @@ export class DialogAgregarCategoriaComponent implements OnInit {
 
     public ngOnInit(): void {
         this.categoriaService.getCategorias().subscribe(
-            (response: any) => {
-                this.categorias = response.data;
+            (categorias: any) => {
+                this.categorias = categorias.data;
                 console.log(this.categorias)
             },
             (error) => {
