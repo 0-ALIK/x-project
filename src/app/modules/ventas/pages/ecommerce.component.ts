@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { productos } from 'src/app/interfaces/data';
-import { Producto } from 'src/app/interfaces/producto.iterface';
+import { categorias, marcas, productos } from 'src/app/interfaces/data';
+import { Categoria, Marca, Producto } from 'src/app/interfaces/producto.iterface';
 
 @Component({
     selector: 'app-ecommerce',
@@ -8,15 +8,35 @@ import { Producto } from 'src/app/interfaces/producto.iterface';
         <main class="border-round p-2 w-full" [style]="{'background': 'var(--surface-card)'}">
 
             <div class="flex align-items-center gap-2 mb-2 w-full">
-                <span class="p-input-icon-left w-full">
-                    <i class="pi pi-search"></i>
-                    <input
-                        class="w-full"
-                        type="text"
-                        pInputText
-                        [(ngModel)]="value">
-                </span>
-                <p-button label="Search"></p-button>
+            <div class="flex align-items-center gap-2 mb-2 w-full">
+                    <span class="p-input-icon-left w-full">
+                        <i class="pi pi-search"></i>
+                        <input
+                            class="w-full"
+                            type="text"
+                            pInputText
+                            [(ngModel)]="value">
+                    </span>
+                    <p-button label="Search"></p-button>
+                </div>
+                <div class="flex align-items-center gap-2 mb-2 w-full">
+                    <p-dropdown
+                        formControlName="categoria"
+                        [options]="categorias"
+                        optionLabel="nombre">
+                    </p-dropdown>
+                    <p-dropdown
+                        formControlName="marca"
+                        [options]="marcas"
+                        optionLabel="nombre">
+                        <ng-template let-marca pTemplate="item">
+                            <div [style]="{'display': 'flex', 'alignItems': 'center', 'gap': 'var(--spacing-2)'}" >
+                                <img [src]="marca.logo" style="width: 18px">
+                                <div>{{ marca.nombre }}</div>
+                            </div>
+                        </ng-template>
+                    </p-dropdown>
+                </div>
             </div>
 
 
@@ -65,6 +85,10 @@ import { Producto } from 'src/app/interfaces/producto.iterface';
 export class EcommerceComponent {
 
     public productos: Producto[] = productos;
+
+    public marcas: Marca[] | undefined = marcas;
+
+    public categorias: Categoria[] | undefined = categorias;
 
     public value: string = '';
 
