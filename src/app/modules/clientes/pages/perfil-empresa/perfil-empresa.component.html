@@ -9,7 +9,7 @@
     </div>
 
     <ng-container *ngIf="activeItem?.label && activeItem?.label === 'Informacion'">
-        <app-perfil-card></app-perfil-card>
+        <app-perfil-card [empresa]="empresa"></app-perfil-card>
     </ng-container>
 
     <ng-container *ngIf="activeItem?.label && activeItem?.label === 'Sucursales'" >

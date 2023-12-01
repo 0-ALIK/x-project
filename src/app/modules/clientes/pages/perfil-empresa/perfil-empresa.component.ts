@@ -8,6 +8,8 @@ import { AgregarSucursalComponent } from '../../components/agregar-sucursal/agre
 import { Pedido } from 'src/app/interfaces/pedido.interface';
 import { ActivatedRoute } from '@angular/router';
 import { DireccionService } from 'src/app/services/direccion.service';
+import { Empresa } from 'src/app/interfaces/usuario.inteface';
+import { ApiEmpresaService } from 'src/app/services/api-empresa.service';
 
 @Component({
   selector: 'app-perfil-empresa',
@@ -27,12 +29,15 @@ export class PerfilEmpresaComponent {
 
     public direcciones: Direccion[] = [];
 
+    public empresa: Empresa | undefined;
+
     private ref: DynamicDialogRef | undefined;
 
     public constructor(
         public dialogService: DialogService,
         private activatedRoute: ActivatedRoute,
-        private apiService: DireccionService
+        private apiService: DireccionService,
+        private empresaService: ApiEmpresaService
     ) {}
 
     public ngOnInit():void {
@@ -48,8 +53,12 @@ export class PerfilEmpresaComponent {
         this.activatedRoute.params.subscribe({
             next: ({id}) => {
 
-                this.apiService.getDireccion(id).subscribe((resp:any)=>{
-                    this.direcciones = resp
+                this.apiService.getDireccionEmpresa(id).subscribe((resp:any)=>{
+                    this.direcciones = resp;
+                }),
+
+                this.empresaService.getDatosEmpresa(id).subscribe((resp:any)=>{
+                    this.empresa = resp[0];
                     console.log(resp)
                 })
             }

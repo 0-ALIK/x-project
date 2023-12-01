@@ -7,6 +7,7 @@ import { Injectable } from '@angular/core';
 export class SolicitudService {
 
     private urlApi = 'http://127.0.0.1:8000/api/solicitudes';
+    private token = '1|aVp3eUr44PhTcDR1LvCYPrJ83DnmLKGE31HHLUly5a7a250d';
 
 
     constructor(private Http: HttpClient) { }
@@ -15,6 +16,7 @@ export class SolicitudService {
 
       let header =  new HttpHeaders()
           .set('Type-content', 'aplication/json')
+          .set('authorization', 'Bearer '+this.token)
 
       return this.Http.get(this.urlApi, {
           headers: header

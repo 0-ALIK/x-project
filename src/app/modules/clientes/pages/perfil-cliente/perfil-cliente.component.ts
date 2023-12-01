@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MenuItem } from 'primeng/api';
+import { DialogService } from 'primeng/dynamicdialog';
 import { direcciones, pedidos, provincias, reclamos } from 'src/app/interfaces/data';
 import { Direccion, Provincia } from 'src/app/interfaces/direccion.interface';
 import { Pedido } from 'src/app/interfaces/pedido.interface';
 import { Reclamo } from 'src/app/interfaces/raclamo.interface';
+import { Cliente } from 'src/app/interfaces/usuario.inteface';
+import { ApiClienteService } from 'src/app/services/api-cliente.service';
+import { DireccionService } from 'src/app/services/direccion.service';
 
 
 @Component({
@@ -29,11 +33,14 @@ export class PerfilClienteComponent implements OnInit{
 
     public pedidos: Pedido[] = pedidos;
 
-    constructor (
-        private activatedRoute: ActivatedRoute
-    ) {
+    public cliente: Cliente | undefined;
 
-    }
+    public constructor(
+        public dialogService: DialogService,
+        private activatedRoute: ActivatedRoute,
+        private apiService: DireccionService,
+        private clienteService: ApiClienteService
+    ) {}
 
     public ngOnInit():void {
         this.items = [
@@ -49,7 +56,14 @@ export class PerfilClienteComponent implements OnInit{
         this.activatedRoute.params.subscribe({
             next: ({id}) => {
 
+                this.apiService.getDireccionEmpresa(id).subscribe((resp:any)=>{
+                    this.direcciones = resp
+                    console.log(resp)
+                }),
 
+                this.clienteService.getDatosCliente(id).subscribe((resp:any)=>{
+                    this.cliente = resp
+                })
             }
         });
 
