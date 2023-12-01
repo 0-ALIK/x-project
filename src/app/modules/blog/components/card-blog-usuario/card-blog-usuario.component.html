@@ -1,5 +1,5 @@
 <section class="gap-2 p-3 m-2 flex flex-column align-items-center justify-content-center w-auto h-auto surface-overlay border-round align-items-center  "
-    *ngFor="let cliente of getClientesForCurrentPage()">
+    *ngFor="let cliente of clientess">
         <div class="prueba flex flex-row gap-2 justify-content-center align-items-center">
             <p-avatar label="A" styleClass="mr-2" size="xlarge" shape="circle"></p-avatar>
             <p class="font-bold text-base text-indigo-100  ">{{cliente.usuario_nombre}} </p>
@@ -9,7 +9,5 @@
         <div class="flex align-content-center align-items-center ">
             <p-rating [readonly]="true" [cancel]="false" [(ngModel)]="cliente.valoracion"></p-rating>
         </div>
-        <textarea class="" rows="9" cols="28" pInputTextarea [readOnly]="true" [autoResize]="true">{{cliente.contenido}}</textarea>
+        <textarea rows="9" cols="28" pInputTextarea [readOnly]="true" [autoResize]="true">{{cliente.contenido}}</textarea>
 </section>
-
-<p-paginator [rows]="itemsPerPage" [totalRecords]="clientess.length"  (onPageChange)="onPageChange($event)"></p-paginator>

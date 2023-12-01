@@ -12,24 +12,25 @@ export class DialogAgregarOpinionComponent  {
     contenido: string= "";
     value: number | undefined
 
-    constructor(private sugerenciaService: SugerenciasService) {}
+  constructor(private sugerenciaService: SugerenciasService) {}
 
-      enviarOpinion() {
-        const opinionData = {
-          cliente_id: 19, 
-          contenido: this.contenido,
-          valoracion: this.value,
-        };
-        console.log(opinionData);
-      
-        this.sugerenciaService.guardarOpinion(opinionData).subscribe(
-          (response) => {
-            console.log('Opinión enviada con éxito:', response);
-          },
-          (error) => {
-            console.error('Error al enviar la opinión:', error);
-          }
-          );
+  enviarOpinion() {
+    const opinionData = {
+      cliente_id: 9, 
+      contenido: this.contenido,
+      valoracion: this.value,
+    };
 
-        }
+    console.log(opinionData);
+  
+    this.sugerenciaService.guardarOpinion(opinionData).subscribe((response) => {
+        console.log('Opinión enviada con éxito:', response);
+        this.contenido = ""; 
+        this.value = 0; 
+      },(error) => {
+        console.error('Error al enviar la opinión:', error);
+      }
+      );
+  }
+
 }
