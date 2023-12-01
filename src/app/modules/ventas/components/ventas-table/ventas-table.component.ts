@@ -5,7 +5,7 @@ import { pedidos } from 'src/app/interfaces/data';
 import { Pedido } from 'src/app/interfaces/pedido.interface';
 import { ImportesCalcService } from '../../services/importes-calc.service';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { ReporteVentaComponent } from 'src/app/modules/analitica/components/reporte-venta.component';
+import { VerReportesVentasComponent } from 'src/app/modules/analitica/pages/ver-reportes-ventas/ver-reportes-ventas.component';
 
 @Component({
   selector: 'app-ventas-table',
@@ -30,7 +30,7 @@ export class VentasTableComponent implements OnInit {
     ) { }
 
     public showGenerarReporte(): void {
-        this.ref = this.dialogService.open(ReporteVentaComponent, {
+        this.ref = this.dialogService.open(VerReportesVentasComponent, {
             header: 'Generar Reporte',
             height: '70%'
         });

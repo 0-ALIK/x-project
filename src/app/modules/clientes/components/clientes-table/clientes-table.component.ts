@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Cliente } from 'src/app/interfaces/usuario.inteface';
 import { clientes } from 'src/app/interfaces/data';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { ReporteClienteComponent } from 'src/app/modules/analitica/components/reporte-cliente.component';
+import { VerReportesClientesComponent } from 'src/app/modules/analitica/pages/ver-reportes-clientes/ver-reportes-clientes.component';
 
 @Component({
   selector: 'app-clientes-table',
@@ -31,7 +31,7 @@ export class ClientesTableComponent {
     ) { }
 
     public showGenerarReporte(): void {
-        this.ref = this.dialogService.open(ReporteClienteComponent, {
+        this.ref = this.dialogService.open(VerReportesClientesComponent, {
             header: 'Generar Reporte',
             height: '70%'
         });

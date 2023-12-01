@@ -22,11 +22,17 @@ import { DashboardClientesComponent } from './pages/dashboard-clientes/dashboard
 import { DashboardVentasComponent } from './pages/dashboard-ventas/dashboard-ventas.component';
 import { IndicadorRendimientoComponent } from './pages/indicador-rendimiento/indicador-rendimiento.component';
 import { DashboardCardComponent } from './components/dashboard-card/dashboard-card.component';
-import { ReporteInventarioComponent } from './components/reporte-inventario.component';
-import { ReporteClienteComponent } from './components/reporte-cliente.component';
-import { ReporteVentaComponent } from './components/reporte-venta.component';
-import { ReporteTicketsComponent } from './components/reporte-tickets.component';
+
 import { DashboardService } from './services/dashboard.service';
+import { GenerarReportesClientesComponent } from './components/generar-reportes-clientes/generar-reportes-clientes.component';
+import { GenerarReportesInventarioComponent } from './components/generar-reportes-inventario/generar-reportes-inventario.component';
+import { VerReportesClientesComponent } from './pages/ver-reportes-clientes/ver-reportes-clientes.component';
+import { VerReportesInventarioComponent } from './pages/ver-reportes-inventario/ver-reportes-inventario.component';
+import { GenerarReportesVentasComponent } from './components/generar-reportes-ventas/generar-reportes-ventas.component';
+import { GenerarReportesTicketsComponent } from './components/generar-reportes-tickets/generar-reportes-tickets.component';
+import { VerReportesTicketsComponent } from './pages/ver-reportes-tickets/ver-reportes-tickets.component';
+import { VerReportesVentasComponent } from './pages/ver-reportes-ventas/ver-reportes-ventas.component';
+
 
 
 @NgModule({
@@ -36,11 +42,17 @@ import { DashboardService } from './services/dashboard.service';
         DashboardClientesComponent,
         DashboardVentasComponent,
         IndicadorRendimientoComponent,
-        ReporteInventarioComponent,
-        ReporteClienteComponent,
-        ReporteVentaComponent,
-        ReporteTicketsComponent,
-        DashboardInventarioComponent
+
+        DashboardInventarioComponent,
+        GenerarReportesClientesComponent,
+        GenerarReportesInventarioComponent,
+        VerReportesClientesComponent,
+        VerReportesInventarioComponent,
+        GenerarReportesVentasComponent,
+        GenerarReportesTicketsComponent,
+        VerReportesTicketsComponent,
+        VerReportesVentasComponent,
+
     ],
     imports: [
         CommonModule,
@@ -62,10 +74,7 @@ import { DashboardService } from './services/dashboard.service';
     ],
     exports: [
 
-        ReporteClienteComponent,
-        ReporteInventarioComponent,
-        ReporteTicketsComponent,
-        ReporteVentaComponent
+
 
     ],
     providers: [

@@ -4,7 +4,20 @@ import { Permisos } from "./permisos.interface";
 import { Categoria, Marca, Producto } from "./producto.iterface";
 import { Reclamo, ReclamoCategoria, ReclamoEstado, ReclamoPrioridad } from "./raclamo.interface";
 import { Admin, Cliente, Empresa, Notificacion } from "./usuario.inteface";
+import { FormatoReporte, PuntoReorden } from "./reportes.interface";
 
+export const formatos: FormatoReporte[] = [
+    { formato: '.xls'},
+    { formato: '.xlsx'},
+    { formato: '.xlsm'},
+    { formato: '.csv'}
+];
+
+export const puntoReorden: PuntoReorden[] = [
+  { puntoReorden: 'Por debajo' },
+  { puntoReorden: 'Por encima' },
+  { puntoReorden: 'En la raya' }
+];
 
 export const categorias: Categoria[] = [
     { id_categoria: 1, nombre: 'Electrónica' },

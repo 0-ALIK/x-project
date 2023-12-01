@@ -4,7 +4,7 @@ import { ConfirmationService, MessageService, ConfirmEventType } from 'primeng/a
 import { Categoria, Marca, Producto } from 'src/app/interfaces/producto.iterface';
 import { Router } from '@angular/router';
 import { categorias, marcas, productos } from 'src/app/interfaces/data';
-import { ReporteInventarioComponent } from 'src/app/modules/analitica/components/reporte-inventario.component';
+import { VerReportesInventarioComponent } from 'src/app/modules/analitica/pages/ver-reportes-inventario/ver-reportes-inventario.component';
 
 @Component({
     selector: 'app-table-inventario',
@@ -58,7 +58,7 @@ export class TableInventarioComponent implements OnInit {
     }
 
     public showGenerarReporte(): void {
-        this.ref = this.dialogService.open(ReporteInventarioComponent, {
+        this.ref = this.dialogService.open(VerReportesInventarioComponent, {
             header: 'Generar Reporte',
             height: '70%'
         });
