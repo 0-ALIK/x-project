@@ -7,6 +7,7 @@ import { marcas, productos } from 'src/app/interfaces/data';
 import { Marca, Producto } from 'src/app/interfaces/producto.iterface';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { DialogVerMarcasComponent } from '../../components/dialog-ver-marcas/dialog-ver-marcas.component';
+import { MarcasService } from 'src/app/services/marcas.service';
 
 interface UploadEvent {
     originalEvent: Event;
@@ -50,6 +51,7 @@ export class AgregarMarcaComponent implements OnInit {
         private formBuilder: FormBuilder,
         private location: Location,
         public dialogService: DialogService,
+        private marcaService: MarcasService
     ) {}
 
     public ngOnInit(): void {
@@ -78,17 +80,21 @@ export class AgregarMarcaComponent implements OnInit {
     private obtenerMarcaEditar(): void {
         this.activatedRoute.params.subscribe({
             next: ({id}) => {
-                this.currentMarca = marcas.find( m => m.id_marca === Number(id) );
+                this.marcaService.getMarca(Number(id)).subscribe(
+                    (marcas: any) => {
+                        this.currentMarca = marcas.data;
 
-                if(!this.currentMarca) return;
+                        if(!this.currentMarca) return;
 
-                this.titulo = 'Editar marca ' + this.currentMarca.nombre;
+                        this.titulo = 'Editar marca ' + this.currentMarca.nombre;
 
-                this.form.setValue({
-                    nombre: this.currentMarca.nombre,
-                    descripcion: this.currentMarca.descripcion
-                });
-                this.imagePreview = this.currentMarca.logo;
+                        this.form.setValue({
+                            nombre: this.currentMarca.nombre,
+                            descripcion: this.currentMarca.descripcion
+                        });
+                        this.imagePreview = this.currentMarca.logo;
+                    }
+                );
             }
         });
     }
