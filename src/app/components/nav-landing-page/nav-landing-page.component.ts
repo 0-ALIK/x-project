@@ -11,8 +11,6 @@ export class NavLandingPageComponent {
 
     public menuItems: String[] | undefined;
 
-    public loginItems: String[] | undefined;
-
     sidebarVisible2: boolean = false;
 
     isSidebarButtonVisible: boolean = true;
@@ -22,15 +20,10 @@ export class NavLandingPageComponent {
     public ngOnInit(): void {
         this.rellenarMenuItem();
         this.updateVisibility();
-        this.rellenarLoginItem();
     }
 
     private rellenarMenuItem(): void {
         this.menuItems = ['Tablas', 'Dashboard', 'Opiniones'];
-      }
-
-      private rellenarLoginItem(): void {
-        this.loginItems = ['Registrarse', 'Iniciar Sesión'];
       }
 
     // Método para cambiar el tema y alternar la visibilidad de los botones
@@ -46,7 +39,7 @@ export class NavLandingPageComponent {
 
     updateVisibility(): void {
       // Cambia la visibilidad del botón del sidebar según el ancho de la pantalla
-      this.isSidebarButtonVisible = window.innerWidth <= 1023; // Puedes ajustar el valor según tus necesidades
+      this.isSidebarButtonVisible = window.innerWidth <= 1023;
     }
 
 }
