@@ -1,46 +1,47 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Producto } from '../interfaces/producto.iterface';  // Asegúrate de importar la interfaz correcta
-import { Categoria, Marca } from '../interfaces/producto.iterface';
+import { Producto } from '../interfaces/producto.iterface';
 import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
-export class InventarioService {
-
+export class ProductoService {
     private apiUrl = 'http://127.0.0.1:8000';
 
     constructor(
         private http: HttpClient
-    ) {}
+    ) { }
 
-    public getInventario(): Observable<any[]> {
-        const url = `${this.apiUrl}/api/inventario`;
-        return this.http.get<Producto[]>(url);
+    public getProducto(id: number): Observable<any> {
+        const url = `${this.apiUrl}/api/producto/${id}`;
+        return this.http.get<Producto>(url);
     }
-    
-    // Métodos para los Productos
+
+    //guardar producto
     public guardarProducto(producto: Producto): Observable<any> {
-        const url = `${this.apiUrl}/api/productos`;
+        const url = `${this.apiUrl}/api/producto`;
         const headers = new HttpHeaders({
             'Content-Type': 'application/json'
         });
         return this.http.post(url, producto, { headers });
     }
 
+
+    //actualizar producto
     public updateProducto(id: number, producto: Producto): Observable<any> {
-        const url = `${this.apiUrl}/api/productos/${id}`;
+        const url = `${this.apiUrl}/api/producto${id}`;
         const headers = new HttpHeaders({
             'Content-Type': 'application/json'
         });
         return this.http.put(url, producto, { headers });
     }
 
+
+    //eliminar producto
     public deleteProducto(id: number): Observable<any> {
         const url = `${this.apiUrl}/api/productos/${id}`;
         return this.http.delete(url);
     }
-
 }

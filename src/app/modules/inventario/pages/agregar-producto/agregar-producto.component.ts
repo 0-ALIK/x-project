@@ -3,9 +3,12 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
-import { categorias, marcas, productos } from 'src/app/interfaces/data';
 import { Categoria, Marca, Producto } from 'src/app/interfaces/producto.iterface';
 import { DOCUMENT } from '@angular/common';
+import { ProductoService } from 'src/app/services/producto.service';
+import { CategoriaService } from 'src/app/services/categoria.service';
+import { MarcasService } from 'src/app/services/marcas.service';
+import { categorias, marcas, productos } from 'src/app/interfaces/data';
 
 interface UploadEvent {
     originalEvent: Event;
@@ -69,6 +72,9 @@ export class AgregarProductoComponent implements OnInit {
         private activatedRoute: ActivatedRoute,
         private formBuilder: FormBuilder,
         private location: Location,
+        private productoService: ProductoService,
+        private marcaService: MarcasService,
+        private categoriaService: CategoriaService,
         @Inject(DOCUMENT) private document: Document
     ) {}
 
@@ -85,10 +91,29 @@ export class AgregarProductoComponent implements OnInit {
     }
 
     public enviarFormulario(): void {
-        this.estaCargando = true;
-        setTimeout(() => {
-            this.estaCargando = false;
-        }, 2000);
+        if (this.form.valid) {
+            const producto: Producto = {
+                nombre: this.form.get('nombre')?.value,
+                precio_unit: this.form.get('precio_unit')?.value,
+                cantidad_cajas: this.form.get('cantidad_cajas')?.value,
+                categoria: this.form.get('categoria')?.value,
+                marca: this.form.get('marca')?.value,
+                punto_reorden: this.form.get('punto_reorden')?.value,
+                foto: this.foto ? this.foto.name : '', // Ajusta esto según tu modelo de datos
+            };
+    
+            this.productoService.guardarProducto(producto).subscribe(
+                (response) => {
+                    // Manejar la respuesta del servicio
+                    console.log('Producto guardado con éxito:', response);
+                    // Puedes redirigir o hacer otras acciones después de guardar
+                },
+                (error) => {
+                    console.error('Error al guardar el producto:', error);
+                    // Manejar el error, mostrar mensajes, etc.
+                }
+            );
+        }
     }
 
     public selectFile( event: UploadEvent ): void {
@@ -123,10 +148,14 @@ export class AgregarProductoComponent implements OnInit {
 
     //TODO: modificar luego
     private obtenerMarcasCategoria(): void {
-        setTimeout(() => {
-            this.marcas = marcas;
-            this.categorias = categorias;
-        }, 2000);
+        this.marcaService.getMarcas().subscribe( (marcas: any) => {
+            this.categoriaService.getCategorias().subscribe( (categorias: any) => {
+                setTimeout(() => {
+                    this.marcas = marcas.data;
+                    this.categorias = categorias.data;
+                }, 2000);
+            });
+        });
     }
 
     private esEdicion(): boolean {
