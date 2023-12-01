@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Router } from '@angular/router';
-import { marcas } from 'src/app/interfaces/data';
 import { Marca } from 'src/app/interfaces/producto.iterface';
 import { MarcasService} from 'src/app/services/marcas.service';
 
@@ -17,7 +16,7 @@ export class DialogVerMarcasComponent {
 
     public selectedMarca: Marca | undefined;
 
-    public marcas: Marca[] = marcas;
+    public marcas: Marca[] | undefined;
 
 
 
@@ -29,8 +28,8 @@ export class DialogVerMarcasComponent {
 
     public ngOnInit(): void {
         this.marcasService.getMarcas().subscribe(
-            (response: any) => {
-                this.marcas = response.data;
+            (marcas: any) => {
+                this.marcas = marcas.data;
                 console.log(this.marcas)
             },
             (error) => {
