@@ -14,6 +14,7 @@ import { ReviewDataviewComponent } from './components/generar-reviews/review-dat
 import { GenerarRatingComponent } from './components/generar-rating/generar-rating/generar-rating.component';
 import { GenerarFormComponent } from './components/generar-form/generar-form/generar-form.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     TagModule,
     FormsModule, 
     ReactiveFormsModule,
+    HttpClientModule
   ]
-  
 })
 export class BlogModule { }

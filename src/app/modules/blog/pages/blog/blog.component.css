@@ -3,6 +3,11 @@
   color: cornflowerblue;
 }
 
+.rating-div .p-icon.p-rating-icon {
+  block-size: 60px;
+  width: 70px;
+}
+
 button.p-ripple.p-element.p-button.p-component.p-button-icon-only.p-button-raised.p-button-rounded.p-button-text{
   color: cornflowerblue;
 }  

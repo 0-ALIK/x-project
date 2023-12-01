@@ -1,5 +1,6 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import {SugerenciasService} from '../../../../../services/sugerencias.service' ;
 
 @Component({
   selector: 'app-generar-form',
@@ -8,20 +9,34 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class GenerarFormComponent {
   public sidebarVisible: boolean = false;
-  starsToFill = 0; // Variable para controlar cuántas estrellas se llenan
-
   mostrarCalificacion: boolean = false;
   formGroup!: FormGroup;
   ratingText: string = 'Elija una calificación'; // Inicializa el ratingText
+  valoracion!: number;
+  comentario: string = "";
 
-  constructor() {
-    this.formGroup = new FormGroup({
-      value: new FormControl(0)
+  constructor(private sugerenciasService: SugerenciasService, private fb: FormBuilder) {
+    this.formGroup = this.fb.group({
+      comentario: [null, Validators.required],
+      valoracion: [null, Validators.required],
     });
+  };
 
-    this.formGroup.get('value')?.valueChanges.subscribe((value) => {
-      this.updateRatingText(value);
-    });
+  enviarResena() {
+    const data = {
+      cliente_id: 19, 
+      comentario: this.formGroup.get('comentario')?.value,
+      valoracion: this.formGroup.get('valoracion')?.value,
+    };
+  
+    this.sugerenciasService.guardarSugerencia(data).subscribe(
+      (response) => {
+        console.log(response);
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
   }
 
   updateRatingText(value: number) {

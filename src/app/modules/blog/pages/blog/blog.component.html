@@ -1,24 +1,3 @@
-<!-- <p-sidebar [(visible)]="sidebarVisible" position="right" [style]="{ width: '450px' }">
-        <h3>Valora tu experiencia con nosotros</h3>
-        <div class="stars-client">
-            <form>
-                <p-rating formControlName="value"></p-rating>
-            </form>
-        </div>
-        <h3>Cuéntanos más sobre tu experiencia</h3>
-        <textarea placeholder="Recuerda valorarnos de forma honesta y constructiva. Sus opiniones contribuyen a que sigamos mejorando :" rows="8" cols="40" pInputTextarea></textarea>
-        <p-button label="Enviar" [raised]="true" severity="info"></p-button>
-
-</p-sidebar>
-
-<-- Para desplegar el sidebar del formulario de reseñas 
-<div class="boton-form">
-    <p-button icon="pi pi-plus" [rounded]="true" (onClick)="sidebarVisible = true"></p-button>
-</div>
-<p-panel *ngIf="mostrarCalificacion" [style]="{ position: 'fixed', bottom: '20px', right: '20px', zIndex: '9999' }">
-    <div class="stars"></div>
-</p-panel> -->
-
 <app-generar-form></app-generar-form>
 <app-generar-rating></app-generar-rating>
 <app-review-dataview></app-review-dataview>

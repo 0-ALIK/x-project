@@ -7,28 +7,26 @@
             <div class="rating-section">
                 <div class="left-section">
                     <div class="rating-text">Valoración promedio</div>
-                    <div class="stars">
-                        <span class="star" [class.filled]="star <= starsToFill" *ngFor="let star of [1, 2, 3, 4, 5]"></span>
-                    </div>
+                    <p-rating  [readonly]="true" [cancel]="false" [(ngModel)]="promedioRedondeado" ></p-rating> 
                     <div class="rating-description">
-                        <h3>{{valoracion}}</h3>
-                        <p>{{formattedPromCalificacion}} / 5.0</p>
+                        <h3>{{mensajeValoracion}}</h3>
+                        <p>{{promedioValoracion}} / 5.0</p>
                     </div>
                 </div>
                 <div class="right-section">
-                    <ng-container *ngFor="let section of rightSections">
+                    <ng-container *ngFor="let categoria of estadisticasResenas">
                       <div class="right-section-item">
                         <div class="seccionstart">
-                            {{ section.stars }}
+                            {{ categoria.stars }}
                           <span class="star-icon">&#9733;</span>
                         </div>
                         <div class="progress-bar-container">
                           <div class="filled-rectangle"
-                               [style.background]="section.filledPercentage >= 5 ? 'cornflowerblue' : 'grey'"
-                               [style.width.%]="section.filledPercentage">
+                               [style.background]="categoria.stars >= 5 ? 'cornflowerblue' : 'grey'"
+                               [style.width.%]="categoria.numReviews">
                           </div>
                         </div>
-                            <h4>{{ section.numReviews }}</h4>
+                            <h4>{{ categoria.numReviews }}</h4>
                       </div>
                     </ng-container>
                   </div>
