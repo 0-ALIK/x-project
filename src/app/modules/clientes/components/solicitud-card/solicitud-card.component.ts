@@ -10,7 +10,19 @@ import { Cliente } from 'src/app/interfaces/usuario.inteface';
 export class SolicitudCardComponent {
 
 
+
     @Input("solicitud")
     public solicitud: any | undefined;
 
+
+    aceptarSolicitud(id_solicitud: any): void {
+        //console.log('Function called with id_solicitud:', id_solicitud);
+
+        console.log('La solicitud fue aceptada con exito: ' + id_solicitud)
+        }
+
+
+    denegarSolicitud(id_solicitud: any): void {
+        console.log('La solicitud fue denegada con exito: ' + id_solicitud)
+    }
 }

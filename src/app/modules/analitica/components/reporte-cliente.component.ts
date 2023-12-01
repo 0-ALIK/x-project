@@ -40,6 +40,7 @@ import { Provincia } from 'src/app/interfaces/direccion.interface';
         </form>
     `,
 })
+
 export class ReporteClienteComponent {
 
     public form: FormGroup = this.formBuilder.group({

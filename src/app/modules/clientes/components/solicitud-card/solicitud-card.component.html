@@ -14,8 +14,8 @@
     </div>
 
     <div class="botones">
-        <p-button icon="pi pi-check" [rounded]="true" [outlined]="true" class="boton"></p-button>
-        <p-button icon="pi pi-times" [rounded]="true" severity="danger" [outlined]="true" class="boton"></p-button>
+        <p-button icon="pi pi-check" [rounded]="true" [outlined]="true" class="boton" (onClick)="aceptarSolicitud(solicitud.id_empresa)"></p-button>
+        <p-button icon="pi pi-times" [rounded]="true" severity="danger" [outlined]="true" class="boton" (onClick)="denegarSolicitud(solicitud.id_empresa)"></p-button>
     </div>
 </article>
 

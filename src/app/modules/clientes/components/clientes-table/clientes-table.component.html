@@ -89,7 +89,7 @@
             </td>
             <td>{{ -1 }}</td>
             <td>
-                <p-button icon="pi pi-trash" [rounded]="true" [text]="true" severity="danger" ></p-button>
+                <p-button icon="pi pi-trash" [rounded]="true" [text]="true" severity="danger"  (click)="showEliminarCliente(cliente.id_cliente,cliente.nombre)" ></p-button>
             </td>
         </tr>
     </ng-template>

@@ -40,6 +40,7 @@ import { AnaliticaModule } from '../analitica/analitica.module';
 import { TicketsModule } from '../tickets/tickets.module';
 import { TicketCardComponent } from '../tickets/components/ticket-card.component';
 import { VentaCardComponent } from 'src/app/components/venta-card.component';
+import { EliminarClienteComponent } from './components/eliminar-cliente/eliminar-cliente.component';
 
 @NgModule({
     declarations: [
@@ -57,6 +58,7 @@ import { VentaCardComponent } from 'src/app/components/venta-card.component';
         CardDireccionComponent,
         AgregarColaboradorComponent,
         AgregarSucursalComponent,
+        EliminarClienteComponent,
     ],
     imports: [
         CommonModule,

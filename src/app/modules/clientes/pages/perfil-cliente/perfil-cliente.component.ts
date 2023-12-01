@@ -56,9 +56,8 @@ export class PerfilClienteComponent implements OnInit{
         this.activatedRoute.params.subscribe({
             next: ({id}) => {
 
-                this.apiService.getDireccionEmpresa(id).subscribe((resp:any)=>{
+                this.apiService.getDireccionCliente(id).subscribe((resp:any)=>{
                     this.direcciones = resp
-                    console.log(resp)
                 }),
 
                 this.clienteService.getDatosCliente(id).subscribe((resp:any)=>{

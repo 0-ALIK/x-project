@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { empresas } from 'src/app/interfaces/data';
 import { Empresa } from 'src/app/interfaces/usuario.inteface';
 import { ApiEmpresaService } from 'src/app/services/api-empresa.service';
+import { EliminarClienteComponent } from '../eliminar-cliente/eliminar-cliente.component';
 
 @Component({
   selector: 'app-empresas-table',
@@ -11,6 +13,7 @@ import { ApiEmpresaService } from 'src/app/services/api-empresa.service';
   styleUrls: ['./empresas-table.component.css']
 })
 export class EmpresasTableComponent {
+
 
     tabs: MenuItem[] | undefined;
 
@@ -22,7 +25,10 @@ export class EmpresasTableComponent {
 
     public arregloEmpresas: Empresa[] = [];
 
+    public ref: DynamicDialogRef | undefined;
+
     public constructor (
+        public dialogService: DialogService,
         private router: Router,
         private apiService: ApiEmpresaService
         ) {
@@ -76,4 +82,25 @@ export class EmpresasTableComponent {
         const { id_empresa } = event.data;
         this.router.navigate(['/app/clientes/perfil/empresa', id_empresa]);
     }
+
+    showEliminarEmpresa(id_empresa: any, nombre_empresa: any): void {
+
+        this.ref = this.dialogService.open(EliminarClienteComponent, {
+            header: 'Empresa: '+nombre_empresa+' con ID:'+id_empresa,
+            height: '30%',
+            width:'30%'
+
+
+        });
+
+        this.ref.onClose.subscribe((result) => {
+            if (result) {
+              // Codigo para hacer el delete
+              console.log('Empresa Eliminada exitosamente')
+
+            } else {
+              console.log('No se elimino ninguna empresa');
+            }
+          });
+        }
 }
