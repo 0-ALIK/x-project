@@ -3,6 +3,7 @@ import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Router } from '@angular/router';
 import { marcas } from 'src/app/interfaces/data';
 import { Marca } from 'src/app/interfaces/producto.iterface';
+import { InventarioService } from 'src/app/services/inventario.service';
 
 @Component({
     selector: 'app-dialog-ver-marcas',
@@ -22,11 +23,20 @@ export class DialogVerMarcasComponent {
 
     public constructor(
         public ref: DynamicDialogRef,
-        private router: Router
+        private router: Router,
+        private inventarioService: InventarioService
     ) { }
 
     public ngOnInit(): void {
-
+        this.inventarioService.getInventario().subscribe(
+            (data: Marca[]) => {
+                this.marcas = data;
+                console.log(this.marcas)
+            },
+            (error) => {
+                console.error('Error al obtener los datos del inventario', error);
+            }
+        );
     }
 
     public editarMarca(marca: Marca) {

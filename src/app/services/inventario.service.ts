@@ -44,4 +44,26 @@ export class InventarioService {
     }
 
     //Métodos para Marca
+
+    public getMarcas(): Observable<Marca[]> {
+        const url = `${this.apiUrl}/api/marcas`;
+        return this.http.get<Marca[]>(url);
+    }
+
+    public guardarMarca(marca:Marca):Observable<any>{
+        const url = `${this.apiUrl}/api/marca`;
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/json'
+        });
+        return this.http.post(url, marca, {headers});
+    }
+
+
+    //Métodos para Categorias
+
+    public getCategorias(): Observable<Categoria[]>{
+        const url = `${this.apiUrl}/api/categoria`;
+        return this.http.get<Marca[]>(url);
+    }
+
 }
