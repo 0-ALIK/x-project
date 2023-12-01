@@ -6,6 +6,7 @@ import { Pedido } from 'src/app/interfaces/pedido.interface';
 import { ImportesCalcService } from '../../services/importes-calc.service';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ReporteVentaComponent } from 'src/app/modules/analitica/components/reporte-venta.component';
+import { VentasService } from 'src/app/services/ventas.service';
 
 @Component({
   selector: 'app-ventas-table',
@@ -14,10 +15,7 @@ import { ReporteVentaComponent } from 'src/app/modules/analitica/components/repo
 })
 export class VentasTableComponent implements OnInit {
 
-    @ViewChild('tablePedidos')
-    public tablePedidos: Table | undefined
-
-    public pedidos: Pedido[] = pedidos;
+    public pedidos: Pedido[] = [];
 
     public selectedPedido: Pedido | undefined;
 
@@ -26,7 +24,8 @@ export class VentasTableComponent implements OnInit {
     public constructor(
         public dialogService: DialogService,
         private router: Router,
-        public importesCalc: ImportesCalcService
+        public importesCalc: ImportesCalcService,
+        public ventasService: VentasService
     ) { }
 
     public showGenerarReporte(): void {
@@ -37,7 +36,12 @@ export class VentasTableComponent implements OnInit {
     }
 
     public ngOnInit(): void {
-        if(!this.tablePedidos) return;
+        this.ventasService.getAllPedidos().subscribe({
+            next: (pedidos) => {
+                console.log(pedidos);
+                this.pedidos = pedidos;
+            }
+        });
     }
 
     public example( evento: any ): void {

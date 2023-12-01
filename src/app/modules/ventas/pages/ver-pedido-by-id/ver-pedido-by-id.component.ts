@@ -50,10 +50,10 @@ export class VerPedidoByIdComponent implements OnInit {
                 this.reclamo = reclamos.find(r => r.cliente?.id_cliente === this.cliente?.id_cliente);
 
                 console.log(this.reclamo);
-                this.importe = this.importesCalc.calcularImporte( this.pedido?.pedido_producto || []);
+                this.importe = this.importesCalc.calcularImporte( this.pedido?.pedido_productos || []);
                 this.importeDebido = this.importesCalc.calcularImporteDebido(
-                    this.pedido?.pedido_producto || [],
-                    this.pedido?.pagos || []
+                    this.pedido?.pedido_productos || [],
+                    this.pedido?.pago || []
                 );
 
                 if(!this.empresa) {

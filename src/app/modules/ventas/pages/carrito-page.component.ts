@@ -8,7 +8,7 @@ import { Pedido } from 'src/app/interfaces/pedido.interface';
         <div>
 
             <card-carrito-compras
-                *ngFor="let pedidoP of pedido.pedido_producto"
+                *ngFor="let pedidoP of pedido.pedido_productos"
                 [pedidoProductos]="pedidoP">
             </card-carrito-compras>
 

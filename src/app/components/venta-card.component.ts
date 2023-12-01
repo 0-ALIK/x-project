@@ -20,7 +20,7 @@ import { TagModule } from 'primeng/tag';
             <div class="flex align-items-center justify-content-between">
                 <div class="flex align-items-center gap-1">
                     <span>Estado: </span>
-                    <p-tag [value]="pedido?.estado?.estado"></p-tag>
+                    <p-tag [value]="pedido?.estado?.nombre"></p-tag>
                 </div>
                 <p class="m-0">{{ pedido?.fecha | date }}</p>
             </div>
