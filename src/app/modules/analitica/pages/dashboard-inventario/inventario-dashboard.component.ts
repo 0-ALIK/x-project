@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { categorias, marcas } from 'src/app/interfaces/data';
-import { Categoria, Marca } from 'src/app/interfaces/producto.iterface';
+import { Categoria, Marca, Producto} from 'src/app/interfaces/producto.iterface';
+import { DashboardService } from '../../services/dashboard.service';
 
 @Component({
     selector: 'app-inventario-dashboard',
     templateUrl: './inventario-dashboard.component.html',
 })
 export class DashboardInventarioComponent implements OnInit {
+
+    public productos: Producto[] | undefined;
 
     public optionsBarras: any;
 
@@ -20,12 +23,19 @@ export class DashboardInventarioComponent implements OnInit {
 
     public categorias: Categoria[] | undefined;
 
+
     public ngOnInit(): void {
         this.defineOptions();
-        this.graficaSegmentacion();
-        this.graficaProductos();
         this.obtenerMarcasCategoria();
+        this.definirProductosMasComprados();
+
     }
+
+    constructor(
+        private dashboardService: DashboardService
+    ){}
+
+    
 
     private obtenerMarcasCategoria(): void {
         setTimeout(() => {
@@ -34,7 +44,37 @@ export class DashboardInventarioComponent implements OnInit {
         }, 2000);
     }
 
-    private graficaProductos(): void {
+    definirProductosMasComprados(): void{
+        this.dashboardService.getProductosMasComprados().subscribe({
+            next:(productos) => {
+                this.graficaProductos;
+                this.graficaSegmentacion;
+                this.filtroCategoria;
+                this.filtroMarca;
+            },
+            error: (error) => {
+                console.error(error);
+            }
+        })
+    }
+
+
+    filtroCategoria(): void {
+        this.categorias = this.productos?.map(function(producto){
+            return producto.categoria as Categoria;
+        });
+        console.log(this.categorias);
+    }
+
+
+    filtroMarca(): void {
+        this.marcas = this.productos?.map(function(producto){
+            return producto.marca as Marca;
+        });
+        console.log(this.marcas);
+    }
+
+        graficaProductos(): void {
         this.stockData = {
             labels: ['Producto 1', 'Producto 2', 'Producto 3', 'Producto 4', 'Producto 5'],
             datasets: [

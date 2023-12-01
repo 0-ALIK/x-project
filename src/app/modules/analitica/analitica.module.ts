@@ -25,7 +25,6 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { MultiSelectModule } from 'primeng/multiselect';
-import { GenerarReporteClientesComponent } from './components/generar-reporte-clientes/generar-reporte-clientes.component';
 
 
 
@@ -55,7 +54,6 @@ import { GenerarReporteClientesComponent } from './components/generar-reporte-cl
         AnaliticaRoutingModule,
         InputNumberModule,
         CalendarModule,
-        AnaliticaRoutingModule,
         ChartModule,
         TagModule,
         TabMenuModule,

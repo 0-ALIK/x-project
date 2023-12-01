@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Producto } from 'src/app/interfaces/producto.iterface';
 
 @Injectable()
 export class DashboardService {
@@ -20,6 +21,8 @@ export class DashboardService {
         return this.http.get<any>(this.host + '/api/clientes/{id}/direcciones');
     }
 
-
+    public getProductosMasComprados(): Observable<any> {
+        return this.http.get<any>(this.host + '');
+    }
 
 }
