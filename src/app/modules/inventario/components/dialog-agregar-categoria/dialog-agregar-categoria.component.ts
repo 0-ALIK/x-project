@@ -33,6 +33,8 @@ export class DialogAgregarCategoriaComponent implements OnInit {
         );
     }
 
+
+
     public eliminarCategoria( categoria: Categoria ) {
         console.log(categoria);
     }

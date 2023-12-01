@@ -3,12 +3,12 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
-import { categorias, marcas, productos } from 'src/app/interfaces/data';
 import { Categoria, Marca, Producto } from 'src/app/interfaces/producto.iterface';
 import { DOCUMENT } from '@angular/common';
-import { MarcasService } from 'src/app/services/marcas.service';
-import { CategoriaService } from 'src/app/services/categoria.service';
 import { ProductoService } from 'src/app/services/producto.service';
+import { CategoriaService } from 'src/app/services/categoria.service';
+import { MarcasService } from 'src/app/services/marcas.service';
+import { categorias, marcas, productos } from 'src/app/interfaces/data';
 
 interface UploadEvent {
     originalEvent: Event;
@@ -73,8 +73,8 @@ export class AgregarProductoComponent implements OnInit {
         private formBuilder: FormBuilder,
         private location: Location,
         private productoService: ProductoService,
-        private categoriaService: CategoriaService,
         private marcaService: MarcasService,
+        private categoriaService: CategoriaService,
         @Inject(DOCUMENT) private document: Document
     ) {}
 
@@ -91,10 +91,29 @@ export class AgregarProductoComponent implements OnInit {
     }
 
     public enviarFormulario(): void {
-        this.estaCargando = true;
-        setTimeout(() => {
-            this.estaCargando = false;
-        }, 2000);
+        if (this.form.valid) {
+            const producto: Producto = {
+                nombre: this.form.get('nombre')?.value,
+                precio_unit: this.form.get('precio_unit')?.value,
+                cantidad_cajas: this.form.get('cantidad_cajas')?.value,
+                categoria: this.form.get('categoria')?.value,
+                marca: this.form.get('marca')?.value,
+                punto_reorden: this.form.get('punto_reorden')?.value,
+                foto: this.foto ? this.foto.name : '', // Ajusta esto según tu modelo de datos
+            };
+    
+            this.productoService.guardarProducto(producto).subscribe(
+                (response) => {
+                    // Manejar la respuesta del servicio
+                    console.log('Producto guardado con éxito:', response);
+                    // Puedes redirigir o hacer otras acciones después de guardar
+                },
+                (error) => {
+                    console.error('Error al guardar el producto:', error);
+                    // Manejar el error, mostrar mensajes, etc.
+                }
+            );
+        }
     }
 
     public selectFile( event: UploadEvent ): void {
@@ -108,29 +127,21 @@ export class AgregarProductoComponent implements OnInit {
         this.activatedRoute.params.subscribe({
             next: ({id}) => {
 
-                this.productoService.getProducto(Number(id)).subscribe(
-                    (producto: any) => {
-                        console.log(producto)
+                this.currentProducto = productos.find( p => p.id_producto === Number(id) );
 
-                        this.currentProducto = producto.data;
+                if(!this.currentProducto) return;
 
+                this.titulo = 'Editar producto ' + this.currentProducto.nombre;
 
-                        if (!this.currentProducto) return;
-                        console.log(this.currentProducto.categoria)
-
-                        this.titulo = 'Editar producto ' + this.currentProducto.nombre;
-
-                        this.form.setValue({
-                            nombre: this.currentProducto.nombre,
-                            precio_unit: this.currentProducto.precio_unit,
-                            cantidad_cajas: this.currentProducto.cantidad_cajas,
-                            categoria: this.currentProducto.categoria,
-                            marca: this.currentProducto.marca,
-                            punto_reorden: this.currentProducto.punto_reorden,
-                        });
-                        this.imagePreview = this.currentProducto.foto;
-                    }
-                );
+                this.form.setValue({
+                    nombre: this.currentProducto.nombre,
+                    precio_unit: this.currentProducto.precio_unit,
+                    cantidad_cajas: this.currentProducto.cantidad_cajas,
+                    categoria: this.currentProducto.categoria,
+                    marca: this.currentProducto.marca,
+                    punto_reorden: this.currentProducto.punto_reorden,
+                });
+                this.imagePreview = this.currentProducto.foto;
             }
         });
     }

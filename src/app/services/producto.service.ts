@@ -20,10 +20,28 @@ export class ProductoService {
     }
 
     //guardar producto
+    public guardarProducto(producto: Producto): Observable<any> {
+        const url = `${this.apiUrl}/api/producto`;
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/json'
+        });
+        return this.http.post(url, producto, { headers });
+    }
 
 
     //actualizar producto
+    public updateProducto(id: number, producto: Producto): Observable<any> {
+        const url = `${this.apiUrl}/api/producto${id}`;
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/json'
+        });
+        return this.http.put(url, producto, { headers });
+    }
 
 
     //eliminar producto
+    public deleteProducto(id: number): Observable<any> {
+        const url = `${this.apiUrl}/api/productos/${id}`;
+        return this.http.delete(url);
+    }
 }
