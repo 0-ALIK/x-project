@@ -1,14 +1,87 @@
-.shape1 {
-    left: 5%;
+
+.background-image {
+    position: relative;
+    height: 100vh;
 }
 
-.logo {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.background-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: url('/assets/universo.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: -1;
 }
 
-.shape2 {
-    top: 350px;
-    left: 40%;
+.formulario {
+    text-align: center;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+    background: transparent;
+    backdrop-filter: blur(5px);
+    box-shadow: 0px 10px 30px 0px rgba(0,0,0,0.6);
+    width: 40%;
+    height: max-content;
+    padding: var(--spacing-4) var(--spacing-5);
+    border-radius: calc(var(--border-radius) + 15px);
+
+    & .button {
+        margin: var(--spacing-2) 0 var(--spacing-4) 0;
+        font-size: var(--text-xl);
+    }
+}
+
+.div-label {
+    font-size: var(--text-2xl);
+    padding: var(--spacing-2) var(--spacing-2) var(--spacing-2) 0;
+    display: flex;
+}
+
+.recordar-usuario {
+    display: flex;
+    align-items: center;
+
+    & label {
+        padding: 10px;
+        font-size: var(--text-xl);
+    }
+}
+
+.sin-cuenta p a{
+    text-decoration: none;
+    color: var(--primary-color);
+}
+
+/* Estilo para tablets y dispositivos con pantallas medianas */
+@media (max-width: 1023px) {
+    form {
+        width: 60%;
+    }
+}
+
+/* Estilo para dispositivos móviles */
+@media (max-width: 767px) {
+    form {
+        width: 90%;
+
+        & h1 {
+            font-size: var(--text-3xl);
+        }
+    }
+
+    .div-label {
+        font-size: var(--text-xl);
+    }
 }
