@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {ReclamosService} from '../../services/reclamos.service'
+import { DashboardService } from '../../services/dashboard.service';
 import * as XLSX from 'xlsx';
 
 
@@ -37,8 +38,8 @@ interface Provincia{
   templateUrl: './generar-reportes-clientes.component.html',
   styleUrls: ['./generar-reportes-clientes.component.css']
 })
-export class GenerarReportesClientesComponent {
-  constructor(private analitica: ReclamosService) { }
+export class GenerarReportesClientesComponent{
+  constructor(private analitica: ReclamosService, private cliente:DashboardService) { }
 
 
 
@@ -60,10 +61,25 @@ export class GenerarReportesClientesComponent {
   public selectedProducto: Producto | undefined;
 
   public nameInforme: string | undefined;
-
+  
+  public empresas: string[] | undefined = [];
   public loading: boolean = false;
-
+  public selectedEmpresa: string = '';
   public ngOnInit(): void {
+
+    this.analitica.getEmpresas().subscribe(
+      (datos) => {
+        const registros = datos.data; // Ajusta según la propiedad real en tu objeto
+        if (registros && Array.isArray(registros)) {
+          // Mapea los nombres de las empresas
+          this.empresas = registros.map((registro) => registro.nombre);
+        }
+      },
+
+      (error) => {
+        console.error('Error al obtener datos del backend', error);
+      }
+    )
 
         this.formatos = [
           { nameFormato: '.xls', codeFormato: 'xls' },
@@ -94,7 +110,7 @@ export class GenerarReportesClientesComponent {
 
   
   public GenerarReporte() {
-    this.analitica.getCliente(this.selectedGenero?.codeGenero, this.selectedProducto?.codeProducto)
+    this.analitica.getCliente(this.selectedGenero?.codeGenero, this.selectedProducto?.codeProducto, this.selectedEmpresa)
     .subscribe(respuesta => {
     const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(respuesta);
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
@@ -104,7 +120,6 @@ export class GenerarReportesClientesComponent {
     }
     else{
       XLSX.writeFile(wb, this.nameInforme + this.selectedFormato?.nameFormato);
-      
     }
     // Guardar el archivo
   })

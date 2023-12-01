@@ -15,6 +15,6 @@ export class DashboardService {
 
     public getEmpresas(): Observable<Empresa[]> {
 
-        return this.http.get<Empresa[]>(this.host + '/api/empresa');
+        return this.http.get<Empresa[]>(this.host + '/api/empresas');
     }
 }

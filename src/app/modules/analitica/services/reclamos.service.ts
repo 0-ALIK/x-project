@@ -30,11 +30,14 @@ console.log(url);
   return respuesta;
 }
 
-public getCliente(genero:string|undefined, producto: string|undefined): Observable<any>{
+public getCliente(genero:string|undefined, producto: string|undefined, empresa: string|undefined): Observable<any>{
 var url = `http://127.0.0.1:8000/api/analitica/reporte/cliente?`;
 
 if(genero != undefined){
   url+= `genero=${genero}&`;
+}
+if(empresa != undefined){
+  url+= `empresa=${empresa}&`;
 }
 if(producto != undefined){
   url+= `producto=${producto}&`;
@@ -83,6 +86,11 @@ if(prioridad != undefined){
 console.log(url);
   const respuesta = this.http.get<any>(url);
   return respuesta;
+}
+
+public getEmpresas(): Observable<any> {
+
+  return this.http.get<any>('http://127.0.0.1:8000/api/empresas');
 }
 }
 
