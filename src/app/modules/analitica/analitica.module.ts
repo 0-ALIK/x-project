@@ -26,6 +26,7 @@ import { ReporteInventarioComponent } from './components/reporte-inventario.comp
 import { ReporteClienteComponent } from './components/reporte-cliente.component';
 import { ReporteVentaComponent } from './components/reporte-venta.component';
 import { ReporteTicketsComponent } from './components/reporte-tickets.component';
+import { DashboardService } from './services/dashboard.service';
 
 
 @NgModule({
@@ -60,10 +61,15 @@ import { ReporteTicketsComponent } from './components/reporte-tickets.component'
         MultiSelectModule
     ],
     exports: [
+
         ReporteClienteComponent,
         ReporteInventarioComponent,
         ReporteTicketsComponent,
         ReporteVentaComponent
+
+    ],
+    providers: [
+        DashboardService
     ]
 })
 export class AnaliticaModule { }
