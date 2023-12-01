@@ -21,6 +21,8 @@
     margin-bottom: 0;
   }
   
+
+  
   .stars {
       display: block;
       flex-direction: column;
@@ -177,25 +179,17 @@
     margin-left: 120px;
 }
 
-.valoraciones, .card{
-    margin-left: 20px;
-    margin-right: 20px;
-    background-color:var(--surface-a);
-    display: flex;
-    flex-flow: column;
-    justify-content: center;
-    padding-bottom: 60px;
-}
-
 .progress-bar-container {
   background: rgb(225, 223, 223);
-  width: 40%;
+  width: 200px;
+  height: 25px;
   height: 25px;
   border-radius: 5px;
   overflow: hidden; 
   text-shadow: 1px 1px 1px rgba(89, 89, 89, 0.7);
-
 }
+
+
 
 .filled-rectangle {
   width: 100%;
@@ -214,9 +208,8 @@
 }
 
 .seccionstart {
-  width: 80px;
   font-size: 15px;
-  margin-right: 10px;
+  margin-right: 5px;
 }
 
 .right-section-item {
@@ -238,9 +231,10 @@
   margin-bottom: 30px;
 }
 
-.right-section h4{
+.barras-progreso h4{
   font-weight: lighter!important;
-  margin-left: 10px;
+  width: 30px;
+  margin-left: 5px;
 }
 
 .left-section {
@@ -295,3 +289,24 @@
 .reseñas-info{
   width: 90%;
 }
+
+.flex.flex-column.align-items-center {
+  margin-inline: 80px;
+}
+
+.valoracion svg.p-icon.p-rating-icon{
+      block-size: 30px;
+}
+
+@media (max-width: 767px) {
+  .flex-col {
+    flex-direction: column;
+  }
+}
+
+/* app-card-blog-usuario{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+} */
+

@@ -12,13 +12,12 @@
     </p-rating>
     </div>
 
-    <!-- <p-rating [cancel]="false"  width="250px" height="250px" > </p-rating> -->
 </section>
 
 <section class=" border-round flex flex-column p-2 m-2 gap-2 justify-content-center align-items-center  ">
     <h2 >Dinos lo que piensas de nostros </h2>
-    <textarea rows="10" cols="50" pInputTextarea  [autoResize]="true" placeholder="Escriba su reseña" [(ngModel)]="opinion" > </textarea>
-    <p-button label="Enviar reseña" [disabled]="!opinion" (onClick)="enviarOpinion()" [loading]="loading" icon="" size="large" ></p-button>
+    <textarea rows="10" cols="50" pInputTextarea  [autoResize]="true" placeholder="Escriba su reseña" [(ngModel)]="contenido" > </textarea>
+    <p-button label="Enviar reseña" [disabled]="!contenido" (onClick)="enviarOpinion()" [loading]="loading" icon="" size="large" ></p-button>
 </section>
 </div>
 
