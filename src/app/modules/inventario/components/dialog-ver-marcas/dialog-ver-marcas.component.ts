@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Router } from '@angular/router';
-import { marcas } from 'src/app/interfaces/data';
 import { Marca } from 'src/app/interfaces/producto.iterface';
+import { MarcasService} from 'src/app/services/marcas.service';
 
 @Component({
     selector: 'app-dialog-ver-marcas',
@@ -16,17 +16,26 @@ export class DialogVerMarcasComponent {
 
     public selectedMarca: Marca | undefined;
 
-    public marcas: Marca[] = marcas;
+    public marcas: Marca[] | undefined;
 
 
 
     public constructor(
         public ref: DynamicDialogRef,
-        private router: Router
+        private router: Router,
+        private marcasService: MarcasService
     ) { }
 
     public ngOnInit(): void {
-
+        this.marcasService.getMarcas().subscribe(
+            (marcas: any) => {
+                this.marcas = marcas.data;
+                console.log(this.marcas)
+            },
+            (error) => {
+                console.error('Error al obtener los datos de las marcas', error);
+            }
+        );
     }
 
     public editarMarca(marca: Marca) {

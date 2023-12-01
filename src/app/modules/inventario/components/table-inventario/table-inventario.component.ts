@@ -5,6 +5,7 @@ import { Categoria, Marca, Producto } from 'src/app/interfaces/producto.iterface
 import { Router } from '@angular/router';
 import { categorias, marcas, productos } from 'src/app/interfaces/data';
 import { ReporteInventarioComponent } from 'src/app/modules/analitica/components/reporte-inventario.component';
+import { InventarioService } from 'src/app/services/inventario.service';
 
 @Component({
     selector: 'app-table-inventario',
@@ -28,13 +29,20 @@ export class TableInventarioComponent implements OnInit {
         private confirmationService: ConfirmationService,
         private messageService: MessageService,
         public dialogService: DialogService,
-        private router: Router
+        private router: Router,
+        private inventarioService: InventarioService
     ) { }
 
     public ngOnInit(): void {
-        setTimeout(() => {
-            this.productos = productos;
-        }, 3000);
+        this.inventarioService.getInventario().subscribe(
+            (data: Producto[]) => {
+                this.productos = data;
+                console.log(this.productos)
+            },
+            (error) => {
+                console.error('Error al obtener los datos del inventario', error);
+            }
+        );
     }
 
     public onEliminarProducto( producto: Producto ): void {
