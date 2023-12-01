@@ -1,5 +1,7 @@
+<!-- Navbar de la pagina -->
 <app-nav-landing-page></app-nav-landing-page>
 
+<!-- Eslogan con texto principal e imagen de fondo -->
 <div id="inicio" class="background-image">
     <div class="eslogan">
         <h2>Eleva tu negocio a nuevas alturas.</h2>
@@ -13,6 +15,9 @@
     <!-- Tablas -->
 
     <div id="tablas" class="tablas">
+
+        <!-- Informacion de Tablas -->
+
         <div class="tablas-info">
             <h3>Tablas</h3>
             <p class="tablas-subtitulo">
@@ -23,9 +28,11 @@
                 capacidades y alcanzar el máximo rendimiento.
             </p>
         </div>
+
+        <!-- Carousel de imagenes de Tablas -->
+
         <div class="tablas-ejemplo">
-            <!-- [autoplayInterval]="3000" -->
-            <p-carousel [value]="tablas" [numVisible]="1" [numScroll]="1" [circular]="true" [autoplayInterval]="3000">
+            <p-carousel [value]="tablas" [numVisible]="1" [numScroll]="1" [circular]="true" [autoplayInterval]="5000">
                 <ng-template let-tabla pTemplate="item">
                     <div class="imagen-tablas">
                         <img src="assets/{{ tabla }}.png" alt="{{ tabla }}">
@@ -38,10 +45,11 @@
     <!-- Dashboard -->
 
     <div id="dashboard" class="dashboard">
+
+        <!-- Carousel de imagenes de Dashboards -->
+
         <div class="dashboard-ejemplo">
-            <!-- [autoplayInterval]="3000" -->
-            <p-carousel [value]="dashboard" [numVisible]="1" [numScroll]="1" [circular]="true"
-                [autoplayInterval]="3000">
+            <p-carousel [value]="dashboard" [numVisible]="1" [numScroll]="1" [circular]="true" [autoplayInterval]="5000">
                 <ng-template let-dashboard pTemplate="item">
                     <div class="imagen-dashboard">
                         <img src="assets/{{ dashboard }}.png" alt="{{ dashboard }}">
@@ -49,6 +57,9 @@
                 </ng-template>
             </p-carousel>
         </div>
+
+        <!-- Informacion de Dashboards -->
+
         <div class="dashboard-info">
             <h3>Dashboard</h3>
             <p class="dashboard-subtitulo">
@@ -63,36 +74,40 @@
 
     <!-- Cards -->
 
-    <div id="cards" class="cards">
+    <div id="opiniones" class="cards">
+
+        <!-- Informacion de Cards -->
+
         <h3>Opiniones</h3>
         <p class="cards-texto">
             Deja que Cosmos ERP aborde los desafíos dificiles y complejos, para que asi puedas centrarte en tus
             capacidades y alcanzar el máximo rendimiento.
         </p>
 
-        <p-carousel [value]="cardsData" [numVisible]="3" [numScroll]="1" [autoplayInterval]="2000" autoplay="true" [style]="{ 'text-align': '-webkit-center' }">
+        <!-- Carousel de Cards con Opiniones-->
+
+        <p-carousel [value]="cardsData" [numVisible]="3" [numScroll]="1" [autoplayInterval]="4000" autoplay="true"
+            [style]="{ 'text-align': '-webkit-center' }" [responsiveOptions]="responsiveOptions">
             <ng-template let-card pTemplate="item">
-              <p-card [header]="card.header" [subheader]="card.subheader" [style]="{ width: '360px' }">
-                <ng-template pTemplate="header">
-                  <img alt="Card" [src]="card.image" />
-                </ng-template>
-                <p>
-                  {{ card.content }}
-                </p>
-                <ng-template pTemplate="footer">
-                  <p>{{ card.footer }}</p>
-                </ng-template>
-              </p-card>
+                <p-card [header]="card.header" [subheader]="card.subheader" [style]="{ width: '360px' }">
+                    <ng-template pTemplate="header">
+                        <img alt="Card" [src]="card.image" />
+                    </ng-template>
+                    <p>
+                        {{ card.content }}
+                    </p>
+                    <ng-template pTemplate="footer">
+                        <p>{{ card.footer }}</p>
+                    </ng-template>
+                </p-card>
             </ng-template>
-          </p-carousel>
-
-
-
+        </p-carousel>
     </div>
+
+    <!-- Footer -->
 
     <footer>
         <p>Footer</p>
     </footer>
-
 
 </div>
