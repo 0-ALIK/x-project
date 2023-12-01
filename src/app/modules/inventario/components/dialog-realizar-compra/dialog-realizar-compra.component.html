@@ -1,1 +1,44 @@
-<p>dialog-realizar-compra works!</p>
+<form [formGroup]="form" class="form">
+
+    <div [style]="{'marginBottom': 'var(--spacing-2)'}">
+        <label htmlFor="fecha" [style]="{'display': 'block'}">Fecha</label>
+        <p-calendar
+            id="fecha"
+            formControlName="fecha"
+            placeholder="fecha">
+        </p-calendar>
+    </div>
+
+    <div [style]="{'marginBottom': 'var(--spacing-2)'}">
+        <label htmlFor="cantidad" [style]="{'display': 'block'}">Cantidad</label>
+        <p-inputNumber
+            id="cantidad"
+            formControlName="cantidad"
+            inputId="integeronly">
+        </p-inputNumber>
+    </div>
+
+    <div [style]="{'marginBottom': 'var(--spacing-2)'}">
+        <label htmlFor="producto" [style]="{'display': 'block'}">Producto</label>
+        <p-dropdown
+            id="producto"
+            formControlName="marca"
+            [options]="productos"
+            optionLabel="nombre">
+            <ng-template let-producto pTemplate="item">
+                <div [style]="{'display': 'flex', 'alignItems': 'center', 'gap': 'var(--spacing-2)'}" >
+                    <img [src]="producto.foto" style="width: 18px">
+                    <div>{{ producto.nombre }}</div>
+                </div>
+            </ng-template>
+        </p-dropdown>
+    </div>
+
+    <p-button
+        label="Agregar"
+        [loading]="estaCargando"
+        [disabled]="!form.valid"
+        (onClick)="enviarFormulario()">
+    </p-button>
+
+</form>

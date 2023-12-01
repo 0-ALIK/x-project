@@ -36,10 +36,15 @@
     --spacing-6: 3rem;
     --spacing-7: 4rem;
     --spacing-8: 5rem;
+    --spacing-9: 19rem;
 }
 
 body {
     background-color: var(--surface-ground);
+}
+
+.inline-flex {
+    display: inline-flex;
 }
 
 /* Estilo para dispositivos móviles */

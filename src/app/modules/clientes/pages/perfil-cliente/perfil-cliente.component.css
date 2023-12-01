@@ -2,6 +2,12 @@
     padding-left: var(--spacing-4);
 }
 
+.claseboba {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: var(--spacing-2);
+}
+
 .top{
     display: flex;
     justify-content: space-between;

@@ -1,3 +1,98 @@
-<!-- Eliminar esto luego -->
-<h2> AQUI DEBEMOS HACER EL LANDING PAGE</h2>
-<p>RUTA: /</p>
+<app-nav-landing-page></app-nav-landing-page>
+
+<div id="inicio" class="background-image">
+    <div class="eslogan">
+        <h2>Eleva tu negocio a nuevas alturas.</h2>
+        <hr>
+        <p>Desde la optimización de las operaciones logísticas hasta la visión completa de la distribución, nuestro
+            software diseñado para empresas distribuidoras es la solución integral que tu negocio necesita.</p>
+        <p-button label="Comenzar" [raised]="true" size="large" class="btn-comenzar" routerLink="app"></p-button>
+        <i class="pi pi-angle-down flecha-abajo" style="font-size: var(--text-6xl)"></i>
+    </div>
+
+    <!-- Tablas -->
+
+    <div id="tablas" class="tablas">
+        <div class="tablas-info">
+            <h3>Tablas</h3>
+            <p class="tablas-subtitulo">
+                Organiza tus productos de manera tabulada
+            </p>
+            <p class="tablas-texto">
+                Deja que Cosmos ERP aborde los desafíos dificiles y complejos, para que asi puedas centrarte en tus
+                capacidades y alcanzar el máximo rendimiento.
+            </p>
+        </div>
+        <div class="tablas-ejemplo">
+            <!-- [autoplayInterval]="3000" -->
+            <p-carousel [value]="tablas" [numVisible]="1" [numScroll]="1" [circular]="true" [autoplayInterval]="3000">
+                <ng-template let-tabla pTemplate="item">
+                    <div class="imagen-tablas">
+                        <img src="assets/{{ tabla }}.png" alt="{{ tabla }}">
+                    </div>
+                </ng-template>
+            </p-carousel>
+        </div>
+    </div>
+
+    <!-- Dashboard -->
+
+    <div id="dashboard" class="dashboard">
+        <div class="dashboard-ejemplo">
+            <!-- [autoplayInterval]="3000" -->
+            <p-carousel [value]="dashboard" [numVisible]="1" [numScroll]="1" [circular]="true"
+                [autoplayInterval]="3000">
+                <ng-template let-dashboard pTemplate="item">
+                    <div class="imagen-dashboard">
+                        <img src="assets/{{ dashboard }}.png" alt="{{ dashboard }}">
+                    </div>
+                </ng-template>
+            </p-carousel>
+        </div>
+        <div class="dashboard-info">
+            <h3>Dashboard</h3>
+            <p class="dashboard-subtitulo">
+                Organiza tus productos de manera tabulada
+            </p>
+            <p class="dashboard-texto">
+                Deja que Cosmos ERP aborde los desafíos dificiles y complejos, para que asi puedas centrarte en tus
+                capacidades y alcanzar el máximo rendimiento.
+            </p>
+        </div>
+    </div>
+
+    <!-- Cards -->
+
+    <div id="cards" class="cards">
+        <h3>Opiniones</h3>
+        <p class="cards-texto">
+            Deja que Cosmos ERP aborde los desafíos dificiles y complejos, para que asi puedas centrarte en tus
+            capacidades y alcanzar el máximo rendimiento.
+        </p>
+
+        <p-carousel [value]="cardsData" [numVisible]="3" [numScroll]="1" [autoplayInterval]="2000" autoplay="true" [style]="{ 'text-align': '-webkit-center' }">
+            <ng-template let-card pTemplate="item">
+              <p-card [header]="card.header" [subheader]="card.subheader" [style]="{ width: '360px' }">
+                <ng-template pTemplate="header">
+                  <img alt="Card" [src]="card.image" />
+                </ng-template>
+                <p>
+                  {{ card.content }}
+                </p>
+                <ng-template pTemplate="footer">
+                  <p>{{ card.footer }}</p>
+                </ng-template>
+              </p-card>
+            </ng-template>
+          </p-carousel>
+
+
+
+    </div>
+
+    <footer>
+        <p>Footer</p>
+    </footer>
+
+
+</div>

@@ -1,20 +1,17 @@
 <p-table
-    #tablePedidos
+    #table
     [value]="pedidos"
     styleClass="p-datatable-gridlines"
     [tableStyle]="{ 'min-width': '50rem' }"
-    [paginator]="true"
-    [rows]="10"
-    [showCurrentPageReport]="true"
-    currentPageReportTemplate="Hay un total de {totalRecords} registros"
-    (onFilter)="example( $event )"
-    >
+    selectionMode="single"
+    [(selection)]="selectedPedido"
+    (onRowSelect)="onRowSelect( $event )">
 
     <ng-template pTemplate="caption">
         <div class="caption">
-            <div>
-                <p-button label="Limpiar" [outlined]="true" icon="pi pi-filter-slash"></p-button>
-                <p-button label="Reporte" [style]="{ marginLeft: 'var(--spacing-3)' }" icon="pi pi-chart-bar"></p-button>
+            <div class="p-buttonset">
+                <button pButton label="Limpiar" (click)="table.clear()" class="p-button-outlined" icon="pi pi-filter-slash"></button>
+                <button pButton label="Reporte" (click)="showGenerarReporte()" icon="pi pi-file-export"></button>
             </div>
             <span class="p-input-icon-left">
                 <i class="pi pi-search"></i>
@@ -26,42 +23,45 @@
     <ng-template pTemplate="header">
         <tr>
             <th>
-                Cliente
-                <p-columnFilter
-                    type="text"
-                    field="e_nombre"
-                    display="menu"
-                    [showMatchModes]="false"
-                    [showOperator]="false"
-                    [showAddButton]="false">
-                </p-columnFilter>
+                <div class="flex align-items-center">
+                    Cliente
+                    <p-columnFilter field="cliente.nombre" display="menu"></p-columnFilter>
+                </div>
             </th>
-
             <th>
-                Fecha
-                <p-columnFilter
-                    type="date"
-                    field="e_fecha"
-                    display="menu"
-                    [showMatchModes]="false"
-                    [showOperator]="false"
-                    [showAddButton]="false"
-                    >
-                </p-columnFilter>
+                <div class="flex align-items-center">
+                    Fecha
+                    <p-columnFilter field="fecha" type="date" display="menu"></p-columnFilter>
+                </div>
             </th>
-            <th>Estado</th>
-            <th>Forma de pago</th>
-            <th>Empresa</th>
+            <th>
+                <div class="flex align-items-center">
+                    Estado
+                    <p-columnFilter field="estado.estado" display="menu"></p-columnFilter>
+                </div>
+            </th>
+            <th>
+                <div class="flex align-items-center">
+                    Empresa
+                    <p-columnFilter field="empresa.nombre" display="menu"></p-columnFilter>
+                </div>
+            </th>
+            <th>Importe de la venta</th>
+            <th>Importe pagado</th>
+            <th>Importe debido</th>
+            <th>Acciones</th>
         </tr>
     </ng-template>
 
     <ng-template pTemplate="body" let-pedido>
-        <tr>
-            <td class="celda-cliente">
-                <div>
-                    <p-avatar [image]="pedido.cliente.foto" shape="circle"></p-avatar>
+        <tr [pSelectableRow]="pedido">
+            <td>
+                <div class="celda-cliente">
+                    <div>
+                        <p-avatar [image]="pedido.cliente.foto" shape="circle"></p-avatar>
+                    </div>
+                    <p class="celda-cliente-nombre">{{ pedido.cliente.nombre + ' ' + pedido.cliente.apellido }}</p>
                 </div>
-                <p class="celda-cliente-nombre">{{ pedido.cliente.nombre + ' ' + pedido.cliente.apellido }}</p>
             </td>
 
             <td>
@@ -73,14 +73,34 @@
             </td>
 
             <td>
-                {{ pedido.forma_pago.nombre }}
+                <p *ngIf="!pedido.cliente.empresa">Sin empresa asociada</p>
+                <div *ngIf="pedido.cliente.empresa" class="celda-cliente">
+                    <div>
+                        <p-avatar [image]="pedido.cliente.empresa.foto" shape="square"></p-avatar>
+                    </div>
+                    <p class="celda-cliente-nombre">{{ pedido.cliente.empresa.nombre }}</p>
+                </div>
             </td>
 
-            <td class="celda-cliente">
-                <div>
-                    <p-avatar [image]="pedido.empresa.foto" shape="square"></p-avatar>
-                </div>
-                <p class="celda-cliente-nombre">{{ pedido.empresa.nombre }}</p>
+            <td>
+                {{ importesCalc.calcularImporte( pedido.pedido_producto ) | currency:'USD':'symbol':'1.2-2' }}
+            </td>
+
+            <td>
+                {{ importesCalc.calcularImportePagado( pedido.pagos ) | currency:'USD':'symbol':'1.2-2' }}
+            </td>
+
+            <td>
+                {{ importesCalc.calcularImporteDebido( pedido.pedido_producto, pedido.pagos ) | currency:'USD':'symbol':'1.2-2' }}
+            </td>
+
+            <td>
+                <p-button
+                    icon="pi pi-trash"
+                    severity="danger"
+                    [text]="true"
+                    [raised]="true">
+                </p-button>
             </td>
         </tr>
     </ng-template>

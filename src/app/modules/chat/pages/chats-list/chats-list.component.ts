@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./chats-list.component.css']
 })
 export class ChatsListComponent {
+
     public reclamos: any[] = [
         {
             id_reclamo: 23
