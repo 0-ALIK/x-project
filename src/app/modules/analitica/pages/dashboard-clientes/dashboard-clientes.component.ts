@@ -1,7 +1,9 @@
+import { empresas } from 'src/app/interfaces/data';
+import { Pedido } from './../../../../interfaces/pedido.interface';
 import { Direccion } from './../../../../interfaces/direccion.interface';
 import { clientes, direcciones, provincias, productos, pedidos } from './../../../../interfaces/data';
 import { DashboardService } from './../../services/dashboard.service';
-import { Cliente, Usuario } from 'src/app/interfaces/usuario.inteface';
+import { Cliente, Empresa, Usuario } from 'src/app/interfaces/usuario.inteface';
 import { Component, OnInit } from '@angular/core';
 
 
@@ -13,17 +15,18 @@ import { Component, OnInit } from '@angular/core';
     export class DashboardClientesComponent implements OnInit {
 
         provincia: any[] | undefined;
-        provincias: Direccion[] | undefined
+        provinciaFrecuente: any[] = [];
 
-        usuario:Usuario [] | undefined;
 
         clientes: Cliente[] | undefined;
-        idCliente: any | undefined;
-        nombreCliente: any[] | undefined;
-        provinciaCliente: any[] | undefined
-        pedidoCliente: any[] | undefined;
+        provinciaCliente: any[] | undefined;
+        clientesFrecuentes: any[] = [];
+        clientesMesActual: any[] | undefined;
+        clientesMesAnterior: any[] | undefined;
 
-        fecha: any | undefined;
+        empresas: Empresa[] | undefined;
+
+        date: Date | undefined;
 
         data1: any;
         data2: any;
@@ -34,38 +37,125 @@ import { Component, OnInit } from '@angular/core';
         options2: any;
 
         ngOnInit() {
-            // this.definirClientes();
-            this.definirEmpresaProvincias();
+            this.definirClientes();
+            this.definirEmpresas();
+            this.definirProvinciasPedidos();
+            this.definirPedidos();
             this.optionsGrafica();
         }
 
         constructor(private dashboardService: DashboardService) {}
 
-        // definirClientes(): void {
-        //     this.dashboardService.getClientes().subscribe({
-        //         next: (clientes) => {
-        //            this.clientes = clientes.data;
-        //            this.filtroNombres();
-        //            this.graficaClientesMas();
-        //           console.log(this.clientes);
-        //         },
-        //         error: (error) => {
-        //             console.error(error);
-        //         }
-        //       })
-        // }
+         definirClientes(): void {
+             this.dashboardService.getClientes().subscribe({
+                 next: (clientes) => {
+                    this.clientes = clientes;
+                    const fechaActual = new Date().toISOString().slice(0, 7);
+                    this.clientesMesActual = clientes.filter( function(cliente: Cliente) {
+                        const fechaCliente = cliente.created_at?.slice(0, 7) ;
+                        return fechaCliente === fechaActual;
+                    });
+
+                    const fechaActual2 = new Date();
+                    fechaActual2.setMonth(fechaActual2.getMonth() - 1); // Restar un mes a la fecha actual
+                    const fechaMesAnterior = fechaActual2.toISOString().slice(0, 7);
+                    this.clientesMesAnterior = clientes.filter( function(cliente: Cliente) {
+                        const fechaCliente = cliente.created_at?.slice(0, 7);
+                        return fechaCliente === fechaMesAnterior ;
+                    });
+                    console.log(this.clientesMesAnterior);
+                 },
+                 error: (error) => {
+                     console.error(error);
+                 }
+               })
+         }
+
+         definirEmpresas(): void {
+            this.dashboardService.getEmpresas().subscribe({
+                next: (empresa) => {
+                   this.empresas = empresa;
+                  console.log(empresa);
+                },
+                error: (error) => {
+                    console.error(error);
+                }
+              })
+        }
+
+        definirProvinciasPedidos(): void {
+            this.dashboardService.getPedidos().subscribe({
+                next: (pedidos) => {
+
+                    if (pedidos.length === 0) return;
+
+                    const frecuenciaProvincia: { [idProvincia: string]: number } = {};
+                    pedidos.forEach((pedido) => {
+                        if(!pedido?.cliente || !pedido?.cliente?.id_cliente) return;
+
+                        const id_provincia = pedido.cliente.id_cliente;
+                        frecuenciaProvincia[id_provincia] = (frecuenciaProvincia[id_provincia] || 0) + 1;
+                    });
+
+                    Object.keys(frecuenciaProvincia).forEach((id_provincia) => {
+                        const pedido = pedidos.find(pedido => pedido?.direccion?.provincia?.id_provincia === Number(id_provincia));
+                        this.provinciaFrecuente.push({
+                            frecuencia: frecuenciaProvincia[id_provincia],
+                            provincia: pedido?.direccion?.provincia
+                        });
+                    })//lo adapte a provincia a lo loko, no se como se hace nada pipipipipipipi
+
+                    this.graficaSegmentacion();
+                }
+            });
+
+        }
+
+        definirPedidos(): void {
+            this.dashboardService.getPedidos().subscribe({
+                next: (provincias) => {
+
+                    if (provincias.length === 0) return;
+
+                    const frecuenciaClientes: { [idCliente: string]: number } = {};
+                    pedidos.forEach((pedido) => {
+                        if(!pedido?.cliente || !pedido?.cliente?.id_cliente) return;
+
+                        const id_cliente = pedido.cliente.id_cliente;
+                        frecuenciaClientes[id_cliente] = (frecuenciaClientes[id_cliente] || 0) + 1;
+                    });
+
+                    Object.keys(frecuenciaClientes).forEach((id_cliente) => {
+                        const pedido = pedidos.find(pedido => pedido?.cliente?.id_cliente === Number(id_cliente));
+                        this.clientesFrecuentes.push({
+                            frecuencia: frecuenciaClientes[id_cliente],
+                            cliente: pedido?.cliente
+                        });
+                    })
+
+                    this.clientesFrecuentes.sort((a, b) => b.frecuencia - a.frecuencia);
+                    this.graficaClientesMas();
+                    this.graficaClientesMenos();
+                }
+            });
+
+        }
 
         definirEmpresaProvincias(): void{
             this.dashboardService.getClientesProvincias().subscribe({
-                next:(provincias) => {
-                    this.provincias = provincias.data;
-                    this.graficaProvincias();
-                    this.graficaSegmentacion();
-                    this.graficaClientesMas();
-                    this.graficaClientesMenos();
-                    this.filtroProvincias();
-                    this.filtroProvinciaCliente();
-                    this.filtroComprasClientes();
+                next:(pedidos) => {
+                    this.provincia = pedidos.direcciones.provincia.nombre;
+                    console.log(this.provincia)
+                    this.provinciaCliente = clientes.flatMap(function(cliente) {
+                        return cliente.direcciones?.map((direccion) => {
+                          return {
+                            nombreCliente: cliente.nombre,
+                            nombreProvincia: direccion.provincia?.nombre || 'Sin provincia',
+                          };
+                        }) || [];
+                      });
+
+                      console.log('Provincias Cliente' + this.provinciaCliente );
                 },
                 error: (error) => {
                     console.error(error);
@@ -73,52 +163,20 @@ import { Component, OnInit } from '@angular/core';
             })
         }
 
-        // filtroNombres(): void {
-        //     this.nombreCliente = clientes.map(function(cliente) {
-        //         return cliente.nombre + ' ' + cliente.apellido; // Acceder a la propiedad "nombre" de cada cliente
-        //     });
-        // }
-
-        filtroIdCliente(): void {
-            this.idCliente = clientes.map(function(id){
-                return id.id_cliente;
-            });
-            console.log(this.idCliente);
-        }
-
-        filtroProvincias(): void {
-            this.provincia = direcciones.map(function(provincia){
-                return provincia.provincia?.nombre;
-            });
-            console.log(this.provincia);
-        }
-
-        filtroProvinciaCliente(): void {
-            this.provinciaCliente = clientes.map(function(clienteProvincia){
-                return clienteProvincia.direcciones;
-            });
-            console.log(this.provinciaCliente);
-        }
-
-        filtroComprasClientes(): void {
-            this.pedidoCliente = pedidos.map(function (pedidoCliente) {
-                return pedidoCliente.cliente
-            });
-
-
-        }
-
         graficaClientesMas(): void{
             const documentStyle = getComputedStyle(document.documentElement);
 
+            const frecuencias = this.clientesFrecuentes.map( clienteFrecuente => clienteFrecuente.frecuencia);
+            const nombres = this.clientesFrecuentes.map( clienteFrecuente => clienteFrecuente.cliente.nombre);
+
             this.data1 = {
-                labels:  ['luis'],
+                labels: nombres.slice(0, 3),
                 datasets: [
                     {
                         label: 'Clientes que más compran',
                         backgroundColor: documentStyle.getPropertyValue('--blue-600'),
                         borderColor: documentStyle.getPropertyValue('--indigo-500'),
-                        data: [65, 59, 80, 81, 56, 55, 40]
+                        data: frecuencias.slice(0,3)
                     },
                 ]
             };
@@ -128,14 +186,17 @@ import { Component, OnInit } from '@angular/core';
         graficaClientesMenos(): void{
             const documentStyle = getComputedStyle(document.documentElement);
 
+            const frecuencias = this.clientesFrecuentes.map( clienteFrecuente => clienteFrecuente.frecuencia);
+            const nombres = this.clientesFrecuentes.map( clienteFrecuente => clienteFrecuente.cliente.nombre);
+
             this.data2 = {
-                labels: ['pepiniloos', 'locos', 'pepinilos'],
+                labels: nombres.reverse().slice(0,3),
                 datasets: [
                     {
                         label: 'Clientes que menos compran',
                         backgroundColor: documentStyle.getPropertyValue('--pink-500'),
                         borderColor: documentStyle.getPropertyValue('--pink-400'),
-                        data: [65, 59, 80, 81, 56, 55, 40]
+                        data: frecuencias.reverse().slice(0,3)
                     }
                 ]
             }
@@ -145,11 +206,14 @@ import { Component, OnInit } from '@angular/core';
         graficaSegmentacion(): void{
             const documentStyle = getComputedStyle(document.documentElement);
 
+            const nombres = this.provinciaFrecuente?.map(provincia => provincia.nombre);
+            const frecuencias = this.provinciaFrecuente?.map(provincia => provincia.provincia.frecuencia);
+
             this.data3 = {
-                labels: ['A', 'B', 'C'],
+                labels: nombres,
                 datasets: [
                     {
-                        data: [540, 325, 702],
+                        data: frecuencias,
                         backgroundColor: [documentStyle.getPropertyValue('--cyan-300'), documentStyle.getPropertyValue('--cyan-600'), documentStyle.getPropertyValue('--cyan-800')],
                         hoverBackgroundColor: [documentStyle.getPropertyValue('--cyan-200'), documentStyle.getPropertyValue('--blue-400'), documentStyle.getPropertyValue('--blue-500')]
                     }
@@ -223,4 +287,5 @@ import { Component, OnInit } from '@angular/core';
                 }
             };
         }
+
     }
