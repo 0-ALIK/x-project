@@ -17,7 +17,7 @@ export class VerClientesComponent implements OnInit {
         private apiService: SolicitudService
     ) {
         this.apiService.getSolicitudes().subscribe((resp:any)=>{
-            this.arregloSolicitudes = resp.data
+            this.arregloSolicitudes = resp
         })
     }
 

@@ -45,15 +45,7 @@
             </div>
         </div>
         <div class="claseboba">
-            <app-colaborador-card></app-colaborador-card>
-            <app-colaborador-card></app-colaborador-card>
-            <app-colaborador-card></app-colaborador-card>
-            <app-colaborador-card></app-colaborador-card>
-            <app-colaborador-card></app-colaborador-card>
-            <app-colaborador-card></app-colaborador-card>
-            <app-colaborador-card></app-colaborador-card>
-            <app-colaborador-card></app-colaborador-card>
-            <app-colaborador-card></app-colaborador-card>
+            <app-colaborador-card *ngFor="let colaborador of arregloColaboradores" [colaborador]="colaborador"></app-colaborador-card>
         </div>
     </ng-container>
 

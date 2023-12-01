@@ -17,9 +17,9 @@ export class DireccionService {
         private http: HttpClient
     ) {}
 
-    public getDireccion(): Observable<Direccion[]> {
+    public getDireccion( idEmpresa:any ): Observable<Direccion[]> {
         //Necesito agregar el id a la url para conseguir las sucursales de x empresa
-        return this.http.get<Direccion[]>(this.host + '/api/sucursales');
+        return this.http.get<Direccion[]>(this.host + '/api/sucursales/'+ idEmpresa);
     }
 }
 

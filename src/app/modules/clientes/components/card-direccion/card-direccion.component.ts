@@ -11,23 +11,10 @@ import { DireccionService } from 'src/app/services/direccion.service';
 export class CardDireccionComponent {
 
     @Input('direccion')
-    public direccion: Direccion | undefined;
+    public direccion: any | undefined;
 
     @Input('fondo')
     public fondo: boolean = false;
 
-
-    public arregloDirecciones: Direccion[] = [];
-
-    public constructor(
-        public dialogService: DialogService,
-        private router: Router,
-        private apiService: DireccionService
-    ) {
-        this.apiService.getDireccion().subscribe((resp:any)=>{
-            //console.log(resp)
-            this.arregloDirecciones = resp.data;
-        })
-    }
 
 }

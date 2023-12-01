@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-colaborador-card',
@@ -7,4 +7,6 @@ import { Component } from '@angular/core';
 })
 export class ColaboradorCardComponent {
 
+    @Input("colaborador")
+    public colaborador: any | undefined;
 }

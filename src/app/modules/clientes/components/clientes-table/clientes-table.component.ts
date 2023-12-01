@@ -35,7 +35,7 @@ export class ClientesTableComponent implements OnInit {
     ) {
         this.apiService.getClientes().subscribe((resp:any)=>{
             //console.log(resp)
-            this.arregloClientes = resp.data
+            this.arregloClientes = resp
         })
     }
 

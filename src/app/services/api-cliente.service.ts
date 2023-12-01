@@ -8,13 +8,13 @@ import { Observable } from 'rxjs';
 export class ApiClienteService {
 
     private urlApi = 'http://127.0.0.1:8000/api/clientes';
-    private token = '1|FEBqqN8xFWXDwX3jSumFPMkmLZjNEBGxwCh7MxqQa6821b7e';
+    private token = '1|aVp3eUr44PhTcDR1LvCYPrJ83DnmLKGE31HHLUly5a7a250d';
 
 
   constructor(private Http: HttpClient) { }
 
 
-    getClientes(){
+    public getClientes( ){
     let header =  new HttpHeaders()
         .set('Type-content', 'aplication/json')
         .set('authorization', 'Bearer '+this.token )

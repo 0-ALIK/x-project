@@ -6,6 +6,8 @@ import { Direccion, Provincia } from 'src/app/interfaces/direccion.interface';
 import { AgregarColaboradorComponent } from '../../components/agregar-colaborador/agregar-colaborador.component';
 import { AgregarSucursalComponent } from '../../components/agregar-sucursal/agregar-sucursal.component';
 import { Pedido } from 'src/app/interfaces/pedido.interface';
+import { ActivatedRoute } from '@angular/router';
+import { DireccionService } from 'src/app/services/direccion.service';
 
 @Component({
   selector: 'app-perfil-empresa',
@@ -23,12 +25,14 @@ export class PerfilEmpresaComponent {
 
     public provinciaSelected: Provincia | undefined;
 
-    public direcciones: Direccion[] = direcciones;
+    public direcciones: Direccion[] = [];
 
     private ref: DynamicDialogRef | undefined;
 
     public constructor(
         public dialogService: DialogService,
+        private activatedRoute: ActivatedRoute,
+        private apiService: DireccionService
     ) {}
 
     public ngOnInit():void {
@@ -40,7 +44,20 @@ export class PerfilEmpresaComponent {
         ];
         this.activeItem = this.items[0];
         console.log(this.activeItem.label);
+
+        this.activatedRoute.params.subscribe({
+            next: ({id}) => {
+
+                this.apiService.getDireccion(id).subscribe((resp:any)=>{
+                    this.direcciones = resp
+                    console.log(resp)
+                })
+            }
+        });
     }
+
+
+    public arregloColaboradores: any[] = [];
 
     public onChange(event:MenuItem):void {
         this.activeItem = event;

@@ -28,7 +28,7 @@ export class EmpresasTableComponent {
         ) {
         this.apiService.getEmpresas().subscribe((resp:any)=>{
             console.log(resp)
-            this.arregloEmpresas = resp.data
+            this.arregloEmpresas = resp
         })
     }
 
