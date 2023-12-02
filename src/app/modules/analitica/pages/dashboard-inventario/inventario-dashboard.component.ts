@@ -23,7 +23,6 @@ export class DashboardInventarioComponent implements OnInit {
     this.defineOptions();
     this.obtenerMarcasCategoria();
     this.definirProductosQueMasHay();
-    this.definirProductosQueMenosHay();
     this.graficaSegmentacion();     
   }
 
@@ -53,7 +52,7 @@ export class DashboardInventarioComponent implements OnInit {
 
         arregloProductos.sort((a, b) => (b.cantidadCajas || 0) - (a.cantidadCajas || 0));
 
-        const top3Productos = arregloProductos.slice(0, 3);
+        const top3Productos = arregloProductos.slice(0, 5);
 
         console.log('Productos que más hay:', top3Productos);
         this.graficaProductos(top3Productos);
@@ -63,35 +62,7 @@ export class DashboardInventarioComponent implements OnInit {
       }
     });
   }
-  private definirProductosQueMenosHay(): void {
-    this.dashboardService.getProductos().subscribe({
-      next: (productosResponse: any) => {
-        console.log('Respuesta de la API:', productosResponse);
   
-        this.productos = productosResponse.data as Producto[];
-  
-        if (!this.productos || this.productos.length === 0) {
-          console.error('No hay productos o la estructura es incorrecta');
-          return;
-        }
-  
-        const arregloProductos = this.productos.map(producto => ({
-          nombre: producto.nombre || '',
-          cantidadCajas: producto.cantidad_cajas || 0,
-        }));
-  
-        arregloProductos.sort((a, b) => (a.cantidadCajas || 0) - (b.cantidadCajas || 0));
-  
-        const bottom3Productos = arregloProductos.slice(0, 3);
-  
-        console.log('Productos que menos hay:', bottom3Productos);
-        this.graficaProductosMenos(bottom3Productos);
-      },
-      error: (error) => {
-        console.error('Error al obtener productos que menos hay', error);
-      }
-    });
-  }
 
   graficaProductos(top3Productos: any[]): void {
     const documentStyle = getComputedStyle(document.documentElement);
@@ -109,7 +80,7 @@ export class DashboardInventarioComponent implements OnInit {
         labels: labels,
         datasets: [
           {
-            label: 'Productos más comprados',
+            label: 'Productos que más existen',
             backgroundColor: Array.from({ length: top3Productos.length }, () => documentStyle.getPropertyValue('--blue-600')),
             borderColor: Array.from({ length: top3Productos.length }, () => documentStyle.getPropertyValue('--indigo-500')),
             data: data,
@@ -122,35 +93,7 @@ export class DashboardInventarioComponent implements OnInit {
     }
   }
   
-  graficaProductosMenos(bottom3Productos: any[]): void {
-    const documentStyle = getComputedStyle(document.documentElement);
   
-    if (Array.isArray(bottom3Productos) && bottom3Productos.length > 0) {
-      console.log('Datos disponibles:', bottom3Productos);
-  
-      const labels = bottom3Productos.map((producto: any) => producto.nombre);
-      console.log('Etiquetas:', labels);
-  
-      const data = bottom3Productos.map((producto: any) => producto.cantidadCajas);
-      console.log('Datos:', data);
-  
-      this.stockData = {
-        labels: labels,
-        datasets: [
-          {
-            label: 'Productos menos comprados',
-            backgroundColor: Array.from({ length: bottom3Productos.length }, () => documentStyle.getPropertyValue('--red-600')),
-            borderColor: Array.from({ length: bottom3Productos.length }, () => documentStyle.getPropertyValue('--orange-500')),
-            data: data,
-            borderWidth: 2,
-          },
-        ],
-      };
-    } else {
-      console.error('Error: No hay datos para la gráfica');
-    }
-  }
-
   graficaSegmentacion(): void {
     const documentStyle = getComputedStyle(document.documentElement);
     const textColor = documentStyle.getPropertyValue('--text-color');
