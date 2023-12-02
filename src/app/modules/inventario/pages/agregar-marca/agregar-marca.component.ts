@@ -68,11 +68,12 @@ export class AgregarMarcaComponent implements OnInit {
             const formData: FormData = new FormData()
             formData.append('nombre', this.form.get('nombre')?.value || '')
             formData.append('descripcion', this.form.get('descripcion')?.value || '')
-            formData.append('_method', 'PUT')
 
             if (this.foto) {
                 formData.append('logo', this.foto)
-                console.log(this.foto)
+            } else {
+                formData.append('logo', this.currentMarca?.logo || '')
+                console.log(this.currentMarca?.logo  || '')
             }
 
             if (this.esEdicion()) {
@@ -93,6 +94,17 @@ export class AgregarMarcaComponent implements OnInit {
                     }
                 });
             } else {
+                this.marcaService.guardarMarca(formData).subscribe(
+                    (response: any) => {
+                        console.log(response.data)
+                        this.estaCargando = false;
+                        this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'La marca ' + response.data.nombre + ' ha sido agregada' });
+                    },
+                    error => {
+                        this.estaCargando = false;
+                        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No se pudo agregar la marca' });
+                    }
+                );
             }
         }
     }
