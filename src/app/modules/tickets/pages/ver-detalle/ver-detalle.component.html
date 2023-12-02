@@ -1,10 +1,13 @@
 <main>
-    <p class="mb-2 text-3xl font-bold">Ticket  {{ reclamo.id_reclamo }}</p>
+    <p class="mb-2 text-3xl font-bold">Ticket #{{ reclamo.id_reclamo }}</p>
 
     <div class="fondo flex flex-column p-2 border-round">
 
         <section class="flex flex-column sm:flex-row align-items-center justify-content-between mb-2">
-            <alik-card-user [cliente]="reclamo.cliente_id"></alik-card-user>
+            <div class="flex align-items-center gap-1">
+                <p>{{ reclamo.usuario_nombre}}</p>
+            </div>
+            <!-- <alik-card-user [cliente]="cliente.nombre"></alik-card-user> -->
         </section>
 
         <section class="flex flex-column md:flex-row gap-2 mb-2">

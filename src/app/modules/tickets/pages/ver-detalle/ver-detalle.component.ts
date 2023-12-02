@@ -6,7 +6,7 @@ import { Pedido } from 'src/app/interfaces/pedido.interface';
 import { Reclamo } from 'src/app/interfaces/raclamo.interface';
 import { ReclamosService } from '../../services/tickets.service';
 import { ClientesService } from 'src/app/services/clientes.service';
-import { Cliente } from 'src/app/interfaces/usuario.inteface';
+import { Cliente, Usuario } from 'src/app/interfaces/usuario.inteface';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 @Component({
@@ -17,13 +17,15 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 export class VerDetalleComponent implements OnInit {
 
-    public cliente: Cliente = clientes[0];
+    public cliente: any;
+
+    public Usuario: any;
 
     uploadedFiles: any[] = [];
 
     ticketNumber: number = 12391;
 
-    public pedido: Pedido = pedidos[0];
+    public pedido: any;
 
     loading: boolean = false;
 
@@ -68,10 +70,27 @@ export class VerDetalleComponent implements OnInit {
                   (data) => {
                     this.reclamo = data.data; // Ajusta según la estructura de tu respuesta
                     console.log('Detalles del ticket:', this.reclamo);
-                  },
-                  (error) => {
-                    console.error('Error al obtener los detalles del ticket', error);
-                  }
+
+                    if (this.reclamo.cliente_id) {
+                        this.clientesService
+                          .getClienteById(this.reclamo.cliente_id)
+                          .subscribe(
+                            (clienteData) => {
+                              this.cliente = clienteData.data; // Ajusta según la estructura de tu respuesta
+                              console.log('Detalles del cliente:', this.cliente);
+                            },
+                            (error) => {
+                              console.error(
+                                'Error al obtener los detalles del cliente',
+                                error
+                              );
+                            }
+                          );
+                      }
+                    },
+                    (error) => {
+                      console.error('Error al obtener los detalles del ticket', error);
+                    }
                 );
             }
         });
