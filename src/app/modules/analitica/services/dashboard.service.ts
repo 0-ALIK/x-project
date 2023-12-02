@@ -18,7 +18,7 @@ export class DashboardService {
         return this.http.get<any>(this.host + '/api/clientes',{headers});
     }
 
-     public getEmpresas(): Observable<any> {
+    public getEmpresas(): Observable<any> {
 
         const headers = new HttpHeaders().set('authorization', 'Bearer ' + '3|Ivsg8yMkmX0JDQvUH9zxEBkDa5ewauhLaYSvnh0Da2db69e7');
         return this.http.get<any>(this.host + '/api/empresas',{headers});
@@ -29,19 +29,8 @@ export class DashboardService {
         return this.http.get<Pedido[]>(this.host + '/api/admin/pedidos');
     }
 
-    public getProductosMasComprados(): Observable<any> {
-        return this.http.get<any>(this.host + '/api/producto');
-    }
-
-
-    public getCategorias(): Observable<any[]> {
-        return this.http.get<any[]>(this.host + '/api/categoria');
-
-    }
-
-    public getMarca(): Observable<any[]> {
-        return this.http.get<any[]>(this.host + '/api/marca');
-
+    public getProductos(): Observable<Producto[]> {
+        return this.http.get<Producto[]>(this.host + '/api/producto');
     }
     
     public getClientesProvincias(): Observable<any> {
