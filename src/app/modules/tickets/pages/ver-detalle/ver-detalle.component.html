@@ -1,28 +1,27 @@
 <main>
-    <p class="mb-2 text-3xl font-bold">Ticket  {{ ticketNumber }}</p>
+    <p class="mb-2 text-3xl font-bold">Ticket  {{ reclamo.id_reclamo }}</p>
 
     <div class="fondo flex flex-column p-2 border-round">
 
         <section class="flex flex-column sm:flex-row align-items-center justify-content-between mb-2">
-            <alik-card-user [cliente]="cliente"></alik-card-user>
-            <p-dropdown styleClass="w-full sm:w-20rem" [options]="reclamoPrioridad" [optionLabel]="" [showClear]="true" placeholder="Prioridad"></p-dropdown>
+            <alik-card-user [cliente]="reclamo.cliente_id"></alik-card-user>
         </section>
 
         <section class="flex flex-column md:flex-row gap-2 mb-2">
             <div class="flex flex-column w-full border-round">
                 <p class="m-0 my-1 text-lg">Detalles</p>
-                <textarea class="w-full h-20rem md:h-full text-justify" [autoResize]="true" pInputTextarea ></textarea>
+                <textarea class="w-full h-20rem md:h-full text-justify" [autoResize]="true" pInputTextarea >{{ reclamo?.descripcion }}</textarea>
             </div>
 
             <div class="flex flex-column w-full border-round w-full" #evidenciasBox>
                 <p class="m-0 my-1 text-lg">Evidencias</p>
                 <div>
-                    <img class="w-full h-20rem md:h-full border-round" src="https://primefaces.org/cdn/primeng/images/galleria/galleria1.jpg" alt="evidencia">
+                    <img class="w-full h-20rem md:h-full border-round" src="{{ reclamo?.evidencia }}" alt="evidencia">
                 </div>
             </div>
         </section>
         <section class="mb-2">
-            <venta-card [pedido]="pedido"></venta-card>
+            <venta-card [pedido]="reclamo?.pedido"></venta-card>
         </section>
         <section class="flex flex-row">
             <p-button label="Abrir chat" icon="pi pi-comments" [loading]="loading" (onClick)="cargarBoton()" [disabled]="false"></p-button>

@@ -16,4 +16,9 @@ export class ReclamosService {
 
         return this.http.get<any>(url);
     }
+
+    getReclamoById(reclamo_Id: number): Observable<any> {
+      const url = `${this.apiUrl}/reclamo/${reclamo_Id}`;
+      return this.http.get<any>(url);
+    }
 }

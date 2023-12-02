@@ -6,7 +6,7 @@ import { Reclamo } from 'src/app/interfaces/raclamo.interface';
 import { TagsColorsService } from '../../services/tags-colors.service';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ReporteTicketsComponent } from 'src/app/modules/analitica/components/reporte-tickets.component';
-
+import { TicketsService } from 'src/app/services/tickets.service';
 import { ReclamosService } from '../../services/tickets.service';
 
 @Component({
@@ -28,7 +28,7 @@ export class TicketsTableComponent {
         public dialogService: DialogService,
         private router: Router,
         public tagsColorsService: TagsColorsService,
-
+        private ticketsService: TicketsService,
         private reclamosService: ReclamosService
     ) { }
     ngOnInit(): void {
@@ -41,7 +41,10 @@ export class TicketsTableComponent {
             console.error('Error al obtener los reclamos', error);
           }
         );
+
       }
+
+    
 
     public showGenerarReporte(): void {
         this.ref = this.dialogService.open(ReporteTicketsComponent, { header: 'Generar Reporte' });
