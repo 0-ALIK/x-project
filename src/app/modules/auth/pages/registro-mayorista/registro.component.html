@@ -1,52 +1,37 @@
-<main class="h-screen w-screen flex p-4 md:p-0">
-
-    <section class="border-round py-2 px-4 md:px-8 h-screen w-full" [style]="{'background': 'var(--surface-card)'}">
-
-        <h1 class="text-center">Registro de solicitud</h1>
-
+<div class="background-image">
+    <div class="formulario">
         <form>
+            <h1>Registro de solicitud</h1>
 
-            <div class="mb-4">
-                <label htmlFor="nombre">Nombre</label>
+            <div>
+                <label htmlFor="nombre" class="div-label">Nombre</label>
                 <input type="text" id="nombre" pInputText class="w-full">
             </div>
 
-            <div class="mb-4">
-                <label htmlFor="ruc">Ruc</label>
-                <input type="text" id="ruc" pInputText class="w-full">
-            </div>
-
-            <div class="mb-4">
-                <label htmlFor="correo">Correo</label>
+            <div>
+                <label htmlFor="correo" class="div-label">Correo</label>
                 <input type="text" id="correo" pInputText class="w-full">
             </div>
 
-            <div class="mb-4">
-                <label htmlFor="pass">Contraseña</label>
+            <div>
+                <label htmlFor="pass" class="div-label">Contraseña</label>
                 <input type="password" id="pass" pInputText class="w-full">
             </div>
 
-            <div class="mb-4">
-                <label htmlFor="ruc">Ruc</label>
+            <div>
+                <label htmlFor="ruc" class="div-label">Ruc</label>
                 <input type="text" id="ruc" pInputText class="w-full">
             </div>
 
-            <div class="mb-4">
-                <label htmlFor="razon">Razón social</label>
+            <div>
+                <label htmlFor="razon" class="div-label">Razón social</label>
                 <input type="text" id="razon" pInputText class="w-full">
             </div>
 
-            <p-button styleClass="w-full mb-4" label="Enviar datos"></p-button>
+            <div class="button">
+                <p-button styleClass="w-full" label="Enviar datos"></p-button>
+            </div>
 
         </form>
-
-    </section>
-
-    <section class="w-full hidden md:block relative">
-
-        <img src="assets/temp.jpg" class="w-full h-full" alt="">
-
-
-    </section>
-
-</main>
+    </div>
+</div>
