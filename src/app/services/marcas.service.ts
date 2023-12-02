@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { from } from 'rxjs';
 import { Marca } from '../interfaces/producto.iterface';
 import { HttpHeaders } from '@angular/common/http';
 
