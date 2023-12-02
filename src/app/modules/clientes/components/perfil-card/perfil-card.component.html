@@ -1,8 +1,17 @@
 <section class="section">
     <article class="article a1">
-        <div class="image">
+        <div class="image" *ngIf="cliente">
             <p-image
-                src="https://primefaces.org/cdn/primeng/images/galleria/galleria1.jpg"
+                src="{{cliente.foto}}"
+                alt="Perfil"
+                width="300"
+                [preview]="true">
+            </p-image>
+        </div>
+
+        <div class="image" *ngIf="empresa">
+            <p-image
+                src="{{empresa.foto}}"
                 alt="Perfil"
                 width="300"
                 [preview]="true">
@@ -22,23 +31,48 @@
         </p-fileUpload>
     </article>
 
-    <article class="article a2">
+    <article class="article a2" *ngIf="empresa">
         <form>
             <div class="input">
                 <label htmlFor="nombre">Nombre</label>
-                <input pInputText id="nombre" aria-describedby="username-help">
+                <input pInputText id="nombre" aria-describedby="username-help" value="{{empresa.nombre}}">
             </div>
             <div class="input">
-                <label htmlFor="apellido">Apellido</label>
-                <input pInputText id="apellido" aria-describedby="username-help">
+                <label htmlFor="apellido">RUC</label>
+                <input pInputText id="apellido" aria-describedby="username-help" value="{{empresa.ruc}}">
             </div>
             <div class="input">
                 <label htmlFor="telefono">Telefono</label>
-                <input pInputText id="telefono" aria-describedby="username-help">
+                <input pInputText id="telefono" aria-describedby="username-help" value="{{empresa.telefono}}">
+            </div>
+            <div class="input">
+                <label htmlFor="cedula">Razon Social</label>
+                <input pInputText id="cedula" aria-describedby="username-help" value="{{empresa.razon_social}}">
+            </div>
+            <div class="flex flex-wrap gap-3 mb-8">
+
+            </div>
+            <p-button label="Actualizar información"></p-button>
+        </form>
+    </article>
+
+    <article class="article a2" *ngIf="cliente">
+        <form>
+            <div class="input">
+                <label htmlFor="nombre">Nombre</label>
+                <input pInputText id="nombre" aria-describedby="username-help" value="{{cliente.nombre}}">
+            </div>
+            <div class="input">
+                <label htmlFor="apellido">Apellido</label>
+                <input pInputText id="apellido" aria-describedby="username-help" value="{{cliente.apellido}}" >
+            </div>
+            <div class="input">
+                <label htmlFor="telefono">Telefono</label>
+                <input pInputText id="telefono" aria-describedby="username-help" value="{{cliente.telefono}}">
             </div>
             <div class="input">
                 <label htmlFor="cedula">Cédula</label>
-                <input pInputText id="cedula" aria-describedby="username-help">
+                <input pInputText id="cedula" aria-describedby="username-help"  value="{{cliente.cedula}}">
             </div>
             <div class="flex flex-wrap gap-3 mb-8">
                 <div class="flex align-items-center">

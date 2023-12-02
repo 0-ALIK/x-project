@@ -9,7 +9,7 @@
     </div>
 
     <ng-container *ngIf="activeItem?.label && activeItem?.label === 'Informacion'">
-        <app-perfil-card></app-perfil-card>
+        <app-perfil-card [empresa]="empresa"></app-perfil-card>
     </ng-container>
 
     <ng-container *ngIf="activeItem?.label && activeItem?.label === 'Sucursales'" >
@@ -22,6 +22,7 @@
                 placeholder="Filtra por provincia">
             </p-dropdown>
         </div>
+
         <div class="claseboba">
             <alik-card-direccion
                 *ngFor="let direccion of direcciones"
@@ -45,15 +46,7 @@
             </div>
         </div>
         <div class="claseboba">
-            <app-colaborador-card></app-colaborador-card>
-            <app-colaborador-card></app-colaborador-card>
-            <app-colaborador-card></app-colaborador-card>
-            <app-colaborador-card></app-colaborador-card>
-            <app-colaborador-card></app-colaborador-card>
-            <app-colaborador-card></app-colaborador-card>
-            <app-colaborador-card></app-colaborador-card>
-            <app-colaborador-card></app-colaborador-card>
-            <app-colaborador-card></app-colaborador-card>
+            <app-colaborador-card *ngFor="let colaborador of arregloColaboradores" [colaborador]="colaborador"></app-colaborador-card>
         </div>
     </ng-container>
 

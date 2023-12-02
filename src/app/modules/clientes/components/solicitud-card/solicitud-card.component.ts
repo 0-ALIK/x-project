@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Cliente } from 'src/app/interfaces/usuario.inteface';
 
 
 @Component({
@@ -9,4 +10,19 @@ import { Component } from '@angular/core';
 export class SolicitudCardComponent {
 
 
+
+    @Input("solicitud")
+    public solicitud: any | undefined;
+
+
+    aceptarSolicitud(id_solicitud: any): void {
+        //console.log('Function called with id_solicitud:', id_solicitud);
+
+        console.log('La solicitud fue aceptada con exito: ' + id_solicitud)
+        }
+
+
+    denegarSolicitud(id_solicitud: any): void {
+        console.log('La solicitud fue denegada con exito: ' + id_solicitud)
+    }
 }

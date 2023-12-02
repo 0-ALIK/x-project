@@ -32,7 +32,7 @@ export interface Cliente extends Usuario {
 
 export interface Empresa extends Usuario {
     id_empresa?: number;
-    RUC?: string;
+    ruc?: string;
     razon_social?: string;
     documento?: string;
     estado?: string;
