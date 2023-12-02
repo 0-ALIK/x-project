@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { MenuItem } from 'primeng/api';
+import { MenuItem, MessageService } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { empresas } from 'src/app/interfaces/data';
 import { Empresa } from 'src/app/interfaces/usuario.inteface';
@@ -29,6 +29,7 @@ export class EmpresasTableComponent {
 
     public constructor (
         public dialogService: DialogService,
+        private messageService: MessageService,
         private router: Router,
         private apiService: ApiEmpresaService
         ) {
@@ -99,8 +100,10 @@ export class EmpresasTableComponent {
               console.log('Empresa Eliminada exitosamente')
 
             } else {
-              console.log('No se elimino ninguna empresa');
+              this.messageService.add({ severity: 'error', summary: 'Operación Fallida', detail: 'Registro no eliminado' });
             }
           });
         }
+
+
 }
