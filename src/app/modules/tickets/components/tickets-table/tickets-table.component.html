@@ -29,7 +29,7 @@
             </th>
             <th>
                 <div class="flex align-items-center">
-                    Categoria
+                    Descripcion
                     <p-columnFilter field="categoria.nombre" display="menu"></p-columnFilter>
                 </div>
             </th>
@@ -47,6 +47,12 @@
             </th>
             <th>
                 <div class="flex align-items-center">
+                    Categoría
+                    <p-columnFilter field="estado.estado" display="menu"></p-columnFilter>
+                </div>
+            </th>
+            <th>
+                <div class="flex align-items-center">
                     Fecha
                     <p-columnFilter field="fecha" type="date" display="menu"></p-columnFilter>
                 </div>
@@ -59,23 +65,27 @@
         <tr [pSelectableRow]="reclamo">
             <td>
                 <div class="flex align-items-center gap-1">
-                    <div>
-                        <p-avatar [image]="reclamo.cliente.foto" shape="circle"></p-avatar>
-                    </div>
-                    <p>{{ reclamo.cliente.nombre + ' ' + reclamo.cliente.apellido }}</p>
+                    <p>{{ reclamo.usuario_nombre}}</p>
                 </div>
             </td>
-            <td>{{ reclamo.categoria.nombre }}</td>
+            <td>{{ reclamo.descripcion }}</td>
+            
             <td>
-                <p-tag [value]="reclamo.prioridad.prioridad" [severity]="tagsColorsService.getPriority(reclamo.prioridad.prioridad)"></p-tag>
+                <p-tag [value]="getPriorityInfo(reclamo.prioridad_id).nombre" [severity]="getPriorityInfo(reclamo.prioridad_id).color"></p-tag>
+            </td>
+
+            <td>
+                <p-tag [value]="getEstadoInfo(reclamo.estado_id).nombre" [severity]="getEstadoInfo(reclamo.estado_id).color"></p-tag>
             </td>
             <td>
-                <p-tag [value]="reclamo.estado.estado" [severity]="tagsColorsService.getSeverity(reclamo.estado.estado)"></p-tag>
+                <p-tag [value]="getCategoriaInfo(reclamo.categoria).nombre" [severity]="getCategoriaInfo(reclamo.categoria).color"></p-tag>
             </td>
-            <td>{{ reclamo.fecha | date }}</td>
+
+            <td>{{ reclamo.fecha}}</td>
             <td>
                 <p-button icon="pi pi-trash" [rounded]="true" severity="danger" [outlined]="true"></p-button>
             </td>
+
         </tr>
     </ng-template>
 </p-table>
