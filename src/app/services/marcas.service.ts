@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { from } from 'rxjs';
 import { Marca } from '../interfaces/producto.iterface';
 import { HttpHeaders } from '@angular/common/http';
 
@@ -28,14 +29,15 @@ export class MarcasService {
 
 
     //actualizar marca
-    public updateMarca(id: number, marca: Marca): Observable<any> {
+    public updateMarca(formData: FormData, id: number): Observable<any> {
         const url = `${this.apiUrl}/api/marca/${id}`;
         const headers = new HttpHeaders({
             'Accept': 'application/json',
             'Content-Type': 'multipart/form-data'
         });
-        return this.http.put(url, marca, { headers });
+        return this.http.post(url, formData, { headers });
     }
+
 
     //eliminar marca
 }

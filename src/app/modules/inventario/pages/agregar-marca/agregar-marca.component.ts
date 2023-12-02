@@ -63,9 +63,38 @@ export class AgregarMarcaComponent implements OnInit {
 
     public enviarFormulario(): void {
         this.estaCargando = true;
-        setTimeout(() => {
-            this.estaCargando = false;
-        }, 2000);
+
+        if (this.form.valid) {
+            const formData: FormData = new FormData()
+            formData.append('nombre', this.form.get('nombre')?.value || '')
+            formData.append('descripcion', this.form.get('descripcion')?.value || '')
+            formData.append('_method', 'PUT')
+
+            if (this.foto) {
+                formData.append('logo', this.foto)
+                console.log(formData)
+            }
+
+            if (this.esEdicion()) {
+                this.activatedRoute.params.subscribe({
+                    next: ({ id }) => {
+                        // Edita una marca existente.
+                        this.marcaService.updateMarca(formData, Number(id)).subscribe(
+                            response => {
+                                console.log(response.data)
+                                this.estaCargando = false;
+                                this.messageService.add({ severity: 'success', summary: 'Éxito', detail: response.data.nombre + ' actualizada'});
+                            },
+                            error => {
+                                this.estaCargando = false;
+                                this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No se pudo actualizar la marca' });
+                            }
+                        );
+                    }
+                });
+            } else {
+            }
+        }
     }
 
     public selectFile(event: UploadEvent): void {

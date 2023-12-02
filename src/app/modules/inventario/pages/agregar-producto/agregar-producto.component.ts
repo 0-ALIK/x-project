@@ -8,7 +8,6 @@ import { DOCUMENT } from '@angular/common';
 import { ProductoService } from 'src/app/services/producto.service';
 import { CategoriaService } from 'src/app/services/categoria.service';
 import { MarcasService } from 'src/app/services/marcas.service';
-import { categorias, marcas, productos } from 'src/app/interfaces/data';
 
 interface UploadEvent {
     originalEvent: Event;
@@ -101,7 +100,7 @@ export class AgregarProductoComponent implements OnInit {
                 punto_reorden: this.form.get('punto_reorden')?.value,
                 foto: this.foto ? this.foto.name : '', // Ajusta esto según tu modelo de datos
             };
-    
+
             this.productoService.guardarProducto(producto).subscribe(
                 (response) => {
                     // Manejar la respuesta del servicio
@@ -127,21 +126,29 @@ export class AgregarProductoComponent implements OnInit {
         this.activatedRoute.params.subscribe({
             next: ({id}) => {
 
-                this.currentProducto = productos.find( p => p.id_producto === Number(id) );
+                this.productoService.getProducto(Number(id)).subscribe(
+                    (producto: any) => {
+                        console.log(producto)
 
-                if(!this.currentProducto) return;
+                        this.currentProducto = producto.data;
 
-                this.titulo = 'Editar producto ' + this.currentProducto.nombre;
 
-                this.form.setValue({
-                    nombre: this.currentProducto.nombre,
-                    precio_unit: this.currentProducto.precio_unit,
-                    cantidad_cajas: this.currentProducto.cantidad_cajas,
-                    categoria: this.currentProducto.categoria,
-                    marca: this.currentProducto.marca,
-                    punto_reorden: this.currentProducto.punto_reorden,
-                });
-                this.imagePreview = this.currentProducto.foto;
+                        if (!this.currentProducto) return;
+                        console.log(this.currentProducto.categoria)
+
+                        this.titulo = 'Editar producto ' + this.currentProducto.nombre;
+
+                        this.form.setValue({
+                            nombre: this.currentProducto.nombre,
+                            precio_unit: this.currentProducto.precio_unit,
+                            cantidad_cajas: this.currentProducto.cantidad_cajas,
+                            categoria: this.currentProducto.categoria,
+                            marca: this.currentProducto.marca,
+                            punto_reorden: this.currentProducto.punto_reorden,
+                        });
+                        this.imagePreview = this.currentProducto.foto;
+                    }
+                );
             }
         });
     }
