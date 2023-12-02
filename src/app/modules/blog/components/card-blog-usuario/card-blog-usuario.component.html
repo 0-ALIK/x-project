@@ -9,6 +9,6 @@
         <div class="flex align-content-center align-items-center ">
             <p-rating [readonly]="true" [cancel]="false" [(ngModel)]="cliente.valoracion"></p-rating>
         </div>
-        <textarea class="" rows="9" cols="28" pInputTextarea [readOnly]="true" [autoResize]="true">{{cliente.contenido}}</textarea>
+        <textarea rows="9" cols="28" pInputTextarea [readOnly]="true" [autoResize]="true">{{cliente.contenido}}</textarea>
 </section>
-
+<p-paginator [rows]="itemsPerPage" [totalRecords]="clientess.length"  (onPageChange)="onPageChange($event)"></p-paginator>

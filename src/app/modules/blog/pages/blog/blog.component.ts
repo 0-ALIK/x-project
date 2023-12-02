@@ -80,23 +80,15 @@ export class VerBlogComponent{
     });
     this.estadisticasResenas.sort((a, b) => b.stars - a.stars);
   }
-        
-  itemsPerPage: number = 15;
-  currentPage: number = 1; 
-
-  onPageChange(event: any): void {
-    this.currentPage = event.page + 1;
-  }
     
-    agregarOpinion(): void{
-        this.ref = this.dialogService.open(DialogAgregarOpinionComponent, {
-            width: '60%',
-            height: '75%',
-            contentStyle: { overflow: 'auto' },
-            baseZIndex: 10000,
-            maximizable: true
-        });
+  agregarOpinion(): void{
+      this.ref = this.dialogService.open(DialogAgregarOpinionComponent, {
+          width: '60%',
+          height: '75%',
+          contentStyle: { overflow: 'auto' },
+          baseZIndex: 10000,
+          maximizable: true
+      });
 
-    }
-
+  }
 }

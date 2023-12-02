@@ -20,7 +20,7 @@ export class CardBlogUsuarioComponent implements OnInit {
         this.clientess = data.sugerencias;
       });
     }
-    
+
     itemsPerPage = 15;
     firstItemIndex = 0;
 
@@ -33,5 +33,4 @@ export class CardBlogUsuarioComponent implements OnInit {
     onPageChange(event: any) {
       this.firstItemIndex = event.first;
     }
-
 }
