@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Categoria } from 'src/app/interfaces/producto.iterface';
 import { CategoriaService } from 'src/app/services/categoria.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
     selector: 'app-dialog-agregar-categoria',
@@ -10,7 +11,7 @@ import { CategoriaService } from 'src/app/services/categoria.service';
 })
 export class DialogAgregarCategoriaComponent implements OnInit {
 
-    public value: string = '';
+    public value: string | undefined;
 
     public loading: boolean = false;
 
@@ -18,7 +19,8 @@ export class DialogAgregarCategoriaComponent implements OnInit {
 
     public constructor(
         public ref: DynamicDialogRef,
-        private categoriaService: CategoriaService
+        private categoriaService: CategoriaService,
+        private messageService: MessageService
     ) {}
 
     public ngOnInit(): void {
@@ -33,16 +35,44 @@ export class DialogAgregarCategoriaComponent implements OnInit {
         );
     }
 
-
-
     public eliminarCategoria( categoria: Categoria ) {
-        console.log(categoria);
+        if (categoria && categoria.id_categoria) {
+            this.categoriaService.deleteCategoria(categoria.id_categoria).subscribe(
+                response => {
+                    console.log('Marca eliminada con éxito.');
+                    this.categorias = this.categorias?.filter(c => c.id_categoria !== categoria.id_categoria)
+                    this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Categoría eliminada con éxito.' });
+                    this.cerrarDynamicDialog();
+                },
+                error => {
+                    console.error('Error al eliminar la marca.', error);
+                    this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No se pudo eliminar la categoría' });
+                    this.cerrarDynamicDialog();
+                }
+            );
+        }
     }
 
     public agregar(): void {
-        this.loading = true;
-        this.loading = false;
-        this.cerrarDynamicDialog();
+        if (this.value) {
+            this.loading = true;
+
+            const formData: FormData = new FormData();
+            formData.append('nombre', this.value)
+
+            this.categoriaService.guardarCategorias(formData).subscribe(
+                response => {
+                    this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Se ha agregdado una nueva categoría.' });
+                    this.loading = false;
+                    this.cerrarDynamicDialog();
+                },
+                error => {
+                    this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No se pudo agregar la categoría' });
+                    this.loading = false;
+                    this.cerrarDynamicDialog();
+                }
+            );
+        }
     }
 
     public cerrarDynamicDialog( categoria?: any ): void {
