@@ -3,23 +3,20 @@
     <section class="flex flex-row align-content-start justify-content-start gap-2 mb-1">
         <p-dropdown
             [options]="provinciaCliente"
-            placeholder="Provincias"
+            placeholder="Provincias que mas compran"
             optionLabel="nombre"
-            onchange="filtroProvincia()"
-            >
+            onchange="$event"
+            [editable]="true"
+            [showClear]="true">
         </p-dropdown>
 
         <p-dropdown
-            [options]="empresas"
-            placeholder="Empresa"
-            optionLabel="nombre" >
+            [options]="clientesCompras"
+            placeholder="Clientes que mas compran"
+            optionLabel="label"
+            [showClear]="true"
+            (onChange)="selectedClientes($event)">
         </p-dropdown>
-
-        <p-calendar
-            [(ngModel)]="date"
-            [showIcon]="true">
-        </p-calendar>
-
 
     </section>
     <!-- Cards superiores -->
@@ -83,13 +80,7 @@
                     [options]="options1">
                 </p-chart>
             </div>
-            <div class=" border-round h-19rem" [style]="{'background': 'var(--surface-card)'}">
-                <p-chart class="h-10rem"
-                    type="bar"
-                    [data]="data2"
-                    [options]="options1">
-                </p-chart>
-            </div>
+
         </div>
     </section>
 </main>

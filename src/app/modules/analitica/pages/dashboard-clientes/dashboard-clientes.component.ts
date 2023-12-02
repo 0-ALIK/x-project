@@ -6,7 +6,6 @@ import { DashboardService } from './../../services/dashboard.service';
 import { Cliente, Empresa, Usuario } from 'src/app/interfaces/usuario.inteface';
 import { Component, OnInit } from '@angular/core';
 
-
     @Component({
       selector: 'app-dashboard-clientes',
       templateUrl: './dashboard-clientes.component.html',
@@ -18,12 +17,14 @@ import { Component, OnInit } from '@angular/core';
         empresaProvincia: any[] | undefined;
         provinciaFrecuente: any[] = [];
 
-
         clientes: Cliente[] | undefined;
-        provinciaCliente: any[] | undefined;
+        clientesCopy: Cliente[] | undefined;
+        clientesCompras: any[] | undefined;
+
         clientesFrecuentes: any[] = [];
         clientesMesActual: any[] | undefined;
         clientesMesAnterior: any[] | undefined;
+        provinciaCliente: any[] = [];
 
         empresas: Empresa[] | undefined;
 
@@ -44,14 +45,20 @@ import { Component, OnInit } from '@angular/core';
             this.optionsGrafica();
             this.definirProvinciasClientes();
             this.definirProvincias();
+
+            this.clientesCompras = [
+                { label: 'Clientes que más compran', value: 'masCompras' },
+                { label: 'Clientes que menos compran', value: 'menosCompras' }
+             ]
         }
 
         constructor(private dashboardService: DashboardService) {}
 
-         definirClientes(): void {//carga los clientes para eñ card de totalclientes
+        definirClientes(): void {//carga los clientes para eñ card de totalclientes
              this.dashboardService.getClientes().subscribe({
                  next: (clientes) => {
                     this.clientes = clientes;
+                    this.clientesCopy = clientes;
                     const fechaActual = new Date().toISOString().slice(0, 7);
                     this.clientesMesActual = clientes.filter( function(cliente: Cliente) {
                         const fechaCliente = cliente.created_at?.slice(0, 7) ;
@@ -71,9 +78,9 @@ import { Component, OnInit } from '@angular/core';
                      console.error(error);
                  }
                })
-         }
+        }
 
-         definirEmpresas(): void {//carga las empresas para el card de total empresas
+        definirEmpresas(): void {//carga las empresas para el card de total empresas
             this.dashboardService.getEmpresas().subscribe({
                 next: (empresa) => {
                    this.empresas = empresa;
@@ -106,9 +113,7 @@ import { Component, OnInit } from '@angular/core';
                             cliente: pedido?.cliente
                         });
                     })
-                    this.clientesFrecuentes.sort((a, b) => b.frecuencia - a.frecuencia);
                     this.graficaClientesMas();
-                    this.graficaClientesMenos();
                 }
             });
         }
@@ -128,7 +133,7 @@ import { Component, OnInit } from '@angular/core';
 
                     Object.keys(frecuenciaProvincia).forEach((id_provincia) => {
                         const pedido = pedidos.find(pedido => pedido?.direccion?.provincia?.id_provincia === Number(id_provincia));
-                        const nombreProvincia = pedido?.direccion || 'Sin provincia';
+                        const nombreProvincia = pedido?.direccion?.provincia || 'Sin provincia';
 
                         this.provinciaFrecuente.push({
                             frecuencia: frecuenciaProvincia[id_provincia],
@@ -137,7 +142,6 @@ import { Component, OnInit } from '@angular/core';
                     })
                     console.log('el metodo de guardado funciona extraño 322  ' +this.provinciaFrecuente)
                     this.provinciaFrecuente.sort((a, b) => b.frecuencia - a.frecuencia);
-
                     this.graficaSegmentacion();//muestra las provincias y sus compras
                 }
             });
@@ -146,50 +150,45 @@ import { Component, OnInit } from '@angular/core';
         definirProvinciasClientes(): void { //clientes que mas hay en cada provincia
             this.dashboardService.getPedidos().subscribe({
                 next: (pedidos) => {
-
                     if (pedidos.length === 0) return;
 
-                    const frecuenciaProvincia: { [idProvincia: string]: number } = {};
+                    const frecuenciaProvinciaCliente: { [idDireccion: string]: number } = {};
                     pedidos.forEach((pedido) => {
                         if(!pedido?.direccion || !pedido?.direccion?.id_direccion) return;
 
-                        const id_provincia = pedido.direccion.id_direccion;
-                        frecuenciaProvincia[id_provincia] = (frecuenciaProvincia[id_provincia] || 0) + 1;
+                        const id_direccion = pedido.direccion.id_direccion;
+                        frecuenciaProvinciaCliente[id_direccion] = (frecuenciaProvinciaCliente[id_direccion] || 0) + 1;
                     });
 
-                    Object.keys(frecuenciaProvincia).forEach((id_provincia) => {
-                        const pedido = pedidos.find(pedido => pedido?.direccion?.provincia?.id_provincia === Number(id_provincia));
-                        this.provinciaFrecuente.push({
-                            frecuencia: frecuenciaProvincia[id_provincia],
-                            provincia: pedido?.direccion?.provincia
+                    Object.keys(frecuenciaProvinciaCliente).forEach((id_direccion) => {
+                        const pedido = pedidos.find(pedido => pedido?.direccion?.id_direccion === Number(id_direccion));
+                        const nombreProvincia = pedido?.cliente || 'Sin cliente';
+
+                        this.provinciaCliente.push({
+                            frecuencia: frecuenciaProvinciaCliente[id_direccion],
+                            cliente: nombreProvincia
                         });
                     })
+                    console.log('el metodo de guardado funciona extraño 322  ' +this.provinciaFrecuente)
+                    this.provinciaCliente.sort((a, b) => b.frecuencia - a.frecuencia);
 
                     this.graficaSegmentacion();//muestra las provincias y sus compras
                 }
             });
         }
 
-        definirEmpresaProvincias(): void{
-            this.dashboardService.getClientesProvincias().subscribe({
-                next:(pedidos) => {
-                    this.provinciaCliente = pedidos.direcciones.provincia.nombre;
-                    console.log(this.provincia)
-                    this.provinciaCliente = clientes.flatMap(function(cliente) {
-                        return cliente.direcciones?.map((direccion) => {
-                          return {
-                            nombreCliente: cliente.nombre,
-                            nombreProvincia: direccion.provincia?.nombre || 'Sin provincia',
-                          };
-                        }) || [];
-                      });
+        public selectedClientes(event: any): void {
 
-                      console.log('Provincias Cliente' + this.provinciaCliente );
-                },
-                error: (error) => {
-                    console.error(error);
-                }
-            })
+            if(!event.value){
+                this.clientes = this.clientesCopy;
+                return
+            }
+            if (event.value === 'masCompras') {
+                this.clientesFrecuentes.sort((a, b) => b.frecuencia - a.compras);
+              } else if (event.value === 'menosCompras') {
+                this.clientesFrecuentes.sort((a, b) => a.frecuencia - b.frecuencia);
+              }
+
         }
 
         graficaClientesMas(): void{
@@ -197,6 +196,7 @@ import { Component, OnInit } from '@angular/core';
 
             const frecuencias = this.clientesFrecuentes.map( clienteFrecuente => clienteFrecuente.frecuencia);
             const nombres = this.clientesFrecuentes.map( clienteFrecuente => clienteFrecuente.cliente.nombre);
+            console.log('los en la grafica de barras nombres son:' + nombres)
 
             this.data1 = {
                 labels: nombres.slice(0, 3),
@@ -212,38 +212,39 @@ import { Component, OnInit } from '@angular/core';
 
         }
 
-        graficaClientesMenos(): void{
-            const documentStyle = getComputedStyle(document.documentElement);
+        // graficaClientesMenos(): void{
+        //     const documentStyle = getComputedStyle(document.documentElement);
 
-            const frecuencias = this.clientesFrecuentes.map( clienteFrecuente => clienteFrecuente.frecuencia);
-            const nombres = this.clientesFrecuentes.map( clienteFrecuente => clienteFrecuente.cliente.nombre);
+        //     const frecuencias = this.clientesFrecuentes.map( clienteFrecuente => clienteFrecuente.frecuencia);
+        //     const nombres = this.clientesFrecuentes.map( clienteFrecuente => clienteFrecuente.cliente.nombre);
 
-            this.data2 = {
-                labels: nombres.reverse().slice(0,3),
-                datasets: [
-                    {
-                        label: 'Clientes que menos compran',
-                        backgroundColor: documentStyle.getPropertyValue('--pink-500'),
-                        borderColor: documentStyle.getPropertyValue('--pink-400'),
-                        data: frecuencias.reverse().slice(0,3)
-                    }
-                ]
-            }
+        //     this.data2 = {
+        //         labels: nombres.reverse().slice(0,3),
+        //         datasets: [
+        //             {
+        //                 label: 'Clientes que menos compran',
+        //                 backgroundColor: documentStyle.getPropertyValue('--pink-500'),
+        //                 borderColor: documentStyle.getPropertyValue('--pink-400'),
+        //                 data: frecuencias.reverse().slice(0,3)
+        //             }
+        //         ]
+        //     }
 
-        }
+        // }
 
         graficaSegmentacion(): void{
             const documentStyle = getComputedStyle(document.documentElement);
 
-            const nombres = this.provinciaFrecuente?.map(provincia => provincia.direcciones.provincia.nombre);
-            console.log('los nombes son:  '+nombres)
-            // const frecuencias = this.provinciaFrecuente?.map(provincia => provincia.provincia.frecuencia);
+            const nombres = this.provinciaFrecuente?.map(provinciaFrecuente => provinciaFrecuente.provincia.nombre);
+            console.log('los en la grafica nombres son:  '+nombres)
+            const frecuencias = this.provinciaFrecuente?.map(provinciaFrecuente => provinciaFrecuente.frecuencia);
+            console.log('los en la grafica frecuencias son:  '+frecuencias)
 
             this.data3 = {
                 labels: nombres,
                 datasets: [
                     {
-                        data: [1,2,34,4],
+                        data: frecuencias,
                         backgroundColor: [documentStyle.getPropertyValue('--cyan-300'), documentStyle.getPropertyValue('--cyan-600'), documentStyle.getPropertyValue('--cyan-800')],
                         hoverBackgroundColor: [documentStyle.getPropertyValue('--cyan-200'), documentStyle.getPropertyValue('--blue-400'), documentStyle.getPropertyValue('--blue-500')]
                     }
@@ -251,14 +252,16 @@ import { Component, OnInit } from '@angular/core';
             };
         }
 
-        graficaProvincias(): void{
+        graficaProvinciasClientes(): void{
             const documentStyle = getComputedStyle(document.documentElement);
 
+            const frecuencias = this.provinciaCliente.map( frecuenciaProvinciaCliente => frecuenciaProvinciaCliente.frecuencia);
+            const nombres = this.provinciaCliente.map( frecuenciaProvinciaCliente => frecuenciaProvinciaCliente.cliente.nombre);
             this.data4 = {
-                labels: this.provincia,
+                labels: nombres,
                 datasets: [
                     {
-                        data: [540, 325, 702],
+                        data:frecuencias,
                         backgroundColor: [documentStyle.getPropertyValue('--pink-300'), documentStyle.getPropertyValue('--pink-600'), documentStyle.getPropertyValue('--pink-800')],
                         hoverBackgroundColor: [documentStyle.getPropertyValue('--pink-200'), documentStyle.getPropertyValue('--pink-400'), documentStyle.getPropertyValue('--pink-500')]
                     }
@@ -317,5 +320,4 @@ import { Component, OnInit } from '@angular/core';
                 }
             };
         }
-
     }
