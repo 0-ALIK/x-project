@@ -72,7 +72,7 @@ export class AgregarMarcaComponent implements OnInit {
 
             if (this.foto) {
                 formData.append('logo', this.foto)
-                console.log(formData)
+                console.log(this.foto)
             }
 
             if (this.esEdicion()) {
