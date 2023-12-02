@@ -28,6 +28,7 @@ export interface Cliente extends Usuario {
     estado?: string;
     empresa?: Empresa;
     direcciones?: Direccion[]
+    created_at?: string;
 }
 
 export interface Empresa extends Usuario {

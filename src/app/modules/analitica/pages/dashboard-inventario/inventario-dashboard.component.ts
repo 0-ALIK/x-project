@@ -9,27 +9,23 @@ import { DashboardService } from '../../services/dashboard.service';
 })
 export class DashboardInventarioComponent implements OnInit {
 
-    public productos: Producto[] | undefined;
-
+    public productosMasComprados: any[] = [];
+    public productos: any;
     public optionsBarras: any;
-
     public optionsPie: any;
-
     public stockData: any;
-
     public segmentacionData: any;
-
     public marcas: Marca[] | undefined;
-
     public categorias: Categoria[] | undefined;
 
+
+    data: any;
 
     public ngOnInit(): void {
         this.defineOptions();
         this.obtenerMarcasCategoria();
         this.definirProductosMasComprados();
-        this.graficaSegmentacion();
-        this.graficaProductos();
+        this.graficaSegmentacion();     
     }
 
     constructor(
@@ -43,48 +39,95 @@ export class DashboardInventarioComponent implements OnInit {
         }, 2000);
     }
 
-    definirProductosMasComprados(): void{
+    definirProductosMasComprados(): void {
         this.dashboardService.getProductosMasComprados().subscribe({
-            next:(Producto) => {
-                this.filtroCategoria();
-                this.filtroMarca();
-            },
-            error: (error) => {
-                console.error(error);
+          next: (productoData: any) => {
+            console.log('Respuesta de la API:', productoData);
+      
+            const productos = productoData.data as Producto[];
+      
+            if (!productos || productos.length === 0) {
+              console.error('No hay productos o la estructura es incorrecta');
+              return;
             }
-        })
-    }
-
+      
+            const frecuenciaProductos: { [idProducto: string]: number } = {};
+            productos.forEach((producto: any) => {
+              if (!producto?.categoria_id || !producto?.marca_id) {
+                console.error('Producto sin categoría o marca', producto);
+                return;
+              }
+      
+              const key = `${producto.categoria_id}-${producto.marca_id}`;
+              frecuenciaProductos[key] = (frecuenciaProductos[key] || 0) + 1;
+            });
+      
+            const productosMasComprados = Object.keys(frecuenciaProductos).map((key) => {
+              const [categoriaId, marcaId] = key.split('-');
+              return {
+                frecuencia: frecuenciaProductos[key],
+                producto: { categoria_id: Number(categoriaId), marca_id: Number(marcaId)},
+              };
+            });
+      
+            productosMasComprados.sort((a, b) => b.frecuencia - a.frecuencia);
+            console.log('Productos más comprados:', productosMasComprados);
+            this.graficaProductos();
+          },
+          error: (error) => {
+            console.error('Error al obtener productos más comprados', error);
+          }
+        });
+      }
+      
 
     filtroCategoria(): void {
-        this.categorias = this.productos?.map(function(producto){
+        /*this.categorias = this.productosMasComprados?.map(function(producto){
             return producto.categoria as Categoria;
         });
-        console.log(this.categorias);
+        console.log(this.categorias);*/
     }
 
 
     filtroMarca(): void {
-        this.marcas = this.productos?.map(function(producto){
+       /* this.marcas = this.productosMasComprados?.map(function(producto){
             return producto.marca as Marca;
         });
-        console.log(this.marcas);
+        console.log(this.marcas);*/
     }
-
-        graficaProductos(): void {
-        this.stockData = {
-            labels: ['Producto 1', 'Producto 2', 'Producto 3', 'Producto 4', 'Producto 5'],
+    
+    graficaProductos(): void {
+        const documentStyle = getComputedStyle(document.documentElement);
+      
+        if (Array.isArray(this.productosMasComprados) && this.productosMasComprados.length > 0) {
+          console.log('Datos disponibles:', this.productosMasComprados);
+      
+          const labels = this.productosMasComprados.map((producto: any) => `${producto.producto.categoria_id} - ${producto.producto.marca_id}`);
+          console.log('Etiquetas:', labels);
+      
+          const data = this.productosMasComprados.map((producto: any) => producto.frecuencia);
+          console.log('Datos:', data);
+      
+          this.data = {
+            labels: labels,
             datasets: [
-                {
-                    label: 'Productos más comprados',
-                    data: [540, 325, 702, 620, 442],
-                    backgroundColor: ['rgba(6, 182, 212, 0.2)', 'rgba(6, 182, 212, 0.2)', 'rgba(6, 182, 212, 0.2)', 'rgba(6, 182, 212, 0.2)', 'rgba(6, 182, 212, 0.2)'],
-                    borderColor: ['rgb(53, 196, 220)', 'rgb(53, 196, 220)', 'rgb(53, 196, 220)', 'rgb(53, 196, 220)', 'rgb(53, 196, 220)'],
-                    borderWidth: 2
-                }
-            ]
-        };
-    }
+              {
+                label: 'Productos más comprados',
+                backgroundColor: Array.from({ length: this.productosMasComprados.length }, () => documentStyle.getPropertyValue('--blue-600')),
+                borderColor: Array.from({ length: this.productosMasComprados.length }, () => documentStyle.getPropertyValue('--indigo-500')),
+                data: data,
+                borderWidth: 2,
+              },
+            ],
+          };
+        } else {
+          console.error('Error: No hay datos para la gráfica');
+        }
+      }
+     
+
+
+
 
     graficaSegmentacion(): void{
         const documentStyle = getComputedStyle(document.documentElement);

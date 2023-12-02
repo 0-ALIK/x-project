@@ -4,20 +4,20 @@
         <p-dropdown
             [options]="provinciaCliente"
             placeholder="Provincias"
-            optionLabel="provincia">
+            optionLabel="nombre"
+            >
         </p-dropdown>
 
         <p-dropdown
-            [options]="fecha"
-            placeholder="Fecha"
-            optionLabel="nombre" >
-        </p-dropdown>
-
-        <p-dropdown
-            [options]="usuario"
+            [options]="empresas"
             placeholder="Empresa"
             optionLabel="nombre" >
         </p-dropdown>
+
+        <p-calendar
+            [(ngModel)]="date"
+            [showIcon]="true"></p-calendar>
+
 
     </section>
     <!-- Cards superiores -->
@@ -26,24 +26,23 @@
             <alik-dashboard-card
                 titulo="Clientes Totales"
                 icon="pi-users"
-                [numero]="45"
-                tipo="numero"
-                [valorAnterior]="85" >
+                [numero]="clientes?.length || 0"
+                tipo="numero" >
             </alik-dashboard-card>
 
             <alik-dashboard-card
                 titulo="Empresas Totales"
                 icon="pi-building"
-                [numero]="58"
-                tipo="numero"
-                [valorAnterior]="49" >
+                [numero]="empresas?.length || 0"
+                tipo="numero" >
             </alik-dashboard-card>
 
             <alik-dashboard-card
                 titulo="Crecimiento"
-                icon="pi-chart-line" [numero]="54"
+                icon="pi-chart-line"
+                [numero]="clientesMesActual?.length || 0"
                 tipo="numero"
-                [valorAnterior]="24" >
+                [valorAnterior]="clientesMesAnterior?.length || 0" >
             </alik-dashboard-card>
 
             <div class=" border-round w-full flex flex-column justify-content-center align-items-center" [style]="{'background': 'var(--surface-card)'}">
