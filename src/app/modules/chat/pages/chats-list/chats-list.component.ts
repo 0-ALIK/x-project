@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ChatService } from '../../chat.service';  
+
 
 @Component({
   selector: 'app-chats-list',
@@ -7,15 +9,14 @@ import { Component } from '@angular/core';
 })
 export class ChatsListComponent {
 
-    public reclamos: any[] = [
-        {
-            id_reclamo: 23
-        },
-        {
-            id_reclamo: 4
-        },
-        {
-            id_reclamo: 53
-        }
-    ];
+    reclamos: any[] = [];
+
+    constructor(private chatService: ChatService){}
+
+    ngOnInit(): void {
+        this.chatService.getAllChats().subscribe( data => {
+            this.reclamos = data;
+        });
+    }
+
 }
