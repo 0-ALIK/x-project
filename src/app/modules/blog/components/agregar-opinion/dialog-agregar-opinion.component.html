@@ -2,23 +2,21 @@
     <section class="h-auto w-auto border-round flex flex-column justify-content-center align-items-center p-2 m-2 gap-2 bg-primary align-content-center align-self-center  ">
     <h1>Danos tu valoración</h1>
     <div class=" flex justify-content-center" >
-        <p-rating [(ngModel)]="value" [stars]="5" class="flex flex-row justify-content-center" >
+        <p-rating [(ngModel)]="value" [stars]="5" [cancel]="false" class="flex flex-row justify-content-center align-items-center" >
         <ng-template pTemplate="onicon">
             <img src="https://primefaces.org/cdn/primeng/images/demo/rating/custom-icon-active.png" width="50px" height="50px" />
         </ng-template>
         <ng-template pTemplate="officon">
             <img src="https://primefaces.org/cdn/primeng/images/demo/rating/custom-icon.png" width="50px" height="50px" />
         </ng-template>
-    </p-rating>
+        </p-rating>
     </div>
 
-    <!-- <p-rating [cancel]="false"  width="250px" height="250px" > </p-rating> -->
 </section>
 
 <section class=" border-round flex flex-column p-2 m-2 gap-2 justify-content-center align-items-center  ">
     <h2 >Dinos lo que piensas de nostros </h2>
-    <textarea rows="10" cols="50" pInputTextarea  [autoResize]="true" placeholder="Escriba su reseña" [(ngModel)]="opinion" > </textarea>
-    <p-button label="Enviar reseña" [disabled]="!opinion" (onClick)="enviarOpinion()" [loading]="loading" icon="" size="large" ></p-button>
+    <textarea rows="10" cols="50" pInputTextarea  [autoResize]="true" placeholder="Escriba su reseña" [(ngModel)]="contenido" > </textarea>
+    <p-button label="Enviar reseña" [disabled]="!contenido" (onClick)="enviarOpinion()" [loading]="loading" icon="" size="large" ></p-button>
 </section>
 </div>
-

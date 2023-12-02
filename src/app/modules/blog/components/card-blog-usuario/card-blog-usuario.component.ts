@@ -1,5 +1,6 @@
 import { Cliente, Usuario } from './../../../../interfaces/usuario.inteface';
 import { Component, Input, OnInit } from '@angular/core';
+import {SugerenciasService} from 'src/app/services/sugerencias.service' ;
 
 @Component({
   selector: 'app-card-blog-usuario',
@@ -9,18 +10,27 @@ import { Component, Input, OnInit } from '@angular/core';
 export class CardBlogUsuarioComponent implements OnInit {
     @Input('clientes')
     public clientes: Usuario[] | undefined;
-    public clientess: any[] | undefined
+    public clientess: any[] = [];
     estrellas: number = 3
+
+    constructor(private sugerenciaService: SugerenciasService) {}
+  
     ngOnInit(): void {
-        this.cargarClientes();
+      this.sugerenciaService.getSugerencias().subscribe(data => {
+        this.clientess = data.sugerencias;
+      });
     }
 
-    cargarClientes(): any[] | undefined{
-        this.clientess = [
-            {nombre: 'Anita', apellido: 'Valencia', foto: 'img', fecha: '8/8/2023', mensaje: 'Título de la Aplicación: "Travel Explorer Travel Explorer es una aplicación innovadora diseñada para satisfacer las necesidades de los amantes de los viajes. Con una interfaz intuitiva y amigable, la apli', estrellas: 5 }
-        ];
+    itemsPerPage = 15;
+    firstItemIndex = 0;
 
-        return this.clientess;
+    getClientesForCurrentPage(): any[] {
+      const startIndex = this.firstItemIndex;
+      const endIndex = startIndex + this.itemsPerPage;
+      return this.clientess.slice(startIndex, endIndex);
     }
 
+    onPageChange(event: any) {
+      this.firstItemIndex = event.first;
+    }
 }
