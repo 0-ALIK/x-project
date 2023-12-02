@@ -37,6 +37,8 @@ export class ApiClienteService {
         });
         }
 
+
+
         public eliminarCliente(idCliente:any ){
             let header =  new HttpHeaders()
                 .set('Type-content', 'aplication/json')

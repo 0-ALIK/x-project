@@ -49,7 +49,27 @@ export class ApiEmpresaService {
         return this.Http.delete(this.urlApi+idEmpresa, {
             headers: header
         });
-        }
+    }
+
+    public eliminarSolicitud(idSolicitud:any){
+        let header =  new HttpHeaders()
+        .set('Type-content', 'aplication/json')
+        .set('authorization', 'Bearer '+ this.token)
+
+    return this.Http.delete(this.urlApi+idSolicitud, {
+        headers: header
+    });
+    }
+
+    public aceptarSolicitud(idSolicitud:any){
+        let header = new HttpHeaders()
+        .set('Type-content', 'aplication/json')
+        .set('authorization', 'Bearer '+ this.token)
+
+        return this.Http.delete(this.urlApi+idSolicitud, {
+            headers: header
+        });
+    }
 
     public editarDatosEmpresa(idEmpresa:any, nombre: any, ruc:any, telefono:any, correo:any, foto:any): Observable<any> {
 
@@ -64,6 +84,8 @@ export class ApiEmpresaService {
 
         return this.Http.put<any>('http://127.0.0.1:8000/api/empresas/' +idEmpresa, {headers, params});
     }
+
+
 
 
 }
