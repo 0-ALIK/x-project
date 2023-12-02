@@ -1,8 +1,9 @@
-<section class="section">
+<section class="section" >
     <article class="article a1">
         <div class="image" *ngIf="cliente">
             <p-image
                 src="{{cliente.foto}}"
+                [(ngModel)] = "fotoCliente"
                 alt="Perfil"
                 width="300"
                 [preview]="true">
@@ -12,6 +13,7 @@
         <div class="image" *ngIf="empresa">
             <p-image
                 src="{{empresa.foto}}"
+                [(ngModel)] = "fotoEmpresa"
                 alt="Perfil"
                 width="300"
                 [preview]="true">
@@ -35,24 +37,24 @@
         <form>
             <div class="input">
                 <label htmlFor="nombre">Nombre</label>
-                <input pInputText id="nombre" aria-describedby="username-help" value="{{empresa.nombre}}">
+                <input pInputText id="nombre" name="nombre" [(ngModel)]="nombre" aria-describedby="username-help" >
             </div>
             <div class="input">
                 <label htmlFor="apellido">RUC</label>
-                <input pInputText id="apellido" aria-describedby="username-help" value="{{empresa.ruc}}">
+                <input pInputText id="ruc" name="ruc" [(ngModel)]="ruc" aria-describedby="username-help">
             </div>
             <div class="input">
                 <label htmlFor="telefono">Telefono</label>
-                <input pInputText id="telefono" aria-describedby="username-help" value="{{empresa.telefono}}">
+                <input pInputText id="telefono" name="telefono" [(ngModel)]="telefono" aria-describedby="username-help">
             </div>
             <div class="input">
                 <label htmlFor="cedula">Razon Social</label>
-                <input pInputText id="cedula" aria-describedby="username-help" value="{{empresa.razon_social}}">
+                <input pInputText id="cedula" name="cedula" [(ngModel)]="razon_social" aria-describedby="username-help">
             </div>
             <div class="flex flex-wrap gap-3 mb-8">
 
             </div>
-            <p-button label="Actualizar información"></p-button>
+            <p-button label="Actualizar información" (onClick)="enviarDatosEmpresa(empresa.id)"></p-button>
         </form>
     </article>
 
@@ -60,31 +62,31 @@
         <form>
             <div class="input">
                 <label htmlFor="nombre">Nombre</label>
-                <input pInputText id="nombre" aria-describedby="username-help" value="{{cliente.nombre}}">
+                <input pInputText name="nombre" [(ngModel)]="nombre" aria-describedby="username-help">
             </div>
             <div class="input">
                 <label htmlFor="apellido">Apellido</label>
-                <input pInputText id="apellido" aria-describedby="username-help" value="{{cliente.apellido}}" >
+                <input pInputText name="apellido" [(ngModel)]="apellido" aria-describedby="username-help" >
             </div>
             <div class="input">
                 <label htmlFor="telefono">Telefono</label>
-                <input pInputText id="telefono" aria-describedby="username-help" value="{{cliente.telefono}}">
+                <input pInputText name="telefono" [(ngModel)]="telefono" aria-describedby="username-help">
             </div>
             <div class="input">
                 <label htmlFor="cedula">Cédula</label>
-                <input pInputText id="cedula" aria-describedby="username-help"  value="{{cliente.cedula}}">
+                <input pInputText name="cedula" [(ngModel)]="cedula" aria-describedby="username-help">
             </div>
             <div class="flex flex-wrap gap-3 mb-8">
                 <div class="flex align-items-center">
-                    <p-radioButton name="genero" value="F" [(ngModel)]="genero" inputId="genero2"></p-radioButton>
+                    <p-radioButton name="genero" value="F"  inputId="genero2"></p-radioButton>
                     <label for="genero2" class="ml-2">Mujer</label>
                 </div>
                 <div class="flex align-items-center">
-                    <p-radioButton name="genero" value="M" [(ngModel)]="genero" inputId="genero1"></p-radioButton>
+                    <p-radioButton name="genero" value="M" inputId="genero1"></p-radioButton>
                     <label for="genero1" class="ml-2">Hombre</label>
                 </div>
             </div>
-            <p-button label="Actualizar información"></p-button>
+            <p-button label="Actualizar información" (onClick)="enviarDatosCliente(cliente.idCliente)"></p-button>
         </form>
     </article>
 </section>

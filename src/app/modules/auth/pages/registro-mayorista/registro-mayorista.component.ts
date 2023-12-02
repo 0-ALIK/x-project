@@ -44,6 +44,7 @@ export class RegistroMayoristaComponent {
         const formData = new FormData();
 
         formData.append('nombre', this.form.get('nombre')?.value || '');
+        //formData.append('_method', '');
         formData.append('correo', this.form.get('correo')?.value || '');
         formData.append('pass', this.form.get('pass')?.value || '');
         formData.append('ruc', this.form.get('ruc')?.value || '');

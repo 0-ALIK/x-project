@@ -81,7 +81,9 @@ export class EmpresasTableComponent {
 
     public onRowSelect(event: any): void {
         const { id_empresa } = event.data;
+        const { nombre_empresa} = event.data;
         this.router.navigate(['/app/clientes/perfil/empresa', id_empresa]);
+        this.router.navigate(['/app/clientes/perfil/empresa', nombre_empresa]);
     }
 
     showEliminarEmpresa(id_empresa: any, nombre_empresa: any): void {
@@ -96,11 +98,12 @@ export class EmpresasTableComponent {
 
         this.ref.onClose.subscribe((result) => {
             if (result) {
-              // Codigo para hacer el delete
-              console.log('Empresa Eliminada exitosamente')
+              this.apiService.eliminarEmpresa(id_empresa).subscribe((resp:any)=>{
+                console.log('Se elimino correctamente')
+            })
 
             } else {
-              this.messageService.add({ severity: 'error', summary: 'Operación Fallida', detail: 'Registro no eliminado' });
+              console.log('No se elimino ningun cliente ');
             }
           });
         }

@@ -51,7 +51,7 @@ export class PerfilEmpresaComponent {
         console.log(this.activeItem.label);
 
         this.activatedRoute.params.subscribe({
-            next: ({id}) => {
+            next: ({id, nombre_empresa}) => {
 
                 this.apiService.getDireccionEmpresa(id).subscribe((resp:any)=>{
                     this.direcciones = resp;
@@ -59,7 +59,12 @@ export class PerfilEmpresaComponent {
 
                 this.empresaService.getDatosEmpresa(id).subscribe((resp:any)=>{
                     this.empresa = resp[0];
-                    console.log(resp)
+                    nombre_empresa = this.empresa?.nombre
+                }),
+
+                this.empresaService.getColaboradores(id,nombre_empresa ).subscribe((resp:any)=>{
+                    console.log(nombre_empresa)
+                    this.arregloColaboradores = resp;
                 })
             }
         });
