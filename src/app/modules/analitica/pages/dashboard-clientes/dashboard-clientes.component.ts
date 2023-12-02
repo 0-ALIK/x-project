@@ -15,6 +15,7 @@ import { Component, OnInit } from '@angular/core';
     export class DashboardClientesComponent implements OnInit {
 
         provincia: any[] | undefined;
+        empresaProvincia: any[] | undefined;
         provinciaFrecuente: any[] = [];
 
 
@@ -39,14 +40,15 @@ import { Component, OnInit } from '@angular/core';
         ngOnInit() {
             this.definirClientes();
             this.definirEmpresas();
-            this.definirProvinciasPedidos();
-            this.definirPedidos();
+            this.definirClientesCompras();
             this.optionsGrafica();
+            this.definirProvinciasClientes();
+            this.definirProvincias();
         }
 
         constructor(private dashboardService: DashboardService) {}
 
-         definirClientes(): void {
+         definirClientes(): void {//carga los clientes para eñ card de totalclientes
              this.dashboardService.getClientes().subscribe({
                  next: (clientes) => {
                     this.clientes = clientes;
@@ -71,7 +73,7 @@ import { Component, OnInit } from '@angular/core';
                })
          }
 
-         definirEmpresas(): void {
+         definirEmpresas(): void {//carga las empresas para el card de total empresas
             this.dashboardService.getEmpresas().subscribe({
                 next: (empresa) => {
                    this.empresas = empresa;
@@ -83,39 +85,11 @@ import { Component, OnInit } from '@angular/core';
               })
         }
 
-        definirProvinciasPedidos(): void {
+        definirClientesCompras(): void {//define clientes que mas y menos compran
             this.dashboardService.getPedidos().subscribe({
                 next: (pedidos) => {
 
                     if (pedidos.length === 0) return;
-
-                    const frecuenciaProvincia: { [idProvincia: string]: number } = {};
-                    pedidos.forEach((pedido) => {
-                        if(!pedido?.cliente || !pedido?.cliente?.id_cliente) return;
-
-                        const id_provincia = pedido.cliente.id_cliente;
-                        frecuenciaProvincia[id_provincia] = (frecuenciaProvincia[id_provincia] || 0) + 1;
-                    });
-
-                    Object.keys(frecuenciaProvincia).forEach((id_provincia) => {
-                        const pedido = pedidos.find(pedido => pedido?.direccion?.provincia?.id_provincia === Number(id_provincia));
-                        this.provinciaFrecuente.push({
-                            frecuencia: frecuenciaProvincia[id_provincia],
-                            provincia: pedido?.direccion?.provincia
-                        });
-                    })//lo adapte a provincia a lo loko, no se como se hace nada pipipipipipipi
-
-                    this.graficaSegmentacion();
-                }
-            });
-
-        }
-
-        definirPedidos(): void {
-            this.dashboardService.getPedidos().subscribe({
-                next: (provincias) => {
-
-                    if (provincias.length === 0) return;
 
                     const frecuenciaClientes: { [idCliente: string]: number } = {};
                     pedidos.forEach((pedido) => {
@@ -132,19 +106,74 @@ import { Component, OnInit } from '@angular/core';
                             cliente: pedido?.cliente
                         });
                     })
-
                     this.clientesFrecuentes.sort((a, b) => b.frecuencia - a.frecuencia);
                     this.graficaClientesMas();
                     this.graficaClientesMenos();
                 }
             });
+        }
 
+        definirProvincias(): void { //provincias que mas compran o que compras hace cada provincia mas o menos
+            this.dashboardService.getPedidos().subscribe({
+                next: (pedidos) => {
+                    if (pedidos.length === 0) return;
+
+                    const frecuenciaProvincia: { [idProvincia: string]: number } = {};
+                    pedidos.forEach((pedido) => {
+                        if(!pedido?.direccion || !pedido?.direccion?.id_direccion) return;
+
+                        const id_provincia = pedido.direccion.id_direccion;
+                        frecuenciaProvincia[id_provincia] = (frecuenciaProvincia[id_provincia] || 0) + 1;
+                    });
+
+                    Object.keys(frecuenciaProvincia).forEach((id_provincia) => {
+                        const pedido = pedidos.find(pedido => pedido?.direccion?.provincia?.id_provincia === Number(id_provincia));
+                        const nombreProvincia = pedido?.direccion || 'Sin provincia';
+
+                        this.provinciaFrecuente.push({
+                            frecuencia: frecuenciaProvincia[id_provincia],
+                            provincia: nombreProvincia
+                        });
+                    })
+                    console.log('el metodo de guardado funciona extraño 322  ' +this.provinciaFrecuente)
+                    this.provinciaFrecuente.sort((a, b) => b.frecuencia - a.frecuencia);
+
+                    this.graficaSegmentacion();//muestra las provincias y sus compras
+                }
+            });
+        }
+
+        definirProvinciasClientes(): void { //clientes que mas hay en cada provincia
+            this.dashboardService.getPedidos().subscribe({
+                next: (pedidos) => {
+
+                    if (pedidos.length === 0) return;
+
+                    const frecuenciaProvincia: { [idProvincia: string]: number } = {};
+                    pedidos.forEach((pedido) => {
+                        if(!pedido?.direccion || !pedido?.direccion?.id_direccion) return;
+
+                        const id_provincia = pedido.direccion.id_direccion;
+                        frecuenciaProvincia[id_provincia] = (frecuenciaProvincia[id_provincia] || 0) + 1;
+                    });
+
+                    Object.keys(frecuenciaProvincia).forEach((id_provincia) => {
+                        const pedido = pedidos.find(pedido => pedido?.direccion?.provincia?.id_provincia === Number(id_provincia));
+                        this.provinciaFrecuente.push({
+                            frecuencia: frecuenciaProvincia[id_provincia],
+                            provincia: pedido?.direccion?.provincia
+                        });
+                    })
+
+                    this.graficaSegmentacion();//muestra las provincias y sus compras
+                }
+            });
         }
 
         definirEmpresaProvincias(): void{
             this.dashboardService.getClientesProvincias().subscribe({
                 next:(pedidos) => {
-                    this.provincia = pedidos.direcciones.provincia.nombre;
+                    this.provinciaCliente = pedidos.direcciones.provincia.nombre;
                     console.log(this.provincia)
                     this.provinciaCliente = clientes.flatMap(function(cliente) {
                         return cliente.direcciones?.map((direccion) => {
@@ -206,14 +235,15 @@ import { Component, OnInit } from '@angular/core';
         graficaSegmentacion(): void{
             const documentStyle = getComputedStyle(document.documentElement);
 
-            const nombres = this.provinciaFrecuente?.map(provincia => provincia.nombre);
-            const frecuencias = this.provinciaFrecuente?.map(provincia => provincia.provincia.frecuencia);
+            const nombres = this.provinciaFrecuente?.map(provincia => provincia.direcciones.provincia.nombre);
+            console.log('los nombes son:  '+nombres)
+            // const frecuencias = this.provinciaFrecuente?.map(provincia => provincia.provincia.frecuencia);
 
             this.data3 = {
                 labels: nombres,
                 datasets: [
                     {
-                        data: frecuencias,
+                        data: [1,2,34,4],
                         backgroundColor: [documentStyle.getPropertyValue('--cyan-300'), documentStyle.getPropertyValue('--cyan-600'), documentStyle.getPropertyValue('--cyan-800')],
                         hoverBackgroundColor: [documentStyle.getPropertyValue('--cyan-200'), documentStyle.getPropertyValue('--blue-400'), documentStyle.getPropertyValue('--blue-500')]
                     }

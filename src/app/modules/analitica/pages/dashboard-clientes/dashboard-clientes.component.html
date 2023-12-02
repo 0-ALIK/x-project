@@ -5,6 +5,7 @@
             [options]="provinciaCliente"
             placeholder="Provincias"
             optionLabel="nombre"
+            onchange="filtroProvincia()"
             >
         </p-dropdown>
 
@@ -16,7 +17,8 @@
 
         <p-calendar
             [(ngModel)]="date"
-            [showIcon]="true"></p-calendar>
+            [showIcon]="true">
+        </p-calendar>
 
 
     </section>
