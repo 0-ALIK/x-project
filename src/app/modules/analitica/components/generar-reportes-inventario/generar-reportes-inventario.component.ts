@@ -43,14 +43,9 @@ export class GenerarReportesInventarioComponent implements OnInit {
     public precio_max: string | undefined;
 
     public nameInforme: string | undefined;
-    public marcas: Marca[] | undefined;
-    public selectedMarcas: Marca | undefined;
 
     public tipos: Tipo[] | undefined;
     public selectedTipos: Tipo | undefined;
-
-    public categorias: Categoria[] | undefined;
-    public selectedCategorias: Categoria | undefined;
 
     public formatos: Formato[] | undefined;
     public selectedFormato: Formato | undefined;
@@ -61,9 +56,41 @@ export class GenerarReportesInventarioComponent implements OnInit {
     public puntoReorden: PuntoReorden[] | undefined;
     public selectedPuntoReorden: PuntoReorden | undefined;
 
+    public categorias: string[] | undefined = [];
+    public selectedCategorias: string = '';
+
+    public marcas: string[] | undefined = [];
+    public selectedMarcas: string = '';
+
     public loading: boolean = false;
 
     public ngOnInit(): void {
+      this.analitica.getCategorias().subscribe(
+        (datos) => {
+          const registros = datos;
+          if (registros && Array.isArray(registros)) {
+            this.categorias = registros.map((registro) => registro.nombre);
+          }
+        },
+  
+        (error) => {
+          console.error('Error al obtener datos del backend', error);
+        }
+      )
+
+      this.analitica.getMarcas().subscribe(
+        (datos) => {
+          const registros = datos;
+          if (registros && Array.isArray(registros)) {
+            this.marcas = registros.map((registro) => registro.nombre);
+          }
+        },
+  
+        (error) => {
+          console.error('Error al obtener datos del backend', error);
+        }
+      )
+
         this.formatos = [
             { nameFormato: '.xls', codeFormato: 'xls' },
             { nameFormato: '.xlsx', codeFormato: 'xlsx' },
@@ -77,20 +104,10 @@ export class GenerarReportesInventarioComponent implements OnInit {
           {namePuntoReorden: 'En la raya', codePuntoReorden: 'En%20la%20raya'}
       ];
 
-
-        this.marcas = [
-            { nameMarca: 'Coca Cola', codeMarca: 'Coca%20Cola' },
-            { nameMarca: 'Pepsi', codeMarca: 'Pepsi' },
-            { nameMarca: 'Fanta', codeMarca: 'Fanta' },
-        ];
-        this.categorias = [
-            { nameCategoria: 'Sodas', codeCategoria: 'Sodas' },
-            { nameCategoria: 'Suplementos', codeCategoria: 'Suplementos' },
-        ];
     }
 
     public GenerarReporte() {
-      this.analitica.getInventario(this.selectedCategorias?.codeCategoria, this.selectedMarcas?.nameMarca, this.precio_max, this.precio_min, this.selectedPuntoReorden?.namePuntoReorden)
+      this.analitica.getInventario(this.selectedCategorias, this.selectedMarcas, this.precio_max, this.precio_min, this.selectedPuntoReorden?.namePuntoReorden)
       .subscribe(respuesta => {
       const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(respuesta);
       const wb: XLSX.WorkBook = XLSX.utils.book_new();

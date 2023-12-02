@@ -9,11 +9,6 @@ import * as XLSX from 'xlsx';
     codeFormato: string
   }
 
-  interface Producto{
-    nameProducto: string,
-    codeProducto: string
-  }
-
   interface Genero{
     nameGenero: string,
     codeGenero: string
@@ -27,10 +22,6 @@ import * as XLSX from 'xlsx';
   interface Cliente{
     nameClientes: string,
     codeClientes: string
-  }
-  interface Provincia{
-    nameProvincia: string,
-    codeProvincia: string
   }
 
 @Component({
@@ -46,8 +37,8 @@ export class GenerarReportesVentasComponent implements OnInit {
 
     dates: Date[] | undefined;
 
-    public estadoPedidos: Pedido[] | undefined;
-    public selectedEstadoPedidos: Pedido | undefined;
+    public estadoPedido: string[] = [];
+    public selectedEstadoPedido: string = '';
 
     public formatos: Formato[] | undefined;
     public selectedFormato: Formato | undefined;
@@ -55,14 +46,14 @@ export class GenerarReportesVentasComponent implements OnInit {
     public generos: Genero[] | undefined;
     public selectedGenero: Genero | undefined;
 
-    public clientes: Cliente[] | undefined;
-    public selectedClientes: Cliente | undefined;
+    public clientes: string[] = [];
+    public selectedCliente: string = '';
 
-    public provincias: Provincia[] | undefined;
-    public selectedProvincia: Provincia | undefined;
+    public productos: string[] = [];
+    public selectedProducto: string = '';
 
-    public productos: Producto[] | undefined;
-    public selectedProducto: Producto | undefined;
+    public provincias: string[] = [];
+    public selectedProvincia: string = '';
 
     public nameInforme: string | undefined;
 
@@ -70,23 +61,58 @@ export class GenerarReportesVentasComponent implements OnInit {
 
     public ngOnInit(): void {
 
-      this.provincias = [
-        { nameProvincia: 'Bocas del Toro', codeProvincia: 'Bocas%20del%20Toro' },
-        { nameProvincia: 'Coclé', codeProvincia: 'Coclé' },
-        { nameProvincia: 'Colón', codeProvincia: 'Colón' },
-        { nameProvincia: 'Chiriquí', codeProvincia: 'Chiriquí' },
-        { nameProvincia: 'Darién', codeProvincia: 'Darién' },
-        { nameProvincia: 'Herrera', codeProvincia: 'Herrera' },
-        { nameProvincia: 'Los Santos', codeProvincia: 'Los%20Santos' },
-        { nameProvincia: 'Panamá', codeProvincia: 'Panamá' },
-        { nameProvincia: 'Veraguas', codeProvincia: 'Veraguas' },
-        { nameProvincia: 'Panamá Oeste', codeProvincia: 'Panamá%20Oeste' },
-        { nameProvincia: 'Emberá-Wounaan', codeProvincia: 'Emberá-Wounaan' },
-        { nameProvincia: 'Guna Yala', codeProvincia: 'Guna%20Yala' },
-        { nameProvincia: 'Ngäbe-Buglé', codeProvincia: 'Ngäbe-Buglé' }
-      ];
+        this.analitica.getProvincias().subscribe(
+          (datos) => {
+            const registros = datos;
+            if (registros && Array.isArray(registros)) {
+              this.provincias = registros.map((registro) => registro.nombre);
+            }
+          },
+    
+          (error) => {
+            console.error('Error al obtener datos del backend', error);
+          }
+        )
 
-          this.formatos = [
+        this.analitica.getProductos().subscribe(
+          (datos) => {
+            const registros = datos;
+            if (registros && Array.isArray(registros)) {
+              this.productos = registros.map((registro) => registro.nombre);
+            }
+          },
+    
+          (error) => {
+            console.error('Error al obtener datos del backend', error);
+          }
+        )
+
+        this.analitica.getCliente(undefined,undefined,undefined, undefined).subscribe(
+          (datos) => {
+            const registros = datos;
+            if (registros && Array.isArray(registros)) {
+              this.clientes = registros.map((registro) => (registro.Nombre + ' ' + registro.Apellido));
+            }
+          },
+    
+          (error) => {
+            console.error('Error al obtener datos del backend', error);
+          }
+        )
+
+        this.analitica.getEstados().subscribe(
+          (datos) => {
+            const registros = datos;
+            if (registros && Array.isArray(registros)) {
+              this.estadoPedido = registros.map((registro) => registro.nombre);
+            }
+          },
+    
+          (error) => {
+            console.error('Error al obtener datos del backend', error);
+          }
+        )
+       this.formatos = [
             { nameFormato: '.xls', codeFormato: 'xls' },
             { nameFormato: '.xlsx', codeFormato: 'xlsx' },
             { nameFormato: '.xlsm', codeFormato: 'xlsm' },
@@ -98,31 +124,13 @@ export class GenerarReportesVentasComponent implements OnInit {
             { nameGenero: 'F', codeGenero: 'G' },
         ];
 
-        this.estadoPedidos = [
-            { nameEstadoPedidos: 'En Progreso', codeEstadoPedidos: 'En%20Progreso' },
-            { nameEstadoPedidos: 'Entregado', codeEstadoPedidos: 'Entregado' },
-        ];
-
-        this.clientes = [
-            { nameClientes: 'Juancho Perez', codeClientes: 'Juancho%20Perez'},
-            { nameClientes: 'Flavio Sánchez', codeClientes: 'Flavio%20Sánchez'},
-            { nameClientes: 'Maria del Carmen', codeClientes: 'Maria%20del%20Carmen'},
-            { nameClientes: 'Ameth Cebrían', codeClientes: 'Ameth%20Cebrían'},
-            { nameClientes: 'José Liao', codeClientes: 'José%20Liao'},
-        ];
-
-        this.productos = [
-          { nameProducto: 'Coca Cola 1 litro', codeProducto: 'Coca%20Cola%201%20litro'},
-          { nameProducto: 'Coca Cola 2 Litros', codeProducto: 'Coca%20Cola%202%20Litros'},
-          { nameProducto: 'Sodas chicas', codeProducto: 'Sodas%20chicas'},
-        ];
     }
 
 
 
     
     public GenerarReporte() {
-      this.analitica.getPedidos(this.selectedClientes?.codeClientes, this.selectedGenero?.codeGenero, this.selectedEstadoPedidos?.codeEstadoPedidos, this.selectedProvincia?.codeProvincia, this.selectedProducto?.codeProducto)
+      this.analitica.getPedidos(this.selectedCliente, this.selectedGenero?.codeGenero, this.selectedEstadoPedido, this.selectedProvincia, this.selectedProducto)
       .subscribe(respuesta => {
       const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(respuesta);
       const wb: XLSX.WorkBook = XLSX.utils.book_new();

@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { empresas } from 'src/app/interfaces/data';
 import { Empresa } from 'src/app/interfaces/usuario.inteface';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { GenerarReportesEmpresasComponent } from 'src/app/modules/analitica/components/generar-reportes-empresas/generar-reportes-empresas.component';
 
 @Component({
   selector: 'app-empresas-table',
@@ -19,10 +21,14 @@ export class EmpresasTableComponent {
 
     rows = 10;
 
+    public ref: DynamicDialogRef | undefined;
+
     public arregloEmpresas: Empresa[] = empresas
 
     public constructor (
-        private router: Router
+        private router: Router,
+        public dialogService: DialogService,
+
     ) {}
 
     public ngOnInit(): void {
@@ -68,5 +74,12 @@ export class EmpresasTableComponent {
     public onRowSelect(event: any): void {
         const { id_empresa } = event.data;
         this.router.navigate(['/app/clientes/perfil/empresa', id_empresa]);
+    }
+
+    public showGenerarReporte(): void {
+        this.ref = this.dialogService.open(GenerarReportesEmpresasComponent, {
+            header: 'Generar Reporte',
+            height: '70%'
+        });
     }
 }

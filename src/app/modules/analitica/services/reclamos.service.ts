@@ -30,7 +30,7 @@ console.log(url);
   return respuesta;
 }
 
-public getCliente(genero:string|undefined, producto: string|undefined, empresa: string|undefined): Observable<any>{
+public getCliente(genero:string|undefined, estado: string|undefined, empresa: string|undefined, provincia: string|undefined): Observable<any>{
 var url = `http://127.0.0.1:8000/api/analitica/reporte/cliente?`;
 
 if(genero != undefined){
@@ -39,8 +39,11 @@ if(genero != undefined){
 if(empresa != undefined){
   url+= `empresa=${empresa}&`;
 }
-if(producto != undefined){
-  url+= `producto=${producto}&`;
+if(estado != undefined){
+  url+= `estado=${estado}&`;
+}
+if(provincia != undefined){
+  url+= `provincia=${provincia}&`;
 }
 console.log(url);
   const respuesta = this.http.get<any>(url);
@@ -71,16 +74,16 @@ console.log(url);
 
 public getReclamos(categoria:string|undefined, cliente:string|undefined, estado:string|undefined, prioridad: string|undefined): Observable<any>{
 var url = `http://127.0.0.1:8000/api/analitica/reporte/reclamo?`;
-if(categoria != undefined){
+if(categoria != ''){
   url+= `categoria=${categoria}&`;
 }
-if(cliente != undefined){
+if(cliente != ''){
   url+= `usuario=${cliente}&`;
 }
-if(estado != undefined){
+if(estado != ''){
   url+= `estado=${estado}&`;
 }
-if(prioridad != undefined){
+if(prioridad != ''){
   url+= `prioridad=${prioridad}&`;
 }
 console.log(url);
@@ -92,5 +95,40 @@ public getEmpresas(): Observable<any> {
 
   return this.http.get<any>('http://127.0.0.1:8000/api/empresas');
 }
+
+public getAllEmpresas(): Observable<any> {
+  return this.http.get<any>('http://127.0.0.1:8000/api/analitica/reporte/empresa/');
+
+}
+public getCategorias(): Observable<any> {
+  return this.http.get<any>('http://127.0.0.1:8000/api/analitica/categoria/');
+}
+public getMarcas(): Observable<any> {
+  return this.http.get<any>('http://127.0.0.1:8000/api/analitica/marca/');
+}
+
+public getProvincias(): Observable<any> {
+return this.http.get<any>('http://127.0.0.1:8000/api/analitica/provincias/');
+}
+
+  public getProductos(): Observable<any> {
+    return this.http.get<any>('http://127.0.0.1:8000/api/analitica/producto/');
+  }
+
+  public getEstados(): Observable<any> {
+    return this.http.get<any>('http://127.0.0.1:8000/api/analitica/estado/');
+  }
+
+  public getEstadoTickets(): Observable<any> {
+    return this.http.get<any>('http://127.0.0.1:8000/api/analitica/estadoTickets/');
+  }
+
+  public getCategoriaTickets(): Observable<any> {
+    return this.http.get<any>('http://127.0.0.1:8000/api/analitica/categoriaTickets/');
+  }
+
+  public getPrioridadTickets(): Observable<any> {
+    return this.http.get<any>('http://127.0.0.1:8000/api/analitica/prioridadTickets/');
+  }
 }
 

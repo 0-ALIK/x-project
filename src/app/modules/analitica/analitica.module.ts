@@ -26,12 +26,9 @@ import { DashboardCardComponent } from './components/dashboard-card/dashboard-ca
 import { DashboardService } from './services/dashboard.service';
 import { GenerarReportesClientesComponent } from './components/generar-reportes-clientes/generar-reportes-clientes.component';
 import { GenerarReportesInventarioComponent } from './components/generar-reportes-inventario/generar-reportes-inventario.component';
-import { VerReportesClientesComponent } from './pages/ver-reportes-clientes/ver-reportes-clientes.component';
-import { VerReportesInventarioComponent } from './pages/ver-reportes-inventario/ver-reportes-inventario.component';
 import { GenerarReportesVentasComponent } from './components/generar-reportes-ventas/generar-reportes-ventas.component';
 import { GenerarReportesTicketsComponent } from './components/generar-reportes-tickets/generar-reportes-tickets.component';
-import { VerReportesTicketsComponent } from './pages/ver-reportes-tickets/ver-reportes-tickets.component';
-import { VerReportesVentasComponent } from './pages/ver-reportes-ventas/ver-reportes-ventas.component';
+import { GenerarReportesEmpresasComponent } from './components/generar-reportes-empresas/generar-reportes-empresas.component';
 
 
 
@@ -46,12 +43,9 @@ import { VerReportesVentasComponent } from './pages/ver-reportes-ventas/ver-repo
         DashboardInventarioComponent,
         GenerarReportesClientesComponent,
         GenerarReportesInventarioComponent,
-        VerReportesClientesComponent,
-        VerReportesInventarioComponent,
         GenerarReportesVentasComponent,
         GenerarReportesTicketsComponent,
-        VerReportesTicketsComponent,
-        VerReportesVentasComponent,
+        GenerarReportesEmpresasComponent,
 
     ],
     imports: [
@@ -73,9 +67,6 @@ import { VerReportesVentasComponent } from './pages/ver-reportes-ventas/ver-repo
         MultiSelectModule
     ],
     exports: [
-
-
-
     ],
     providers: [
         DashboardService

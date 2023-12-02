@@ -22,15 +22,7 @@
     <div>
         <div>
             <span class="p-float-label segment">
-                <p-dropdown [ngModelOptions]="{standalone: true}" [options]="generos" [(ngModel)]="selectedGenero" optionLabel="nameGenero" name=" generos" placeholder="Elije un Género"></p-dropdown>
-                <label for="float-label">Genero</label>
-            </span>
-            <span class="p-float-label segment">
-                <p-dropdown [ngModelOptions]="{standalone: true}" [options]="empresas"  [(ngModel)]="selectedEmpresa" name=" empresas" placeholder="Elije una Empresa"></p-dropdown>
-                <label for="float-label">Empresa</label>
-            </span>
-            <span class="p-float-label segment">
-                <p-dropdown [ngModelOptions]="{standalone: true}" [options]="estadosCliente"  [(ngModel)]="selectedEstadoCliente" name=" estados" placeholder="Elije una Empresa"></p-dropdown>
+                <p-dropdown [ngModelOptions]="{standalone: true}" [options]="estadosEmpresa"  [(ngModel)]="selectedEstadoEmpresa" name=" estados" placeholder="Elije una Empresa"></p-dropdown>
                 <label for="float-label">Estado</label>
             </span>
             <span class="p-float-label segment">

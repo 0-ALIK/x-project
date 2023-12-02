@@ -5,7 +5,7 @@ import { reclamos } from 'src/app/interfaces/data';
 import { Reclamo } from 'src/app/interfaces/raclamo.interface';
 import { TagsColorsService } from '../../services/tags-colors.service';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { VerReportesTicketsComponent  } from 'src/app/modules/analitica/pages/ver-reportes-tickets/ver-reportes-tickets.component';
+import { GenerarReportesTicketsComponent  } from 'src/app/modules/analitica/components/generar-reportes-tickets/generar-reportes-tickets.component';
 
 @Component({
   selector: 'app-tickets-table',
@@ -29,7 +29,7 @@ export class TicketsTableComponent {
     ) { }
 
     public showGenerarReporte(): void {
-        this.ref = this.dialogService.open(VerReportesTicketsComponent, { header: 'Generar Reporte' });
+        this.ref = this.dialogService.open(GenerarReportesTicketsComponent, { header: 'Generar Reporte' });
     }
 
     public onSeleccion( evento: any ): void {

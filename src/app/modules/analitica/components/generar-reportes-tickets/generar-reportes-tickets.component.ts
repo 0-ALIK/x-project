@@ -41,21 +41,73 @@ export class GenerarReportesTicketsComponent {
     public formatos: Formato[] | undefined;
     public selectedFormato: Formato | undefined;
 
-    public categorias: Categoria[] | undefined;
-    public selectedCategoria: Categoria | undefined;
+    public categorias: string[] = []
+    public selectedCategoria: string = '';
 
-    public estados: Estado[] | undefined;
-    public selectedEstado: Estado | undefined;
+    public estados: string[] = [];
+    public selectedEstado: string = '';
 
-    public prioridades: Prioridad[] | undefined;
-    public selectedPrioridad: Prioridad | undefined;
+    public prioridades: string[] = [];
+    public selectedPrioridad: string = '';
 
-    public clientes: Cliente[] | undefined;
-    public selectedCliente: Cliente | undefined;
+    public clientes: string[] = [];
+    public selectedCliente: string = '';
 
     public loading: boolean = false;
 
     public ngOnInit(): void {
+
+      this.analitica.getEstadoTickets().subscribe(
+        (datos) => {
+          const registros = datos;
+          if (registros && Array.isArray(registros)) {
+            this.estados = registros.map((registro) => registro.estado);
+          }
+        },
+  
+        (error) => {
+          console.error('Error al obtener datos del backend', error);
+        }
+      )
+        
+      this.analitica.getCategoriaTickets().subscribe(
+        (datos) => {
+          const registros = datos;
+          if (registros && Array.isArray(registros)) {
+            this.categorias = registros.map((registro) => registro.categoria);
+          }
+        },
+  
+        (error) => {
+          console.error('Error al obtener datos del backend', error);
+        }
+      )
+
+      this.analitica.getCliente(undefined,undefined,undefined, undefined).subscribe(
+        (datos) => {
+          const registros = datos;
+          if (registros && Array.isArray(registros)) {
+            this.clientes = registros.map((registro) => (registro.Nombre + ' ' + registro.Apellido));
+          }
+        },
+  
+        (error) => {
+          console.error('Error al obtener datos del backend', error);
+        }
+      )
+
+      this.analitica.getPrioridadTickets().subscribe(
+        (datos) => {
+          const registros = datos;
+          if (registros && Array.isArray(registros)) {
+            this.prioridades = registros.map((registro) => registro.prioridad);
+          }
+        },
+  
+        (error) => {
+          console.error('Error al obtener datos del backend', error);
+        }
+      )
         this.formatos = [
             { nameFormato: '.xls', codeFormato: 'xls' },
             { nameFormato: '.xlsx', codeFormato: 'xlsx' },
@@ -63,26 +115,10 @@ export class GenerarReportesTicketsComponent {
             { nameFormato: '.csv', codeFormato: 'csv' }
         ];
         
-        this.categorias = [
-            { nameCategoria: 'Sodas', codeCategoria: 'Sodas' },
-            { nameCategoria: 'Suplementos', codeCategoria: 'Suplementos' },
-        ];
-
-        this.estados = [
-          {nameEstado: 'Ejemplo', codeEstado: 'Ejemplo'}
-        ]
-
-        this.prioridades = [
-          {namePrioridad: 'Ejemplo', codePrioridad: 'Prioridad'}
-        ]
-
-        this.clientes = [
-          {nameCliente: 'fulano', codeCliente: 'fulano'}
-        ]
     }
 
     public GenerarReporte() {
-      this.analitica.getReclamos(this.selectedCategoria?.nameCategoria, this.selectedCliente?.nameCliente, this.selectedEstado?.nameEstado, this.selectedPrioridad?.namePrioridad)
+      this.analitica.getReclamos(this.selectedCategoria, this.selectedCliente, this.selectedEstado, this.selectedPrioridad)
       .subscribe(respuesta => {
       const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(respuesta);
       const wb: XLSX.WorkBook = XLSX.utils.book_new();

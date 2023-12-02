@@ -20,20 +20,20 @@
     <h3>Precio</h3>
     <div class="header segment d-flex gap-5 ">
         <span class="p-float-label">
-            <p-inputNumber inputId="currency-us" [showButtons]="true" mode="currency" currency="USD" [(ngModel)]="precio_min" name="precio_min"></p-inputNumber>
+            <p-inputNumber inputId="currency-us" [showButtons]="true" mode="currency" currency="USD" [(ngModel)]="precio_min" name="precio_min" [min]="0"></p-inputNumber>
             <label htmlFor="number-input">Elije una precio minimo</label>
         </span>
         <span class="p-float-label">
-            <p-inputNumber inputId="currency-us" [showButtons]="true" mode="currency" currency="USD" [(ngModel)]="precio_max" name="precio_max"></p-inputNumber>
+            <p-inputNumber inputId="currency-us" [showButtons]="true" mode="currency" currency="USD" [(ngModel)]="precio_max" name="precio_max" [min]="0"></p-inputNumber>
             <label htmlFor="number-input">Elije una precio maximo</label>
         </span> 
     </div>                          
     <span class="p-float-label segment">
-        <p-dropdown [ngModelOptions]="{standalone: true}" [options]="categorias" [(ngModel)]="selectedCategorias"optionLabel="nameCategoria" name="nameCategoria" placeholder="Elije una categoria"></p-dropdown>
+        <p-dropdown [ngModelOptions]="{standalone: true}" [options]="categorias" [(ngModel)]="selectedCategorias" name="nameCategoria" placeholder="Elije una categoria"></p-dropdown>
         <label for="float-label">Categoria</label>
     </span>
     <span class="p-float-label segment">
-        <p-dropdown [ngModelOptions]="{standalone: true}" [options]="marcas" [(ngModel)]="selectedMarcas" optionLabel="nameMarca" name="nameMarca" placeholder="Elije una marca"></p-dropdown>
+        <p-dropdown [ngModelOptions]="{standalone: true}" [options]="marcas" [(ngModel)]="selectedMarcas"  name="nameMarca" placeholder="Elije una marca"></p-dropdown>
         <label for="float-label">Marca</label>
     </span>
 

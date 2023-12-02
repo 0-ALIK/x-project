@@ -3,7 +3,6 @@ import {ReclamosService} from '../../services/reclamos.service'
 import { DashboardService } from '../../services/dashboard.service';
 import * as XLSX from 'xlsx';
 
-
 interface Formato{
   nameFormato: string,
   codeFormato: string
@@ -34,19 +33,19 @@ interface Provincia{
 }
 
 @Component({
-  selector: 'app-generar-reportes-clientes',
-  templateUrl: './generar-reportes-clientes.component.html',
-  styleUrls: ['./generar-reportes-clientes.component.css']
+  selector: 'app-generar-reportes-empresas',
+  templateUrl: './generar-reportes-empresas.component.html',
+  styleUrls: ['./generar-reportes-empresas.component.css']
 })
-export class GenerarReportesClientesComponent{
+export class GenerarReportesEmpresasComponent {
   constructor(private analitica: ReclamosService, private cliente:DashboardService) { }
 
 
 
   dates: Date[] | undefined;
 
-  public estadosCliente: string[] = [];
-  public selectedEstadoCliente: string = '';
+  public estadosEmpresa: string[] = [];
+  public selectedEstadoEmpresa: string = '';
 
   public formatos: Formato[] | undefined;
   public selectedFormato: Formato | undefined;
@@ -57,9 +56,7 @@ export class GenerarReportesClientesComponent{
   public provincias: string[] = [];
   public selectedProvincia: string = '';
 
-  public productos: Producto[] | undefined;
-  public selectedProducto: Producto | undefined;
-
+  
   public nameInforme: string | undefined;
   
   public empresas: string[] | undefined = [];
@@ -67,25 +64,13 @@ export class GenerarReportesClientesComponent{
   public selectedEmpresa: string = '';
   public ngOnInit(): void {
 
-    this.analitica.getEmpresas().subscribe(
+    this.analitica.getAllEmpresas().subscribe(
       (datos) => {
-        const registros = datos.data; // Ajusta según la propiedad real en tu objeto
+        const registros = datos; // Ajusta según la propiedad real en tu objeto
+        console.log(registros)
         if (registros && Array.isArray(registros)) {
           // Mapea los nombres de las empresas
-          this.empresas = registros.map((registro) => registro.nombre);
-        }
-      },
-
-      (error) => {
-        console.error('Error al obtener datos del backend', error);
-      }
-    )
-
-    this.analitica.getCliente(undefined,undefined,undefined, undefined).subscribe(
-      (datos) => {
-        const registros = datos;
-        if (registros && Array.isArray(registros)) {
-          this.estadosCliente = registros.map((registro) => registro.Estado);
+          this.estadosEmpresa = registros.map((registro) => registro.Estado);
         }
       },
 
@@ -119,18 +104,13 @@ export class GenerarReportesClientesComponent{
           { nameGenero: 'F', codeGenero: 'F' },
       ];
 
-      this.productos = [
-        { nameProducto: 'Coca Cola 1 litro', codeProducto: 'Coca%20Cola%201%20litro'},
-        { nameProducto: 'Coca Cola 2 Litros', codeProducto: 'Coca%20Cola%202%20Litros'},
-        { nameProducto: 'Sodas chicas', codeProducto: 'Sodas%20chicas'},
-      ];
   }
 
 
 
   
   public GenerarReporte() {
-    this.analitica.getCliente(this.selectedGenero?.codeGenero, this.selectedEstadoCliente, this.selectedEmpresa, this.selectedProvincia)
+    this.analitica.getCliente(this.selectedGenero?.codeGenero, this.selectedEstadoEmpresa, this.selectedEmpresa, this.selectedProvincia)
     .subscribe(respuesta => {
     const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(respuesta);
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
@@ -153,4 +133,3 @@ export class GenerarReportesClientesComponent{
         }, 2000);
     }
 }
-
