@@ -1,7 +1,7 @@
 
 <div class="flex align-items-center gap-2">
     <h1 class="text-3xl">Pedido con id: id</h1>
-    <p-tag [value]="pedido?.estado?.estado"></p-tag>
+    <p-tag [value]="pedido?.estado?.nombre"></p-tag>
 </div>
 
 
@@ -41,11 +41,11 @@
     <div class="w-full">
         <p-accordion [activeIndex]="0">
             <p-accordionTab header="Productos">
-                <app-productos-pedidos [importeDebido]="importeDebido" [pedidoProducto]="pedido?.pedido_producto ||   []" [pagos]="pedido?.pagos" ></app-productos-pedidos>
+                <app-productos-pedidos [importeDebido]="importeDebido" [pedidoProducto]="pedido?.pedido_productos ||   []" [pagos]="pedido?.pago" ></app-productos-pedidos>
             </p-accordionTab>
 
             <p-accordionTab header="Pagos">
-                <app-pagos-list [importeDebido]="importeDebido" [pagos]="pedido?.pagos"></app-pagos-list>
+                <app-pagos-list [importeDebido]="importeDebido" [pagos]="pedido?.pago"></app-pagos-list>
             </p-accordionTab>
         </p-accordion>
     </div>

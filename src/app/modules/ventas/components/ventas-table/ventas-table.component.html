@@ -37,7 +37,7 @@
             <th>
                 <div class="flex align-items-center">
                     Estado
-                    <p-columnFilter field="estado.estado" display="menu"></p-columnFilter>
+                    <p-columnFilter field="estado.nombre" display="menu"></p-columnFilter>
                 </div>
             </th>
             <th>
@@ -69,7 +69,7 @@
             </td>
 
             <td>
-                <p-tag [value]="pedido.estado.estado"></p-tag>
+                <p-tag [value]="pedido.estado.nombre"></p-tag>
             </td>
 
             <td>
@@ -83,15 +83,15 @@
             </td>
 
             <td>
-                {{ importesCalc.calcularImporte( pedido.pedido_producto ) | currency:'USD':'symbol':'1.2-2' }}
+                {{ importesCalc.calcularImporte( pedido.pedido_productos || [] ) | currency:'USD':'symbol':'1.2-2' }}
             </td>
 
             <td>
-                {{ importesCalc.calcularImportePagado( pedido.pagos ) | currency:'USD':'symbol':'1.2-2' }}
+                {{ importesCalc.calcularImportePagado( pedido.pago || [] ) | currency:'USD':'symbol':'1.2-2' }}
             </td>
 
             <td>
-                {{ importesCalc.calcularImporteDebido( pedido.pedido_producto, pedido.pagos ) | currency:'USD':'symbol':'1.2-2' }}
+                {{ importesCalc.calcularImporteDebido( pedido.pedido_productos || [], pedido.pago || [] ) | currency:'USD':'symbol':'1.2-2' }}
             </td>
 
             <td>

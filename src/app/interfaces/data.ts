@@ -317,9 +317,9 @@ export const clientes: Cliente[] = [
 ];
 
 export const pedidoEstados: PedidoEstado[] = [
-    {id_estado_pedido: 1, estado: 'proceso'},
-    {id_estado_pedido: 2, estado: 'enviado'},
-    {id_estado_pedido: 3, estado: 'entregado'},
+    {id_estado_pedido: 1, nombre: 'proceso'},
+    {id_estado_pedido: 2, nombre: 'enviado'},
+    {id_estado_pedido: 3, nombre: 'entregado'},
 ];
 
 export const formasPago: FormaPago[] = [
@@ -333,7 +333,7 @@ export const pedidos: Pedido[] = [
         id_pedido: 1,
         cliente: clientes[0],
         fecha: new Date(),
-        pagos: [
+        pago: [
             {
                 id_pago: 1,
                 fecha: new Date(),
@@ -349,7 +349,7 @@ export const pedidos: Pedido[] = [
         ],
         estado: pedidoEstados[0],
         direccion: direcciones[2],
-        pedido_producto: [
+        pedido_productos: [
             { id_pedido_producto: 1, cantidad: 4, producto: productos[0] },
             { id_pedido_producto: 2, cantidad: 2, producto: productos[1] },
         ],
@@ -358,7 +358,7 @@ export const pedidos: Pedido[] = [
         id_pedido: 2,
         cliente: clientes[1],
         fecha: new Date(),
-        pagos: [
+        pago: [
             {
                 id_pago: 1,
                 fecha: new Date(),
@@ -374,7 +374,7 @@ export const pedidos: Pedido[] = [
         ],
         estado: pedidoEstados[2],
         direccion: direcciones[0],
-        pedido_producto: [
+        pedido_productos: [
             { id_pedido_producto: 1, cantidad: 2, producto: productos[1] },
             { id_pedido_producto: 2, cantidad: 5, producto: productos[2] },
         ]

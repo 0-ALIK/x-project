@@ -1,25 +1,47 @@
+<p-toast></p-toast>
+
 <div class="background-image">
     <div class="formulario">
-        <form>
+        <form [formGroup]="form">
             <h1>Iniciar Sesión</h1>
 
             <div>
                 <label htmlFor="correo" class="div-label">Correo</label>
-                <input type="text" id="correo" pInputText class="w-full">
+                <input
+                    class="w-full"
+                    formControlName="correo"
+                    type="text"
+                    id="correo"
+                    pInputText>
             </div>
 
             <div>
                 <label htmlFor="pass" class="div-label">Contraseña</label>
-                <input type="password" id="pass" pInputText class="w-full">
+                <input
+                    class="w-full"
+                    formControlName="pass"
+                    type="password"
+                    id="pass"
+                    pInputText>
             </div>
 
             <div class="recordar-usuario">
-                <p-checkbox value="New York" inputId="ny"></p-checkbox>
+                <p-checkbox
+                    formControlName="recordar"
+                    value="r"
+                    inputId="ny">
+                </p-checkbox>
                 <label for="ny">Recordar usuario</label>
             </div>
 
             <div class="button">
-                <p-button styleClass="w-full" label="Iniciar sesión"></p-button>
+                <p-button
+                    (onClick)="enviarDatos()"
+                    styleClass="w-full"
+                    label="Iniciar sesión"
+                    [loading]="loading"
+                    [disabled]="!form.valid">
+                </p-button>
             </div>
 
             <div class="sin-cuenta">

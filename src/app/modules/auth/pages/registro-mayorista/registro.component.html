@@ -1,35 +1,81 @@
+<p-toast></p-toast>
+
 <div class="background-image">
     <div class="formulario">
-        <form>
+        <form [formGroup]="form">
             <h1>Registro de solicitud</h1>
+
+            <p-fileUpload
+                [showUploadButton]="false"
+                [showCancelButton]="false"
+                (onSelect)="selectFile( $event )"
+                (onRemove)="documento = undefined;"
+                [multiple]="false"
+                accept=".pdf"
+                [maxFileSize]="1000000">
+            </p-fileUpload>
 
             <div>
                 <label htmlFor="nombre" class="div-label">Nombre</label>
-                <input type="text" id="nombre" pInputText class="w-full">
+                <input
+                    class="w-full"
+                    formControlName="nombre"
+                    type="text"
+                    id="nombre"
+                    pInputText>
             </div>
 
             <div>
                 <label htmlFor="correo" class="div-label">Correo</label>
-                <input type="text" id="correo" pInputText class="w-full">
+                <input
+                    formControlName="correo"
+                    type="text"
+                    id="correo"
+                    pInputText class="w-full">
             </div>
 
             <div>
                 <label htmlFor="pass" class="div-label">Contraseña</label>
-                <input type="password" id="pass" pInputText class="w-full">
+                <input
+                    formControlName="pass"
+                    type="password"
+                    id="pass"
+                    pInputText class="w-full">
+            </div>
+
+            <div>
+                <label htmlFor="passConfim" class="div-label">Confirmar contraseña</label>
+                <input
+                    formControlName="confirmPass"
+                    type="password"
+                    id="passConfim"
+                    pInputText class="w-full">
             </div>
 
             <div>
                 <label htmlFor="ruc" class="div-label">Ruc</label>
-                <input type="text" id="ruc" pInputText class="w-full">
+                <input
+                    formControlName="ruc"
+                    type="text"
+                    id="ruc"
+                    pInputText class="w-full">
             </div>
 
             <div>
-                <label htmlFor="razon" class="div-label">Razón social</label>
-                <input type="text" id="razon" pInputText class="w-full">
+                <label htmlFor="tel" class="div-label">Telefono</label>
+                <input
+                    formControlName="telefono"
+                    type="tel"
+                    id="tel"
+                    pInputText class="w-full">
             </div>
 
             <div class="button">
-                <p-button styleClass="w-full" label="Enviar datos"></p-button>
+                <p-button
+                    styleClass="w-full" label="Enviar datos"
+                    [disabled]="!form.valid || !documento"
+                    [loading]="loading"
+                    (onClick)="enviarDatos()"></p-button>
             </div>
 
         </form>
