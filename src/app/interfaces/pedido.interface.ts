@@ -44,3 +44,8 @@ export interface Compra {
     cantidad?: number;
     producto?: Producto;
 }
+
+export interface CarritoItem {
+    producto_id: number
+    cantidad: number
+}

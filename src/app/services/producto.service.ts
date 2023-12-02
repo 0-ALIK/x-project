@@ -26,4 +26,8 @@ export class ProductoService {
 
 
     //eliminar producto
+
+    public getAllProductos(): Observable<Producto[]> {
+        return this.http.get<Producto[]>(this.apiUrl + '/productos');
+    }
 }

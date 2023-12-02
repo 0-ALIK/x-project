@@ -28,6 +28,8 @@ import { CardModule } from 'primeng/card';
 import { CardCarritoComprasComponent } from './components/card-carrito-compras/card-carrito-compras.component';
 import { ImageModule } from 'primeng/image';
 import { CarritoPageComponent } from './pages/carrito-page.component';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { MessagesModule } from 'primeng/messages';
 
 @NgModule({
     declarations: [
@@ -59,7 +61,9 @@ import { CarritoPageComponent } from './pages/carrito-page.component';
         DropdownModule,
         TicketCardComponent,
         CardModule,
-        ImageModule
+        ImageModule,
+        SharedModule,
+        MessagesModule
     ],
     providers: [ImportesCalcService, MessageService, DialogService]
 })
