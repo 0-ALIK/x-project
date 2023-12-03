@@ -3,7 +3,6 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ConfirmationService, MessageService, ConfirmEventType } from 'primeng/api'
 import { Categoria, Marca, Producto } from 'src/app/interfaces/producto.iterface';
 import { Router } from '@angular/router';
-import { categorias, marcas, productos } from 'src/app/interfaces/data';
 import { ReporteInventarioComponent } from 'src/app/modules/analitica/components/reporte-inventario.component';
 import { InventarioService } from 'src/app/services/inventario.service';
 
@@ -19,9 +18,9 @@ export class TableInventarioComponent implements OnInit {
 
     public selectedProducto: Producto | undefined;
 
-    public categorias: Categoria[] = categorias;
+    public categorias: Categoria[] | undefined;
 
-    public marcas: Marca[] = marcas;
+    public marcas: Marca[] | undefined;
 
     public productos: Producto[] | undefined;
 
@@ -40,7 +39,7 @@ export class TableInventarioComponent implements OnInit {
                 console.log(this.productos)
             },
             (error) => {
-                console.error('Error al obtener los datos del inventario', error);
+                console.log('Error al obtener los datos del inventario', error);
             }
         );
     }

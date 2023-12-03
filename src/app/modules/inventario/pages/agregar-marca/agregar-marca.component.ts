@@ -73,12 +73,7 @@ export class AgregarMarcaComponent implements OnInit {
             } else {
 
                 if (this.currentMarca?.logo) {
-                    //aqui va cuando no se selecciona una foto
-                    //tienes que convertir la misma foto en archivo
-                    //para cuando llegue al back lo interprete que es un archivo
-                    // const file = new File(this.currentMarca?.logo);
-
-                    // formData.append('logo', file);
+                    this.obtenerArchivoDesdeURL(this.currentMarca?.logo);
                 }
             }
 
@@ -115,6 +110,27 @@ export class AgregarMarcaComponent implements OnInit {
         }
     }
 
+    async obtenerArchivoDesdeURL(url: string): Promise<void> {
+        try {
+            // Descargar el archivo desde la URL
+            const response = await fetch(url);
+            const blob = await response.blob();
+
+            // Crear un objeto File a partir del blob
+            const nombreArchivo = this.obtenerNombreDeArchivoDesdeURL(url);
+            this.foto = new File([blob], nombreArchivo);
+        } catch (error) {
+            console.error('Error al obtener el archivo:', error);
+            this.foto = undefined;
+        }
+    }
+
+    obtenerNombreDeArchivoDesdeURL(url: string): string {
+        // Obtiene el nombre del archivo de la URL
+        const partesUrl = url.split('/');
+        return partesUrl[partesUrl.length - 1];
+    }
+
     public selectFile(event: UploadEvent): void {
         this.foto = event.currentFiles[0]
         this.imagePreview = URL.createObjectURL( this.foto );
@@ -139,6 +155,9 @@ export class AgregarMarcaComponent implements OnInit {
                             nombre: this.currentMarca.nombre,
                             descripcion: this.currentMarca.descripcion
                         });
+                        if (this.currentMarca.logo) {
+                            this.obtenerArchivoDesdeURL(this.currentMarca.logo);
+                        }
                         this.imagePreview = this.currentMarca.logo;
                     }
                 );

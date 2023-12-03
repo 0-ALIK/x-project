@@ -90,28 +90,58 @@ export class AgregarProductoComponent implements OnInit {
     }
 
     public enviarFormulario(): void {
-        if (this.form.valid) {
-            const producto: Producto = {
-                nombre: this.form.get('nombre')?.value,
-                precio_unit: this.form.get('precio_unit')?.value,
-                cantidad_cajas: this.form.get('cantidad_cajas')?.value,
-                categoria: this.form.get('categoria')?.value,
-                marca: this.form.get('marca')?.value,
-                punto_reorden: this.form.get('punto_reorden')?.value,
-                foto: this.foto ? this.foto.name : '', // Ajusta esto según tu modelo de datos
-            };
+        this.estaCargando = true;
 
-            this.productoService.guardarProducto(producto).subscribe(
-                (response) => {
-                    // Manejar la respuesta del servicio
-                    console.log('Producto guardado con éxito:', response);
-                    // Puedes redirigir o hacer otras acciones después de guardar
-                },
-                (error) => {
-                    console.error('Error al guardar el producto:', error);
-                    // Manejar el error, mostrar mensajes, etc.
+        if (this.form.valid) {
+            const formData: FormData = new FormData()
+            formData.append('nombre', this.form.get('nombre')?.value || '')
+            formData.append('precio_unit', this.form.get('precio_unit')?.value || '')
+            formData.append('cantidad_cajas', this.form.get('cantidad_cajas')?.value || '')
+            formData.append('categoria', this.form.get('categorias')?.value)
+            formData.append('marca', this.form.get('marcas')?.value)
+            formData.append('punto_reorden', this.form.get('descripcion')?.value || '')
+
+            console.log('categoria :', formData.get('categoria'))
+
+            if (this.foto) {
+                formData.append('logo', this.foto)
+            } else {
+
+                if (this.currentProducto?.foto) {
+                    this.obtenerArchivoDesdeURL(this.currentProducto?.foto);
                 }
-            );
+            }
+
+            if (this.esEdicion()) {
+                this.activatedRoute.params.subscribe({
+                    next: ({ id }) => {
+                        // Edita una marca existente.
+                        this.productoService.updateProducto(formData, Number(id)).subscribe(
+                            response => {
+                                console.log(response.data)
+                                this.estaCargando = false;
+                                this.messageService.add({ severity: 'success', summary: 'Éxito', detail: response.data.nombre + ' actualizada'});
+                            },
+                            error => {
+                                this.estaCargando = false;
+                                this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No se pudo actualizar el producto' });
+                            }
+                        );
+                    }
+                });
+            } else {
+                this.productoService.guardarProducto(formData).subscribe(
+                    (response: any) => {
+                        if (response.status !== 201) {
+                            this.estaCargando = false;
+                            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No se pudo agregar la marca' + formData.get('nombre') });
+                        } else {
+                            this.estaCargando = false;
+                            this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'La marca ' + response.data.nombre + ' ha sido agregada' });
+                        }
+                    }
+                );
+            }
         }
     }
 
@@ -146,11 +176,38 @@ export class AgregarProductoComponent implements OnInit {
                             marca: this.currentProducto.marca,
                             punto_reorden: this.currentProducto.punto_reorden,
                         });
+                        if (this.currentProducto.foto) {
+                            this.obtenerArchivoDesdeURL(this.currentProducto.foto);
+
+                        }
                         this.imagePreview = this.currentProducto.foto;
+                        console.log(this.foto)
+
                     }
                 );
             }
         });
+    }
+
+    async obtenerArchivoDesdeURL(url: string): Promise<void> {
+        try {
+            // Descargar el archivo desde la URL
+            const response = await fetch(url);
+            const blob = await response.blob();
+
+            // Crear un objeto File a partir del blob
+            const nombreArchivo = this.obtenerNombreDeArchivoDesdeURL(url);
+            this.foto = new File([blob], nombreArchivo);
+        } catch (error) {
+            console.error('Error al obtener el archivo:', error);
+            this.foto = undefined;
+        }
+    }
+
+    obtenerNombreDeArchivoDesdeURL(url: string): string {
+        // Obtiene el nombre del archivo de la URL
+        const partesUrl = url.split('/');
+        return partesUrl[partesUrl.length - 1];
     }
 
     //TODO: modificar luego
