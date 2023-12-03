@@ -20,28 +20,27 @@ export class ProductoService {
     }
 
     //guardar producto
-    public guardarProducto(producto: Producto): Observable<any> {
+    public guardarProducto(formData: FormData): Observable<any> {
         const url = `${this.apiUrl}/api/producto`;
         const headers = new HttpHeaders({
-            'Content-Type': 'application/json'
+            'Accept': 'application/json'
         });
-        return this.http.post(url, producto, { headers });
+        return this.http.post<Producto>(url, formData, { headers });
     }
 
-
     //actualizar producto
-    public updateProducto(id: number, producto: Producto): Observable<any> {
-        const url = `${this.apiUrl}/api/producto${id}`;
+    public updateProducto(formData: FormData, id: number): Observable<any> {
+        const url = `${this.apiUrl}/api/producto/${id}?_method=PUT`;
         const headers = new HttpHeaders({
-            'Content-Type': 'application/json'
+            'Accept': 'application/json'
         });
-        return this.http.put(url, producto, { headers });
+        return this.http.post<Producto>(url, formData, { headers });
     }
 
 
     //eliminar producto
     public deleteProducto(id: number): Observable<any> {
-        const url = `${this.apiUrl}/api/productos/${id}`;
-        return this.http.delete(url);
+        const url = `${this.apiUrl}/api/producto/${id}`;
+        return this.http.delete<Producto>(url);
     }
 }
