@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Categoria } from '../interfaces/producto.iterface';
 import { HttpHeaders } from '@angular/common/http';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -14,16 +15,21 @@ export class CategoriaService {
         private http: HttpClient
     ) { }
 
+    //obtiene todas las categorias
     public getCategorias(): Observable<any[]> {
         const url = `${this.apiUrl}/api/categoria`;
         return this.http.get<Categoria[]>(url);
     }
 
     //guardar categoria
-
-
-    //actualizar producto (no se si vaya esta)
-
+    public guardarCategorias(formData: FormData): Observable<any> {
+        const url = `${this.apiUrl}/api/categoria/`;
+        return this.http.post<Categoria>(url, formData);
+    }
 
     //eliminar categoria
+    public deleteCategoria(id: number): Observable<any> {
+        const url = `${this.apiUrl}/api/categoria/${id}`;
+        return this.http.delete(url);
+    }
 }

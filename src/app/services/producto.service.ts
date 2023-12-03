@@ -14,20 +14,43 @@ export class ProductoService {
         private http: HttpClient
     ) { }
 
+    //obtiene todos los productos
+    public getProductos(): Observable<any[]> {
+        const url = `${this.apiUrl}/api/producto`;
+        return this.http.get<Producto[]>(url);
+    }
+
+    //obtiene un producto en especifico
     public getProducto(id: number): Observable<any> {
         const url = `${this.apiUrl}/api/producto/${id}`;
         return this.http.get<Producto>(url);
     }
 
     //guardar producto
-
+    public guardarProducto(formData: FormData): Observable<any> {
+        const url = `${this.apiUrl}/api/producto`;
+        const headers = new HttpHeaders({
+            'Accept': 'application/json'
+        });
+        return this.http.post<Producto>(url, formData, { headers });
+    }
 
     //actualizar producto
+    public updateProducto(formData: FormData, id: number): Observable<any> {
+        const url = `${this.apiUrl}/api/producto/${id}?_method=PUT`;
+        const headers = new HttpHeaders({
+            'Accept': 'application/json'
+        });
+        return this.http.post<Producto>(url, formData, { headers });
+    }
 
-
-    //eliminar producto
 
     public getAllProductos(): Observable<Producto[]> {
         return this.http.get<Producto[]>(this.apiUrl + '/productos');
+    }
+
+    public deleteProducto(id: number): Observable<any> {
+        const url = `${this.apiUrl}/api/producto/${id}`;
+        return this.http.delete<Producto>(url);
     }
 }
