@@ -93,10 +93,10 @@ export class TableInventarioComponent implements OnInit {
     }
 
     eliminarProducto(producto: Producto): void {
-        const idProducto = producto.id_producto;
-        if (idProducto !== undefined) {
-            this.productoService.deleteProducto(idProducto).subscribe(
+        if (producto && producto.id_producto) {
+            this.productoService.deleteProducto(producto.id_producto).subscribe(
                 () => {
+                    this.productos = this.productos?.filter(p => p.id_producto !== producto.id_producto)
                     this.messageService.add({ severity: 'success', summary: 'Operación Exitosa', detail: 'Producto eliminado' });
                 },
                 (error) => {
@@ -104,9 +104,6 @@ export class TableInventarioComponent implements OnInit {
                     this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al eliminar el producto' });
                 }
             );
-        } else {
-            console.error('ID del producto no válido:', idProducto);
-            // Manejar el caso donde id_producto es undefined, si es necesario
         }
     }
 
