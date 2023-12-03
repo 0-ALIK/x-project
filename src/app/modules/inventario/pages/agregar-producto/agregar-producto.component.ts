@@ -61,6 +61,7 @@ export class AgregarProductoComponent implements OnInit {
         nombre: ['', [Validators.required]],
         precio_unit: [0, [Validators.required]],
         cantidad_cajas: [0, [Validators.required]],
+        cantidad_por_caja: [0, [Validators.required]],
         categoria: [null , [Validators.required]],
         marca: [null , [Validators.required]],
         punto_reorden: [0, [Validators.required]],
@@ -97,14 +98,22 @@ export class AgregarProductoComponent implements OnInit {
             formData.append('nombre', this.form.get('nombre')?.value || '')
             formData.append('precio_unit', this.form.get('precio_unit')?.value || '')
             formData.append('cantidad_cajas', this.form.get('cantidad_cajas')?.value || '')
-            formData.append('categoria', this.form.get('categorias')?.value)
-            formData.append('marca', this.form.get('marcas')?.value)
-            formData.append('punto_reorden', this.form.get('descripcion')?.value || '')
+            formData.append('cantidad_por_caja', this.form.get('cantidad_por_caja')?.value || '')
 
-            console.log('categoria :', formData.get('categoria'))
+            const categoriaId = this.form.get('categoria')?.value;
+            if (categoriaId) {
+                formData.append('categoria_id', String(categoriaId));
+            }
+
+            const marcaId = this.form.get('marca')?.value;
+            if (marcaId) {
+                formData.append('marca_id', String(marcaId));
+            }
+
+            formData.append('punto_reorden', this.form.get('punto_reorden')?.value || '')
 
             if (this.foto) {
-                formData.append('logo', this.foto)
+                formData.append('foto', this.foto)
             } else {
 
                 if (this.currentProducto?.foto) {
@@ -172,6 +181,7 @@ export class AgregarProductoComponent implements OnInit {
                             nombre: this.currentProducto.nombre,
                             precio_unit: this.currentProducto.precio_unit,
                             cantidad_cajas: this.currentProducto.cantidad_cajas,
+                            cantidad_por_caja: this.currentProducto.cantidad_por_caja,
                             categoria: this.currentProducto.categoria,
                             marca: this.currentProducto.marca,
                             punto_reorden: this.currentProducto.punto_reorden,
@@ -181,7 +191,6 @@ export class AgregarProductoComponent implements OnInit {
 
                         }
                         this.imagePreview = this.currentProducto.foto;
-                        console.log(this.foto)
 
                     }
                 );

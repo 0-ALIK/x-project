@@ -54,13 +54,22 @@
                 </p-inputNumber>
             </div>
 
+            <div class="flex-column">
+                <label>Cantidad por caja</label>
+                <p-inputNumber
+                    formControlName="cantidad_por_caja"
+                    inputId="integeronly">
+                </p-inputNumber>
+            </div>
+
 
             <div class="flex-column">
                 <label>Categoría</label>
                 <p-dropdown
                     formControlName="categoria"
                     [options]="categorias"
-                    optionLabel="nombre">
+                    optionLabel="nombre"
+                    optionValue="id_categoria">
                 </p-dropdown>
             </div>
 
@@ -70,7 +79,8 @@
                 <p-dropdown
                     formControlName="marca"
                     [options]="marcas"
-                    optionLabel="nombre">
+                    optionLabel="nombre"
+                    optionValue="id_marca">
                     <ng-template let-marca pTemplate="item">
                         <div [style]="{'display': 'flex', 'alignItems': 'center', 'gap': 'var(--spacing-2)'}" >
                             <img [src]="marca.logo" style="width: 18px">
