@@ -19,7 +19,8 @@ export class DashboardInventarioComponent implements OnInit {
   public CantidadTotalProductos: number = 0;
   public CantidadTotalMarcas: number = 0;
   public CantidadTotalCategorias: number = 0;
-
+  public ValorTotalInventario: number = 0;
+  public ValorAnteriorInventario: number = 2150;
 
   constructor(private dashboardService: DashboardService) {}
 
@@ -31,6 +32,7 @@ export class DashboardInventarioComponent implements OnInit {
     this.definirTotalProductos();
     this.definirTotalCategorias();
     this.definirTotalMarcas(); 
+    this.definirTotalInventario();
   }
 
   private obtenerMarcasCategoria(): void {
@@ -114,6 +116,34 @@ export class DashboardInventarioComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error al obtener marcas', error);
+      }
+    });
+  }
+
+  calcularValorTotalInventario(): number {
+    return (this.productos || []).reduce((total, producto) => {
+      const cantidadProductosEnCaja = producto.cantidad_por_caja || 0;
+      const cantidadCajas = producto.cantidad_cajas || 0;
+      const precioUnitario = producto.precio_unit || 0;   
+      const valorProducto = cantidadProductosEnCaja * cantidadCajas * precioUnitario;
+      
+      return total + valorProducto;
+    }, 0);
+  }
+
+  definirTotalInventario(): void {
+    this.dashboardService.getProductos().subscribe({
+      next: (productosResponse: any) => {
+        console.log('Respuesta de la API (productos):', productosResponse);
+        const productosAnteriores = this.productos || [];
+        this.productos = productosResponse.data as Producto[] || [];
+        this.CantidadTotalProductos = this.productos.length;
+        const valorAnterior = this.calcularValorTotalInventario();
+        this.ValorAnteriorInventario = valorAnterior;
+        this.ValorTotalInventario = this.calcularValorTotalInventario();
+      },
+      error: (error) => {
+        console.error('Error al obtener productos', error);
       }
     });
   }
