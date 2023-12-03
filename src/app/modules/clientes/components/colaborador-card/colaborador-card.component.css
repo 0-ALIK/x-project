@@ -1,8 +1,9 @@
 .card{
-    margin: var(--spacing-4) var(--spacing-4);
+    margin: var(--spacing-4);
     border: solid 2px #808080;
     text-align: center;
-    padding-bottom: 30px;
+    padding: var(--spacing-4);
+
 }
 
 .datos{

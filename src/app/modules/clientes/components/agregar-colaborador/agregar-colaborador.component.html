@@ -23,6 +23,22 @@
         <label htmlFor="cedula" class="block">Cédula</label>
         <input pInputText name="cedula" aria-describedby="username-help" [(ngModel)]="cedula">
     </div>
+    <div class="mb-2">
+        <label htmlFor="direccion" class="block">Direccion</label>
+        <input pInputText name="direccion" aria-describedby="username-help" [(ngModel)]="direccion">
+    </div>
+    <div class="mb-2">
+        <label htmlFor="codigo_postal" class="block">Codigo Postal</label>
+        <input pInputText name="codigo_postal" aria-describedby="username-help" [(ngModel)]="codigoPostal">
+    </div>
+    <div class="mb-2">
+        <label htmlFor="provincia" class="block">Provincia</label>
+        <input pInputText name="provincia" aria-describedby="username-help" [(ngModel)]="provincia">
+    </div>
+    <div class="mb-2">
+        <label htmlFor="telefonoDireccion" class="block">Telefono Direccion</label>
+        <input pInputText name="telefonoDireccion" aria-describedby="username-help" [(ngModel)]="telefonoDireccion">
+    </div>
     <div class="flex flex-wrap gap-3 mb-4">
         <div class="flex align-items-center">
             <p-radioButton name="genero" value="F" [(ngModel)]="genero" inputId="genero2"></p-radioButton>
@@ -33,5 +49,5 @@
             <label for="genero1" class="ml-2">Hombre</label>
         </div>
     </div>
-    <p-button label="Agregar" (Click)="agregarColaborador"></p-button>
+    <p-button label="Agregar" (onClick)="agregarColaborador()"></p-button>
 </form>

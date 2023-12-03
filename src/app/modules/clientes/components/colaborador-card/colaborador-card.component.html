@@ -1,23 +1,21 @@
 <div class="card" >
     <p-avatar  size="xlarge" shape="circle" icon="pi pi-user" ></p-avatar>
-    <h2> {{ colaborador.nombre }}</h2>
+    <h2> {{ colaborador.nombre }} {{colaborador.apellido}}</h2>
     <div class="datos">
         <div>
-            <p>RUC: {{ colaborador.cedula }}</p>
+            <p>Cedula: {{ colaborador.cedula }}</p>
         </div>
         <div>
             <p>Tel: {{ colaborador.telefono}}</p>
         </div>
-
-
     </div>
-
-    <p>fecha registro: {{colaborador.created_at | date}}</p>
+    <p >Correo: {{ colaborador.correo}}</p>
+    <p>Fecha registro: {{colaborador.created_at | date}}</p>
     <div style="justify-content:space-between">
 
-            <p-button icon="pi pi-pencil" [rounded]="true" [outlined]="true" class="boton" (onClick)="editarColaborador()"></p-button>
+         <!p-button icon="pi pi-pencil" [rounded]="true" [outlined]="true" class="boton" (onClick)="editarColaborador()"><!/p-button>
 
-            <p-button icon="pi pi-times" [rounded]="true" severity="danger" [outlined]="true" class="boton" (onClick)="eliminarColaborador(colaborador.id_colaborador)"></p-button>
+            <p-button icon="pi pi-times" [rounded]="true" severity="danger" [outlined]="true" class="boton" (onClick)="eliminarColaborador(colaborador.id_cliente)"></p-button>
     </div>
 
 </div>

@@ -82,11 +82,6 @@ export class ApiEmpresaService {
     }
 
 
-
-
-
-
-
     public agregarSucursal(idEmpresa:number, formData:FormData): Observable<any> {
         const token = localStorage.getItem('token') || '';
         const headers = new HttpHeaders()
@@ -94,6 +89,16 @@ export class ApiEmpresaService {
             .set('Type-content', 'aplication/json');
 
         return this.Http.post<any>('http://127.0.0.1:8000/api/sucursales/' + idEmpresa , formData,  {headers} );
+    }
+
+    public eliminarSucursal( id_sucursal:any, id_empresa:any){
+        const token = localStorage.getItem('token') || '';
+        const headers = new HttpHeaders()
+            .set('Authorization', `Bearer ` + token)
+            .set('Type-content', 'aplication/json');
+            console.log(id_empresa+ ' ' + id_sucursal)
+
+        return this.Http.delete<any>('http://127.0.0.1:8000/api/sucursales/' + id_empresa+'/'+id_sucursal ,  {headers} );
     }
 
 }
