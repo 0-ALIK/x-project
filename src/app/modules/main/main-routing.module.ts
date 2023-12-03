@@ -2,6 +2,20 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './main.component';
 
+const usuario = JSON.parse(localStorage.getItem('usuario') || '');
+
+let redirect = 'inventario';
+
+if(usuario) {
+
+    if(usuario.tipo === 'cliente')
+        redirect = '/app/clientes/perfil/empresa/'+usuario.data.id_cliente
+
+    if(usuario.tipo === 'empresa')
+        redirect = '/app/clientes/perfil/empresa/'+usuario.data.id_empresa
+
+}
+
 const routes: Routes = [
     {
         path: '',
@@ -9,7 +23,7 @@ const routes: Routes = [
         children: [
             {
                 path: '',
-                redirectTo: 'inventario',
+                redirectTo: redirect,
                 pathMatch: 'full'
             },
             {

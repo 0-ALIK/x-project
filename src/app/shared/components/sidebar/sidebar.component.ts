@@ -59,17 +59,54 @@ export class SidebarComponent implements OnInit {
 
     public ngOnInit(): void {
         if(!localStorage.getItem('usuario')) return;
-        const usuario = localStorage.getItem('usuario');
+        const usuario = JSON.parse(localStorage.getItem('usuario') || '');
 
-        this.rellenarMenuItem();
+        if(usuario.tipo === 'admin') {
+            this.rellenarMenuItem();
+        } else if(usuario.tipo === 'cliente') {
+            this.rellenarMenuItemCliente(usuario.data.id_cliente);
+        } else {
+            this.rellenarMenuItemEmpresa(usuario.data.id_empresa);
+        }
     }
 
-    private rellenarMenuItemCliente(): void {
+    private rellenarMenuItemEmpresa(id: number):void {
         this.menuItems = [
             {
+                label: 'Perfil',
+                icon: 'pi pi-fw pi-user',
+                route: '/app/clientes/perfil/empresa/'+id
+            },
+        ];
+    }
+
+    private rellenarMenuItemCliente(id : number): void {
+
+        this.menuItems = [
+            {
+                label: 'Perfil',
+                icon: 'pi pi-fw pi-user',
+                route: '/app/clientes/perfil/cliente/'+id
+            },
+            {
                 label: 'Productos',
-                icon: 'pi pi-fw pi-box',
+                icon: 'pi pi-fw pi-shopping-bag',
                 route: '/app/ventas/c/ecommerce'
+            },
+            {
+                label: 'Carrito',
+                icon: 'pi pi-fw pi-shopping-cart',
+                route: '/app/ventas/c/carrito'
+            },
+            {
+                label: 'Chat',
+                icon: 'pi pi-fw pi-comments',
+                route: '/app/chat'
+            },
+            {
+                label: 'Blog',
+                icon: 'pi pi-fw pi-globe',
+                route: '/app/blog'
             }
         ];
     }
