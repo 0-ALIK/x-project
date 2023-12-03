@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { pedidos, reclamos } from 'src/app/interfaces/data';
 import { Pedido, PedidoEstado } from 'src/app/interfaces/pedido.interface';
 import { Cliente, Empresa } from 'src/app/interfaces/usuario.inteface';
 import { ImportesCalcService } from '../../services/importes-calc.service';
@@ -8,6 +7,10 @@ import { Producto } from 'src/app/interfaces/producto.iterface';
 import { Reclamo } from 'src/app/interfaces/raclamo.interface';
 import { VentasService } from 'src/app/services/ventas.service';
 import { MessageService } from 'primeng/api';
+import * as pdfMake from 'pdfmake/build/pdfmake';
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+
+(pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
 
 
 @Component({
@@ -66,6 +69,10 @@ import { MessageService } from 'primeng/api';
                         locale="en-US">
                     </p-inputNumber>
                 </div>
+                <p-button
+                    label="Generar factura"
+                    (onClick)="generarFactura()">
+                </p-button>
             </div>
 
             <div class="w-full">
@@ -84,6 +91,7 @@ import { MessageService } from 'primeng/api';
                     </p-accordionTab>
                 </p-accordion>
             </div>
+
         </div>
     `
 })
@@ -168,6 +176,78 @@ export class VerPedidoByIdComponent implements OnInit {
                 this.loading = false;
             }
         });
+    }
+
+    public generarFactura(): void {
+        const contenido = [];
+
+        // Encabezado de la tabla
+        const encabezado = [
+            'ID',
+            'Nombre',
+            'Precio',
+            'Cantidad',
+            'Total'
+        ];
+
+        contenido.push(encabezado);
+
+        if(!this.pedido?.pedido_productos) return;
+
+        this.pedido?.pedido_productos.forEach(productoP => {
+            const fila = [
+                productoP?.producto?.id_producto || 0,
+                productoP?.producto?.nombre || '',
+                `$${(productoP.producto?.precio_unit || 0) * (productoP.producto?.cantidad_por_caja || 0)}`,
+                productoP.cantidad,
+                `$${(productoP.producto?.precio_unit || 0) * (productoP.producto?.cantidad_por_caja || 0) * (productoP.cantidad || 0)}`,
+            ];
+            contenido.push(fila);
+        });
+
+        // Obtener el nombre de la empresa, su logo y la fecha actual (reemplaza estos datos con los tuyos)
+  const nombreEmpresa = '131CodeLines - Cosmos';
+
+  const fecha = new Date().toLocaleDateString(); // Obtener la fecha actual en formato legible
+
+  // Definir el contenido del documento PDF con el título, logo de la empresa y la fecha
+  const documentoDefinition: any = {
+    content: [
+      {
+        text: nombreEmpresa, // Agregar el nombre de la empresa como título
+        style: 'encabezado'
+      },
+      {
+        text: `Fecha: ${fecha}`, // Agregar la fecha
+        style: 'fecha'
+      },
+      {
+        text: 'Factura de Productos',
+        style: 'encabezado'
+      },
+      {
+        table: {
+          headerRows: 1,
+          widths: ['*', '*', '*', '*', '*'],
+          body: contenido
+        }
+      }
+    ],
+    styles: {
+      encabezado: {
+        fontSize: 18,
+        bold: true,
+        margin: [0, 0, 0, 10]
+      },
+      fecha: {
+        alignment: 'right',
+        margin: [0, 0, 0, 10]
+      }
+    }
+  };
+
+        const pdfDoc = pdfMake.createPdf(documentoDefinition);
+        pdfDoc.open();
     }
 
 }

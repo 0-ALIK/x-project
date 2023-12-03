@@ -62,9 +62,7 @@ export class AgregarEditarPagoComponent implements OnInit, AfterViewInit {
 
     public ngOnInit(): void {
         if(!this.config.data || !this.config.data.debido || !this.config.data.pedidoid) return;
-
         this.debido = this.config.data.debido;
-
         this.pedidoid = this.config.data.pedidoid;
     }
 
