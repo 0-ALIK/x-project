@@ -3,9 +3,48 @@ import { MenuItem } from 'src/app/interfaces/menu-item.interface';
 import { SidebarService } from 'src/app/services/sidebar.service';
 
 @Component({
-  selector: 'alik-sidebar',
-  templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.css']
+    selector: 'alik-sidebar',
+    template: `
+        <div class="back"
+        [ngClass]="{ 'back_show': sidebarService.sidebarActivo, '': !sidebarService.sidebarActivo, }"
+        (click)="sidebarService.sidebarActivo = false"></div>
+
+        <aside class="sidebar" #sidebar [ngClass]="{ 'sidebar_show': sidebarService.sidebarActivo, '': !sidebarService.sidebarActivo, }">
+            <section>
+                <!-- Logo app -->
+                <article class="sidebar-logo">
+                    <img src="assets/logo.png" alt="logo">
+                    <h1>Cosmos ERP</h1>
+                </article>
+
+                <hr>
+
+                <!-- Menu items -->
+                <article>
+                    <ul class="sidebar-menu">
+                        <li class="sidebar-menu-item"
+                            *ngFor="let item of menuItems"
+                            [routerLink]="item.route"
+                            routerLinkActive="sidebar-menu-item_active"
+                            (click)="sidebarService.sidebarActivo = false">
+
+                            <span [class]="item.icon"></span>
+                            <p>{{ item.label }}</p>
+                        </li>
+                    </ul>
+                </article>
+            </section>
+
+            <!-- Link hacia la documentacion -->
+            <article>
+                <div class="sidebar-menu-item" [routerLink]="['/app/docs']">
+                    <span class="pi pi-fw pi-question-circle"></span>
+                    <p>Ayuda</p>
+                </div>
+            </article>
+        </aside>
+    `,
+    styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
 
@@ -19,7 +58,20 @@ export class SidebarComponent implements OnInit {
     ) {}
 
     public ngOnInit(): void {
+        if(!localStorage.getItem('usuario')) return;
+        const usuario = localStorage.getItem('usuario');
+
         this.rellenarMenuItem();
+    }
+
+    private rellenarMenuItemCliente(): void {
+        this.menuItems = [
+            {
+                label: 'Productos',
+                icon: 'pi pi-fw pi-box',
+                route: '/app/ventas/c/ecommerce'
+            }
+        ];
     }
 
     private rellenarMenuItem(): void {
@@ -45,7 +97,7 @@ export class SidebarComponent implements OnInit {
                 route: '/app/tickets'
             },
             {
-                label: 'chat',
+                label: 'Chat',
                 icon: 'pi pi-fw pi-comments',
                 route: '/app/chat'
             },

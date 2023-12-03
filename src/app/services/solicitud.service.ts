@@ -7,39 +7,40 @@ import { Injectable } from '@angular/core';
 export class SolicitudService {
 
     private urlApi = 'http://127.0.0.1:8000/api/solicitudes/';
-    private token = '1|aVp3eUr44PhTcDR1LvCYPrJ83DnmLKGE31HHLUly5a7a250d';
 
 
     constructor(private Http: HttpClient) { }
 
-      getSolicitudes(){
+    getSolicitudes(){
+        const token = localStorage.getItem('token') || '';
+        let header =  new HttpHeaders()
+            .set('Type-content', 'aplication/json')
+            .set('authorization', 'Bearer '+token)
 
-      let header =  new HttpHeaders()
-          .set('Type-content', 'aplication/json')
-          .set('authorization', 'Bearer '+this.token)
+        return this.Http.get(this.urlApi, {
+            headers: header
+        });
+    }
 
-      return this.Http.get(this.urlApi, {
-          headers: header
-      });
-      }
-
-      public eliminarSolicitud(idSolicitud:any){
+    public eliminarSolicitud(idSolicitud:any){
+        const token = localStorage.getItem('token') || '';
         let header =  new HttpHeaders()
         .set('Type-content', 'aplication/json')
-        .set('authorization', 'Bearer '+ this.token)
+        .set('authorization', 'Bearer '+ token)
 
-    return this.Http.delete(this.urlApi+idSolicitud, {
-        headers: header
-    });
+        return this.Http.delete(this.urlApi+idSolicitud, {
+            headers: header
+        });
     }
 
     public aceptarSolicitud(idSolicitud:any){
+        const token = localStorage.getItem('token') || '';
         let header = new HttpHeaders()
         .set('Type-content', 'aplication/json')
-        .set('authorization', 'Bearer '+ this.token)
+        .set('authorization', 'Bearer '+ token)
 
         return this.Http.put(this.urlApi+idSolicitud,'', {
             headers: header
         });
     }
-  }
+}

@@ -7,7 +7,66 @@ import { ThemesService } from 'src/app/services/themes.service';
 
 @Component({
   selector: 'alik-nav',
-  templateUrl: './nav.component.html',
+  template: `
+    <p-overlayPanel #op styleClass="w-25rem h-25rem overflow-y-scroll">
+        <ng-template pTemplate="content">
+
+            <h3 class="m-0 mb-2">Notificaciones</h3>
+            <div>
+
+                <article
+                    *ngFor="let noti of notificaciones; let lastItem = last"
+                    [routerLink]="[noti.ruta]">
+                    <div class="flex gap-2 cursor-pointer">
+                        <div class="w-3rem h-3rem bg-primary border-round flex justify-content-center align-items-center">
+                            <i [class]="'pi w-1rem ' + noti.icono"></i>
+                        </div>
+                        <div>
+                            <p class="m-0">{{ noti.titulo }}</p>
+                            <p class="m-0 text-sm">{{ noti.contenido }}</p>
+                        </div>
+                    </div>
+                    <hr *ngIf="!lastItem">
+                </article>
+
+            </div>
+        </ng-template>
+    </p-overlayPanel>
+
+    <p-menu #menu [model]="avatarMenuItems" [popup]="true"></p-menu>
+
+    <p-sidebar [(visible)]="sidebarVisible" position="right" [style]="{ witdh: '200px' }">
+        <h2>Selecciona un tema</h2>
+        <div>
+            <p-button label="Claro" (onClick)="themesService.switchTheme('viva-light')"></p-button>
+            <p-button label="Oscuro" [style]="{ marginLeft: '10px' }" (onClick)="themesService.switchTheme('viva-dark')"></p-button>
+        </div>
+    </p-sidebar>
+
+    <nav class="nav backdrop">
+
+        <article class="nav-toggle">
+            <p-button icon="pi pi-bars" [rounded]="true" [text]="true" (onClick)="sidebarService.sidebarActivo = true"></p-button>
+        </article>
+
+        <section class="nav-actions">
+
+            <article>
+                <p-button icon="pi pi-cog" [rounded]="true" [text]="true" (onClick)="sidebarVisible = true"></p-button>
+
+                <p-button icon="pi pi-bell" [rounded]="true" [text]="true" (click)="op.toggle($event)"></p-button>
+            </article>
+
+            <article>
+                <div (click)="menu.toggle( $event )" class="avatar-cursor">
+                    <p-avatar label="A" shape="circle"></p-avatar>
+                </div>
+            </article>
+
+        </section>
+
+    </nav>
+  `,
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
