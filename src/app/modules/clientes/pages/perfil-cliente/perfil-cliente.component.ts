@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MenuItem } from 'primeng/api';
-import { DialogService } from 'primeng/dynamicdialog';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { direcciones, pedidos, provincias, reclamos } from 'src/app/interfaces/data';
 import { Direccion, Provincia } from 'src/app/interfaces/direccion.interface';
 import { Pedido } from 'src/app/interfaces/pedido.interface';
@@ -9,6 +9,7 @@ import { Reclamo } from 'src/app/interfaces/raclamo.interface';
 import { Cliente } from 'src/app/interfaces/usuario.inteface';
 import { ApiClienteService } from 'src/app/services/api-cliente.service';
 import { DireccionService } from 'src/app/services/direccion.service';
+import { AgregarDireccionComponent } from '../../components/agregar-direccion/agregar-direccion/agregar-direccion.component';
 
 
 @Component({
@@ -34,6 +35,8 @@ export class PerfilClienteComponent implements OnInit{
     public pedidos: Pedido[] = pedidos;
 
     public cliente: Cliente | undefined;
+
+    private ref: DynamicDialogRef | undefined;
 
     public constructor(
         public dialogService: DialogService,
@@ -67,6 +70,18 @@ export class PerfilClienteComponent implements OnInit{
         });
 
         this.provincias = provincias;
+    }
+
+    public agregarDireccion(id_cliente:any){
+
+        console.log(id_cliente)
+        this.ref = this.dialogService.open(AgregarDireccionComponent, {
+            header: 'Agregar Direccion',
+            data: {
+               id_cliente: id_cliente
+              }
+        });
+
     }
 
     public onChange(event:MenuItem):void {

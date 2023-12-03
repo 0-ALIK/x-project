@@ -47,6 +47,19 @@ export class ApiClienteService {
         });
     }
 
+    public getProvincias(){
+        const token = localStorage.getItem('token') || '';
+        let header =  new HttpHeaders()
+            .set('Type-content', 'aplication/json')
+            .set('authorization', 'Bearer '+ token)
+
+
+        return this.Http.get('http://127.0.0.1:8000/api/provincias/', {
+            headers: header
+        });
+
+    }
+
     public editarDatosCliente(idCliente:number, formData:FormData): Observable<any> {
         const token = localStorage.getItem('token') || '';
         const headers = new HttpHeaders()

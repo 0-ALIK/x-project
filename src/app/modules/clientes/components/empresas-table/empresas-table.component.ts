@@ -89,7 +89,7 @@ export class EmpresasTableComponent {
     showEliminarEmpresa(id_empresa: any, nombre_empresa: any): void {
 
         this.ref = this.dialogService.open(EliminarClienteComponent, {
-            header: 'Empresa: '+nombre_empresa+' con ID:'+id_empresa,
+            header: 'Empresa: '+nombre_empresa,
             height: '30%',
             width:'30%'
 

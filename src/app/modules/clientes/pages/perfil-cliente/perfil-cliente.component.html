@@ -20,7 +20,9 @@
                 placeholder="Filtra por provincia">
             </p-dropdown>
         </div>
-        <div class="claseboba">
+
+        <button  pButton label="Agregar Sucursal" (click)="agregarDireccion(cliente?.id_cliente)"></button>
+        <div class="claseboba" style="margin-top: 20px;">
             <alik-card-direccion
                 *ngFor="let direccion of direcciones"
                 [direccion]="direccion"
@@ -38,6 +40,7 @@
             </ticket-card>
         </div>
     </ng-container>
+
     <ng-container *ngIf="activeItem?.label && activeItem?.label === 'Pedidos'" >
         <div class="flex gap-2">
             <venta-card
@@ -47,4 +50,5 @@
             </venta-card>
         </div>
     </ng-container>
+
 </div>

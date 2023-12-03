@@ -2,6 +2,8 @@ import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { DialogService } from 'primeng/dynamicdialog';
 import { Direccion } from 'src/app/interfaces/direccion.interface';
+import { Empresa } from 'src/app/interfaces/usuario.inteface';
+import { ApiEmpresaService } from 'src/app/services/api-empresa.service';
 import { DireccionService } from 'src/app/services/direccion.service';
 
 @Component({
@@ -16,5 +18,27 @@ export class CardDireccionComponent {
     @Input('fondo')
     public fondo: boolean = false;
 
+    @Input('cliente')
+    public cliente: any;
+
+    constructor(
+        public apiService: ApiEmpresaService,
+    ){
+
+    }
+
+    public eliminarSucursal(id_direccion: any, id_empresa:any){
+
+        this.apiService.eliminarSucursal(id_direccion,id_empresa).subscribe((resp:any)=>{
+
+        })
+    }
+
+    public eliminarDireccion(id_direccion: any, id_cliente:any){
+        console.log(id_direccion)
+        this.apiService.eliminarDireccion(id_direccion,id_cliente).subscribe((resp:any)=>{
+
+        })
+    }
 
 }

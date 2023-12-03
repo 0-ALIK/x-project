@@ -41,6 +41,7 @@ import { TicketsModule } from '../tickets/tickets.module';
 import { TicketCardComponent } from '../tickets/components/ticket-card.component';
 import { VentaCardComponent } from 'src/app/components/venta-card.component';
 import { EliminarClienteComponent } from './components/eliminar-cliente/eliminar-cliente.component';
+import { AgregarDireccionComponent } from './components/agregar-direccion/agregar-direccion/agregar-direccion.component';
 
 @NgModule({
     declarations: [
@@ -59,6 +60,7 @@ import { EliminarClienteComponent } from './components/eliminar-cliente/eliminar
         AgregarColaboradorComponent,
         AgregarSucursalComponent,
         EliminarClienteComponent,
+        AgregarDireccionComponent,
     ],
     imports: [
         CommonModule,
