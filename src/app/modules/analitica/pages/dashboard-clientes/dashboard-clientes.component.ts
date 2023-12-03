@@ -229,15 +229,22 @@ import { Component, OnInit } from '@angular/core';
                 this.provinciaFrecuente = [...this.provinciaFrecuenteCopy];
 
               } else {
-                this.provinciaFrecuente = this.provinciaFrecuente
-                .filter(item => event.value.includes(item.provincia))  // Comparar con la propiedad 'nombre'
-                .map(item => ({ ...item }));
+                this.provinciaFrecuente = this.provinciaFrecuente.filter(item => {
+                    const isIncluded = event.value.includes(item.provincia.nombre);
+                    console.log(`Item: ${item.provincia.nombre}, isIncluded: ${isIncluded}`);
+                    return isIncluded;
+                });
+
                 console.log('Después de la filtración: else   ', this.provinciaFrecuente);
 
 
             }
               console.log('Después de la filtración:', this.provinciaFrecuente);
             //   this.provinciaFrecuente.sort((a, b) => b.frecuencia - a.frecuencia);
+
+            this.provinciaFrecuente = this.provinciaFrecuenteCopy
+
+            console.log('Después de la copia profunda:', this.provinciaFrecuente);
               this.graficaSegmentacion();
         }
 
