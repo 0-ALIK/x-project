@@ -21,7 +21,7 @@ export interface PedidoProductos {
 }
 
 export interface PedidoEstado {
-    id_estado_pedido?: number;
+    id_pedido_estado?: number;
     nombre?: string;
 }
 

@@ -317,9 +317,9 @@ export const clientes: Cliente[] = [
 ];
 
 export const pedidoEstados: PedidoEstado[] = [
-    {id_estado_pedido: 1, nombre: 'proceso'},
-    {id_estado_pedido: 2, nombre: 'enviado'},
-    {id_estado_pedido: 3, nombre: 'entregado'},
+    {id_pedido_estado: 1, nombre: 'proceso'},
+    {id_pedido_estado: 2, nombre: 'enviado'},
+    {id_pedido_estado: 3, nombre: 'entregado'},
 ];
 
 export const formasPago: FormaPago[] = [

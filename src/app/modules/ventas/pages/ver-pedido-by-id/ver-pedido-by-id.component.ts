@@ -1,17 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { pedidos, reclamos } from 'src/app/interfaces/data';
-import { Pedido } from 'src/app/interfaces/pedido.interface';
+import { Pedido, PedidoEstado } from 'src/app/interfaces/pedido.interface';
 import { Cliente, Empresa } from 'src/app/interfaces/usuario.inteface';
 import { ImportesCalcService } from '../../services/importes-calc.service';
 import { Producto } from 'src/app/interfaces/producto.iterface';
 import { Reclamo } from 'src/app/interfaces/raclamo.interface';
 import { VentasService } from 'src/app/services/ventas.service';
+import { MessageService } from 'primeng/api';
 
 
 @Component({
     selector: 'app-ver-pedido-by-id',
     template: `
+        <p-toast></p-toast>
         <div class="flex align-items-center gap-2">
             <h1 class="text-3xl">Pedido con id: id</h1>
             <p-tag [value]="pedido?.estado?.nombre"></p-tag>
@@ -32,12 +34,29 @@ import { VentasService } from 'src/app/services/ventas.service';
                     <h2 class="text-lg m-0 p-0">Dirección de envio</h2>
                     <alik-card-direccion [direccion]="pedido?.direccion"></alik-card-direccion>
                 </div>
+                <div class="mb-2">
+                    <h2 class="text-lg m-0 p-0">Estado del pedido</h2>
+                    <div class="flex gap-2 align-items-center">
+                        <p-dropdown
+                            [options]="estados"
+                            [(ngModel)]="estado"
+                            placeholder="Selecciona estado"
+                            optionLabel="nombre">
+                        </p-dropdown>
+                        <p-button
+                            [loading]="loading"
+                            label="Cambiar estado"
+                            [disabled]="estado === undefined"
+                            (onClick)="cambiarEstado()">
+                        </p-button>
+                    </div>
+                </div>
                 <div class="mb-2" *ngIf="reclamo">
                     <h2 class="text-lg m-0 p-0">Reclamo</h2>
                     <ticket-card [reclamo]="reclamo"></ticket-card>
                 </div>
                 <div class="mb-2">
-                    <h2 class="text-lg m-0 p-0">Impote de la venta</h2>
+                    <h2 class="text-lg m-0 p-0">Importe de la venta</h2>
                     <p-inputNumber
                         [(ngModel)]="importe"
                         [readonly]="true"
@@ -82,6 +101,11 @@ export class VerPedidoByIdComponent implements OnInit {
 
     public importe: number | undefined;
 
+    public loading = false;
+
+    public estados: PedidoEstado[] = [];
+    public estado: PedidoEstado | undefined;
+
     public importePagado: number | undefined;
 
     public reclamo: Reclamo | undefined;
@@ -89,13 +113,20 @@ export class VerPedidoByIdComponent implements OnInit {
     public constructor(
         private activatedRoute: ActivatedRoute,
         public importesCalc: ImportesCalcService,
-        private ventaService: VentasService
+        private ventaService: VentasService,
+        private message: MessageService
     ) {}
 
     public ngOnInit(): void {
         this.activatedRoute.params.subscribe({
             next: ({id}) => {
                 this.obtenerPedido(Number(id));
+            }
+        });
+
+        this.ventaService.getPedidoEstados().subscribe({
+            next: estados => {
+                this.estados = estados;
             }
         });
     }
@@ -120,6 +151,21 @@ export class VerPedidoByIdComponent implements OnInit {
                     this.tieneEmpresa = true;
                 }
                 console.log(this.pedido);
+            }
+        });
+    }
+
+    public cambiarEstado(): void {
+        if(!this.estado?.id_pedido_estado || !this.pedido?.id_pedido) return;
+        console.log('xd');
+        this.loading = true;
+        this.ventaService.cambiarEstadoPedido(this.estado.id_pedido_estado, this.pedido?.id_pedido).subscribe({
+            next: resp => {
+                this.message.add({severity: 'success', summary: 'Estado actualizado a '+this.estado?.nombre});
+                if(this.pedido?.estado){
+                    this.pedido.estado = this.estado;
+                }
+                this.loading = false;
             }
         });
     }
