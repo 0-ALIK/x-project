@@ -3,6 +3,7 @@ import { Provincia } from 'src/app/interfaces/direccion.interface';
 import { provincias } from 'src/app/interfaces/data';
 import { DireccionService } from 'src/app/services/direccion.service';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { ApiClienteService } from 'src/app/services/api-cliente.service';
 
 @Component({
   selector: 'app-agregar-direccion',
@@ -14,15 +15,11 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
     <p-dropdown
         [options]="provincias"
         [(ngModel)]="provinciaSelected"
+        name="provinciaSelected"
         optionLabel="nombre"
         [showClear]="true"
         placeholder="Provincia...">
     </p-dropdown>
-</div>
-
-<div class="mb-2">
-    <label htmlFor="nombre" class="block">Nombre</label>
-    <input pInputText name="nombre" [(ngModel)]="nombre" aria-describedby="username-help">
 </div>
 
 <div class="mb-2">
@@ -50,7 +47,7 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 })
 export class AgregarDireccionComponent {
 
-    public provincias: Provincia[] = provincias;
+    public provincias: Provincia[] = [];
 
     public provinciaSelected: Provincia | any;
 
@@ -63,6 +60,7 @@ export class AgregarDireccionComponent {
 
     constructor(
         public apiService: DireccionService,
+        public provinciaService: ApiClienteService,
         public ref: DynamicDialogRef,
         public config: DynamicDialogConfig
     ){
@@ -70,14 +68,20 @@ export class AgregarDireccionComponent {
         this.id_cliente = this.config.data.id_cliente;
             console.log(this.id_cliente)
 
+
+        this.provinciaService.getProvincias().subscribe((resp:any)=>{
+            console.log(resp)
+            this.provincias = resp
+        })
+
     }
 
 
     public agregarDireccion(){
+        console.log(this.provinciaSelected)
 
         const formData = new FormData();
-        formData.append('nombre',this.nombre);
-        formData.append('provincia_id', '4');
+        formData.append('provincia_id', this.provinciaSelected.id_provincia);
         formData.append('telefono', this.telefono);
         formData.append('codigo_postal', this.codigo_postal);
         formData.append('detalles', this.detalles);

@@ -4,12 +4,14 @@
 
     <ng-container>
         <div class="p-2">
-            <h2 class="m-0 p-0">{{direccion?.nombre_sucursal}}</h2>
+            <h2 class="m-0 p-0">{{direccion?.provincia}}</h2>
             <p class="m-0 mb-2 p-0">{{direccion?.telefono}}</p>
 
             <p class="m-0 p-0">{{direccion?.detalles}}</p>
         </div>
-        <p-button icon="pi pi-trash" [rounded]="true" [text]="true" severity="danger"  (onClick)="eliminarSucursal(direccion.id_direccion, direccion.id_empresa)" ></p-button>
+
+        <p-button *ngIf="direccion.id_empresa" icon="pi pi-trash" [rounded]="true" [text]="true" severity="danger"  (onClick)="eliminarSucursal(direccion.id_direccion, direccion.id_empresa)" ></p-button>
+        <p-button *ngIf="!direccion.id_empresa" icon="pi pi-trash" [rounded]="true" [text]="true" severity="danger"  (onClick)="eliminarDireccion(direccion.id_direccion, direccion.cliente_id)" ></p-button>
 
     </ng-container>
 

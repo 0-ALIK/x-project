@@ -18,6 +18,9 @@ export class CardDireccionComponent {
     @Input('fondo')
     public fondo: boolean = false;
 
+    @Input('cliente')
+    public cliente: any;
+
     constructor(
         public apiService: ApiEmpresaService,
     ){
@@ -25,7 +28,15 @@ export class CardDireccionComponent {
     }
 
     public eliminarSucursal(id_direccion: any, id_empresa:any){
+
         this.apiService.eliminarSucursal(id_direccion,id_empresa).subscribe((resp:any)=>{
+
+        })
+    }
+
+    public eliminarDireccion(id_direccion: any, id_cliente:any){
+        console.log(id_direccion)
+        this.apiService.eliminarDireccion(id_direccion,id_cliente).subscribe((resp:any)=>{
 
         })
     }

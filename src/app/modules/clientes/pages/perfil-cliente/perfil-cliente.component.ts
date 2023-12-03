@@ -76,7 +76,7 @@ export class PerfilClienteComponent implements OnInit{
 
         console.log(id_cliente)
         this.ref = this.dialogService.open(AgregarDireccionComponent, {
-            header: 'Agregar Sucursal',
+            header: 'Agregar Direccion',
             data: {
                id_cliente: id_cliente
               }
