@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Pedido } from 'src/app/interfaces/pedido.interface';
-import { Producto } from 'src/app/interfaces/producto.iterface';
+import { Categoria, Producto, Marca } from 'src/app/interfaces/producto.iterface';
 
 @Injectable()
 export class DashboardService {
@@ -31,6 +31,14 @@ export class DashboardService {
 
     public getProductos(): Observable<Producto[]> {
         return this.http.get<Producto[]>(this.host + '/api/producto');
+    }
+
+    public getMarca(): Observable<Marca[]> {
+        return this.http.get<Marca[]>(this.host + '/api/marca');
+    }
+
+    public getCategoria(): Observable<Categoria[]> {
+        return this.http.get<Categoria[]>(this.host + '/api/categoria');
     }
     
     public getClientesProvincias(): Observable<any> {

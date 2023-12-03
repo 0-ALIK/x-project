@@ -29,14 +29,14 @@
         <alik-dashboard-card
             titulo="Productos"
             icon="pi-box"
-            [numero]="512"
+            [numero]="productos?.length || 0"
             tipo="numero"
         ></alik-dashboard-card>
 
         <alik-dashboard-card
         titulo="Valor inventario"
             icon="pi-dollar"
-            [numero]="2300"
+            [numero]="2000"
             [valorAnterior]="2150"
             tipo="dinero"
         ></alik-dashboard-card>
@@ -44,14 +44,14 @@
         <alik-dashboard-card
         titulo="Marcas"
             icon="pi-verified"
-            [numero]="53"
+            [numero]="marcas?.length || 0"
             tipo="numero"
         ></alik-dashboard-card>
 
         <alik-dashboard-card
         titulo="Categorías"
             icon="pi-tag"
-            [numero]="23"
+            [numero]="categorias?.length || 0"
             tipo="numero"
         ></alik-dashboard-card>
 

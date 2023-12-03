@@ -16,6 +16,10 @@ export class DashboardInventarioComponent implements OnInit {
   public categorias: Categoria[] | undefined;
   public optionsBarras: any;
   public optionsPie: any;
+  public CantidadTotalProductos: number = 0;
+  public CantidadTotalMarcas: number = 0;
+  public CantidadTotalCategorias: number = 0;
+
 
   constructor(private dashboardService: DashboardService) {}
 
@@ -23,7 +27,10 @@ export class DashboardInventarioComponent implements OnInit {
     this.defineOptions();
     this.obtenerMarcasCategoria();
     this.definirProductosQueMasHay();
-    this.graficaSegmentacion();     
+    this.graficaSegmentacion();  
+    this.definirTotalProductos();
+    this.definirTotalCategorias();
+    this.definirTotalMarcas(); 
   }
 
   private obtenerMarcasCategoria(): void {
@@ -62,8 +69,55 @@ export class DashboardInventarioComponent implements OnInit {
       }
     });
   }
-  
 
+  definirTotalProductos(): void {
+    this.dashboardService.getProductos().subscribe({
+      next: (productosResponse: any) => {
+        console.log('Respuesta de la API (productos):', productosResponse);
+
+        this.productos = productosResponse.data as  Producto[] || [];
+
+        this.CantidadTotalProductos = this.productos.length;
+        
+      },
+      error: (error) => {
+        console.error('Error al obtener productos', error);
+      }
+    });
+  }
+
+
+  definirTotalCategorias(): void {
+    this.dashboardService.getCategoria().subscribe({
+      next: (categoriasResponse: any) => {
+        console.log('Respuesta de la API (categorias):', categoriasResponse);
+
+        this.categorias = categoriasResponse.data as  Categoria[] || [];
+
+        this.CantidadTotalCategorias = this.categorias.length;
+        
+      },
+      error: (error) => {
+        console.error('Error al obtener categorias', error);
+      }
+    });
+  }
+
+  definirTotalMarcas(): void {
+    this.dashboardService.getMarca().subscribe({
+      next: (marcasResponse: any) => {
+        console.log('Respuesta de la API (marcas):', marcasResponse);
+        this.marcas = marcasResponse.data as  Marca[] || [];
+
+        this.CantidadTotalMarcas = this.marcas.length;
+        
+      },
+      error: (error) => {
+        console.error('Error al obtener marcas', error);
+      }
+    });
+  }
+  
   graficaProductos(top3Productos: any[]): void {
     const documentStyle = getComputedStyle(document.documentElement);
 
