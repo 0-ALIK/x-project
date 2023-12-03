@@ -90,13 +90,8 @@ export class TicketsTableComponent {
             return { nombre: 'Dañado', color: 'info' };
           case 'devolución':
             return { nombre: 'Devolución', color: 'primary' };
-          case 'otro':
-            return { nombre: 'Otro', color: 'default' };
           default:
-            return { nombre: 'Desconocido', color: 'unknown' };
+            return { nombre: 'Otro', color: 'default' };
         }
       }
-      
-      
-
 }
