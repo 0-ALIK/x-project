@@ -71,14 +71,14 @@ export class ApiEmpresaService {
         return this.Http.post<any>('http://127.0.0.1:8000/api/clientes/', formData,  {headers} );
     }
 
-    public eliminarColaborador(idEmpresa:number, formData:FormData): Observable<any> {
+    public eliminarColaborador(id_colaborador:number): Observable<any> {
         const token = localStorage.getItem('token') || '';
         const headers = new HttpHeaders()
         .set('Authorization', `Bearer ` + token)
         .set('Type-content', 'aplication/json');
 
 
-        return this.Http.post<any>('http://127.0.0.1:8000/api/clientes/', formData,  {headers} );
+        return this.Http.delete<any>('http://127.0.0.1:8000/api/clientes/'+id_colaborador,  {headers} );
     }
 
 

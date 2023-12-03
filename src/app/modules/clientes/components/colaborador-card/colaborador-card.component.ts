@@ -20,10 +20,10 @@ export class ColaboradorCardComponent {
 
     }
 
-    public eliminarColaborador(id_empresa: any){
+    public eliminarColaborador(id_colaborador: any){
 
             const formData = new FormData;
-            this.apiService.eliminarColaborador(id_empresa,formData).subscribe((resp:any)=>{
+            this.apiService.eliminarColaborador(id_colaborador).subscribe((resp:any)=>{
               console.log('Se elimino correctamente')
           })
 
