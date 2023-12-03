@@ -3,8 +3,8 @@
 <div class="card">
     <div class="mb-4">
         <div class="p-buttonset">
-            <button pButton label="Agregar colaborador" class="p-button-outlined" (click)="agregarColaborador()"></button>
-            <button pButton label="Agregar Sucursal" (click)="agregarSucursal()"></button>
+            <button pButton label="Agregar colaborador" class="p-button-outlined" (click)="agregarColaborador(empresa?.id_empresa)"></button>
+            <button pButton label="Agregar Sucursal" (click)="agregarSucursal(empresa?.id_empresa)"></button>
         </div>
     </div>
 

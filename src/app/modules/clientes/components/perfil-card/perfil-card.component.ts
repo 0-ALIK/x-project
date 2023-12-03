@@ -1,13 +1,18 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { valueOrDefault } from 'chart.js/dist/helpers/helpers.core';
-import { FileUploadEvent } from 'primeng/fileupload';
+import { FileSelectEvent, FileUploadEvent } from 'primeng/fileupload';
 import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
 import { Cliente, Empresa } from 'src/app/interfaces/usuario.inteface';
 import { ApiClienteService } from 'src/app/services/api-cliente.service';
 import { ApiEmpresaService } from 'src/app/services/api-empresa.service';
 
+interface UploadEvent {
+    originalEvent: Event;
+    files: File[];
+    currentFiles: File[];
+}
 
 @Component({
   selector: 'app-perfil-card',
@@ -19,6 +24,8 @@ export class PerfilCardComponent implements OnInit{
 
 
 
+
+
     @Input("cliente")
     public cliente: any | undefined;
 
@@ -26,8 +33,9 @@ export class PerfilCardComponent implements OnInit{
     @Input("empresa")
     public empresa: any | undefined;
 
-
-
+    public idEmpresa: any | undefined;
+    public idCliente: any | undefined;
+    public selectedOption: String | any;
     public cedula: any;
     public fotoCliente: any;
     public correo: any;
@@ -40,7 +48,7 @@ export class PerfilCardComponent implements OnInit{
 
     public genero: string = "M";
 
-    public uploadedFiles: File[] = [];
+    public document: File | undefined;
 
     public datosEmpresa:Empresa[] =  [];
     public datosCliente:Cliente[] = [];
@@ -51,7 +59,8 @@ export class PerfilCardComponent implements OnInit{
         private formBuilder: FormBuilder,
         public apiService: ApiEmpresaService,
         public activatedRoute: ActivatedRoute,
-        public clienteService: ApiClienteService
+        public clienteService: ApiClienteService,
+        private router: Router
     ){}
 
     public formEmpresa = this.formBuilder.group({
@@ -80,8 +89,10 @@ export class PerfilCardComponent implements OnInit{
     fillFormEmpresa(data: any): void {
         console.log(data)
         if (data) {
+          this.idEmpresa = data.id_empresa;
           this.nombre = data.nombre;
           this.ruc = data.ruc;
+          this.correo = data.correo;
           this.telefono = data.telefono;
           this.razon_social = data.razon_social;
           this.fotoEmpresa = data.foto
@@ -91,43 +102,69 @@ export class PerfilCardComponent implements OnInit{
     fillFormCliente(data: any): void {
         console.log(data)
         if (data) {
+          this.idCliente = data.id_cliente
           this.nombre = data.nombre;
           this.apellido = data.apellido;
+          this.correo = data.correo
           this.telefono = data.telefono;
           this.cedula = data.cedula
           this.fotoCliente = data.foto;
+          this.selectedOption = data.genero
         }
     }
 
-    public onUpload(event: FileUploadEvent) {
+    public selectFile( event: UploadEvent ): void {
+        this.document = event.currentFiles[0];
+    }
 
-        for(let file of event.files) {
 
-            const partes = file.name.split('.');
-            const extension = partes[ partes.length - 1 ].toLowerCase();
-            console.log(extension);
+    enviarDatosCliente(){
 
-            if( this.extenPerminitas.includes( extension ) )
-                this.uploadedFiles.push(file);
+        const formData = new FormData();
+        formData.append('nombre', this.nombre );
+        formData.append('apellido', this.apellido );
+        formData.append('telefono', this.telefono);
+        formData.append('correo', this.correo);
+        formData.append('genero',  this.selectedOption);
+        if(this.document){
+            formData.append('foto', this.document)
         }
+        formData.append('_method', 'PUT');
+        formData.append('cedula', this.cedula);
+
+
+
+        //const formData = new FormData
+        this.clienteService.editarDatosCliente(this.idCliente, formData).subscribe((resp:any)=>{
+            window.location.reload()
+        })
+
     }
 
+    onOptionChange() {
+        console.log( this.selectedOption);
+      }
 
 
-    enviarDatosCliente(idCliente:any){
 
-        this.clienteService.editarDatosCliente(idCliente, this.nombre, this.apellido, this.ruc, this.telefono, this.fotoCliente).subscribe((resp:any)=>{
-        console.log(resp);
+    enviarDatosEmpresa(){
 
-            })
-    }
+        const formData = new FormData();
+        formData.append('nombre', this.nombre );
+        formData.append('ruc', this.ruc);
+        formData.append('telefono', this.telefono)
+        formData.append('razon_social', this.razon_social);
+        formData.append('correo', this.correo);
+        if(this.document){
+            formData.append('foto', this.document)
+        }
+        formData.append('_method', 'PUT');
 
-    enviarDatosEmpresa(id_empresa:any){
 
-        console.log(this.razon_social)
-        this.apiService.editarDatosEmpresa(id_empresa, this.nombre, this.ruc, this.telefono, this.correo, this.fotoEmpresa).subscribe((resp:any)=>{
-        console.log(resp);
 
+        //const formData = new FormData
+        this.apiService.editarDatosEmpresa(this.idEmpresa, formData).subscribe((resp:any)=>{
+            window.location.reload()
         })
 
     }

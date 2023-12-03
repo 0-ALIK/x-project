@@ -63,8 +63,8 @@ export class PerfilEmpresaComponent {
                 }),
 
                 this.empresaService.getColaboradores(id,nombre_empresa ).subscribe((resp:any)=>{
-                    console.log(nombre_empresa)
                     this.arregloColaboradores = resp;
+                    console.log(resp)
                 })
             }
         });
@@ -77,15 +77,18 @@ export class PerfilEmpresaComponent {
         this.activeItem = event;
     }
 
-    public agregarColaborador(): void {
+    public agregarColaborador(id_empresa:any): void {
         this.ref = this.dialogService.open(AgregarColaboradorComponent, {
             header: 'Agregar Colaborador',
         });
     }
 
-    public agregarSucursal(): void {
+    public agregarSucursal(id_empresa:any): void {
         this.ref = this.dialogService.open(AgregarSucursalComponent, {
             header: 'Agregar Sucursal',
+            data: {
+                id_empresa: id_empresa
+              }
         });
     }
 }

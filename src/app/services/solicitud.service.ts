@@ -38,7 +38,7 @@ export class SolicitudService {
         .set('Type-content', 'aplication/json')
         .set('authorization', 'Bearer '+ this.token)
 
-        return this.Http.put(this.urlApi+idSolicitud, {
+        return this.Http.put(this.urlApi+idSolicitud,'', {
             headers: header
         });
     }

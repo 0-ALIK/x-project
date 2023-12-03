@@ -53,18 +53,34 @@ export class ApiEmpresaService {
 
 
 
-    public editarDatosEmpresa(idEmpresa:any, nombre: any, ruc:any, telefono:any, correo:any, foto:any): Observable<any> {
+    public editarDatosEmpresa(idEmpresa:number, formData:FormData): Observable<any> {
 
-        const headers = new HttpHeaders().set('Authorization', `Bearer `+this.token);
+        const headers = new HttpHeaders()
+        .set('Authorization', `Bearer ` + this.token)
+        .set('Type-content', 'aplication/json');
 
-        const params = new HttpParams()
-        .set('nombre', nombre)
-        .set('ruc', ruc)
-        .set('telefono', telefono)
-        .set('correo', correo)
-        .set('foto', foto);
 
-        return this.Http.put<any>('http://127.0.0.1:8000/api/empresas/' +idEmpresa, {headers, params});
+        return this.Http.post<any>('http://127.0.0.1:8000/api/empresas/' + idEmpresa , formData,  {headers} );
+    }
+
+    public agregarColaborador(idEmpresa:number, formData:FormData): Observable<any> {
+
+        const headers = new HttpHeaders()
+        .set('Authorization', `Bearer ` + this.token)
+        .set('Type-content', 'aplication/json');
+
+
+        return this.Http.post<any>('http://127.0.0.1:8000/api/clientes/', formData,  {headers} );
+    }
+
+    public agregarSucursal(idEmpresa:number, formData:FormData): Observable<any> {
+
+        const headers = new HttpHeaders()
+        .set('Authorization', `Bearer ` + this.token)
+        .set('Type-content', 'aplication/json');
+
+
+        return this.Http.post<any>('http://127.0.0.1:8000/api/sucursales/' + idEmpresa , formData,  {headers} );
     }
 
 

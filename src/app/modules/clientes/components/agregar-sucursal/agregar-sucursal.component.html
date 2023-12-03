@@ -13,17 +13,17 @@
 
     <div class="mb-2">
         <label htmlFor="telefono" class="block">Telefono</label>
-        <input type="phone" id="telefono" pInputText>
+        <input type="phone" id="telefono" pInputText [(ngModel)]="telefono">
     </div>
 
     <div class="mb-2">
         <label htmlFor="code" class="block">Código postal</label>
-        <input type="text" id="code" pInputText>
+        <input type="text" id="code" pInputText [(ngModel)]="codigo_postal">
     </div>
 
     <div class="mb-2">
         <label htmlFor="code" class="block">Detalles</label>
-        <textarea rows="5" cols="30" pInputTextarea [autoResize]="true"></textarea>
+        <textarea rows="5" cols="30" pInputTextarea [autoResize]="true" [(ngModel)]="descripcion"></textarea>
     </div>
 
     <p-button label="Agregar"></p-button>
