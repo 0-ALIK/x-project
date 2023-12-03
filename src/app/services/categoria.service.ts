@@ -15,6 +15,7 @@ export class CategoriaService {
         private http: HttpClient
     ) { }
 
+    //obtiene todas las categorias
     public getCategorias(): Observable<any[]> {
         const url = `${this.apiUrl}/api/categoria`;
         return this.http.get<Categoria[]>(url);

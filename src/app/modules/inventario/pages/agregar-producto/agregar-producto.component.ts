@@ -100,11 +100,13 @@ export class AgregarProductoComponent implements OnInit {
             formData.append('cantidad_cajas', this.form.get('cantidad_cajas')?.value || '')
             formData.append('cantidad_por_caja', this.form.get('cantidad_por_caja')?.value || '')
 
+            //obtiene el id de categoria
             const categoriaId = this.form.get('categoria')?.value;
             if (categoriaId) {
                 formData.append('categoria_id', String(categoriaId));
             }
 
+            //obtiene el id de marca
             const marcaId = this.form.get('marca')?.value;
             if (marcaId) {
                 formData.append('marca_id', String(marcaId));
@@ -112,12 +114,11 @@ export class AgregarProductoComponent implements OnInit {
 
             formData.append('punto_reorden', this.form.get('punto_reorden')?.value || '')
 
-            console.log('nombre: ', formData.get('nombre'))
-
             if (this.foto) {
                 formData.append('foto', this.foto)
             } else {
 
+                //convierte la url en archivo
                 if (this.currentProducto?.foto) {
                     this.obtenerArchivoDesdeURL(this.currentProducto?.foto);
                 }
@@ -161,7 +162,7 @@ export class AgregarProductoComponent implements OnInit {
         this.imagePreview = URL.createObjectURL( this.foto );
     }
 
-    //TODO: modificar luego
+    //obtiene los datos de un producto en especifico
     private obtenerProductoEditar(): void {
 
         this.activatedRoute.params.subscribe({
@@ -200,6 +201,7 @@ export class AgregarProductoComponent implements OnInit {
         });
     }
 
+    //obtiene un archivo a traves de la url
     async obtenerArchivoDesdeURL(url: string): Promise<void> {
         try {
             // Descargar el archivo desde la URL
@@ -215,13 +217,14 @@ export class AgregarProductoComponent implements OnInit {
         }
     }
 
+    //obtiene el nombre de archivo
     obtenerNombreDeArchivoDesdeURL(url: string): string {
         // Obtiene el nombre del archivo de la URL
         const partesUrl = url.split('/');
         return partesUrl[partesUrl.length - 1];
     }
 
-    //TODO: modificar luego
+    //obtiene todas las categorias y marcas
     private obtenerMarcasCategoria(): void {
         this.marcaService.getMarcas().subscribe( (marcas: any) => {
             this.categoriaService.getCategorias().subscribe( (categorias: any) => {

@@ -18,6 +18,13 @@ export class ProductoService {
         private http: HttpClient
     ) { }
 
+    //obtiene todos los productos
+    public getProductos(): Observable<any[]> {
+        const url = `${this.apiUrl}/api/producto`;
+        return this.http.get<Producto[]>(url);
+    }
+
+    //obtiene un producto en especifico
     public getProducto(id: number): Observable<any> {
         const url = `${this.apiUrl}/api/producto/${id}`;
         return this.http.get<Producto>(url);
@@ -40,7 +47,6 @@ export class ProductoService {
         });
         return this.http.post<Producto>(url, formData, { headers });
     }
-
 
     //eliminar producto
     public deleteProducto(id: number): Observable<any> {

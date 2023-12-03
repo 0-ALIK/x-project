@@ -14,11 +14,13 @@ export class MarcasService {
         private http: HttpClient
     ) { }
 
+    //obtienes todas las marcas
     public getMarcas(): Observable<any[]> {
         const url = `${this.apiUrl}/api/marca`;
         return this.http.get<Marca[]>(url);
     }
 
+    //obtiene una marca en especifico
     public getMarca(id: number): Observable<any> {
         const url = `${this.apiUrl}/api/marca/${id}`;
         return this.http.get<Marca>(url);
