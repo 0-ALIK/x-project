@@ -3,8 +3,9 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ConfirmationService, MessageService, ConfirmEventType } from 'primeng/api'
 import { Categoria, Marca, Producto } from 'src/app/interfaces/producto.iterface';
 import { Router } from '@angular/router';
-import { categorias, marcas, productos } from 'src/app/interfaces/data';
 import { GenerarReportesInventarioComponent } from 'src/app/modules/analitica/components/generar-reportes-inventario/generar-reportes-inventario.component';
+import { InventarioService } from 'src/app/services/inventario.service';
+import { ProductoService } from 'src/app/services/producto.service';
 
 @Component({
     selector: 'app-table-inventario',
@@ -18,9 +19,9 @@ export class TableInventarioComponent implements OnInit {
 
     public selectedProducto: Producto | undefined;
 
-    public categorias: Categoria[] = categorias;
+    public categorias: Categoria[] | undefined;
 
-    public marcas: Marca[] = marcas;
+    public marcas: Marca[] | undefined;
 
     public productos: Producto[] | undefined;
 
@@ -28,13 +29,21 @@ export class TableInventarioComponent implements OnInit {
         private confirmationService: ConfirmationService,
         private messageService: MessageService,
         public dialogService: DialogService,
-        private router: Router
+        private router: Router,
+        private inventarioService: InventarioService,
+        private productoService: ProductoService
     ) { }
 
     public ngOnInit(): void {
-        setTimeout(() => {
-            this.productos = productos;
-        }, 3000);
+        this.inventarioService.getInventario().subscribe(
+            (data: Producto[]) => {
+                this.productos = data;
+                console.log(this.productos)
+            },
+            (error) => {
+                console.log('Error al obtener los datos del inventario', error);
+            }
+        );
     }
 
     public onEliminarProducto( producto: Producto ): void {
@@ -83,8 +92,19 @@ export class TableInventarioComponent implements OnInit {
         ]);
     }
 
-    private eliminarProducto = (): void => {
-        this.messageService.add({ severity: 'info', summary: 'Operación Exitosa', detail: 'Registro eliminado' });
+    eliminarProducto(producto: Producto): void {
+        if (producto && producto.id_producto) {
+            this.productoService.deleteProducto(producto.id_producto).subscribe(
+                () => {
+                    this.productos = this.productos?.filter(p => p.id_producto !== producto.id_producto)
+                    this.messageService.add({ severity: 'success', summary: 'Operación Exitosa', detail: 'Producto eliminado' });
+                },
+                (error) => {
+                    console.error('Error al eliminar el producto:', error);
+                    this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al eliminar el producto' });
+                }
+            );
+        }
     }
 
 }

@@ -1,31 +1,36 @@
 import { Component, OnInit } from '@angular/core';
+import {SugerenciasService} from 'src/app/services/sugerencias.service' ;
 
 @Component({
   selector: 'dialog-app-agregar-opinion',
   templateUrl: './dialog-agregar-opinion.component.html',
   styleUrls: ['./dialog-agregar-opinion.component.css']
 })
-export class DialogAgregarOpinionComponent implements OnInit {
+export class DialogAgregarOpinionComponent  {
 
     loading: boolean = false;
-    opinion: any[] | undefined
+    contenido: string= "";
     value: number | undefined
 
-    ngOnInit(): void {
-    }
+  constructor(private sugerenciaService: SugerenciasService) {}
 
-    load(){
+  enviarOpinion() {
+    const opinionData = {
+      cliente_id: 9, 
+      contenido: this.contenido,
+      valoracion: this.value,
+    };
 
-    }
-
-    enviarOpinion() {
-        this.loading = true;
-
-        setTimeout(() => {
-            this.loading = false
-        }, 2000);
-        console.log('Mensaje enviado:', this.opinion);
-
+    console.log(opinionData);
+  
+    this.sugerenciaService.guardarOpinion(opinionData).subscribe((response) => {
+        console.log('Opinión enviada con éxito:', response);
+        this.contenido = ""; 
+        this.value = 0; 
+      },(error) => {
+        console.error('Error al enviar la opinión:', error);
       }
+      );
+  }
 
 }

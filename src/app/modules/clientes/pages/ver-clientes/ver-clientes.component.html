@@ -12,10 +12,7 @@
     </ng-container>
     <ng-container *ngIf="activeItem?.label && activeItem?.label === 'Solicitudes'">
         <section class="list-cards-solicitud">
-            <app-solicitud-card></app-solicitud-card>
-            <app-solicitud-card></app-solicitud-card>
-            <app-solicitud-card></app-solicitud-card>
-            <app-solicitud-card></app-solicitud-card>
+            <app-solicitud-card *ngFor="let solicitud of arregloSolicitudes" [solicitud]="solicitud"></app-solicitud-card>
         </section>
 
         <section class="">

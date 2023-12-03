@@ -13,6 +13,8 @@ import { MessageBubbleComponent } from './components/message-bubble/message-bubb
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { FormsModule } from '@angular/forms';  // Importa FormsModule
 
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { FormsModule } from '@angular/forms';  // Importa FormsModule
     ChatRoutingModule,
     AvatarModule,
     TagModule,
+    HttpClientModule,
     ButtonModule,
     InputTextareaModule,
     FormsModule

@@ -6,6 +6,10 @@ import { Direccion, Provincia } from 'src/app/interfaces/direccion.interface';
 import { AgregarColaboradorComponent } from '../../components/agregar-colaborador/agregar-colaborador.component';
 import { AgregarSucursalComponent } from '../../components/agregar-sucursal/agregar-sucursal.component';
 import { Pedido } from 'src/app/interfaces/pedido.interface';
+import { ActivatedRoute } from '@angular/router';
+import { DireccionService } from 'src/app/services/direccion.service';
+import { Empresa } from 'src/app/interfaces/usuario.inteface';
+import { ApiEmpresaService } from 'src/app/services/api-empresa.service';
 
 @Component({
   selector: 'app-perfil-empresa',
@@ -23,12 +27,17 @@ export class PerfilEmpresaComponent {
 
     public provinciaSelected: Provincia | undefined;
 
-    public direcciones: Direccion[] = direcciones;
+    public direcciones: Direccion[] = [];
+
+    public empresa: Empresa | undefined;
 
     private ref: DynamicDialogRef | undefined;
 
     public constructor(
         public dialogService: DialogService,
+        private activatedRoute: ActivatedRoute,
+        private apiService: DireccionService,
+        private empresaService: ApiEmpresaService
     ) {}
 
     public ngOnInit():void {
@@ -40,21 +49,46 @@ export class PerfilEmpresaComponent {
         ];
         this.activeItem = this.items[0];
         console.log(this.activeItem.label);
+
+        this.activatedRoute.params.subscribe({
+            next: ({id, nombre_empresa}) => {
+
+                this.apiService.getDireccionEmpresa(id).subscribe((resp:any)=>{
+                    this.direcciones = resp;
+                }),
+
+                this.empresaService.getDatosEmpresa(id).subscribe((resp:any)=>{
+                    this.empresa = resp[0];
+                    nombre_empresa = this.empresa?.nombre
+                }),
+
+                this.empresaService.getColaboradores(id,nombre_empresa ).subscribe((resp:any)=>{
+                    this.arregloColaboradores = resp;
+                    console.log(resp)
+                })
+            }
+        });
     }
+
+
+    public arregloColaboradores: any[] = [];
 
     public onChange(event:MenuItem):void {
         this.activeItem = event;
     }
 
-    public agregarColaborador(): void {
+    public agregarColaborador(id_empresa:any): void {
         this.ref = this.dialogService.open(AgregarColaboradorComponent, {
             header: 'Agregar Colaborador',
         });
     }
 
-    public agregarSucursal(): void {
+    public agregarSucursal(id_empresa:any): void {
         this.ref = this.dialogService.open(AgregarSucursalComponent, {
             header: 'Agregar Sucursal',
+            data: {
+                id_empresa: id_empresa
+              }
         });
     }
 }

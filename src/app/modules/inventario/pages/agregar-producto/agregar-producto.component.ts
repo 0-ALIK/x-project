@@ -3,9 +3,11 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
-import { categorias, marcas, productos } from 'src/app/interfaces/data';
 import { Categoria, Marca, Producto } from 'src/app/interfaces/producto.iterface';
 import { DOCUMENT } from '@angular/common';
+import { ProductoService } from 'src/app/services/producto.service';
+import { CategoriaService } from 'src/app/services/categoria.service';
+import { MarcasService } from 'src/app/services/marcas.service';
 
 interface UploadEvent {
     originalEvent: Event;
@@ -59,6 +61,7 @@ export class AgregarProductoComponent implements OnInit {
         nombre: ['', [Validators.required]],
         precio_unit: [0, [Validators.required]],
         cantidad_cajas: [0, [Validators.required]],
+        cantidad_por_caja: [0, [Validators.required]],
         categoria: [null , [Validators.required]],
         marca: [null , [Validators.required]],
         punto_reorden: [0, [Validators.required]],
@@ -69,6 +72,9 @@ export class AgregarProductoComponent implements OnInit {
         private activatedRoute: ActivatedRoute,
         private formBuilder: FormBuilder,
         private location: Location,
+        private productoService: ProductoService,
+        private marcaService: MarcasService,
+        private categoriaService: CategoriaService,
         @Inject(DOCUMENT) private document: Document
     ) {}
 
@@ -86,9 +92,69 @@ export class AgregarProductoComponent implements OnInit {
 
     public enviarFormulario(): void {
         this.estaCargando = true;
-        setTimeout(() => {
-            this.estaCargando = false;
-        }, 2000);
+
+        if (this.form.valid) {
+            const formData: FormData = new FormData()
+            formData.append('nombre', this.form.get('nombre')?.value || '')
+            formData.append('precio_unit', this.form.get('precio_unit')?.value || '')
+            formData.append('cantidad_cajas', this.form.get('cantidad_cajas')?.value || '')
+            formData.append('cantidad_por_caja', this.form.get('cantidad_por_caja')?.value || '')
+
+            //obtiene el id de categoria
+            const categoriaId = this.form.get('categoria')?.value;
+            if (categoriaId) {
+                formData.append('categoria_id', String(categoriaId));
+            }
+
+            //obtiene el id de marca
+            const marcaId = this.form.get('marca')?.value;
+            if (marcaId) {
+                formData.append('marca_id', String(marcaId));
+            }
+
+            formData.append('punto_reorden', this.form.get('punto_reorden')?.value || '')
+
+            if (this.foto) {
+                formData.append('foto', this.foto)
+            } else {
+
+                //convierte la url en archivo
+                if (this.currentProducto?.foto) {
+                    this.obtenerArchivoDesdeURL(this.currentProducto?.foto);
+                }
+            }
+
+            if (this.esEdicion()) {
+                this.activatedRoute.params.subscribe({
+                    next: ({ id }) => {
+                        // Edita una marca existente.
+                        this.productoService.updateProducto(formData, Number(id)).subscribe(
+                            response => {
+                                console.log(response.data)
+                                this.estaCargando = false;
+                                this.messageService.add({ severity: 'success', summary: 'Éxito', detail: response.data.nombre + ' actualizada'});
+                            },
+                            error => {
+                                this.estaCargando = false;
+                                this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No se pudo actualizar el producto' });
+                            }
+                        );
+                    }
+                });
+            } else {
+                this.productoService.guardarProducto(formData).subscribe(
+                    (response) => {
+                        if (response.status !== 201) {
+                            this.estaCargando = false;
+                            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No se pudo agregar el producto' + formData.get('nombre') });
+                        } else {
+                            this.estaCargando = false;
+                            this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'El producto ' + response.data.nombre + ' ha sido agregada' });
+                        }
+                    }
+                );
+            }
+        }
     }
 
     public selectFile( event: UploadEvent ): void {
@@ -96,37 +162,78 @@ export class AgregarProductoComponent implements OnInit {
         this.imagePreview = URL.createObjectURL( this.foto );
     }
 
-    //TODO: modificar luego
+    //obtiene los datos de un producto en especifico
     private obtenerProductoEditar(): void {
 
         this.activatedRoute.params.subscribe({
             next: ({id}) => {
 
-                this.currentProducto = productos.find( p => p.id_producto === Number(id) );
+                this.productoService.getProducto(Number(id)).subscribe(
+                    (producto: any) => {
+                        console.log(producto)
 
-                if(!this.currentProducto) return;
+                        this.currentProducto = producto.data;
 
-                this.titulo = 'Editar producto ' + this.currentProducto.nombre;
 
-                this.form.setValue({
-                    nombre: this.currentProducto.nombre,
-                    precio_unit: this.currentProducto.precio_unit,
-                    cantidad_cajas: this.currentProducto.cantidad_cajas,
-                    categoria: this.currentProducto.categoria,
-                    marca: this.currentProducto.marca,
-                    punto_reorden: this.currentProducto.punto_reorden,
-                });
-                this.imagePreview = this.currentProducto.foto;
+                        if (!this.currentProducto) return;
+                        console.log(this.currentProducto.categoria)
+
+                        this.titulo = 'Editar producto ' + this.currentProducto.nombre;
+
+                        this.form.setValue({
+                            nombre: this.currentProducto.nombre,
+                            precio_unit: this.currentProducto.precio_unit,
+                            cantidad_cajas: this.currentProducto.cantidad_cajas,
+                            cantidad_por_caja: this.currentProducto.cantidad_por_caja,
+                            categoria: this.currentProducto.categoria,
+                            marca: this.currentProducto.marca,
+                            punto_reorden: this.currentProducto.punto_reorden,
+                        });
+                        if (this.currentProducto.foto) {
+                            this.obtenerArchivoDesdeURL(this.currentProducto.foto);
+
+                        }
+                        this.imagePreview = this.currentProducto.foto;
+
+                    }
+                );
             }
         });
     }
 
-    //TODO: modificar luego
+    //obtiene un archivo a traves de la url
+    async obtenerArchivoDesdeURL(url: string): Promise<void> {
+        try {
+            // Descargar el archivo desde la URL
+            const response = await fetch(url);
+            const blob = await response.blob();
+
+            // Crear un objeto File a partir del blob
+            const nombreArchivo = this.obtenerNombreDeArchivoDesdeURL(url);
+            this.foto = new File([blob], nombreArchivo);
+        } catch (error) {
+            console.error('Error al obtener el archivo:', error);
+            this.foto = undefined;
+        }
+    }
+
+    //obtiene el nombre de archivo
+    obtenerNombreDeArchivoDesdeURL(url: string): string {
+        // Obtiene el nombre del archivo de la URL
+        const partesUrl = url.split('/');
+        return partesUrl[partesUrl.length - 1];
+    }
+
+    //obtiene todas las categorias y marcas
     private obtenerMarcasCategoria(): void {
-        setTimeout(() => {
-            this.marcas = marcas;
-            this.categorias = categorias;
-        }, 2000);
+        this.marcaService.getMarcas().subscribe( (marcas: any) => {
+            this.categoriaService.getCategorias().subscribe( (categorias: any) => {
+                setTimeout(() => {
+                    this.marcas = marcas.data;
+                    this.categorias = categorias.data;
+                }, 2000);
+            });
+        });
     }
 
     private esEdicion(): boolean {

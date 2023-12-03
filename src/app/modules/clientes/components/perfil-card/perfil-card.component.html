@@ -1,56 +1,99 @@
-<section class="section">
+<section class="section" >
     <article class="article a1">
-        <div class="image">
+        <div class="image" *ngIf="cliente">
             <p-image
-                src="https://primefaces.org/cdn/primeng/images/galleria/galleria1.jpg"
+                src="{{cliente.foto}}"
+                [(ngModel)] = "fotoCliente"
                 alt="Perfil"
                 width="300"
                 [preview]="true">
             </p-image>
         </div>
 
-        <p-fileUpload
-            name="demo[]"
-            (onUpload)="onUpload($event)"
-            [multiple]="false" accept="image/*"
-            [maxFileSize]="1000000">
-            <ng-template pTemplate="content">
-                <ul *ngIf="uploadedFiles.length">
-                    <li *ngFor="let file of uploadedFiles">{{ file.name }} - {{ file.size }} bytes</li>
-                </ul>
-            </ng-template>
-        </p-fileUpload>
+        <div class="image" *ngIf="empresa">
+            <p-image
+                src="{{empresa.foto}}"
+                [(ngModel)] = "fotoEmpresa"
+                alt="Perfil"
+                width="300"
+                [preview]="true">
+            </p-image>
+        </div>
+
+                    <p-fileUpload
+                [showUploadButton]="false"
+                [showCancelButton]="false"
+                (onSelect)="selectFile( $event )"
+                (onRemove)="document = undefined;"
+                [multiple]="false"
+                accept="image/*"
+                [maxFileSize]="1000000">
+            </p-fileUpload>
     </article>
 
-    <article class="article a2">
+    <article class="article a2" *ngIf="empresa">
         <form>
             <div class="input">
                 <label htmlFor="nombre">Nombre</label>
-                <input pInputText id="nombre" aria-describedby="username-help">
+                <input pInputText name="nombre" [(ngModel)]="nombre" aria-describedby="username-help">
             </div>
             <div class="input">
-                <label htmlFor="apellido">Apellido</label>
-                <input pInputText id="apellido" aria-describedby="username-help">
+                <label htmlFor="ruc">ruc</label>
+                <input pInputText name="ruc" [(ngModel)]="ruc" aria-describedby="username-help" >
+            </div>
+            <div class="input">
+                <label htmlFor="cedula">Razon Social</label>
+                <input pInputText id="correo" name="correo" [(ngModel)]="correo" aria-describedby="username-help">
             </div>
             <div class="input">
                 <label htmlFor="telefono">Telefono</label>
-                <input pInputText id="telefono" aria-describedby="username-help">
+                <input pInputText  name="telefono" [(ngModel)]="telefono" aria-describedby="username-help">
             </div>
             <div class="input">
-                <label htmlFor="cedula">Cédula</label>
-                <input pInputText id="cedula" aria-describedby="username-help">
+                <label htmlFor="cedula">Razon Social</label>
+                <input pInputText  name="cedula" [(ngModel)]="razon_social" aria-describedby="username-help">
             </div>
             <div class="flex flex-wrap gap-3 mb-8">
-                <div class="flex align-items-center">
-                    <p-radioButton name="genero" value="F" [(ngModel)]="genero" inputId="genero2"></p-radioButton>
-                    <label for="genero2" class="ml-2">Mujer</label>
-                </div>
-                <div class="flex align-items-center">
-                    <p-radioButton name="genero" value="M" [(ngModel)]="genero" inputId="genero1"></p-radioButton>
-                    <label for="genero1" class="ml-2">Hombre</label>
-                </div>
+
             </div>
-            <p-button label="Actualizar información"></p-button>
+            <p-button label="Actualizar información" (onClick)="enviarDatosEmpresa()"></p-button>
+        </form>
+    </article>
+
+    <article class="article a2" *ngIf="cliente">
+        <form>
+            <div class="input">
+                <label htmlFor="nombre">Nombre</label>
+                <input pInputText name="nombre" [(ngModel)]="nombre" aria-describedby="username-help">
+            </div>
+            <div class="input">
+                <label htmlFor="apellido">Apellido</label>
+                <input pInputText name="apellido" [(ngModel)]="apellido" aria-describedby="username-help" >
+            </div>
+            <div class="input">
+                <label htmlFor="telefono">Telefono</label>
+                <input pInputText name="telefono" [(ngModel)]="telefono" aria-describedby="username-help">
+            </div>
+            <div class="input">
+                <label htmlFor="correo">Correo</label>
+                <input pInputText name="correo" [(ngModel)]="correo" aria-describedby="username-help">
+            </div>
+
+            <div class="input">
+                <label htmlFor="cedula">Cédula</label>
+                <input pInputText name="cedula" [(ngModel)]="cedula" aria-describedby="username-help">
+            </div>
+            <div class="flex flex-wrap gap-3 mb-8">
+                    <label>
+                        <input type="radio" [(ngModel)]="selectedOption" value="M" name="options" (ngModelChange)="onOptionChange()"> M
+                      </label>
+
+                      <label>
+                        <input type="radio" [(ngModel)]="selectedOption" value="F" name="options" (ngModelChange)="onOptionChange()"> F
+                      </label>
+
+            </div>
+            <p-button label="Actualizar información" (onClick)="enviarDatosCliente()"></p-button>
         </form>
     </article>
 </section>

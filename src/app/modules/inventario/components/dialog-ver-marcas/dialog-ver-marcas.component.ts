@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Router } from '@angular/router';
-import { marcas } from 'src/app/interfaces/data';
+import { MarcasService} from 'src/app/services/marcas.service';
 import { Marca } from 'src/app/interfaces/producto.iterface';
+import { MessageService } from 'primeng/api';
+
 
 @Component({
     selector: 'app-dialog-ver-marcas',
@@ -16,17 +18,26 @@ export class DialogVerMarcasComponent {
 
     public selectedMarca: Marca | undefined;
 
-    public marcas: Marca[] = marcas;
+    public marcas: Marca[] | undefined;
 
 
 
     public constructor(
         public ref: DynamicDialogRef,
-        private router: Router
+        private router: Router,
+        private marcasService: MarcasService,
+        private messageService: MessageService
     ) { }
 
     public ngOnInit(): void {
-
+        this.marcasService.getMarcas().subscribe(
+            (marcas: any) => {
+                this.marcas = marcas.data;
+            },
+            (error) => {
+                console.error('Error al obtener los datos de las marcas', error);
+            }
+        );
     }
 
     public editarMarca(marca: Marca) {
@@ -36,12 +47,23 @@ export class DialogVerMarcasComponent {
         }
     }
 
-
-    public eliminarMarca(Marca: Marca) {
-        console.log(Marca);
+    public eliminarMarca(marca: Marca) {
+        if (marca && marca.id_marca) {
+            this.marcasService.deleteMarca(marca.id_marca).subscribe(
+                response => {
+                    console.log('Marca eliminada con éxito.');
+                    this.marcas = this.marcas?.filter(m => m.id_marca !== marca.id_marca)
+                    this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Marca eliminada con éxito.' });
+                },
+                error => {
+                    console.error('Error al eliminar la marca.', error);
+                    this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No se pudo eliminar la marca' });
+                }
+            );
+        }
     }
 
-    public agregar(): void {
+    public agregar(formData: FormData): void {
         this.loading = true;
         this.loading = false;
         this.cerrarDynamicDialog();

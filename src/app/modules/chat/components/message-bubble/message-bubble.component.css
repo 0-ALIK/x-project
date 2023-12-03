@@ -7,12 +7,16 @@
     background-color: var(--primary-color);
     color: var(--primary-color-text);
     border-bottom-right-radius: 0;
+    min-width: fit-content;
+    max-width: fit-content;
 }
 
 .message-left {
     background-color: var(--highlight-bg	);
     color: var(--highlight-text-color);
     border-bottom-left-radius: 0;
+    min-width: fit-content;
+    max-width: fit-content;
 }
 
 .message p {

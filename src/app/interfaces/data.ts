@@ -227,7 +227,7 @@ export const empresas: Empresa[] = [
       telefono: "111-111-1111",
       detalles: "Detalles de la empresa 1",
       id_empresa: 101,
-      RUC: "12345678901",
+      ruc: "12345678901",
       razon_social: "Razón Social 1",
       documento: "Documento1",
       estado: "Activo",
@@ -245,7 +245,7 @@ export const empresas: Empresa[] = [
       telefono: "222-222-2222",
       detalles: "Detalles de la empresa 2",
       id_empresa: 102,
-      RUC: "98765432102",
+      ruc: "98765432102",
       razon_social: "Razón Social 2",
       documento: "Documento2",
       estado: "Inactivo",
@@ -263,7 +263,7 @@ export const empresas: Empresa[] = [
       telefono: "333-333-3333",
       detalles: "Detalles de la empresa 3",
       id_empresa: 103,
-      RUC: "55555555553",
+      ruc: "55555555553",
       razon_social: "Razón Social 3",
       documento: "Documento3",
       estado: "Activo",
@@ -330,9 +330,9 @@ export const clientes: Cliente[] = [
 ];
 
 export const pedidoEstados: PedidoEstado[] = [
-    {id_estado_pedido: 1, estado: 'proceso'},
-    {id_estado_pedido: 2, estado: 'enviado'},
-    {id_estado_pedido: 3, estado: 'entregado'},
+    {id_pedido_estado: 1, nombre: 'proceso'},
+    {id_pedido_estado: 2, nombre: 'enviado'},
+    {id_pedido_estado: 3, nombre: 'entregado'},
 ];
 
 export const formasPago: FormaPago[] = [
@@ -346,7 +346,7 @@ export const pedidos: Pedido[] = [
         id_pedido: 1,
         cliente: clientes[0],
         fecha: new Date(),
-        pagos: [
+        pago: [
             {
                 id_pago: 1,
                 fecha: new Date(),
@@ -362,7 +362,7 @@ export const pedidos: Pedido[] = [
         ],
         estado: pedidoEstados[0],
         direccion: direcciones[2],
-        pedido_producto: [
+        pedido_productos: [
             { id_pedido_producto: 1, cantidad: 4, producto: productos[0] },
             { id_pedido_producto: 2, cantidad: 2, producto: productos[1] },
         ],
@@ -371,7 +371,7 @@ export const pedidos: Pedido[] = [
         id_pedido: 2,
         cliente: clientes[1],
         fecha: new Date(),
-        pagos: [
+        pago: [
             {
                 id_pago: 1,
                 fecha: new Date(),
@@ -387,7 +387,7 @@ export const pedidos: Pedido[] = [
         ],
         estado: pedidoEstados[2],
         direccion: direcciones[0],
-        pedido_producto: [
+        pedido_productos: [
             { id_pedido_producto: 1, cantidad: 2, producto: productos[1] },
             { id_pedido_producto: 2, cantidad: 5, producto: productos[2] },
         ]

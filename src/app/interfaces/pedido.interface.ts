@@ -21,8 +21,8 @@ export interface PedidoProductos {
 }
 
 export interface PedidoEstado {
-    id_estado_pedido?: number;
-    estado?: string;
+    id_pedido_estado?: number;
+    nombre?: string;
 }
 
 export interface Pedido {
@@ -31,10 +31,10 @@ export interface Pedido {
     fecha?: Date,
     fecha_cambio_estado?: Date,
     detalles?: string;
-    pagos?: Pago[]
+    pago?: Pago[]
     estado?: PedidoEstado;
     direccion?: Direccion;
-    pedido_producto?: PedidoProductos[]
+    pedido_productos?: PedidoProductos[]
 }
 
 export interface Compra {
@@ -43,4 +43,9 @@ export interface Compra {
     fecha?: Date;
     cantidad?: number;
     producto?: Producto;
+}
+
+export interface CarritoItem {
+    producto_id: number
+    cantidad: number
 }

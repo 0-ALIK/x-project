@@ -2,6 +2,7 @@
     <div class="opciones">
         <div class="modulos">
             <ul>
+                <li *ngFor="let item of loginItems"><a href="#{{ item.toLowerCase() }}" class="etiqueta-a">{{ item }}</a></li>
                 <li><a routerLink="registro" class="etiqueta-a">Registrarse</a></li>
                 <li><a routerLink="login" class="etiqueta-a">Iniciar Sesión</a></li>
                 <li *ngFor="let item of menuItems"><a href="#{{ item.toLowerCase() }}" class="etiqueta-a">{{ item }}</a></li>
@@ -47,8 +48,9 @@
         <!-- Registrarse - Iniciar Sesion -->
         <div *ngIf="!isSidebarButtonVisible" class="acciones">
             <ul>
-                <li><a routerLink="registro" class="etiqueta-a">Registrarse</a></li>
-                <li><a routerLink="login" class="etiqueta-a">Iniciar Sesión</a></li>
+                <!-- <li *ngFor="let item of loginItems"><a href="#{{ item.toLowerCase() }}" class="etiqueta-a">{{ item }}</a></li> -->
+                <li><a routerLink="/auth/registro-mayorista" class="etiqueta-a">Registrarse</a></li>
+                <li><a routerLink="/auth/login" class="etiqueta-a">Iniciar Sesión</a></li>
             </ul>
         </div>
     </div>

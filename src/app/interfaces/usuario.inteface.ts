@@ -22,6 +22,7 @@ export interface Admin extends Usuario {
 
 export interface Cliente extends Usuario {
     id_cliente?: number;
+    empresa_id?: number;
     apellido?: string;
     cedula?: string;
     genero?: string;
@@ -33,7 +34,7 @@ export interface Cliente extends Usuario {
 export interface Empresa extends Usuario {
     nombre?: string;
     id_empresa?: number;
-    RUC?: string;
+    ruc?: string;
     razon_social?: string;
     documento?: string;
     estado?: string;

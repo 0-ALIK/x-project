@@ -13,9 +13,9 @@ export class MessageBubbleComponent {
     @Input('mensaje')
     public mensaje!: any;
 
-    ngOnInit() {
-        console.log('Posición:', this.posicion);
-        console.log('Mensaje:', this.mensaje);
-    }
+    // ngOnInit() {
+    //     console.log('Posición:', this.posicion);
+    //     console.log('Mensaje:', this.mensaje);
+    // }
 
 }

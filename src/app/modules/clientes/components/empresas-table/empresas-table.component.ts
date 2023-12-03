@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { MenuItem } from 'primeng/api';
+import { MenuItem, MessageService } from 'primeng/api';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { empresas } from 'src/app/interfaces/data';
 import { Empresa } from 'src/app/interfaces/usuario.inteface';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { GenerarReportesEmpresasComponent } from 'src/app/modules/analitica/components/generar-reportes-empresas/generar-reportes-empresas.component';
+import { ApiEmpresaService } from 'src/app/services/api-empresa.service';
+import { EliminarClienteComponent } from '../eliminar-cliente/eliminar-cliente.component';
 
 @Component({
   selector: 'app-empresas-table',
@@ -12,6 +15,7 @@ import { GenerarReportesEmpresasComponent } from 'src/app/modules/analitica/comp
   styleUrls: ['./empresas-table.component.css']
 })
 export class EmpresasTableComponent {
+
 
     tabs: MenuItem[] | undefined;
 
@@ -23,13 +27,19 @@ export class EmpresasTableComponent {
 
     public ref: DynamicDialogRef | undefined;
 
-    public arregloEmpresas: Empresa[] = empresas
+    public arregloEmpresas: Empresa[] = [];
 
     public constructor (
+        private messageService: MessageService,
         private router: Router,
         public dialogService: DialogService,
-
-    ) {}
+        private apiService: ApiEmpresaService
+        ) {
+        this.apiService.getEmpresas().subscribe((resp:any)=>{
+            console.log(resp)
+            this.arregloEmpresas = resp
+        })
+    }
 
     public ngOnInit(): void {
 
@@ -73,8 +83,34 @@ export class EmpresasTableComponent {
 
     public onRowSelect(event: any): void {
         const { id_empresa } = event.data;
+        const { nombre_empresa} = event.data;
         this.router.navigate(['/app/clientes/perfil/empresa', id_empresa]);
+        this.router.navigate(['/app/clientes/perfil/empresa', nombre_empresa]);
     }
+
+    showEliminarEmpresa(id_empresa: any, nombre_empresa: any): void {
+
+        this.ref = this.dialogService.open(EliminarClienteComponent, {
+            header: 'Empresa: '+nombre_empresa+' con ID:'+id_empresa,
+            height: '30%',
+            width:'30%'
+
+
+        });
+
+        this.ref.onClose.subscribe((result) => {
+            if (result) {
+              this.apiService.eliminarEmpresa(id_empresa).subscribe((resp:any)=>{
+                console.log('Se elimino correctamente')
+            })
+
+            } else {
+              console.log('No se elimino ningun cliente ');
+            }
+          });
+        }
+
+
 
     public showGenerarReporte(): void {
         this.ref = this.dialogService.open(GenerarReportesEmpresasComponent, {

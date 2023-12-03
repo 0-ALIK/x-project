@@ -2,20 +2,20 @@
 <article class="card">
     <div class="contenido">
         <div class="avatar">
-            <p-avatar  styleClass="mr-2" size="xlarge" shape="circle" image="https://res.cloudinary.com/duwsb7fbe/image/upload/v1697773715/xd_upxbh0.jpg"></p-avatar>
+            <p-avatar  styleClass="mr-2" size="xlarge" shape="circle" image="{{solicitud.foto}}"></p-avatar>
         </div>
 
         <article style="margin-left: var(--spacing-3);">
-            <p style="font-size: var(--text-xl) ;">Nombre Empresa</p>
-            <p style="font-size: var(--text-base);margin-bottom:var(--spacing-3);">propietario</p>
+            <p style="font-size: var(--text-xl) ;">{{ solicitud.nombre}} </p>
+            <p style="font-size: var(--text-base);margin-bottom:var(--spacing-3);">RUC: {{ solicitud.ruc }}</p>
 
-            <p style="font-size: var(--text-sm) ;">archivo</p>
+            <p style="font-size: var(--text-sm) ;"> Ver archivo: <a href="{{ solicitud.documento }}" >Documento</a></p>
         </article>
     </div>
 
     <div class="botones">
-        <p-button icon="pi pi-check" [rounded]="true" [outlined]="true" class="boton"></p-button>
-        <p-button icon="pi pi-times" [rounded]="true" severity="danger" [outlined]="true" class="boton"></p-button>
+        <p-button icon="pi pi-check" [rounded]="true" [outlined]="true" class="boton" (onClick)="aceptarSolicitud(solicitud.id_empresa)"></p-button>
+        <p-button icon="pi pi-times" [rounded]="true" severity="danger" [outlined]="true" class="boton" (onClick)="denegarSolicitud(solicitud.id_empresa)"></p-button>
     </div>
 </article>
 

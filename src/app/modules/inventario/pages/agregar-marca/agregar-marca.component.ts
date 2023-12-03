@@ -3,10 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
-import { marcas, productos } from 'src/app/interfaces/data';
 import { Marca, Producto } from 'src/app/interfaces/producto.iterface';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { DialogVerMarcasComponent } from '../../components/dialog-ver-marcas/dialog-ver-marcas.component';
+import { MarcasService } from 'src/app/services/marcas.service';
 
 interface UploadEvent {
     originalEvent: Event;
@@ -35,7 +35,7 @@ export class AgregarMarcaComponent implements OnInit {
 
     public labelButton2: string = 'Agregar marca';
 
-    public productos: Producto[] = productos;
+    public productos: Producto[] | undefined;
 
     private ref: DynamicDialogRef | undefined;
 
@@ -50,6 +50,7 @@ export class AgregarMarcaComponent implements OnInit {
         private formBuilder: FormBuilder,
         private location: Location,
         public dialogService: DialogService,
+        private marcaService: MarcasService
     ) {}
 
     public ngOnInit(): void {
@@ -61,9 +62,73 @@ export class AgregarMarcaComponent implements OnInit {
 
     public enviarFormulario(): void {
         this.estaCargando = true;
-        setTimeout(() => {
-            this.estaCargando = false;
-        }, 2000);
+
+        if (this.form.valid) {
+            const formData: FormData = new FormData()
+            formData.append('nombre', this.form.get('nombre')?.value || '')
+            formData.append('descripcion', this.form.get('descripcion')?.value || '')
+
+            if (this.foto) {
+                formData.append('logo', this.foto)
+            } else {
+
+                if (this.currentMarca?.logo) {
+                    this.obtenerArchivoDesdeURL(this.currentMarca?.logo);
+                }
+            }
+
+            if (this.esEdicion()) {
+                this.activatedRoute.params.subscribe({
+                    next: ({ id }) => {
+                        // Edita una marca existente.
+                        this.marcaService.updateMarca(formData, Number(id)).subscribe(
+                            response => {
+                                console.log(response.data)
+                                this.estaCargando = false;
+                                this.messageService.add({ severity: 'success', summary: 'Éxito', detail: response.data.nombre + ' actualizada'});
+                            },
+                            error => {
+                                this.estaCargando = false;
+                                this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No se pudo actualizar la marca' });
+                            }
+                        );
+                    }
+                });
+            } else {
+                this.marcaService.guardarMarca(formData).subscribe(
+                    (response: any) => {
+                        if (response.status !== 201) {
+                            this.estaCargando = false;
+                            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No se pudo agregar la marca' + formData.get('nombre') });
+                        } else {
+                            this.estaCargando = false;
+                            this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'La marca ' + response.data.nombre + ' ha sido agregada' });
+                        }
+                    }
+                );
+            }
+        }
+    }
+
+    async obtenerArchivoDesdeURL(url: string): Promise<void> {
+        try {
+            // Descargar el archivo desde la URL
+            const response = await fetch(url);
+            const blob = await response.blob();
+
+            // Crear un objeto File a partir del blob
+            const nombreArchivo = this.obtenerNombreDeArchivoDesdeURL(url);
+            this.foto = new File([blob], nombreArchivo);
+        } catch (error) {
+            console.error('Error al obtener el archivo:', error);
+            this.foto = undefined;
+        }
+    }
+
+    obtenerNombreDeArchivoDesdeURL(url: string): string {
+        // Obtiene el nombre del archivo de la URL
+        const partesUrl = url.split('/');
+        return partesUrl[partesUrl.length - 1];
     }
 
     public selectFile(event: UploadEvent): void {
@@ -78,17 +143,24 @@ export class AgregarMarcaComponent implements OnInit {
     private obtenerMarcaEditar(): void {
         this.activatedRoute.params.subscribe({
             next: ({id}) => {
-                this.currentMarca = marcas.find( m => m.id_marca === Number(id) );
+                this.marcaService.getMarca(Number(id)).subscribe(
+                    (marcas: any) => {
+                        this.currentMarca = marcas.data;
 
-                if(!this.currentMarca) return;
+                        if(!this.currentMarca) return;
 
-                this.titulo = 'Editar marca ' + this.currentMarca.nombre;
+                        this.titulo = 'Editar marca ' + this.currentMarca.nombre;
 
-                this.form.setValue({
-                    nombre: this.currentMarca.nombre,
-                    descripcion: this.currentMarca.descripcion
-                });
-                this.imagePreview = this.currentMarca.logo;
+                        this.form.setValue({
+                            nombre: this.currentMarca.nombre,
+                            descripcion: this.currentMarca.descripcion
+                        });
+                        if (this.currentMarca.logo) {
+                            this.obtenerArchivoDesdeURL(this.currentMarca.logo);
+                        }
+                        this.imagePreview = this.currentMarca.logo;
+                    }
+                );
             }
         });
     }

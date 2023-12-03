@@ -1,6 +1,8 @@
 .contenido{
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    gap: var(--spacing-2);
 }
 
 .celda-cliente {
@@ -14,3 +16,4 @@
     margin-top: 0;
     margin-bottom: 0;
 }
+

@@ -11,6 +11,8 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { FileUploadModule } from 'primeng/fileupload';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
     declarations: [
@@ -27,7 +29,9 @@ import { InputNumberModule } from 'primeng/inputnumber';
         PasswordModule,
         CheckboxModule,
         RadioButtonModule,
-        InputNumberModule
+        InputNumberModule,
+        FileUploadModule,
+        ToastModule
     ]
 })
 export class AuthModule { }
