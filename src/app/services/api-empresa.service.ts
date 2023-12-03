@@ -35,10 +35,11 @@ export class ApiEmpresaService {
 
 
 
-    public getColaboradores(idEmpresa:any, nombre_empresa:any): Observable<any> {
+    public getColaboradores(idEmpresa:any, nombre_empresa: any): Observable<any> {
 
         const headers = new HttpHeaders().set('Authorization', `Bearer `+this.token);
         return this.Http.get<any>('http://127.0.0.1:8000/api/clientes/' , {headers, params: nombre_empresa});
+
     }
 
     public eliminarEmpresa(idEmpresa:any ){
@@ -72,6 +73,22 @@ export class ApiEmpresaService {
 
         return this.Http.post<any>('http://127.0.0.1:8000/api/clientes/', formData,  {headers} );
     }
+
+    public eliminarColaborador(idEmpresa:number, formData:FormData): Observable<any> {
+
+        const headers = new HttpHeaders()
+        .set('Authorization', `Bearer ` + this.token)
+        .set('Type-content', 'aplication/json');
+
+
+        return this.Http.post<any>('http://127.0.0.1:8000/api/clientes/', formData,  {headers} );
+    }
+
+
+
+
+
+
 
     public agregarSucursal(idEmpresa:number, formData:FormData): Observable<any> {
 

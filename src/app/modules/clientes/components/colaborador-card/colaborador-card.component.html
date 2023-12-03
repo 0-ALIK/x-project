@@ -9,8 +9,16 @@
             <p>Tel: {{ colaborador.telefono}}</p>
         </div>
 
+
     </div>
 
-    <p>fecha registro</p>
+    <p>fecha registro: {{colaborador.created_at | date}}</p>
+    <div style="justify-content:space-between">
+
+            <p-button icon="pi pi-pencil" [rounded]="true" [outlined]="true" class="boton" (onClick)="editarColaborador()"></p-button>
+
+            <p-button icon="pi pi-times" [rounded]="true" severity="danger" [outlined]="true" class="boton" (onClick)="eliminarColaborador(colaborador.id_empresa)"></p-button>
+    </div>
 
 </div>
+

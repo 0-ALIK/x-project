@@ -33,6 +33,16 @@ export class DireccionService {
         return this.http.get<Direccion[]>(this.host +'clientes/'+  idCliente + '/direcciones', {headers});
     }
 
+    public addDireccionCliente( idCliente:any, formData: FormData ): Observable<Direccion[]> {
+
+        const headers= new HttpHeaders()
+        .set('Authorization', `Bearer ` + this.token)
+        .set('Type-content', 'aplication/json');
+
+
+        return this.http.post<Direccion[]>(this.host +'clientes/'+  idCliente + '/direcciones',formData, {headers});
+    }
+
     public getDatosEmpresa( idEmpresa:any ): Observable<Empresa[]> {
 
         return this.http.get<Empresa[]>(this.host +'empresas/'+  idEmpresa);

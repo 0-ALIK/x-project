@@ -50,6 +50,8 @@ export class PerfilEmpresaComponent {
         this.activeItem = this.items[0];
         console.log(this.activeItem.label);
 
+        const formData = new FormData();
+
         this.activatedRoute.params.subscribe({
             next: ({id, nombre_empresa}) => {
 
@@ -62,7 +64,9 @@ export class PerfilEmpresaComponent {
                     nombre_empresa = this.empresa?.nombre
                 }),
 
-                this.empresaService.getColaboradores(id,nombre_empresa ).subscribe((resp:any)=>{
+
+                formData.append('nombre',nombre_empresa);
+                this.empresaService.getColaboradores(id,nombre_empresa).subscribe((resp:any)=>{
                     this.arregloColaboradores = resp;
                     console.log(resp)
                 })
@@ -80,14 +84,18 @@ export class PerfilEmpresaComponent {
     public agregarColaborador(id_empresa:any): void {
         this.ref = this.dialogService.open(AgregarColaboradorComponent, {
             header: 'Agregar Colaborador',
+            data: {
+                id_empresa: id_empresa
+               }
         });
     }
 
     public agregarSucursal(id_empresa:any): void {
+        console.log(id_empresa)
         this.ref = this.dialogService.open(AgregarSucursalComponent, {
-            header: 'Agregar Sucursal',
+            header: 'Agregar Direccion',
             data: {
-                id_empresa: id_empresa
+               id_empresa: id_empresa
               }
         });
     }

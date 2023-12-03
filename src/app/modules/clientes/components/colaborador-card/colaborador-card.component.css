@@ -2,9 +2,14 @@
     margin: var(--spacing-4) var(--spacing-4);
     border: solid 2px #808080;
     text-align: center;
+    padding-bottom: 30px;
 }
 
 .datos{
     display: grid;
     grid-template-columns: 50% 50%;
+}
+
+p-button{
+    padding: 30px;
 }

@@ -27,7 +27,7 @@ export class AgregarColaboradorComponent implements OnInit{
     ){}
 
     ngOnInit(): void {
-        this.id_empresa = this.config.data.id_cliente;
+        this.id_empresa = this.config.data.id_empresa;
     }
     agregarColaborador() {
         const formData = new FormData();
