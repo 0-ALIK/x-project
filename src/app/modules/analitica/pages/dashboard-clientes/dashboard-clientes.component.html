@@ -55,16 +55,16 @@
         </div>
     </section>
 
-    <section class="flex flex-row gap-2 mt-2">
-        <div class=" flex flex-column gap-2">
-            <div class="flex w-17rem h-19rem border-round justify-content-center align-items-center" [style]="{'background': 'var(--surface-card)'}">
+    <section class="flex flex-column gap-2 mt-2">
+        <div class=" flex gap-2">
+            <div class="flex w-screen h-auto border-round justify-content-center align-items-center" [style]="{'background': 'var(--surface-card)'}">
                 <p-chart class="w-17rem h-17rem"
                     type="pie"
                     [data]="data3"
                     [options]="options2">
                 </p-chart>
             </div>
-            <div class="flex w-17rem h-19rem border-round justify-content-center align-items-center" [style]="{'background': 'var(--surface-card)'}">
+            <div class="flex w-screen h-full border-round justify-content-center align-items-center" [style]="{'background': 'var(--surface-card)'}">
                 <p-chart class="w-17rem h-17rem"
                     type="pie"
                     [data]="data4"
@@ -74,15 +74,15 @@
         </div>
 
         <div class="pie flex flex-column gap-2">
-            <div class=" border-round h-19rem" [style]="{'background': 'var(--surface-card)'}">
+            <div class=" border-round h-full" [style]="{'background': 'var(--surface-card)'}">
                 <p-chart class="h-10rem"
                     type="bar"
                     [data]="data1"
                     [options]="options1">
                 </p-chart>
             </div>
-
         </div>
+
     </section>
 </main>
 

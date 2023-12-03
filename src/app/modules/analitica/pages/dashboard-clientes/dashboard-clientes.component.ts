@@ -1,7 +1,3 @@
-import { empresas, provincias } from 'src/app/interfaces/data';
-import { Pedido } from './../../../../interfaces/pedido.interface';
-import { Direccion } from './../../../../interfaces/direccion.interface';
-import { clientes, direcciones, productos, pedidos } from './../../../../interfaces/data';
 import { DashboardService } from './../../services/dashboard.service';
 import { Cliente, Empresa } from 'src/app/interfaces/usuario.inteface';
 import { Component, OnInit } from '@angular/core';
@@ -66,7 +62,6 @@ import { Component, OnInit } from '@angular/core';
              this.dashboardService.getClientes().subscribe({
                  next: (clientes) => {
                     this.clientes = clientes;
-                    this.clientesCopy = clientes;
                     const fechaActual = new Date().toISOString().slice(0, 7);
                     this.clientesMesActual = clientes.filter( function(cliente: Cliente) {
                         const fechaCliente = cliente.created_at?.slice(0, 7) ;
@@ -257,7 +252,7 @@ import { Component, OnInit } from '@angular/core';
                 datasets: [
                     {
                         label: 'Compras',
-                        backgroundColor: documentStyle.getPropertyValue('--blue-600'),
+                        backgroundColor: [documentStyle.getPropertyValue('--cyan-300'),documentStyle.getPropertyValue('--cyan-600')],
                         borderColor: documentStyle.getPropertyValue('--indigo-500'),
                         data: frecuencias.slice(0,4)
                     },
