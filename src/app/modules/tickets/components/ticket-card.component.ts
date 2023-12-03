@@ -16,7 +16,7 @@ import { TagModule } from 'primeng/tag';
             [ngStyle]="{backgroundColor:'var(--highlight-bg)', color: 'var(--highlight-text-color)'}"
             [routerLink]="['/app/tickets', reclamo?.id_reclamo]">
             <div class="flex align-items-center justify-content-between mb-1">
-                <p class="m-0">{{ reclamo?.categoria?.nombre }}</p>
+                <p class="m-0">{{ reclamo?.categoria?.categoria }}</p>
                 <p-tag
                     [value]="reclamo?.prioridad?.prioridad"
                     [severity]="tagsColorsService.getPriority(reclamo?.prioridad?.prioridad || '')">

@@ -97,7 +97,7 @@ export class NavComponent implements OnInit {
 
     public ngOnInit(): void {
         if(!localStorage.getItem('usuario')) return;
-        const usuario = JSON.parse(localStorage.getItem('usuario') || '');
+            const usuario = JSON.parse(localStorage.getItem('usuario') || '');
 
         this.usuario = usuario.data;
 

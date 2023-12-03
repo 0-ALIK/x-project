@@ -16,7 +16,7 @@ import { ProductosPedidosComponent } from './components/productos-pedidos/produc
 import { PagosListComponent } from './components/pagos-list/pagos-list.component';
 import { ImportesCalcService } from './services/importes-calc.service';
 import { InputNumberModule } from 'primeng/inputnumber';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { AgregarEditarPagoComponent } from './components/agregar-editar-pago/agregar-editar-pago.component';
@@ -33,6 +33,8 @@ import { MessagesModule } from 'primeng/messages';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { FileUploadModule } from 'primeng/fileupload';
+import { AgregarReclamoComponent } from './components/agregar-reclamo.component';
 
 @NgModule({
     declarations: [
@@ -45,6 +47,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
         EcommerceComponent,
         CardCarritoComprasComponent,
         CarritoPageComponent,
+        AgregarReclamoComponent
     ],
     imports: [
         CommonModule,
@@ -60,6 +63,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
         ClientesModule,
         InputNumberModule,
         FormsModule,
+        ReactiveFormsModule,
         DropdownModule,
         AnaliticaModule,
         DropdownModule,
@@ -69,7 +73,8 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
         SharedModule,
         MessagesModule,
         ToastModule,
-        ConfirmDialogModule
+        ConfirmDialogModule,
+        FileUploadModule
     ],
     providers: [ImportesCalcService, MessageService, DialogService, ConfirmationService]
 })

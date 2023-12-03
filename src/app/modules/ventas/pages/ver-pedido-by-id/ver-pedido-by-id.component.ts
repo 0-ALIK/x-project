@@ -9,6 +9,9 @@ import { VentasService } from 'src/app/services/ventas.service';
 import { MessageService } from 'primeng/api';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { AgregarReclamoComponent } from '../../components/agregar-reclamo.component';
+import { ReclamosService } from 'src/app/modules/tickets/services/tickets.service';
 
 (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
 
@@ -37,7 +40,7 @@ import * as pdfFonts from 'pdfmake/build/vfs_fonts';
                     <h2 class="text-lg m-0 p-0">Dirección de envio</h2>
                     <alik-card-direccion [direccion]="pedido?.direccion"></alik-card-direccion>
                 </div>
-                <div class="mb-2">
+                <div class="mb-2" *ngIf="esAdmin">
                     <h2 class="text-lg m-0 p-0">Estado del pedido</h2>
                     <div class="flex gap-2 align-items-center">
                         <p-dropdown
@@ -69,10 +72,17 @@ import * as pdfFonts from 'pdfmake/build/vfs_fonts';
                         locale="en-US">
                     </p-inputNumber>
                 </div>
-                <p-button
-                    label="Generar factura"
-                    (onClick)="generarFactura()">
-                </p-button>
+                <div>
+                    <p-button
+                        label="Generar factura"
+                        (onClick)="generarFactura()">
+                    </p-button>
+                    <p-button
+                        label="Crear reclamo"
+                        [disabled]="reclamo !== undefined"
+                        (onClick)="crearReclamo()">
+                    </p-button>
+                </div>
             </div>
 
             <div class="w-full">
@@ -97,6 +107,8 @@ import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 })
 export class VerPedidoByIdComponent implements OnInit {
 
+    private ref: DynamicDialogRef | undefined;
+
     public cliente: Cliente | undefined;
 
     public producto: Producto | undefined;
@@ -111,6 +123,8 @@ export class VerPedidoByIdComponent implements OnInit {
 
     public loading = false;
 
+    public esAdmin: boolean = false;
+
     public estados: PedidoEstado[] = [];
     public estado: PedidoEstado | undefined;
 
@@ -122,10 +136,19 @@ export class VerPedidoByIdComponent implements OnInit {
         private activatedRoute: ActivatedRoute,
         public importesCalc: ImportesCalcService,
         private ventaService: VentasService,
-        private message: MessageService
+        public dialogService: DialogService,
+        private message: MessageService,
+        private reclamoService: ReclamosService
     ) {}
 
     public ngOnInit(): void {
+        if(!localStorage.getItem('usuario')) {
+            const usuario = JSON.parse(localStorage.getItem('usuario') || '');
+            if(usuario.tipo === 'admin') {
+                this.esAdmin = true;
+            }
+        }
+
         this.activatedRoute.params.subscribe({
             next: ({id}) => {
                 this.obtenerPedido(Number(id));
@@ -135,6 +158,16 @@ export class VerPedidoByIdComponent implements OnInit {
         this.ventaService.getPedidoEstados().subscribe({
             next: estados => {
                 this.estados = estados;
+            }
+        });
+
+        this.reclamoService.getReclamos().subscribe({
+            next: resp => {
+                this.reclamo = resp.data.find((r: Reclamo) => r.id_reclamo === this.pedido?.id_pedido);
+                console.log(this.reclamo);
+            },
+            error: error => {
+                console.log(error);
             }
         });
     }
@@ -163,9 +196,28 @@ export class VerPedidoByIdComponent implements OnInit {
         });
     }
 
+    public crearReclamo(): void {
+        this.ref = this.dialogService.open(AgregarReclamoComponent, {
+            header: 'Agregar pago',
+            data: {
+                cliente_id: this.pedido?.cliente?.id_cliente,
+                pedido_id: this.pedido?.id_pedido
+            },
+            height: '70%'
+        });
+
+        this.ref.onClose.subscribe((mensaje) => {
+            if(mensaje) {
+                this.message.add({severity: 'error', summary: 'Reclamo agregado'});
+                return;
+            }
+            this.message.add({severity: 'success', summary: 'El reclamo no se pudo agregar'});
+        });
+    }
+
     public cambiarEstado(): void {
         if(!this.estado?.id_pedido_estado || !this.pedido?.id_pedido) return;
-        console.log('xd');
+
         this.loading = true;
         this.ventaService.cambiarEstadoPedido(this.estado.id_pedido_estado, this.pedido?.id_pedido).subscribe({
             next: resp => {
@@ -206,48 +258,50 @@ export class VerPedidoByIdComponent implements OnInit {
         });
 
         // Obtener el nombre de la empresa, su logo y la fecha actual (reemplaza estos datos con los tuyos)
-  const nombreEmpresa = '131CodeLines - Cosmos';
+        const nombreEmpresa = '131CodeLines - Cosmos';
 
-  const fecha = new Date().toLocaleDateString(); // Obtener la fecha actual en formato legible
+        const fecha = new Date().toLocaleDateString(); // Obtener la fecha actual en formato legible
 
-  // Definir el contenido del documento PDF con el título, logo de la empresa y la fecha
-  const documentoDefinition: any = {
-    content: [
-      {
-        text: nombreEmpresa, // Agregar el nombre de la empresa como título
-        style: 'encabezado'
-      },
-      {
-        text: `Fecha: ${fecha}`, // Agregar la fecha
-        style: 'fecha'
-      },
-      {
-        text: 'Factura de Productos',
-        style: 'encabezado'
-      },
-      {
-        table: {
-          headerRows: 1,
-          widths: ['*', '*', '*', '*', '*'],
-          body: contenido
-        }
-      }
-    ],
-    styles: {
-      encabezado: {
-        fontSize: 18,
-        bold: true,
-        margin: [0, 0, 0, 10]
-      },
-      fecha: {
-        alignment: 'right',
-        margin: [0, 0, 0, 10]
-      }
-    }
-  };
+        // Definir el contenido del documento PDF con el título, logo de la empresa y la fecha
+        const documentoDefinition: any = {
+            content: [
+            {
+                text: nombreEmpresa, // Agregar el nombre de la empresa como título
+                style: 'encabezado'
+            },
+            {
+                text: `Fecha: ${fecha}`, // Agregar la fecha
+                style: 'fecha'
+            },
+            {
+                text: 'Factura de Productos',
+                style: 'encabezado'
+            },
+            {
+                table: {
+                headerRows: 1,
+                widths: ['*', '*', '*', '*', '*'],
+                body: contenido
+                }
+            }
+            ],
+            styles: {
+            encabezado: {
+                fontSize: 18,
+                bold: true,
+                margin: [0, 0, 0, 10]
+            },
+            fecha: {
+                alignment: 'right',
+                margin: [0, 0, 0, 10]
+            }
+            }
+        };
 
         const pdfDoc = pdfMake.createPdf(documentoDefinition);
         pdfDoc.open();
     }
+
+
 
 }
