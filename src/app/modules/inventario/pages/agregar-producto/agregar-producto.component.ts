@@ -8,7 +8,6 @@ import { DOCUMENT } from '@angular/common';
 import { ProductoService } from 'src/app/services/producto.service';
 import { CategoriaService } from 'src/app/services/categoria.service';
 import { MarcasService } from 'src/app/services/marcas.service';
-import { categorias, marcas, productos } from 'src/app/interfaces/data';
 
 interface UploadEvent {
     originalEvent: Event;
@@ -16,11 +15,13 @@ interface UploadEvent {
     currentFiles: File[];
 }
 
+
 @Component({
     selector: 'app-agregar-producto',
     templateUrl: './agregar-producto.component.html',
     styleUrls: ['./agregar-producto.component.css']
 })
+
 export class AgregarProductoComponent implements OnInit {
 
     public titulo: string = 'Agregar nuevo producto'
@@ -63,8 +64,8 @@ export class AgregarProductoComponent implements OnInit {
         precio_unit: [0, [Validators.required]],
         cantidad_cajas: [0, [Validators.required]],
         cantidad_por_caja: [0, [Validators.required]],
-        categoria: [null , [Validators.required]],
-        marca: [null , [Validators.required]],
+        categoria: [{} , [Validators.required]],
+        marca: [{}, [Validators.required]],
         punto_reorden: [0, [Validators.required]],
     });
 
@@ -98,12 +99,13 @@ export class AgregarProductoComponent implements OnInit {
                 precio_unit: this.form.get('precio_unit')?.value,
                 cantidad_cajas: this.form.get('cantidad_cajas')?.value,
                 cantidad_por_caja: this.form.get('cantidad_por_caja')?.value,
-                categoria: this.form.get('categoria')?.value,
-                marca: this.form.get('marca')?.value,
+                categoria: this.options.id_categoria,
+                marca: this.form.get('marcas')?.value.id_marca,
                 punto_reorden: this.form.get('punto_reorden')?.value,
-                foto: this.foto ? this.foto.name : '', // Ajusta esto según tu modelo de datos
+                foto: this.foto ? this.foto.name : '',
             };
-    
+
+            console.log(producto.categoria);
             this.productoService.guardarProducto(producto).subscribe(
                 (response) => {
                     // Manejar la respuesta del servicio
@@ -117,6 +119,9 @@ export class AgregarProductoComponent implements OnInit {
             );
         }
     }
+    
+    
+    
 
     public selectFile( event: UploadEvent ): void {
         this.foto = event.currentFiles[0]
@@ -127,24 +132,30 @@ export class AgregarProductoComponent implements OnInit {
     private obtenerProductoEditar(): void {
 
         this.activatedRoute.params.subscribe({
-            next: ({id}) => {
+            next: ({ id }) => {
+                this.productoService.getProducto(Number(id)).subscribe(
+                    (producto: any) => {
+                        console.log(producto)
 
-                this.currentProducto = productos.find( p => p.id_producto === Number(id) );
+                        this.currentProducto = producto.data;
 
-                if(!this.currentProducto) return;
 
-                this.titulo = 'Editar producto ' + this.currentProducto.nombre;
+                        if (!this.currentProducto) return;
+                        console.log(this.currentProducto.categoria)
 
-                this.form.setValue({
-                    nombre: this.currentProducto.nombre,
-                    precio_unit: this.currentProducto.precio_unit,
-                    cantidad_cajas: this.currentProducto.cantidad_cajas,
-                    cantidad_por_caja: this.currentProducto.cantidad_por_caja,
-                    categoria: this.currentProducto.categoria,
-                    marca: this.currentProducto.marca,
-                    punto_reorden: this.currentProducto.punto_reorden,
-                });
-                this.imagePreview = this.currentProducto.foto;
+                        this.titulo = 'Editar producto ' + this.currentProducto.nombre;
+
+                        this.form.setValue({
+                            nombre: this.currentProducto.nombre,
+                            precio_unit: this.currentProducto.precio_unit,
+                            cantidad_cajas: this.currentProducto.cantidad_cajas,
+                            categoria: this.currentProducto.categoria,
+                            marca: this.currentProducto.marca,
+                            punto_reorden: this.currentProducto.punto_reorden,
+                        });
+                        this.imagePreview = this.currentProducto.foto;
+                    }
+                );
             }
         });
     }

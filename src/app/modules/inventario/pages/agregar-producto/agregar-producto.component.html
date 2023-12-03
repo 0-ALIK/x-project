@@ -67,7 +67,8 @@
                 <p-dropdown
                     formControlName="categoria"
                     [options]="categorias"
-                    optionLabel="nombre">
+                    optionLabel="nombre"
+                    optionValue="id_categoria">
                 </p-dropdown>
             </div>
 
@@ -77,9 +78,10 @@
                 <p-dropdown
                     formControlName="marca"
                     [options]="marcas"
-                    optionLabel="nombre">
+                    optionLabel="nombre"
+                    optionValue="id_marca">
                     <ng-template let-marca pTemplate="item">
-                        <div [style]="{'display': 'flex', 'alignItems': 'center', 'gap': 'var(--spacing-2)'}" >
+                        <div [style]="{'display': 'flex', 'alignItems': 'center', 'gap': 'var(--spacing-2)'}">
                             <img [src]="marca.logo" style="width: 18px">
                             <div>{{ marca.nombre }}</div>
                         </div>
@@ -98,7 +100,7 @@
             <p-button
                 [label]="labelButton"
                 [loading]="estaCargando"
-                [disabled]="!form.valid"
+                [disabled]="!form || !form.valid"
                 (onClick)="enviarFormulario()">
             </p-button>
         </form>
