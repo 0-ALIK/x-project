@@ -5,6 +5,7 @@ import { Categoria, Marca, Producto } from 'src/app/interfaces/producto.iterface
 import { Router } from '@angular/router';
 import { ReporteInventarioComponent } from 'src/app/modules/analitica/components/reporte-inventario.component';
 import { InventarioService } from 'src/app/services/inventario.service';
+import { ProductoService } from 'src/app/services/producto.service';
 
 @Component({
     selector: 'app-table-inventario',
@@ -29,7 +30,8 @@ export class TableInventarioComponent implements OnInit {
         private messageService: MessageService,
         public dialogService: DialogService,
         private router: Router,
-        private inventarioService: InventarioService
+        private inventarioService: InventarioService,
+        private productoService: ProductoService
     ) { }
 
     public ngOnInit(): void {
@@ -90,8 +92,22 @@ export class TableInventarioComponent implements OnInit {
         ]);
     }
 
-    private eliminarProducto = (): void => {
-        this.messageService.add({ severity: 'info', summary: 'Operación Exitosa', detail: 'Registro eliminado' });
+    eliminarProducto(producto: Producto): void {
+        const idProducto = producto.id_producto;
+        if (idProducto !== undefined) {
+            this.productoService.deleteProducto(idProducto).subscribe(
+                () => {
+                    this.messageService.add({ severity: 'success', summary: 'Operación Exitosa', detail: 'Producto eliminado' });
+                },
+                (error) => {
+                    console.error('Error al eliminar el producto:', error);
+                    this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al eliminar el producto' });
+                }
+            );
+        } else {
+            console.error('ID del producto no válido:', idProducto);
+            // Manejar el caso donde id_producto es undefined, si es necesario
+        }
     }
 
 }

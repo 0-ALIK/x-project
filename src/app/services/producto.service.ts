@@ -3,7 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Producto } from '../interfaces/producto.iterface';
 import { HttpHeaders } from '@angular/common/http';
-
+import { HttpErrorResponse } from '@angular/common/http';
+import { catchError } from 'rxjs';
+import { throwError } from 'rxjs';
+import { AgregarProductoComponent } from '../modules/inventario/pages/agregar-producto/agregar-producto.component';
+import { productos } from '../interfaces/data';
 @Injectable({
   providedIn: 'root'
 })
