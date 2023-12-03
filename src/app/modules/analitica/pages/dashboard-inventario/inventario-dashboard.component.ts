@@ -1,145 +1,50 @@
 import { Component, OnInit } from '@angular/core';
-import {ReclamosService} from '../../services/reclamos.service'
+import { categorias, marcas } from 'src/app/interfaces/data';
+import { Categoria, Marca } from 'src/app/interfaces/producto.iterface';
 
 @Component({
     selector: 'app-inventario-dashboard',
     templateUrl: './inventario-dashboard.component.html',
 })
 export class DashboardInventarioComponent implements OnInit {
-    constructor(private analitica: ReclamosService){}
+
     public options: any;
 
     public comprasData: any;
 
-    public filtroProducto: string[] = [];
-    public selectedFiltroProducto: string = 'Categoria';
-
     public stockData: any;
 
-    public marcas: any[] = [];
+    public marcas: Marca[] | undefined;
 
-    public productosMarca: any[] = [];
-    public productosCategoria: any[] = [];
-
-    public categorias: any[] = [];
+    public categorias: Categoria[] | undefined;
 
     public ngOnInit(): void {
-        this.filtroProducto = [
-            'Categoria',
-            'Marca'
-        ]
-
         this.defineOptions();
+        this.defineData1();
         this.defineData2();
-
-        this.analitica.getProductos().subscribe(
-            (datos) => {
-                this.productosMarca = datos.map((data: any) => data.marca_id);
-                this.productosCategoria = datos.map((data: any) => data.categoria_id);
-            },
-            (error) => {
-                console.error('Error al obtener datos del backend', error);
-            }
-        )
-
-        this.analitica.getMarcas().subscribe(
-            (datos) => {
-                this.marcas = datos;
-                this.defineData1();
-            },
-            (error) => {
-              console.error('Error al obtener datos del backend', error);
-            }
-          )
-
-          this.analitica.getCategorias().subscribe(
-            (datos) => {
-                this.categorias = datos;
-            },
-            (error) => {
-              console.error('Error al obtener datos del backend', error);
-            }
-          )
-       
-
-
+        this.obtenerMarcasCategoria();
     }
 
+    private obtenerMarcasCategoria(): void {
+        setTimeout(() => {
+            this.marcas = marcas;
+            this.categorias = categorias;
+        }, 2000);
+    }
 
-    public defineData1(): void {
-        var marcasCantidad = [];
-        const conteo:any = [];
-        if(this.selectedFiltroProducto == "Marca")
-        {
-            this.productosMarca.forEach(producto => {
-                const valor = producto; // Reemplaza 'tuPropiedad' con el nombre real de la propiedad que deseas contar
-    
-                const indice = conteo.findIndex((item:any) => item.valor === valor);
-    
-                if (indice !== -1) {
-                    // Si el valor ya está en el array, incrementa el contador
-                    conteo[indice].contador++;
-                } else {
-                    // Si es la primera vez que aparece el valor, añade un nuevo objeto al array
-                    conteo.push({valor, contador:1});
+    private defineData1(): void {
+        this.comprasData = {
+            labels: ['Producto 1', 'Producto 2', 'Producto 3', 'Producto 4', 'Producto 5'],
+            datasets: [
+                {
+                    label: 'Productos más comprados',
+                    data: [540, 325, 702, 620, 442],
+                    backgroundColor: ['rgba(6, 182, 212, 0.2)', 'rgba(6, 182, 212, 0.2)', 'rgba(6, 182, 212, 0.2)', 'rgba(6, 182, 212, 0.2)', 'rgba(6, 182, 212, 0.2)'],
+                    borderColor: ['rgb(53, 196, 220)', 'rgb(53, 196, 220)', 'rgb(53, 196, 220)', 'rgb(53, 196, 220)', 'rgb(53, 196, 220)'],
+                    borderWidth: 2
                 }
-            });
-            conteo.map((data:any) => console.log(data.contador))
-    
-            const labels = this.marcas.map(producto => producto.nombre);
-            
-            marcasCantidad = conteo.map((data:any) => data.contador)
-            console.log(marcasCantidad)
-    
-            this.comprasData = {
-                labels: labels,
-                datasets: [
-                    {
-                        label: 'Productos más comprados',
-                        data: marcasCantidad,
-                        backgroundColor: ['rgba(6, 182, 212, 0.2)', 'rgba(6, 182, 212, 0.2)', 'rgba(6, 182, 212, 0.2)', 'rgba(6, 182, 212, 0.2)', 'rgba(6, 182, 212, 0.2)'],
-                        borderColor: ['rgb(53, 196, 220)', 'rgb(53, 196, 220)', 'rgb(53, 196, 220)', 'rgb(53, 196, 220)', 'rgb(53, 196, 220)'],
-                        borderWidth: 2
-                    }
-                ]
-            };
-        }
-        if(this.selectedFiltroProducto == "Categoria")
-        {
-            this.productosCategoria.forEach(producto => {
-                const valor = producto; // Reemplaza 'tuPropiedad' con el nombre real de la propiedad que deseas contar
-    
-                const indice = conteo.findIndex((item:any) => item.valor === valor);
-    
-                if (indice !== -1) {
-                    // Si el valor ya está en el array, incrementa el contador
-                    conteo[indice].contador++;
-                } else {
-                    // Si es la primera vez que aparece el valor, añade un nuevo objeto al array
-                    conteo.push({valor, contador:1});
-                }
-            });
-            conteo.map((data:any) => console.log(data.contador))
-    
-            const labels = this.categorias.map(producto => producto.nombre);
-            
-            marcasCantidad = conteo.map((data:any) => data.contador)
-            console.log(marcasCantidad)
-    
-            this.comprasData = {
-                labels: labels,
-                datasets: [
-                    {
-                        label: 'Productos más comprados',
-                        data: marcasCantidad,
-                        backgroundColor: ['rgba(6, 182, 212, 0.2)', 'rgba(6, 182, 212, 0.2)', 'rgba(6, 182, 212, 0.2)', 'rgba(6, 182, 212, 0.2)', 'rgba(6, 182, 212, 0.2)'],
-                        borderColor: ['rgb(53, 196, 220)', 'rgb(53, 196, 220)', 'rgb(53, 196, 220)', 'rgb(53, 196, 220)', 'rgb(53, 196, 220)'],
-                        borderWidth: 2
-                    }
-                ]
-            };
-        }
-        
+            ]
+        };
     }
 
     private defineData2(): void {
