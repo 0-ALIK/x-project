@@ -4,7 +4,6 @@ import { MenuItem, MessageService } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { empresas } from 'src/app/interfaces/data';
 import { Empresa } from 'src/app/interfaces/usuario.inteface';
-import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { GenerarReportesEmpresasComponent } from 'src/app/modules/analitica/components/generar-reportes-empresas/generar-reportes-empresas.component';
 import { ApiEmpresaService } from 'src/app/services/api-empresa.service';
 import { EliminarClienteComponent } from '../eliminar-cliente/eliminar-cliente.component';
