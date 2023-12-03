@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Router } from '@angular/router';
+import { MarcasService} from 'src/app/services/marcas.service';
 import { Marca } from 'src/app/interfaces/producto.iterface';
-import { MarcasService } from 'src/app/services/marcas.service';
+import { MessageService } from 'primeng/api';
+
 
 @Component({
     selector: 'app-dialog-ver-marcas',
@@ -23,14 +25,14 @@ export class DialogVerMarcasComponent {
     public constructor(
         public ref: DynamicDialogRef,
         private router: Router,
-        private marcasService: MarcasService
+        private marcasService: MarcasService,
+        private messageService: MessageService
     ) { }
 
     public ngOnInit(): void {
         this.marcasService.getMarcas().subscribe(
             (marcas: any) => {
                 this.marcas = marcas.data;
-                console.log(this.marcas)
             },
             (error) => {
                 console.error('Error al obtener los datos de las marcas', error);
@@ -45,12 +47,23 @@ export class DialogVerMarcasComponent {
         }
     }
 
-
-    public eliminarMarca(Marca: Marca) {
-        console.log(Marca);
+    public eliminarMarca(marca: Marca) {
+        if (marca && marca.id_marca) {
+            this.marcasService.deleteMarca(marca.id_marca).subscribe(
+                response => {
+                    console.log('Marca eliminada con éxito.');
+                    this.marcas = this.marcas?.filter(m => m.id_marca !== marca.id_marca)
+                    this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Marca eliminada con éxito.' });
+                },
+                error => {
+                    console.error('Error al eliminar la marca.', error);
+                    this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No se pudo eliminar la marca' });
+                }
+            );
+        }
     }
 
-    public agregar(): void {
+    public agregar(formData: FormData): void {
         this.loading = true;
         this.loading = false;
         this.cerrarDynamicDialog();

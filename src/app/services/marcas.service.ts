@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Marca } from '../interfaces/producto.iterface';
 import { HttpHeaders } from '@angular/common/http';
@@ -25,17 +25,26 @@ export class MarcasService {
     }
 
     //guardar marca
-
+    public guardarMarca(formData: FormData): Observable<any> {
+        const url = `${this.apiUrl}/api/marca`;
+        const headers = new HttpHeaders({
+            'Accept': 'application/json'
+        });
+        return this.http.post<Marca>(url, formData, { headers });
+    }
 
     //actualizar marca
-    public updateMarca(id: number, marca: Marca): Observable<any> {
-        const url = `${this.apiUrl}/api/marca/${id}`;
+    public updateMarca(formData: FormData, id: number): Observable<any> {
+        const url = `${this.apiUrl}/api/marca/${id}?_method=PUT`;
         const headers = new HttpHeaders({
-            'Accept': 'application/json',
-            'Content-Type': 'multipart/form-data'
+            'Accept': 'application/json'
         });
-        return this.http.put(url, marca, { headers });
+        return this.http.post<Marca>(url, formData, { headers });
     }
 
     //eliminar marca
+    public deleteMarca(id: number): Observable<any> {
+        const url = `${this.apiUrl}/api/marca/${id}`;
+        return this.http.delete<Marca>(url);
+    }
 }

@@ -23,6 +23,8 @@ export class DashboardVentasComponent implements OnInit {
     public options2: any;
 
     ngOnInit() {
+        this.definirGraficaLineal1();
+        this.definirGraficaLineal2();
 
         this.definirGraficaLineal1();
         this.definirGraficaLineal2();

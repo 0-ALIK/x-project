@@ -29,8 +29,16 @@ export class DashboardClientesComponent implements OnInit {
     data4: any;
     options4: any;
 
+
+
+    constructor(
+        private clienteService: ClientesService
+      ) {}
+
     ngOnInit() {
 
+        this.definirGraficaPastel1();
+        this.definirGraficaBarras1();
         this.definirGraficaBarras1();
         this.definirGraficaBarras2();
         this.definirGraficaPastel1();
@@ -40,7 +48,6 @@ export class DashboardClientesComponent implements OnInit {
 
 
     }
-    constructor() {}
 
     totalEmpresas(): void{
         // this.lengthEmpresas = this.usuario.length;

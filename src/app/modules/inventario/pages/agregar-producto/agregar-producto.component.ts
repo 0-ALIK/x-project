@@ -104,7 +104,6 @@ export class AgregarProductoComponent implements OnInit {
                 punto_reorden: this.form.get('punto_reorden')?.value,
                 foto: this.foto ? this.foto.name : '',
             };
-
             console.log(producto.categoria);
             this.productoService.guardarProducto(producto).subscribe(
                 (response) => {
@@ -132,7 +131,8 @@ export class AgregarProductoComponent implements OnInit {
     private obtenerProductoEditar(): void {
 
         this.activatedRoute.params.subscribe({
-            next: ({ id }) => {
+            next: ({id}) => {
+
                 this.productoService.getProducto(Number(id)).subscribe(
                     (producto: any) => {
                         console.log(producto)

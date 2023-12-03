@@ -20,12 +20,13 @@ export class InventarioService {
         const url = `${this.apiUrl}/api/inventario`;
         return this.http.get<Producto[]>(url);
     }
-    
+
     // Métodos para los Productos
     public guardarProducto(producto: Producto): Observable<any> {
         const url = `${this.apiUrl}/api/productos`;
         const headers = new HttpHeaders({
-            'Content-Type': 'application/json'
+            'Accept': 'application/json',
+            'Content-Type': 'multipart/form-data'
         });
         return this.http.post(url, producto, { headers });
     }
@@ -33,7 +34,8 @@ export class InventarioService {
     public updateProducto(id: number, producto: Producto): Observable<any> {
         const url = `${this.apiUrl}/api/productos/${id}`;
         const headers = new HttpHeaders({
-            'Content-Type': 'application/json'
+            'Accept': 'application/json',
+            'Content-Type': 'multipart/form-data'
         });
         return this.http.put(url, producto, { headers });
     }
@@ -42,5 +44,4 @@ export class InventarioService {
         const url = `${this.apiUrl}/api/productos/${id}`;
         return this.http.delete(url);
     }
-
 }
