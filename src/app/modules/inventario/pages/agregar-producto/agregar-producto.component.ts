@@ -112,6 +112,8 @@ export class AgregarProductoComponent implements OnInit {
 
             formData.append('punto_reorden', this.form.get('punto_reorden')?.value || '')
 
+            console.log('nombre: ', formData.get('nombre'))
+
             if (this.foto) {
                 formData.append('foto', this.foto)
             } else {
@@ -140,13 +142,13 @@ export class AgregarProductoComponent implements OnInit {
                 });
             } else {
                 this.productoService.guardarProducto(formData).subscribe(
-                    (response: any) => {
+                    (response) => {
                         if (response.status !== 201) {
                             this.estaCargando = false;
-                            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No se pudo agregar la marca' + formData.get('nombre') });
+                            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No se pudo agregar el producto' + formData.get('nombre') });
                         } else {
                             this.estaCargando = false;
-                            this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'La marca ' + response.data.nombre + ' ha sido agregada' });
+                            this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'El producto ' + response.data.nombre + ' ha sido agregada' });
                         }
                     }
                 );
