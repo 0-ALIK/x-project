@@ -208,10 +208,10 @@ export class VerPedidoByIdComponent implements OnInit {
 
         this.ref.onClose.subscribe((mensaje) => {
             if(mensaje) {
-                this.message.add({severity: 'error', summary: 'Reclamo agregado'});
+                this.message.add({severity: 'success', summary: 'Reclamo agregado'});
                 return;
             }
-            this.message.add({severity: 'success', summary: 'El reclamo no se pudo agregar'});
+            this.message.add({severity: 'error', summary: 'El reclamo no se pudo agregar'});
         });
     }
 
