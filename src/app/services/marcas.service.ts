@@ -30,17 +30,16 @@ export class MarcasService {
         const headers = new HttpHeaders({
             'Accept': 'application/json'
         });
-        return this.http.post(url, formData, { headers });
+        return this.http.post<Marca>(url, formData, { headers });
     }
 
     //actualizar marca
     public updateMarca(formData: FormData, id: number): Observable<any> {
         const url = `${this.apiUrl}/api/marca/${id}?_method=PUT`;
         const headers = new HttpHeaders({
-            'Accept': 'application/json',
-            'Content-Type': 'multipart/form-data'
+            'Accept': 'application/json'
         });
-        return this.http.post(url, formData, { headers });
+        return this.http.post<Marca>(url, formData, { headers });
     }
 
     //eliminar marca

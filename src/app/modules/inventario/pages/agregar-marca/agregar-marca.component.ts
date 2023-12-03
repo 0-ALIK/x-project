@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
-import { marcas, productos } from 'src/app/interfaces/data';
 import { Marca, Producto } from 'src/app/interfaces/producto.iterface';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { DialogVerMarcasComponent } from '../../components/dialog-ver-marcas/dialog-ver-marcas.component';
@@ -36,7 +35,7 @@ export class AgregarMarcaComponent implements OnInit {
 
     public labelButton2: string = 'Agregar marca';
 
-    public productos: Producto[] = productos;
+    public productos: Producto[] | undefined;
 
     private ref: DynamicDialogRef | undefined;
 
@@ -72,8 +71,15 @@ export class AgregarMarcaComponent implements OnInit {
             if (this.foto) {
                 formData.append('logo', this.foto)
             } else {
-                formData.append('logo', this.currentMarca?.logo || '')
-                console.log(this.currentMarca?.logo  || '')
+
+                if (this.currentMarca?.logo) {
+                    //aqui va cuando no se selecciona una foto
+                    //tienes que convertir la misma foto en archivo
+                    //para cuando llegue al back lo interprete que es un archivo
+                    // const file = new File(this.currentMarca?.logo);
+
+                    // formData.append('logo', file);
+                }
             }
 
             if (this.esEdicion()) {
@@ -96,13 +102,13 @@ export class AgregarMarcaComponent implements OnInit {
             } else {
                 this.marcaService.guardarMarca(formData).subscribe(
                     (response: any) => {
-                        console.log(response.data)
-                        this.estaCargando = false;
-                        this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'La marca ' + response.data.nombre + ' ha sido agregada' });
-                    },
-                    error => {
-                        this.estaCargando = false;
-                        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No se pudo agregar la marca' });
+                        if (response.status !== 201) {
+                            this.estaCargando = false;
+                            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No se pudo agregar la marca' + formData.get('nombre') });
+                        } else {
+                            this.estaCargando = false;
+                            this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'La marca ' + response.data.nombre + ' ha sido agregada' });
+                        }
                     }
                 );
             }
