@@ -20,11 +20,13 @@ export class ClientesTableComponent implements OnInit {
 
     public activeItem: MenuItem | undefined;
 
+
     public first = 0;
 
     public rows = 10;
 
     id_cliente: any;
+
 
 
 
@@ -51,9 +53,9 @@ export class ClientesTableComponent implements OnInit {
         });
     }
 
-    public showEliminarCliente(id_cliente:any, nombre_cliente:any): void {
+    public showEliminarCliente(id_cliente:any, nombre_cliente:any): void{
         this.ref = this.dialogService.open(EliminarClienteComponent, {
-            header: 'Cliente: '+nombre_cliente+' con ID:'+id_cliente,
+            header: 'Cliente: ' + nombre_cliente + ' con ID: '+id_cliente,
             height: '30%',
             width:'30%'
 
@@ -62,8 +64,10 @@ export class ClientesTableComponent implements OnInit {
 
         this.ref.onClose.subscribe((result) => {
             if (result) {
-              // Codigo para hacer el delete
-              console.log('Cliente Eliminado exitosamente')
+              this.apiService.eliminarCliente(id_cliente).subscribe((resp:any)=>{
+                //console.log(resp)
+                console.log('Se elimino correctamente')
+            })
 
             } else {
               console.log('No se elimino ningun cliente ');

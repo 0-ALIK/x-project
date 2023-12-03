@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Direccion } from '../interfaces/direccion.interface';
 import { Empresa } from '../interfaces/usuario.inteface';
@@ -29,7 +29,9 @@ export class DireccionService {
     public getDireccionCliente( idCliente:any ): Observable<Direccion[]> {
         console.log(this.host +'clientes/'+  idCliente + '/direcciones');
 
-        return this.http.get<Direccion[]>(this.host +'clientes/'+  idCliente + '/direcciones');
+
+        const headers = new HttpHeaders().set('Authorization', `Bearer `+this.token);
+        return this.http.get<Direccion[]>(this.host +'clientes/'+  idCliente + '/direcciones', {headers});
     }
 
     public getDatosEmpresa( idEmpresa:any ): Observable<Empresa[]> {
