@@ -118,17 +118,17 @@ export class AgregarProductoComponent implements OnInit {
             if (marcaId) {
                 formData.append('marca_id', String(marcaId));
             }
-            console.log(marcaId);
+            //console.log(marcaId);
 
             this.productoService.guardarProducto(formData).subscribe(
                 (response) => {
                     // Manejar la respuesta del servicio
-                    console.log('Producto guardado con éxito:', response);
+                    //console.log('Producto guardado con éxito:', response);
                     this.messageService.add({severity:"success", summary: "Operación Exitosa", detail:"Producto guardado con éxito" })
                     // Puedes redirigir o hacer otras acciones después de guardar
                 },
                 (error) => {
-                    console.error('Error al guardar el producto:', error);
+                    //console.error('Error al guardar el producto:', error);
                     this.messageService.add({severity:"error", summary: "Operación Fallida", detail:"Producto no se ha podido guardar" })
                     // Manejar el error, mostrar mensajes, etc.
                 }
