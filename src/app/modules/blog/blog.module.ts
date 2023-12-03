@@ -22,6 +22,7 @@ import { DialogAgregarOpinionComponent } from './components/agregar-opinion/dial
 import { FormsModule } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { PaginatorModule } from 'primeng/paginator';
 
 
 @NgModule({
@@ -49,8 +50,8 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
     ScrollPanelModule,
     DividerModule,
     InputTextareaModule,
-    FormsModule
-
+    FormsModule,
+    PaginatorModule
   ],
   providers: [
     DialogService,

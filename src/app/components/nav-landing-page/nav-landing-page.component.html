@@ -3,6 +3,8 @@
         <div class="modulos">
             <ul>
                 <li *ngFor="let item of loginItems"><a href="#{{ item.toLowerCase() }}" class="etiqueta-a">{{ item }}</a></li>
+                <li><a routerLink="registro" class="etiqueta-a">Registrarse</a></li>
+                <li><a routerLink="login" class="etiqueta-a">Iniciar Sesión</a></li>
                 <li *ngFor="let item of menuItems"><a href="#{{ item.toLowerCase() }}" class="etiqueta-a">{{ item }}</a></li>
             </ul>
         </div>
@@ -18,7 +20,7 @@
     <!-- Logo y Nombre -->
     <div class="logo">
         <img src="assets/logo.png" alt="logo">
-        <a href="#" class="etiqueta-a">
+        <a href="#inicio" class="etiqueta-a">
             <h1>Cosmos ERP</h1>
         </a>
     </div>
@@ -47,6 +49,8 @@
         <div *ngIf="!isSidebarButtonVisible" class="acciones">
             <ul>
                 <li *ngFor="let item of loginItems"><a href="#{{ item.toLowerCase() }}" class="etiqueta-a">{{ item }}</a></li>
+                <li><a routerLink="registro" class="etiqueta-a">Registrarse</a></li>
+                <li><a routerLink="login" class="etiqueta-a">Iniciar Sesión</a></li>
             </ul>
         </div>
     </div>
