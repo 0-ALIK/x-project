@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { notificaciones } from 'src/app/interfaces/data';
-import { Notificacion } from 'src/app/interfaces/usuario.inteface';
+import { Notificacion, Usuario } from 'src/app/interfaces/usuario.inteface';
 import { SidebarService } from 'src/app/services/sidebar.service';
 import { ThemesService } from 'src/app/services/themes.service';
 
@@ -59,7 +60,16 @@ import { ThemesService } from 'src/app/services/themes.service';
 
             <article>
                 <div (click)="menu.toggle( $event )" class="avatar-cursor">
-                    <p-avatar label="A" shape="circle"></p-avatar>
+                    <p-avatar
+                        *ngIf="!usuario?.foto"
+                        [label]="usuario?.nombre?.charAt(0)"
+                        shape="circle">
+                    </p-avatar>
+                    <p-avatar
+                        *ngIf="usuario?.foto"
+                        [image]="usuario?.foto"
+                        shape="circle">
+                    </p-avatar>
                 </div>
             </article>
 
@@ -77,21 +87,51 @@ export class NavComponent implements OnInit {
 
     public notificaciones: Notificacion[] = notificaciones;
 
+    public usuario: Usuario | undefined;
+
     public constructor (
         public sidebarService: SidebarService,
-        public themesService: ThemesService
+        public themesService: ThemesService,
+        public router: Router
     ) {}
 
     public ngOnInit(): void {
+        if(!localStorage.getItem('usuario')) return;
+        const usuario = JSON.parse(localStorage.getItem('usuario') || '');
+
+        this.usuario = usuario.data;
+
+        if(!this.usuario) return;
+
+        let link = '/app'
+
+        if(usuario.tipo === 'cliente') {
+            link = '/app/clientes/perfil/cliente/'+usuario.data.id_cliente;
+        } else {
+            link = '/app/clientes/perfil/empresa/'+usuario.data.id_empresa;
+        }
+
         this.avatarMenuItems = [
             {
-                label: '{Username}',
+                label: usuario.data.nombre + ' ' + usuario.data?.apellido || '',
                 items: [
-                    {label: 'Ver perfil'},
-                    {label: 'Cerrar sesión'}
+                    {
+                        label: 'Ver perfil',
+                        routerLink: link
+                    },
+                    {
+                        label: 'Cerrar sesión',
+                        command: () => { this.cerrarSesion() }
+                    }
                 ]
             }
         ]
+    }
+
+    private cerrarSesion():void {
+        localStorage.removeItem('usuario');
+        localStorage.removeItem('token');
+        this.router.navigate(['/']);
     }
 
 }
