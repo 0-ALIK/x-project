@@ -9,11 +9,22 @@ let redirect = 'inventario';
 
 if(usuario) {
 
-    if(usuario.tipo === 'cliente')
-        redirect = '/app/clientes/perfil/empresa/'+usuario.data.id_cliente
+    if(usuario.tipo === 'cliente') {
+        if(Array.isArray(usuario.data)) {
+            redirect = '/app/clientes/perfil/cliente/'+usuario.data[0].id_cliente
+        } else {
+            redirect = '/app/clientes/perfil/cliente/'+usuario.data.id_cliente
+        }
+    }
 
-    if(usuario.tipo === 'empresa')
-        redirect = '/app/clientes/perfil/empresa/'+usuario.data.id_empresa
+
+    if(usuario.tipo === 'empresa') {
+        if(Array.isArray(usuario.data)) {
+            redirect = '/app/clientes/perfil/empresa/'+usuario.data[0].id_empresa
+        } else {
+            redirect = '/app/clientes/perfil/empresa/'+usuario.data.id_empresa
+        }
+    }
 
 }
 

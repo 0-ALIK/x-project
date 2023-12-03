@@ -61,32 +61,49 @@ export class SidebarComponent implements OnInit {
         if(!localStorage.getItem('usuario')) return;
         const usuario = JSON.parse(localStorage.getItem('usuario') || '');
 
+        console.log(usuario);
+
         if(usuario.tipo === 'admin') {
             this.rellenarMenuItem();
         } else if(usuario.tipo === 'cliente') {
-            this.rellenarMenuItemCliente(usuario.data.id_cliente);
+            if(Array.isArray(usuario.data)) {
+                const id: number = usuario.data[0].id_cliente;
+                this.rellenarMenuItemCliente(id);
+            } else {
+                const id: number = usuario.data.id_cliente;
+                this.rellenarMenuItemCliente(id);
+            }
         } else {
-            this.rellenarMenuItemEmpresa(usuario.data.id_empresa);
+            if(Array.isArray(usuario.data)) {
+                const id: number = usuario.data[0].id_empresa;
+            this.rellenarMenuItemEmpresa(id);
+            } else {
+                const id: number = usuario.data.id_empresa;
+                this.rellenarMenuItemCliente(id);
+            }
         }
     }
 
     private rellenarMenuItemEmpresa(id: number):void {
+        const ruta = '/app/clientes/perfil/empresa/'+id
+
         this.menuItems = [
             {
                 label: 'Perfil',
                 icon: 'pi pi-fw pi-user',
-                route: '/app/clientes/perfil/empresa/'+id
+                route: ruta
             },
         ];
     }
 
-    private rellenarMenuItemCliente(id : number): void {
-
+    private rellenarMenuItemCliente(id: number): void {
+        const ruta = '/app/clientes/perfil/cliente/'+id
+        console.log(ruta);
         this.menuItems = [
             {
                 label: 'Perfil',
                 icon: 'pi pi-fw pi-user',
-                route: '/app/clientes/perfil/cliente/'+id
+                route: ruta
             },
             {
                 label: 'Productos',
