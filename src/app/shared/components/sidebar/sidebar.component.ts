@@ -3,9 +3,48 @@ import { MenuItem } from 'src/app/interfaces/menu-item.interface';
 import { SidebarService } from 'src/app/services/sidebar.service';
 
 @Component({
-  selector: 'alik-sidebar',
-  templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.css']
+    selector: 'alik-sidebar',
+    template: `
+        <div class="back"
+        [ngClass]="{ 'back_show': sidebarService.sidebarActivo, '': !sidebarService.sidebarActivo, }"
+        (click)="sidebarService.sidebarActivo = false"></div>
+
+        <aside class="sidebar" #sidebar [ngClass]="{ 'sidebar_show': sidebarService.sidebarActivo, '': !sidebarService.sidebarActivo, }">
+            <section>
+                <!-- Logo app -->
+                <article class="sidebar-logo">
+                    <img src="assets/logo.png" alt="logo">
+                    <h1>Cosmos ERP</h1>
+                </article>
+
+                <hr>
+
+                <!-- Menu items -->
+                <article>
+                    <ul class="sidebar-menu">
+                        <li class="sidebar-menu-item"
+                            *ngFor="let item of menuItems"
+                            [routerLink]="item.route"
+                            routerLinkActive="sidebar-menu-item_active"
+                            (click)="sidebarService.sidebarActivo = false">
+
+                            <span [class]="item.icon"></span>
+                            <p>{{ item.label }}</p>
+                        </li>
+                    </ul>
+                </article>
+            </section>
+
+            <!-- Link hacia la documentacion -->
+            <article>
+                <div class="sidebar-menu-item" [routerLink]="['/app/docs']">
+                    <span class="pi pi-fw pi-question-circle"></span>
+                    <p>Ayuda</p>
+                </div>
+            </article>
+        </aside>
+    `,
+    styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
 
@@ -19,7 +58,57 @@ export class SidebarComponent implements OnInit {
     ) {}
 
     public ngOnInit(): void {
-        this.rellenarMenuItem();
+        if(!localStorage.getItem('usuario')) return;
+        const usuario = JSON.parse(localStorage.getItem('usuario') || '');
+
+        if(usuario.tipo === 'admin') {
+            this.rellenarMenuItem();
+        } else if(usuario.tipo === 'cliente') {
+            this.rellenarMenuItemCliente(usuario.data.id_cliente);
+        } else {
+            this.rellenarMenuItemEmpresa(usuario.data.id_empresa);
+        }
+    }
+
+    private rellenarMenuItemEmpresa(id: number):void {
+        this.menuItems = [
+            {
+                label: 'Perfil',
+                icon: 'pi pi-fw pi-user',
+                route: '/app/clientes/perfil/empresa/'+id
+            },
+        ];
+    }
+
+    private rellenarMenuItemCliente(id : number): void {
+
+        this.menuItems = [
+            {
+                label: 'Perfil',
+                icon: 'pi pi-fw pi-user',
+                route: '/app/clientes/perfil/cliente/'+id
+            },
+            {
+                label: 'Productos',
+                icon: 'pi pi-fw pi-shopping-bag',
+                route: '/app/ventas/c/ecommerce'
+            },
+            {
+                label: 'Carrito',
+                icon: 'pi pi-fw pi-shopping-cart',
+                route: '/app/ventas/c/carrito'
+            },
+            {
+                label: 'Chat',
+                icon: 'pi pi-fw pi-comments',
+                route: '/app/chat'
+            },
+            {
+                label: 'Blog',
+                icon: 'pi pi-fw pi-globe',
+                route: '/app/blog'
+            }
+        ];
     }
 
     private rellenarMenuItem(): void {
@@ -45,7 +134,7 @@ export class SidebarComponent implements OnInit {
                 route: '/app/tickets'
             },
             {
-                label: 'chat',
+                label: 'Chat',
                 icon: 'pi pi-fw pi-comments',
                 route: '/app/chat'
             },

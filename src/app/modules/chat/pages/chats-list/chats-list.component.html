@@ -10,8 +10,9 @@
             *ngFor="let reclamo of reclamos"
             [routerLink]="['/app/chat/reclamo', reclamo.id_reclamo]"
             routerLinkActive="card-user-chat-selected">
-            <app-usuario-chat-card [reclamo]="reclamo"></app-usuario-chat-card>
+            <app-usuario-chat-card [apellido]="reclamo.apellido" [nombre]="reclamo.nombre" [descripcion]="reclamo.descripcion" [reclamo]="reclamo"></app-usuario-chat-card>
         </div>
+
     </section>
 
     <section class="messages-list">

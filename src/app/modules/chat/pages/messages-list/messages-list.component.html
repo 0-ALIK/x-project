@@ -1,19 +1,20 @@
 <section class=" flex overflow-y-auto flex-column mensajes-list" style="height: calc(80vh)">
-    <div class=" "
-        *ngFor="let mensaje of mensajes"
-        [ngClass]="{'right': mensaje.remitente === 'admin', 'left':  mensaje.remitente === 'admin'}">
+    <div class="" 
+        *ngFor="let mensaje of mensajes" 
+        [ngClass]="{'right': mensaje.admin_id, 'left': !mensaje.admin_id}">
 
-        <app-message-bubble
-            [posicion]="mensaje.remitente === 'admin' ? 'right' : 'left'"
+        <app-message-bubble 
+            [posicion]="mensaje.admin_id ? 'right' : 'left'" 
             [mensaje]="mensaje">
         </app-message-bubble>
+        
     </div>
 </section>
 
  <section class=" h-3rem " style= "position:fixed; bottom: 3%; width: 50%;" >
-    <div class="flex flex-row justify-content-center gap-4 align-items-center ">
-        <textarea class="overflow-y-auto" rows="2" cols="65" pInputTextarea [autoResize]="true" [(ngModel)]="mensaje" placeholder="Escribe un mensaje"></textarea>
-        <p-button class="right-50" label="Submit" [disabled]="!mensaje"  (click)="enviarMensaje()"></p-button>
-    </div>
+    <form class="flex flex-row justify-content-center gap-4 align-items-center ">
+        <input class="overflow-y-auto w-full" rows="2" cols="65" pInputTextarea [autoResize]="true" [(ngModel)]="newMessage" name="message" placeholder="Escribe un mensaje"/>
+        <p-button class="right-50" label="Submit" [disabled]="!newMessage"  (click)="sendMessage()"></p-button>
+    </form>
  </section>
 

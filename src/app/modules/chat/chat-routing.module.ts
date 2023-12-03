@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ChatsListComponent } from './pages/chats-list/chats-list.component';
 import { MessagesListComponent } from './pages/messages-list/messages-list.component';
 import { NoOpenChatComponent } from './pages/no-open-chat/no-open-chat.component';
+import { NotFoundComponent } from 'src/app/not-found/not-found.component';
 
 const routes: Routes = [
     {
@@ -16,6 +17,10 @@ const routes: Routes = [
             {
                 path: 'reclamo/:id',
                 component: MessagesListComponent
+            },
+            {
+                path: '**',
+                component: NotFoundComponent
             }
         ]
     }

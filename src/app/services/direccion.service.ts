@@ -27,6 +27,7 @@ export class DireccionService {
     }
 
     public getDireccionCliente( idCliente:any ): Observable<Direccion[]> {
+        console.log(this.host +'clientes/'+  idCliente + '/direcciones');
 
 
         const headers = new HttpHeaders().set('Authorization', `Bearer `+this.token);
