@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './main.component';
+import { NotFoundComponent } from 'src/app/not-found/not-found.component';
 
 const usuario = JSON.parse(localStorage.getItem('usuario') || '');
 
@@ -57,6 +58,10 @@ const routes: Routes = [
             {
                 path: 'analitica',
                 loadChildren: () => import('../analitica/analitica.module').then(m => m.AnaliticaModule)
+            },
+            {
+                path: '**',
+                component: NotFoundComponent
             }
         ]
     }
