@@ -4,10 +4,10 @@
 
     <ng-container>
         <div class="p-2">
-            <h2 class="m-0 p-0">{{direccion.provincia}}</h2>
-            <p class="m-0 mb-2 p-0">{{direccion.telefono}}</p>
+            <h2 class="m-0 p-0">{{direccion?.provincia?.nombre}}</h2>
+            <p class="m-0 mb-2 p-0">{{direccion?.telefono}}</p>
 
-            <p class="m-0 p-0">{{direccion.detalles}}</p>
+            <p class="m-0 p-0">{{direccion?.detalles}}</p>
         </div>
     </ng-container>
 

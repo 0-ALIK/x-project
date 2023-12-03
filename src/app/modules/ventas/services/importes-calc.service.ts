@@ -32,7 +32,7 @@ export class ImportesCalcService {
 
 
     public calcularDescuento(): number {
-        const descuento: number = 0.17
+        const descuento: number = 0;
 
         return descuento
     }

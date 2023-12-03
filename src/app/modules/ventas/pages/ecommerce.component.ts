@@ -171,6 +171,7 @@ export class EcommerceComponent implements OnInit {
     public selectCategoriasChange(event: any): void {
         if(!event.value) {
             this.productos = this.productosCopy;
+            return;
         }
 
         const categoria: Categoria = event.value;
@@ -180,6 +181,7 @@ export class EcommerceComponent implements OnInit {
     public selectMarcasChange(event: any): void {
         if(!event.value) {
             this.productos = this.productosCopy;
+            return;
         }
 
         const marca: Marca = event.value;

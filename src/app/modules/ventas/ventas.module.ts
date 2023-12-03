@@ -17,7 +17,7 @@ import { PagosListComponent } from './components/pagos-list/pagos-list.component
 import { ImportesCalcService } from './services/importes-calc.service';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { FormsModule } from '@angular/forms';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { AgregarEditarPagoComponent } from './components/agregar-editar-pago/agregar-editar-pago.component';
 import { DropdownModule } from 'primeng/dropdown';
@@ -30,6 +30,9 @@ import { ImageModule } from 'primeng/image';
 import { CarritoPageComponent } from './pages/carrito-page.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MessagesModule } from 'primeng/messages';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { ToastModule } from 'primeng/toast';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @NgModule({
     declarations: [
@@ -49,6 +52,7 @@ import { MessagesModule } from 'primeng/messages';
         TableModule,
         ButtonModule,
         InputTextModule,
+        InputTextareaModule,
         TabMenuModule,
         AvatarModule,
         TagModule,
@@ -63,8 +67,10 @@ import { MessagesModule } from 'primeng/messages';
         CardModule,
         ImageModule,
         SharedModule,
-        MessagesModule
+        MessagesModule,
+        ToastModule,
+        ConfirmDialogModule
     ],
-    providers: [ImportesCalcService, MessageService, DialogService]
+    providers: [ImportesCalcService, MessageService, DialogService, ConfirmationService]
 })
 export class VentasModule { }

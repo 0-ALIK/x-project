@@ -1,14 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { Message } from 'primeng/api';
-import { pedidos } from 'src/app/interfaces/data';
-import { CarritoItem, Pedido, PedidoProductos } from 'src/app/interfaces/pedido.interface';
+import { Message, MessageService } from 'primeng/api';
+import { CarritoItem, PedidoProductos } from 'src/app/interfaces/pedido.interface';
 import { Producto } from 'src/app/interfaces/producto.iterface';
 import { ProductoService } from 'src/app/services/producto.service';
 import { ImportesCalcService } from '../services/importes-calc.service';
+import { DireccionService } from 'src/app/services/direccion.service';
+import { Cliente } from 'src/app/interfaces/usuario.inteface';
+import { Direccion } from 'src/app/interfaces/direccion.interface';
+import { VentasService } from 'src/app/services/ventas.service';
 
 @Component({
     selector: 'app-carrito-page',
     template: `
+        <p-toast></p-toast>
         <div class="mb-2">
 
             <div *ngIf="carrito.length === 0">
@@ -66,7 +70,38 @@ import { ImportesCalcService } from '../services/importes-calc.service';
                     <p class="m-0 mb-1">Descuento {{ 0 | currency:'USD':'symbol':'1.2-2' }}</p>
                     <p class="m-0 mb-4">Total {{ importes.calcularImporte(carritoProductos) | currency:'USD':'symbol':'1.2-2' }}</p>
 
+                    <p-dropdown
+                        styleClass="w-full mb-2"
+                        [options]="direccionesCliente"
+                        [(ngModel)]="direccion"
+                        placeholder="Dirección de cliente"
+                        optionLabel="provincia.nombre"
+                        [showClear]="true">
+                    </p-dropdown>
+
+                    <p-dropdown
+                        styleClass="w-full mb-2"
+                        [options]="direccionesEmpresa"
+                        [(ngModel)]="direccion"
+                        placeholder="Dirección la empresa"
+                        optionLabel="nombre_sucursal"
+                        [showClear]="true">
+                    </p-dropdown>
+
+                    <div *ngIf="direccion" class="mb-2">
+                        <alik-card-direccion  [direccion]="direccion"></alik-card-direccion>
+                    </div>
+
+                    <textarea
+                        [(ngModel)]="detalles"
+                        placeholder="Detalles del pedido"
+                        pInputTextarea
+                        [autoResize]="true" class="w-full mb-2"></textarea>
+
                     <p-button
+                        [loading]="loading"
+                        (onClick)="realizarPedido()"
+                        [disabled]="!direccion"
                         styleClass="w-full"
                         label="Realizar pedido"
                         icon="pi pi-shopping-cart">
@@ -99,6 +134,16 @@ export class CarritoPageComponent implements OnInit {
 
     public carritoProductos: PedidoProductos[] = [];
 
+    public direccion: Direccion | undefined;
+
+    public direccionesCliente: Direccion[] = [];
+
+    public loading: boolean = false;
+
+    public direccionesEmpresa: Direccion[] = [];
+
+    public detalles: string = '';
+
     public message: Message[] = [{
         severity: 'info',
         summary: 'Info',
@@ -107,11 +152,14 @@ export class CarritoPageComponent implements OnInit {
 
     public constructor(
         private productoService: ProductoService,
-        public importes: ImportesCalcService
+        public importes: ImportesCalcService,
+        public direccionService: DireccionService,
+        public ventaService: VentasService,
+        private messageService: MessageService,
     ) {}
 
     ngOnInit(): void {
-        if(!localStorage.getItem('carrito')) return;
+        if(!localStorage.getItem('carrito') || !localStorage.getItem('usuario')) return;
 
         this.carrito = JSON.parse( localStorage.getItem('carrito') || '');
 
@@ -126,8 +174,68 @@ export class CarritoPageComponent implements OnInit {
                         cantidad: item.cantidad
                     }
                 });
+            }
+        });
 
-                console.log(this.carritoProductos);
+        const cliente = JSON.parse(localStorage.getItem('usuario') || '').data as Cliente;
+
+        this.direccionService.getDireccionCliente(cliente?.id_cliente).subscribe({
+            next:(resp: any) => {
+
+                this.direccionesCliente = resp.map((objeto: { provincia: { nombre: any; }; }) => {
+                    let nuevaProvincia = {
+                        "nombre": objeto.provincia
+                    };
+                    objeto.provincia = nuevaProvincia;
+                    return objeto;
+                });
+            }
+        });
+
+        this.direccionService.getDireccionEmpresa(cliente.empresa_id).subscribe({
+            next:(resp: any) => {
+                this.direccionesEmpresa = resp.map((objeto: { provincia: { nombre: any; }; }) => {
+                    let nuevaProvincia = {
+                        "nombre": objeto.provincia
+                    };
+                    objeto.provincia = nuevaProvincia;
+                    return objeto;
+                });
+            }
+        });
+    }
+
+    public realizarPedido(): void {
+        this.loading = true;
+
+        const data: any = {
+            direccion_id: this.direccion?.id_direccion,
+            pedido_productos: this.carrito
+        };
+
+        if(this.detalles.length > 0) {
+            data.detalles = this.detalles;
+        }
+
+        this.ventaService.agregarPedido(data).subscribe({
+            next: (resp) => {
+                this.loading = false;
+                this.messageService.add({
+                    severity: 'success',
+                    summary: 'Pedido agregado'
+                });
+                this.carrito = [];
+                this.carritoProductos = [];
+                localStorage.removeItem('carrito');
+            },
+            error: (error) => {
+                console.log(error);
+                this.loading = false;
+                this.messageService.add({
+                    severity: 'error',
+                    summary: 'Error al realizar pedido',
+                    detail: 'Algo ha salido mal al realizar el pedido, verifique que su sesión no haya expirado o que uno de los productos no se haya agotado'
+                });
             }
         });
     }

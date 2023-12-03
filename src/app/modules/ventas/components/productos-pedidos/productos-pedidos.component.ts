@@ -17,9 +17,6 @@ export class ProductosPedidosComponent implements OnInit {
     @Input('pagos')
     public pagos: Pago[] | undefined;
 
-    @Input('importeDebido')
-    public importeDebido: number | undefined;
-
     private ref: DynamicDialogRef | undefined;
 
     public constructor(
