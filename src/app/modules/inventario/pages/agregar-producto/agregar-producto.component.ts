@@ -64,8 +64,8 @@ export class AgregarProductoComponent implements OnInit {
         precio_unit: [0, [Validators.required]],
         cantidad_cajas: [0, [Validators.required]],
         cantidad_por_caja: [0, [Validators.required]],
-        categoria: [{} , [Validators.required]],
-        marca: [{}, [Validators.required]],
+        categoria: [null , [Validators.required]],
+        marca: [null, [Validators.required]],
         punto_reorden: [0, [Validators.required]],
     });
 
@@ -94,30 +94,48 @@ export class AgregarProductoComponent implements OnInit {
 
     public enviarFormulario(): void {
         if (this.form.valid) {
-            const producto: Producto = {
-                nombre: this.form.get('nombre')?.value,
-                precio_unit: this.form.get('precio_unit')?.value,
-                cantidad_cajas: this.form.get('cantidad_cajas')?.value,
-                cantidad_por_caja: this.form.get('cantidad_por_caja')?.value,
-                categoria: this.options.id_categoria,
-                marca: this.form.get('marcas')?.value.id_marca,
-                punto_reorden: this.form.get('punto_reorden')?.value,
-                foto: this.foto ? this.foto.name : '',
-            };
-            console.log(producto.categoria);
-            this.productoService.guardarProducto(producto).subscribe(
+            const formData: FormData = new FormData();
+    
+            formData.append('nombre', this.form.get('nombre')?.value || '');
+            formData.append('precio_unit', String(this.form.get('precio_unit')?.value || 0));
+            formData.append('cantidad_cajas', String(this.form.get('cantidad_cajas')?.value || 0));
+            formData.append('cantidad_por_caja', String(this.form.get('cantidad_por_caja')?.value || 0));
+            formData.append('punto_reorden', String(this.form.get('punto_reorden')?.value || 0));
+            
+            // Agregar la imagen solo si se ha seleccionado una nueva
+            if (this.foto) {
+                formData.append('foto', this.foto);
+            }
+    
+            // Agregar el ID de la categoría solo si está seleccionada
+            const categoriaId = this.form.get('categoria')?.value;
+            if (categoriaId) {
+                formData.append('categoria_id', String(categoriaId));
+            }
+            console.log(categoriaId);
+            // Agregar el ID de la marca solo si está seleccionada
+            const marcaId = this.form.get('marca')?.value;
+            if (marcaId) {
+                formData.append('marca_id', String(marcaId));
+            }
+            console.log(marcaId);
+
+            this.productoService.guardarProducto(formData).subscribe(
                 (response) => {
                     // Manejar la respuesta del servicio
                     console.log('Producto guardado con éxito:', response);
+                    this.messageService.add({severity:"success", summary: "Operación Exitosa", detail:"Producto guardado con éxito" })
                     // Puedes redirigir o hacer otras acciones después de guardar
                 },
                 (error) => {
                     console.error('Error al guardar el producto:', error);
+                    this.messageService.add({severity:"error", summary: "Operación Fallida", detail:"Producto no se ha podido guardar" })
                     // Manejar el error, mostrar mensajes, etc.
                 }
             );
         }
     }
+    
     
     
     
