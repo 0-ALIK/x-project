@@ -11,6 +11,14 @@
     align-self: flex-end
 }
 
+.fondo{
+    background: linear-gradient(0deg, rgb(22, 29, 33) 0%, rgba(22, 29, 33, 0.85) 100%), url(../../../../../assets/cuadros.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 90vh;
+}
+
 /* Estilo para dispositivos móviles */
 @media (max-width: 767px) {}
 

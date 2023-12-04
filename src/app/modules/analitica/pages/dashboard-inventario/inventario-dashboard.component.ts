@@ -8,11 +8,13 @@ import { Categoria, Marca } from 'src/app/interfaces/producto.iterface';
 })
 export class DashboardInventarioComponent implements OnInit {
 
-    public options: any;
+    public optionsBarras: any;
 
-    public comprasData: any;
+    public optionsPie: any;
 
     public stockData: any;
+
+    public segmentacionData: any;
 
     public marcas: Marca[] | undefined;
 
@@ -20,8 +22,8 @@ export class DashboardInventarioComponent implements OnInit {
 
     public ngOnInit(): void {
         this.defineOptions();
-        this.defineData1();
-        this.defineData2();
+        this.graficaSegmentacion();
+        this.graficaProductos();
         this.obtenerMarcasCategoria();
     }
 
@@ -32,8 +34,8 @@ export class DashboardInventarioComponent implements OnInit {
         }, 2000);
     }
 
-    private defineData1(): void {
-        this.comprasData = {
+    private graficaProductos(): void {
+        this.stockData = {
             labels: ['Producto 1', 'Producto 2', 'Producto 3', 'Producto 4', 'Producto 5'],
             datasets: [
                 {
@@ -47,27 +49,33 @@ export class DashboardInventarioComponent implements OnInit {
         };
     }
 
-    private defineData2(): void {
-        this.stockData = {
-            labels: ['Producto 1', 'Producto 2', 'Producto 3', 'Producto 4', 'Producto 5'],
+    graficaSegmentacion(): void{
+        const documentStyle = getComputedStyle(document.documentElement);
+        const textColor = documentStyle.getPropertyValue('--text-color');
+        const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
+        const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
+
+
+        this.segmentacionData = {
+            labels: ['Suplementos', 'Farmacos', 'Bebidas'],
             datasets: [
                 {
-                    label: 'Productos con más stock',
-                    data: [540, 325, 702, 620, 220],
-                    backgroundColor: ['rgba(236, 72, 153, 0.2)', 'rgba(236, 72, 153, 0.2)', 'rgba(236, 72, 153, 0.2)', 'rgba(236, 72, 153, 0.2)', 'rgba(236, 72, 153, 0.2)'],
-                    borderColor: ['rgb(240, 107, 172)', 'rgb(240, 107, 172)', 'rgb(240, 107, 172)', 'rgb(240, 107, 172)', 'rgb(240, 107, 172)'],
-                    borderWidth: 2
+                    data: [540, 325, 702],
+                    backgroundColor: [documentStyle.getPropertyValue('--cyan-300'), documentStyle.getPropertyValue('--cyan-600'), documentStyle.getPropertyValue('--cyan-800')],
+                    hoverBackgroundColor: [documentStyle.getPropertyValue('--cyan-200'), documentStyle.getPropertyValue('--blue-400'), documentStyle.getPropertyValue('--blue-500')]
                 }
             ]
         };
+
     }
+
 
     private defineOptions(): void {
         const documentStyle = getComputedStyle(document.documentElement);
         const textColor = documentStyle.getPropertyValue('--text-color');
         const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
         const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
-        this.options = {
+        this.optionsBarras = {
             plugins: {
                 legend: {
                     labels: {
@@ -77,6 +85,7 @@ export class DashboardInventarioComponent implements OnInit {
             },
             scales: {
                 y: {
+                    maintainAspectRatio: false,
                     beginAtZero: true,
                     ticks: {
                         color: textColorSecondary
@@ -97,6 +106,15 @@ export class DashboardInventarioComponent implements OnInit {
                 }
             }
         };
+        this.optionsPie = {
+            plugins: {
+                legend: {
+                    labels: {
+                        usePointStyle: true,
+                        color: textColor
+                    }
+                }
+            }
+        }
     }
-
 }
