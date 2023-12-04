@@ -10,14 +10,14 @@ export class CardBlogUsuarioComponent implements OnInit {
     @Input('clientes')
     public clientes: Usuario[] | undefined;
     public clientess: any[] | undefined
-    estrellas: number = 3
+    estrellas: number = 5
     ngOnInit(): void {
         this.cargarClientes();
     }
 
     cargarClientes(): any[] | undefined{
         this.clientess = [
-            {nombre: 'Anita', apellido: 'Valencia', foto: 'img', fecha: '8/8/2023', mensaje: 'Título de la Aplicación: "Travel Explorer Travel Explorer es una aplicación innovadora diseñada para satisfacer las necesidades de los amantes de los viajes. Con una interfaz intuitiva y amigable, la apli', estrellas: 5 }
+            {nombre: 'Mauricio', apellido: 'Esquizo', foto: 'img', fecha: '8/8/2023', mensaje: 'Título de la Aplicación:"Travel Explorer Travel Explorer es una aplicación innovadora diseñada para satisfacer las necesidades de los amantes de los viajes. Con una interfaz intuitiva y amigable', estrellas: 5 }
         ];
 
         return this.clientess;

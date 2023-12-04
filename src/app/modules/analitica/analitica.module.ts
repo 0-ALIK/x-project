@@ -1,22 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { ReactiveFormsModule} from '@angular/forms'
 import { AnaliticaRoutingModule } from './analitica-routing.module';
 import { VerDashboardComponent } from './pages/ver-dashboard/ver-dashboard.component';
-
-import { DropdownModule } from 'primeng/dropdown';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CheckboxModule } from 'primeng/checkbox';
-import { InputTextModule } from 'primeng/inputtext';
-import { ButtonModule } from 'primeng/button';
-import { MultiSelectModule } from 'primeng/multiselect';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { CalendarModule } from 'primeng/calendar';
 import { ChartModule } from 'primeng/chart';
 import { TagModule } from 'primeng/tag';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { RadioButtonModule } from 'primeng/radiobutton';
-
 import { DashboardInventarioComponent } from './pages/dashboard-inventario/inventario-dashboard.component';
 import { DashboardClientesComponent } from './pages/dashboard-clientes/dashboard-clientes.component';
 import { DashboardVentasComponent } from './pages/dashboard-ventas/dashboard-ventas.component';
@@ -29,6 +21,12 @@ import { GenerarReportesInventarioComponent } from './components/generar-reporte
 import { GenerarReportesVentasComponent } from './components/generar-reportes-ventas/generar-reportes-ventas.component';
 import { GenerarReportesTicketsComponent } from './components/generar-reportes-tickets/generar-reportes-tickets.component';
 import { GenerarReportesEmpresasComponent } from './components/generar-reportes-empresas/generar-reportes-empresas.component';
+import { DropdownModule } from 'primeng/dropdown';
+import { FormsModule } from '@angular/forms';
+import { CheckboxModule } from 'primeng/checkbox';
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
+import { MultiSelectModule } from 'primeng/multiselect';
 
 
 
@@ -48,6 +46,7 @@ import { GenerarReportesEmpresasComponent } from './components/generar-reportes-
         GenerarReportesEmpresasComponent,
 
     ],
+
     imports: [
         CommonModule,
         FormsModule,
@@ -57,9 +56,9 @@ import { GenerarReportesEmpresasComponent } from './components/generar-reportes-
         InputTextModule,
         ButtonModule,
         MultiSelectModule,
+        AnaliticaRoutingModule,
         InputNumberModule,
         CalendarModule,
-        AnaliticaRoutingModule,
         ChartModule,
         TagModule,
         TabMenuModule,

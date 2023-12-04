@@ -12,9 +12,9 @@ export class VerDashboardComponent implements OnInit {
 
     ngOnInit() {
         this.items = [
-            { label: 'Inventario', icon: 'pi pi-fw pi-home' },
-            { label: 'Ventas', icon: 'pi pi-fw pi-calendar' },
-            { label: 'Clientes', icon: 'pi pi-fw pi-pencil' }
+            { label: 'Ventas', icon: 'pi pi-fw pi-dollar' },
+            { label: 'Clientes', icon: 'pi pi-fw pi-users' },
+            { label: 'Inventario', icon: 'pi pi-fw pi-truck' }
         ];
 
         this.activeItem = this.items[0];
