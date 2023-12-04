@@ -49,7 +49,8 @@
         <!-- Carousel de imagenes de Dashboards -->
 
         <div class="dashboard-ejemplo">
-            <p-carousel [value]="dashboard" [numVisible]="1" [numScroll]="1" [circular]="true" [autoplayInterval]="5000">
+            <p-carousel [value]="dashboard" [numVisible]="1" [numScroll]="1" [circular]="true"
+                [autoplayInterval]="5000">
                 <ng-template let-dashboard pTemplate="item">
                     <div class="imagen-dashboard">
                         <img src="assets/{{ dashboard }}.png" alt="{{ dashboard }}">
@@ -97,7 +98,8 @@
                         {{ card.content }}
                     </p>
                     <ng-template pTemplate="footer">
-                        <p>{{ card.footer }}</p>
+                        <p-rating [stars]="5" [readonly]="true" [cancel]="false"></p-rating>
+                        <!-- <p>{{ card.footer }}</p> -->
                     </ng-template>
                 </p-card>
             </ng-template>
@@ -107,7 +109,36 @@
     <!-- Footer -->
 
     <footer>
-        <p>Footer</p>
+
+        <div class="redes-sociales">
+            <hr>
+            <div class="">
+                <a href="enlace_a_facebook" target="_blank"><i class="pi pi-facebook" style="font-size: 1.5rem"></i></a>
+                <a href="enlace_a_instagram" target="_blank"><i class="pi pi-instagram"style="font-size: 1.5rem"></i></a>
+                <a href="enlace_a_youtube" target="_blank"><i class="pi pi-youtube" style="font-size: 1.5rem"></i></a>
+                <a href="enlace_a_twitter" target="_blank"><i class="pi pi-twitter" style="font-size: 1.5rem"></i></a>
+                <a href="enlace_a_paypal" target="_blank"><i class="pi pi-paypal" style="font-size: 1.5rem"></i></a>
+                <a href="enlace_a_whatsapp" target="_blank"><i class="pi pi-whatsapp" style="font-size: 1.5rem"></i></a>
+            </div>
+            <hr>
+        </div>
+
+        <div class="info-empresa">
+            <p class="p-empresa">Cosmos ERP</p>
+            <p class="p-copy">Copyright © 2023 | CosmosERP, Inc.</p>
+
+            <div>
+                <a href="#">Informacion legal</a>
+                <span>|</span>
+                <a href="#">Politica de privacidad</a>
+            </div>
+        </div>
+
+        <!-- <div class="redes">
+
+        </div>
+
+         -->
     </footer>
 
 </div>

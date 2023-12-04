@@ -11,6 +11,7 @@ import { SidebarModule } from 'primeng/sidebar';
 import { NavLandingPageComponent } from './components/nav-landing-page/nav-landing-page.component';
 import { CarouselModule } from 'primeng/carousel';
 import { CardModule } from 'primeng/card';
+import { RatingModule } from 'primeng/rating';
 
 @NgModule({
     declarations: [
@@ -27,7 +28,8 @@ import { CardModule } from 'primeng/card';
         ButtonModule,
         SidebarModule,
         CarouselModule,
-        CardModule
+        CardModule,
+        RatingModule
     ],
     providers: [],
     bootstrap: [AppComponent]

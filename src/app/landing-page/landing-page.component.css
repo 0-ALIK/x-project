@@ -159,7 +159,58 @@ footer {
     justify-content: center;
     align-items: center;
     font-size: var(--text-4xl);
-    padding: var(--spacing-5);
+    padding: var(--spacing-6) var(--spacing-5);
+    flex-direction: column;
+
+    & .redes-sociales {
+        display: flex;
+        width: 100%;
+
+        & hr {
+            width: 100%;
+        }
+
+
+        & div {
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+        }
+    }
+}
+
+.info-empresa {
+    text-align: center;
+    padding-top: var(--spacing-3);
+
+    & p {
+        margin: var(--spacing-2);
+    }
+
+    & .p-empresa {
+        font-size: var(--text-3xl);
+    }
+
+    & .p-copy {
+        font-size: var(--text-base);
+        opacity: 0.8;
+    }
+}
+
+.info-empresa div {
+    display: flex;
+    align-items: center;
+}
+
+.info-empresa div a {
+    color: var(--surface);
+    font-size: var(--text-sm);
+}
+
+.info-empresa div span {
+    color: var(--surface);
+    font-size: var(--text-sm);
+    padding-inline: var(--spacing-3);
 }
 
 /* Animacion de la flecha */
@@ -275,5 +326,25 @@ footer {
     .cards .cards-texto {
         font-size: var(--text-base);
         margin-inline: var(--spacing-4);
+    }
+
+    footer {
+        padding: var(--spacing-3) var(--spacing-5);
+
+        & .redes-sociales {
+            flex-direction: column;
+        }
+    }
+
+    .info-empresa {
+        padding: 0;
+
+        & .p-empresa {
+            font-size: var(--text-2xl);
+        }
+    }
+
+    .info-empresa div span {
+        padding-inline: var(--spacing-1);
     }
 }

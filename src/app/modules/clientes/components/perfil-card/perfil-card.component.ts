@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { valueOrDefault } from 'chart.js/dist/helpers/helpers.core';
+// import { valueOrDefault } from 'chart.js/dist/helpers/helpers.core';
 import { FileSelectEvent, FileUploadEvent } from 'primeng/fileupload';
 import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
 import { Cliente, Empresa } from 'src/app/interfaces/usuario.inteface';

@@ -26,49 +26,50 @@ export class LandingPageComponent implements OnInit {
 
     public cardsData: any[] = [
         {
-            header: 'Card 1 Header',
-            subheader: 'Card 1 Subheader',
+            header: 'John Doe',
+            subheader: 'Coca-Cola',
             image: 'https://primefaces.org/cdn/primeng/images/usercard.png',
-            content: 'Contenido de la tarjeta 1',
-            footer: 'Valoración 1'
+            content: 'Me encanta la nueva campaña publicitaria de Coca-Cola. ¡Refresca mi día!',
+            footer: 5
         },
         {
-            header: 'Card 2 Header',
-            subheader: 'Card 2 Subheader',
+            header: 'Jane Smith',
+            subheader: 'Samsung',
             image: 'https://primefaces.org/cdn/primeng/images/usercard.png',
-            content: 'Contenido de la tarjeta 2',
-            footer: 'Valoración 2'
+            content: 'La última tecnología de Samsung es asombrosa. ¡Realmente innovadores!',
+            footer: 4
         },
         {
-            header: 'Card 3 Header',
-            subheader: 'Card 3 Subheader',
+            header: 'Alex Johnson',
+            subheader: 'Apple Inc.',
             image: 'https://primefaces.org/cdn/primeng/images/usercard.png',
-            content: 'Contenido de la tarjeta 3',
-            footer: 'Valoración 3'
+            content: 'Estoy enamorado de mi nuevo iPhone. La calidad de construcción es incomparable.',
+            footer: 4
         },
         {
-            header: 'Card 4 Header',
-            subheader: 'Card 4 Subheader',
+            header: 'Emily Davis',
+            subheader: 'Google',
             image: 'https://primefaces.org/cdn/primeng/images/usercard.png',
-            content: 'Contenido de la tarjeta 4',
-            footer: 'Valoración 4'
+            content: 'Google siempre simplifica mi vida. ¡Grandes servicios y productos!',
+            footer: 3
         },
         {
-            header: 'Card 5 Header',
-            subheader: 'Card 5 Subheader',
+            header: 'Michael Brown',
+            subheader: 'Amazon',
             image: 'https://primefaces.org/cdn/primeng/images/usercard.png',
-            content: 'Contenido de la tarjeta 5',
-            footer: 'Valoración 5'
+            content: 'Hago todas mis compras en Amazon. La entrega rápida y el servicio al cliente son geniales.',
+            footer: 2
         },
         {
-            header: 'Card 6 Header',
-            subheader: 'Card 6 Subheader',
+            header: 'Sophia Miller',
+            subheader: 'Microsoft',
             image: 'https://primefaces.org/cdn/primeng/images/usercard.png',
-            content: 'Contenido de la tarjeta 6',
-            footer: 'Valoración 6'
-        },
-        // Agrega más tarjetas según sea necesario
+            content: 'Microsoft siempre supera mis expectativas. Excelentes productos y software.',
+            footer: 4
+        }
+        // Puedes agregar más tarjetas según sea necesario
     ];
+
 
     public responsiveOptions: any[] = [
         {
