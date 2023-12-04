@@ -3,7 +3,6 @@ import { Direccion } from 'src/app/interfaces/direccion.interface';
 import { Pedido } from 'src/app/interfaces/pedido.interface';
 import { Usuario } from 'src/app/interfaces/usuario.inteface';
 import { DashboardService } from '../../services/dashboard.service';
-import { DashboardService } from '../../services/dashboard.service';
 
 
 @Component({
