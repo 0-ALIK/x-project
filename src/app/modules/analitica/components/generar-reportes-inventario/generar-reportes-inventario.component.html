@@ -41,6 +41,10 @@
         <p-dropdown  [ngModelOptions]="{standalone: true}" [options]="puntoReorden" [(ngModel)]="selectedPuntoReorden" optionLabel="namePuntoReorden" name="namePuntoReorden" placeholder="Elije un punto de reorden"></p-dropdown>
         <label for="float-label">Punto Reorden</label>
     </span>
+    <span class="p-float-label segment">
+        <input pInputText type="number" placeholder="Colocar el año" [(ngModel)]="selectedAno" min="2023"/>
+        <label for="float-label">Historico</label>
+    </span>
 
     <p-button label="Generar Informe" [loading]="loading" loadingIcon="pi pi-spinner" (onClick)="load()" (click) = "GenerarReporte()" [style]="{'margin-top': 'var(--spacing-5)'}"></p-button>
     

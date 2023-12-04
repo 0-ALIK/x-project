@@ -33,7 +33,7 @@ export class ClientesTableComponent {
     public showGenerarReporte(): void {
         this.ref = this.dialogService.open(GenerarReportesClientesComponent, {
             header: 'Generar Reporte',
-            height: '70%'
+            height: '80%'
         });
     }
 

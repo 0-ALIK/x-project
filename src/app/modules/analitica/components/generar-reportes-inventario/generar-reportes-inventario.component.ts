@@ -41,7 +41,7 @@ export class GenerarReportesInventarioComponent implements OnInit {
 
     public precio_min: string | undefined;
     public precio_max: string | undefined;
-
+    public selectedAno: string | undefined;
     public nameInforme: string | undefined;
 
     public tipos: Tipo[] | undefined;
