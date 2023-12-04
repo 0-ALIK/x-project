@@ -26,16 +26,14 @@ export class CardDireccionComponent implements AfterViewInit {
     public eliminarSucursal(id_direccion: any, id_empresa:any){
 
         this.apiService.eliminarSucursal(id_direccion,id_empresa).subscribe((resp:any)=>{
-
+            window.location.reload()
         })
     }
 
     public eliminarDireccion(id_direccion: any, id_cliente:any){
-        console.log(id_direccion)
-        console.log(this.direccion);
 
         this.apiService.eliminarDireccion(id_direccion,id_cliente).subscribe((resp:any)=>{
-
+            window.location.reload()
         })
     }
 
@@ -46,5 +44,7 @@ export class CardDireccionComponent implements AfterViewInit {
 
         return this.direccion?.provincia;
     }
+
+
 
 }
