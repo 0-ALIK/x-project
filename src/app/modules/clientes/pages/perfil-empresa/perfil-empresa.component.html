@@ -5,6 +5,7 @@
         <div class="p-buttonset">
             <button pButton label="Agregar colaborador" class="p-button-outlined" (click)="agregarColaborador(empresa?.id_empresa)"></button>
             <button pButton label="Agregar Sucursal" (click)="agregarSucursal(empresa?.id_empresa)"></button>
+            <button pButton label="Editar Sucursal" class="p-button-outlined" (click)="editarSucursal(empresa?.id_empresa)"></button>
         </div>
     </div>
 
@@ -17,6 +18,7 @@
             <p-dropdown
                 [options]="provincias"
                 [(ngModel)]="provinciaSelected"
+                name="provinciaSelected"
                 optionLabel="nombre"
                 [showClear]="true"
                 placeholder="Filtra por provincia">

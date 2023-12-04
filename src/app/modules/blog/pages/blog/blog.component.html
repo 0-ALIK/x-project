@@ -27,29 +27,19 @@
             </div>
         </div>
 
-    <section *ngFor=" let user of usuario"
+    <section *ngFor="let user of usuario"
         class="flex flex-wrap justify-content-center gap-2">
         <app-card-blog-usuario [clientes]="usuario"> </app-card-blog-usuario>
     </section>
     <p-scrollTop target="parent" styleClass="custom-scrolltop" [threshold]="1" icon="pi pi-arrow-up"></p-scrollTop>
     <p-button label="Añadir Reseña" [raised]="true" (click)="agregarOpinion()" ></p-button>
-
+    sugerenciasData
     <section class=" flex flex-wrap justify-content-center ">
         <app-card-blog-usuario></app-card-blog-usuario>
         <app-card-blog-usuario></app-card-blog-usuario>
         <app-card-blog-usuario></app-card-blog-usuario>
         <app-card-blog-usuario></app-card-blog-usuario>
         <app-card-blog-usuario></app-card-blog-usuario>
-<<<<<<< HEAD
-=======
-        <app-card-blog-usuario></app-card-blog-usuario>
-        <app-card-blog-usuario></app-card-blog-usuario>
-        <app-card-blog-usuario></app-card-blog-usuario>
-        <app-card-blog-usuario></app-card-blog-usuario>
-        <app-card-blog-usuario></app-card-blog-usuario>
-        <app-card-blog-usuario></app-card-blog-usuario>
-        <app-card-blog-usuario></app-card-blog-usuario>
->>>>>>> modulo5-ana-valencia
     </section>
 
 </main>

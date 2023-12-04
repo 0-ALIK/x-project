@@ -11,6 +11,8 @@ let redirect = 'inventario';
 if(usuario) {
 
     if(usuario.tipo === 'cliente') {
+        console.log('cliente');
+
         if(Array.isArray(usuario.data)) {
             redirect = '/app/clientes/perfil/cliente/'+usuario.data[0].id_cliente
         } else {
@@ -20,6 +22,7 @@ if(usuario) {
 
 
     if(usuario.tipo === 'empresa') {
+        console.log('empresa');
         if(Array.isArray(usuario.data)) {
             redirect = '/app/clientes/perfil/empresa/'+usuario.data[0].id_empresa
         } else {

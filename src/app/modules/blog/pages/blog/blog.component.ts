@@ -12,13 +12,13 @@ import {SugerenciasService} from 'src/app/services/sugerencias.service' ;
   encapsulation: ViewEncapsulation.None,
 })
 
-export class VerBlogComponent{
+export class VerBlogComponent implements OnInit{
 
     estrellas:number = 5
 
     public usuario: Usuario[] | undefined;
     private ref: DynamicDialogRef | undefined;
-    
+
     promedioValoracion!: number;
     promedioRedondeado!: number;
     mensajeValoracion: string = '';
@@ -26,20 +26,23 @@ export class VerBlogComponent{
     estadisticasResenas: { stars: number, numReviews: number }[] = [];
 
   constructor(private sugerenciasService: SugerenciasService,  public dialogService: DialogService,
-    public messageService: MessageService) { 
-      this.sugerenciasService.getSugerencias().subscribe((data) => {
-        this.sugerenciasData = data.sugerencias;
-        this.calcularPromedioValoracion();
-        this.contarResenasPorEstrellas();
-      });
+    public messageService: MessageService) {
+
   }
-  
+    ngOnInit(): void {
+        this.sugerenciasService.getSugerencias().subscribe((data) => {
+            this.sugerenciasData = data.sugerencias;
+            this.calcularPromedioValoracion();
+            this.contarResenasPorEstrellas();
+          });
+    }
+
   calcularPromedioValoracion() {
     if (this.sugerenciasData && this.sugerenciasData.length > 0) {
       const sugerenciasConValoracion = this.sugerenciasData.filter(sugerencia => sugerencia.valoracion !== undefined);
-  
+
       if (sugerenciasConValoracion.length > 0) {
-        const sumaValoraciones = sugerenciasConValoracion.reduce((acumulador, sugerencia) => acumulador + sugerencia.valoracion, 0);                
+        const sumaValoraciones = sugerenciasConValoracion.reduce((acumulador, sugerencia) => acumulador + sugerencia.valoracion, 0);
         this.promedioValoracion = parseFloat((sumaValoraciones / sugerenciasConValoracion.length).toFixed(1));
         this.promedioRedondeado = Math.floor(this.promedioValoracion);
         this.mensajeValoracion = this.obtenerMensajeValoracion(this.promedioRedondeado);
@@ -50,7 +53,7 @@ export class VerBlogComponent{
     } else {
       console.warn('No hay datos de sugerencias');
     }
-  }; 
+  };
 
   obtenerMensajeValoracion(promedioRedondeado: number): string {
     switch (promedioRedondeado) {
@@ -68,12 +71,12 @@ export class VerBlogComponent{
         return '';
     }
   }
-        
+
   contarResenasPorEstrellas() {
-    this.estadisticasResenas = [];  
+    this.estadisticasResenas = [];
     this.sugerenciasData.forEach(sugerencia => {
-      const valoracion = sugerencia.valoracion;  
-      const categoria = this.estadisticasResenas.find(item => item.stars === valoracion);  
+      const valoracion = sugerencia.valoracion;
+      const categoria = this.estadisticasResenas.find(item => item.stars === valoracion);
       if (categoria) {
         categoria.numReviews++;
       } else {
@@ -82,7 +85,7 @@ export class VerBlogComponent{
     });
     this.estadisticasResenas.sort((a, b) => b.stars - a.stars);
   }
-    
+
   agregarOpinion(): void{
       this.ref = this.dialogService.open(DialogAgregarOpinionComponent, {
           width: '60%',

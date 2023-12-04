@@ -3,6 +3,7 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { AngleUpIcon } from 'primeng/icons/angleup';
 import { provincias } from 'src/app/interfaces/data';
 import { Provincia } from 'src/app/interfaces/direccion.interface';
+import { ApiClienteService } from 'src/app/services/api-cliente.service';
 import { ApiEmpresaService } from 'src/app/services/api-empresa.service';
 
 @Component({
@@ -12,7 +13,7 @@ import { ApiEmpresaService } from 'src/app/services/api-empresa.service';
   ]
 })
 export class AgregarSucursalComponent {
-    public provincias: Provincia[] = provincias;
+    public provincias: Provincia[] = [];
 
     public provinciaSelected: Provincia | any;
 
@@ -26,6 +27,7 @@ export class AgregarSucursalComponent {
 
     constructor(
         public apiService: ApiEmpresaService,
+        public provinciaService: ApiClienteService,
         public ref: DynamicDialogRef,
         public config: DynamicDialogConfig
     ){
@@ -33,6 +35,10 @@ export class AgregarSucursalComponent {
             this.id_empresa = this.config.data.id_empresa;
             console.log(this.id_empresa)
 
+            this.provinciaService.getProvincias().subscribe((resp:any)=>{
+                console.log(resp)
+                this.provincias = resp
+            })
     }
 
     ngOnInit(): void {
@@ -44,7 +50,7 @@ export class AgregarSucursalComponent {
 
         const formData = new FormData();
         formData.append('nombre',this.nombre);
-        formData.append('provincia_id', '2');
+        formData.append('provincia_id', this.provinciaSelected.id_provincia);
         formData.append('telefono', this.telefono);
         formData.append('codigo_postal', this.codigo_postal);
         formData.append('detalles', this.detalles);

@@ -76,7 +76,8 @@ export class PerfilCardComponent implements OnInit{
                 this.apiService.getDatosEmpresa(id).subscribe((resp:any)=>{
                     this.datosEmpresa = resp[0];
                     this.fillFormEmpresa(this.datosEmpresa)
-                })
+                });
+
 
                 this.clienteService.getDatosCliente(id).subscribe((resp:any)=>{
                     this.datosCliente = resp;
