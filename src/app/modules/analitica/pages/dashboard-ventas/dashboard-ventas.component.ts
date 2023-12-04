@@ -28,6 +28,10 @@ export class DashboardVentasComponent implements OnInit {
     productos:any;
     productosOptions: any;
 
+    clientesCompras: any[] | undefined;
+    provincias: any[] | undefined;
+
+
 
     ngOnInit() {
         this.graficaMes();
@@ -35,6 +39,16 @@ export class DashboardVentasComponent implements OnInit {
         this.graficaProductos();
         this.graficaPagos();
         this.graficasOptions();
+        this.clientesCompras = [
+            { label: 'Más compran', value: 'masCompras' },
+            { label: 'Menos compran', value: 'menosCompras' }
+         ]
+         this.provincias = [
+            { label: 'Enero',value: 'miss' },
+            { label: 'Febrero', value: 'geor' },
+            { label: 'Marzo', value: 'mich' }
+         ]
+
     }
 
     constructor(private dashboardService: DashboardService) {}

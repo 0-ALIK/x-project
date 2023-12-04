@@ -318,6 +318,7 @@ import { Component, OnInit } from '@angular/core';
             this.options1 = {
                 indexAxis: 'y',
                 maintainAspectRatio: true,
+                aspectRatio: 2.5,
                 plugins: {
                     legend: {
                         labels: {
