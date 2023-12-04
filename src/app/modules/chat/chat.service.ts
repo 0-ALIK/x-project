@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { PusherService } from './pusher.service';
 
@@ -14,7 +14,15 @@ export class ChatService {
   constructor(private http: HttpClient, private pusherService: PusherService) {}
 
   getAllChats(): Observable<any>{
-    return this.http.get(`${this.apiUrl}/api/chat`);
+
+    const token = localStorage.getItem('token') || '';
+        let header =  new HttpHeaders()
+            .set('Type-content', 'aplication/json')
+            .set('authorization', 'Bearer '+token)
+
+        return this.http.get(`${this.apiUrl}/api/chat`, {
+            headers: header
+        });
   }
 
   getChatMessages(reclamoId: string): Observable<any> {
@@ -22,7 +30,17 @@ export class ChatService {
   }
 
   sendMessage(messageData: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/api/chat/broadcast`, messageData);
+
+    const token = localStorage.getItem('token') || '';
+        let header =  new HttpHeaders()
+            .set('Type-content', 'aplication/json')
+            .set('authorization', 'Bearer '+token)
+
+        return this.http.post(`${this.apiUrl}/api/chat/broadcast`, messageData, {
+            headers: header
+        });
+
+    // return this.http.post(`${this.apiUrl}/api/chat/broadcast`, messageData);
   }
 
   receiveMessages(): Observable<any> {
@@ -37,4 +55,14 @@ export class ChatService {
     });
   }
 
+  openChat(messageData: any): Observable<any> {
+    const token = localStorage.getItem('token') || '';
+        let header =  new HttpHeaders()
+            .set('Type-content', 'aplication/json')
+            .set('authorization', 'Bearer '+token)
+
+        return this.http.post(`${this.apiUrl}/api/chat/open`, messageData, {
+            headers: header
+        });
+  }
 }

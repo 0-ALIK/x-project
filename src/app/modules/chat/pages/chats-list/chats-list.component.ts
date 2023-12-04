@@ -16,6 +16,7 @@ export class ChatsListComponent {
     ngOnInit(): void {
         this.chatService.getAllChats().subscribe( data => {
             this.reclamos = data;
+            console.log(this.reclamos);
         });
     }
 

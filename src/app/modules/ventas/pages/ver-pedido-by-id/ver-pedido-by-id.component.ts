@@ -185,7 +185,7 @@ export class VerPedidoByIdComponent implements OnInit {
 
                 this.reclamoService.getReclamos().subscribe({
                     next: resp => {
-                        this.reclamo = resp.data.find((r: Reclamo) => r.id_reclamo === this.pedido?.id_pedido);
+                        this.reclamo = resp.data.find((r: Reclamo) => r.pedido?.id_pedido === this.pedido?.id_pedido);
                     },
                     error: error => {
                         console.log(error);
@@ -197,7 +197,7 @@ export class VerPedidoByIdComponent implements OnInit {
 
     public crearReclamo(): void {
         this.ref = this.dialogService.open(AgregarReclamoComponent, {
-            header: 'Agregar pago',
+            header: 'Crear reclamo',
             data: {
                 cliente_id: this.pedido?.cliente?.id_cliente,
                 pedido_id: this.pedido?.id_pedido

@@ -53,9 +53,9 @@ export class MessagesListComponent implements OnInit {
 
         const messageData = {
             reclamo: this.reclamoId,
-            cliente: null,
+            // cliente: ? :,
             mensaje: this.newMessage,
-            admin: '1',
+            // admin: ? :,
         };
 
         this.chatService.sendMessage(messageData).subscribe(() => {
