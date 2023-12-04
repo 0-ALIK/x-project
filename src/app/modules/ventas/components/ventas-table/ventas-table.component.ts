@@ -5,9 +5,9 @@ import { pedidos } from 'src/app/interfaces/data';
 import { Pedido } from 'src/app/interfaces/pedido.interface';
 import { ImportesCalcService } from '../../services/importes-calc.service';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { ReporteVentaComponent } from 'src/app/modules/analitica/components/reporte-venta.component';
 import { VentasService } from 'src/app/services/ventas.service';
 import { ConfirmEventType, ConfirmationService, MessageService } from 'primeng/api';
+import { GenerarReportesVentasComponent } from 'src/app/modules/analitica/components/generar-reportes-ventas/generar-reportes-ventas.component';
 
 @Component({
   selector: 'app-ventas-table',
@@ -151,7 +151,7 @@ export class VentasTableComponent implements OnInit {
     ) { }
 
     public showGenerarReporte(): void {
-        this.ref = this.dialogService.open(ReporteVentaComponent, {
+        this.ref = this.dialogService.open(GenerarReportesVentasComponent, {
             header: 'Generar Reporte',
             height: '70%'
         });

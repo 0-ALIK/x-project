@@ -1,0 +1,43 @@
+
+
+<form>
+    <div class="tableoftwo">
+        <div class="header">
+            <span class="p-float-label">
+                <input pInputText id="nameInforme" [(ngModel)]="nameInforme" name="nameInforme"/>
+                <label for="float-label">Nombre del Informe</label>
+            </span>
+    
+            <span class="p-float-label ">
+                <p-dropdown [ngModelOptions]="{standalone: true}" [options]="formatos" [(ngModel)]="selectedFormato" optionLabel="nameFormato" name=" data" defaultLabel="Sin selección"></p-dropdown>
+                <label for="float-label">Formato</label>
+            </span>
+        </div>
+    </div>
+    
+
+    <br>
+
+    <h3>Segmentar según</h3>
+    <div>
+        <div>
+            <span class="p-float-label segment">
+                <p-dropdown [ngModelOptions]="{standalone: true}" [options]="generos" [(ngModel)]="selectedGenero" optionLabel="nameGenero" name=" generos" placeholder="Elije un Género"></p-dropdown>
+                <label for="float-label">Genero</label>
+            </span>
+            <span class="p-float-label segment">
+                <p-dropdown [ngModelOptions]="{standalone: true}" [options]="empresas"  [(ngModel)]="selectedEmpresa" name=" empresas" placeholder="Elije una Empresa"></p-dropdown>
+                <label for="float-label">Empresa</label>
+            </span>
+            <span class="p-float-label segment">
+                <p-dropdown [ngModelOptions]="{standalone: true}" [options]="estadosCliente"  [(ngModel)]="selectedEstadoCliente" name=" estados" placeholder="Elije una Empresa"></p-dropdown>
+                <label for="float-label">Estado</label>
+            </span>
+            <span class="p-float-label segment">
+                <p-dropdown [ngModelOptions]="{standalone: true}" [options]="provincias"  [(ngModel)]="selectedProvincia" name=" estados" placeholder="Elije una Empresa"></p-dropdown>
+                <label for="float-label">Provincia</label>
+            </span>
+        </div>
+    </div>
+    <p-button label="Generar Informe" [loading]="loading" loadingIcon="pi pi-spinner" (onClick)="load()" [style]="{'margin-top': 'var(--spacing-5)'}" (click) = "GenerarReporte()" ></p-button>
+</form>

@@ -8,30 +8,9 @@
     <!-- Cards superiores -->
     <section>
         <div class="flex gap-2 justify-content-between">
-            <alik-dashboard-card class=""
-                titulo="Ventas Totales"
-                icon="pi-users"
-                [numero]="ventas.lenght"
-                tipo="numero"
-                [valorAnterior]="85" >
-            </alik-dashboard-card>
-
-            <alik-dashboard-card class=""
-                titulo="Diferencia Anterior"
-                icon="pi-building"
-                [numero]="58"
-                tipo="numero"
-                [valorAnterior]="49" >
-            </alik-dashboard-card>
-
-            <alik-dashboard-card class=""
-                titulo="Promedio pedidos"
-                icon="pi-chart-line"
-                [numero]="54"
-                tipo="numero"
-                [valorAnterior]="24" >
-            </alik-dashboard-card>
-
+            <alik-dashboard-card class="" titulo="Ventas Totales" icon="pi-users" [numero]="lengthEmpresas" tipo="numero" [valorAnterior]="85" ></alik-dashboard-card>
+            <alik-dashboard-card class="" titulo="Diferencia Anterior" icon="pi-building" [numero]="diferenciaGanacias" tipo="numero" [valorAnterior]="49" ></alik-dashboard-card>
+            <alik-dashboard-card class="" titulo="Cantidad de pedidos" icon="pi-chart-line" [numero]="cantidadPedidos" tipo="numero" [valorAnterior]="24" ></alik-dashboard-card>
             <div class=" border-round w-full flex flex-column justify-content-center align-items-center" [style]="{'background': 'var(--surface-card)'}">
                 <p>Rendimiento</p>
                 <ana-speedometer [total]="5400" [valorActual]="5345"></ana-speedometer>
@@ -49,18 +28,6 @@
                     [options]="ventasOptions" >
                 </p-chart>
             </div>
-
-            <article class="flex flex-column align-content-center m-2 border-round w-full" [style]="{'background': 'var(--surface-card)'}">
-                <p-chart
-                    type="bar"
-                    [data]="productos"
-                    [options]="productosOptions">
-                </p-chart>
-            </article>
-
-        </div>
-
-        <div class="flex">
             <div class="flex flex-column align-content-center m-2 border-round w-full" [style]="{'background': 'var(--surface-card)'}">
                 <p-chart
                     type="bar"
@@ -68,18 +35,7 @@
                     [options]="mesOptions">
                 </p-chart>
             </div>
-
-            <div class="flex flex-column align-content-center m-2 border-round justify-content-center align-items-center w-screen h-full " [style]="{'background': 'var(--surface-card)'}">
-                <label for="lineal2" class="text-center p-2">Métodos de pago</label>
-                <p-chart class="w-6"
-                    type="doughnut"
-                    [data]="pagos"
-                    [options]="pagosOptions">
-                </p-chart>
-            </div>
-
         </div>
-
     </section>
 
 </main>

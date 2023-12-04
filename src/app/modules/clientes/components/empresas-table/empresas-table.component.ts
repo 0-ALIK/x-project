@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem, MessageService } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { empresas } from 'src/app/interfaces/data';
 import { Empresa } from 'src/app/interfaces/usuario.inteface';
 import { ApiEmpresaService } from 'src/app/services/api-empresa.service';
 import { EliminarClienteComponent } from '../eliminar-cliente/eliminar-cliente.component';
+import { GenerarReportesEmpresasComponent } from 'src/app/modules/analitica/components/generar-reportes-empresas/generar-reportes-empresas.component';
 
 @Component({
   selector: 'app-empresas-table',
@@ -109,4 +109,10 @@ export class EmpresasTableComponent {
         }
 
 
+    public showGenerarReporte(): void {
+        this.ref = this.dialogService.open(GenerarReportesEmpresasComponent, {
+            header: 'Generar Reporte',
+            height: '70%'
+        });
+    }
 }

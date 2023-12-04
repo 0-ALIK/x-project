@@ -1,0 +1,23 @@
+
+.header{
+    display: flex;
+}
+section{
+    display: flex;
+    justify-content: flex-end;
+}
+.segment{
+    margin-top: 30px;
+}
+h4{
+    margin-left: 10px;
+    margin-bottom: 5px;
+    color: gray;
+    font-size: 12px;
+}
+h3{
+    margin-bottom: 0px;
+}
+form{
+    padding-top: 19px;
+}

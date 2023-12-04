@@ -1,0 +1,52 @@
+<form action="" class="">
+    <div class="header">
+        
+            <span class="p-float-label">
+                <input pInputText id="nameInforme" [(ngModel)]="nameInforme" name="nameInforme"/>
+                <label for="float-label">Nombre del Informe</label>
+            </span>
+    
+            <span class="p-float-label ">
+                <p-dropdown [ngModelOptions]="{standalone: true}" [options]="formatos" [(ngModel)]="selectedFormato" optionLabel="nameFormato" name="nameFormato"></p-dropdown>
+                <label for="float-label">Formato</label>
+            </span>
+
+    </div>
+    
+    
+    <br>
+    
+    <h3>Segmentar según: </h3>
+    <h3>Precio</h3>
+    <div class="header segment d-flex gap-5 ">
+        <span class="p-float-label">
+            <p-inputNumber inputId="currency-us" [showButtons]="true" mode="currency" currency="USD" [(ngModel)]="precio_min" name="precio_min" [min]="0"></p-inputNumber>
+            <label htmlFor="number-input">Elije una precio minimo</label>
+        </span>
+        <span class="p-float-label">
+            <p-inputNumber inputId="currency-us" [showButtons]="true" mode="currency" currency="USD" [(ngModel)]="precio_max" name="precio_max" [min]="0"></p-inputNumber>
+            <label htmlFor="number-input">Elije una precio maximo</label>
+        </span> 
+    </div>                          
+    <span class="p-float-label segment">
+        <p-dropdown [ngModelOptions]="{standalone: true}" [options]="categorias" [(ngModel)]="selectedCategorias" name="nameCategoria" placeholder="Elije una categoria"></p-dropdown>
+        <label for="float-label">Categoria</label>
+    </span>
+    <span class="p-float-label segment">
+        <p-dropdown [ngModelOptions]="{standalone: true}" [options]="marcas" [(ngModel)]="selectedMarcas"  name="nameMarca" placeholder="Elije una marca"></p-dropdown>
+        <label for="float-label">Marca</label>
+    </span>
+
+    <span class="p-float-label segment">
+        <p-dropdown  [ngModelOptions]="{standalone: true}" [options]="puntoReorden" [(ngModel)]="selectedPuntoReorden" optionLabel="namePuntoReorden" name="namePuntoReorden" placeholder="Elije un punto de reorden"></p-dropdown>
+        <label for="float-label">Punto Reorden</label>
+    </span>
+    <span class="p-float-label segment">
+        <input pInputText type="number" placeholder="Colocar el año" [(ngModel)]="selectedAno" min="2023"/>
+        <label for="float-label">Historico</label>
+    </span>
+
+    <p-button label="Generar Informe" [loading]="loading" loadingIcon="pi pi-spinner" (onClick)="load()" (click) = "GenerarReporte()" [style]="{'margin-top': 'var(--spacing-5)'}"></p-button>
+    
+</form>
+

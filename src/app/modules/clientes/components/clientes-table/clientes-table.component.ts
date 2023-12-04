@@ -4,9 +4,10 @@ import { Data, Router } from '@angular/router';
 import { Cliente } from 'src/app/interfaces/usuario.inteface';
 import { clientes } from 'src/app/interfaces/data';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { ReporteClienteComponent } from 'src/app/modules/analitica/components/reporte-cliente.component';
 import { ApiClienteService } from 'src/app/services/api-cliente.service';
 import { EliminarClienteComponent } from '../eliminar-cliente/eliminar-cliente.component';
+import { GenerarReportesClientesComponent } from 'src/app/modules/analitica/components/generar-reportes-clientes/generar-reportes-clientes.component';
+
 
 @Component({
   selector: 'app-clientes-table',
@@ -46,9 +47,9 @@ export class ClientesTableComponent implements OnInit {
     }
 
     public showGenerarReporte(): void {
-        this.ref = this.dialogService.open(ReporteClienteComponent, {
+        this.ref = this.dialogService.open(GenerarReportesClientesComponent, {
             header: 'Generar Reporte',
-            height: '70%'
+            height: '80%'
         });
     }
 

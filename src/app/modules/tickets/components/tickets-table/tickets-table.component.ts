@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Table } from 'primeng/table';
-import { reclamos } from 'src/app/interfaces/data';
 import { Reclamo } from 'src/app/interfaces/raclamo.interface';
 import { TagsColorsService } from '../../services/tags-colors.service';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { ReporteTicketsComponent } from 'src/app/modules/analitica/components/reporte-tickets.component';
 import { TicketsService } from 'src/app/services/tickets.service';
 import { ReclamosService } from '../../services/tickets.service';
+import { GenerarReportesTicketsComponent  } from 'src/app/modules/analitica/components/generar-reportes-tickets/generar-reportes-tickets.component';
 
 @Component({
   selector: 'app-tickets-table',
@@ -51,7 +49,7 @@ export class TicketsTableComponent {
 
 
     public showGenerarReporte(): void {
-        this.ref = this.dialogService.open(ReporteTicketsComponent, { header: 'Generar Reporte' });
+        this.ref = this.dialogService.open(GenerarReportesTicketsComponent, { header: 'Generar Reporte' });
     }
 
     public onSeleccion( evento: any ): void {

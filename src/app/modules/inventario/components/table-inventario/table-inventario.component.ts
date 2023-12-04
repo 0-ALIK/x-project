@@ -3,9 +3,9 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ConfirmationService, MessageService, ConfirmEventType } from 'primeng/api'
 import { Categoria, Marca, Producto } from 'src/app/interfaces/producto.iterface';
 import { Router } from '@angular/router';
-import { ReporteInventarioComponent } from 'src/app/modules/analitica/components/reporte-inventario.component';
 import { InventarioService } from 'src/app/services/inventario.service';
 import { ProductoService } from 'src/app/services/producto.service';
+import { GenerarReportesInventarioComponent } from 'src/app/modules/analitica/components/generar-reportes-inventario/generar-reportes-inventario.component';
 
 @Component({
     selector: 'app-table-inventario',
@@ -67,7 +67,7 @@ export class TableInventarioComponent implements OnInit {
     }
 
     public showGenerarReporte(): void {
-        this.ref = this.dialogService.open(ReporteInventarioComponent, {
+        this.ref = this.dialogService.open(GenerarReportesInventarioComponent, {
             header: 'Generar Reporte',
             height: '70%'
         });

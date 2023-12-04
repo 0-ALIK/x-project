@@ -1,0 +1,45 @@
+<form action="" class="">
+    <div class="header">
+        
+            <span class="p-float-label">
+                <input pInputText id="nameInforme" [(ngModel)]="nameInforme" name="nameInforme"/>
+                <label for="float-label">Nombre del Informe</label>
+            </span>
+    
+            <span class="p-float-label ">
+                <p-dropdown [ngModelOptions]="{standalone: true}" [options]="formatos" [(ngModel)]="selectedFormato" optionLabel="nameFormato" name="nameFormato"></p-dropdown>
+                <label for="float-label">Formato</label>
+            </span>
+
+    </div>
+    
+    
+    <br>
+    
+    <h3>Segmentar según: </h3>
+                         
+    <span class="p-float-label segment">
+        <p-dropdown [ngModelOptions]="{standalone: true}" [options]="estados" [(ngModel)]="selectedEstado" name="nameEstado" placeholder="Elije una categoria"></p-dropdown>
+        <label for="float-label">Estado</label>
+    </span>
+
+    <span class="p-float-label segment">
+        <p-dropdown [ngModelOptions]="{standalone: true}" [options]="categorias" [(ngModel)]="selectedCategoria" name="nameCategoria" placeholder="Elije una marca"></p-dropdown>
+        <label for="float-label">Categoria</label>
+    </span>
+
+    <span class="p-float-label segment">
+        <p-dropdown  [ngModelOptions]="{standalone: true}" [options]="clientes" [(ngModel)]="selectedCliente" name="nameCliente" placeholder="Elije un punto de reorden"></p-dropdown>
+        <label for="float-label">Cliente</label>
+    </span>
+
+    <span class="p-float-label segment">
+        <p-dropdown  [ngModelOptions]="{standalone: true}" [options]="prioridades" [(ngModel)]="selectedPrioridad" name="namePrioridad" placeholder="Elije un punto de reorden"></p-dropdown>
+        <label for="float-label">Prioridad</label>
+    </span>
+
+    <p-button label="Generar Informe" [loading]="loading" loadingIcon="pi pi-spinner" (onClick)="load()" (click) = "GenerarReporte()" [style]="{'margin-top': 'var(--spacing-5)'}"></p-button>
+    
+</form>
+
+

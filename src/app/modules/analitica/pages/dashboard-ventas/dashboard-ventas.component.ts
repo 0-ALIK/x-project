@@ -10,8 +10,13 @@ import { DashboardService } from '../../services/dashboard.service';
   templateUrl: './dashboard-ventas.component.html',
 })
 export class DashboardVentasComponent implements OnInit {
+    constructor(private dashboardService: DashboardService){}
 
     direccion: Direccion[] | undefined;
+    lengthEmpresas: number = 0;
+    diferenciaGanacias: number = 0;
+    cantidadPedidos: number = 0;
+    fecha: any[] | undefined;
     usuario:Usuario [] | undefined;
 
     pedidos: Pedido[] | undefined;
@@ -35,11 +40,53 @@ export class DashboardVentasComponent implements OnInit {
         this.graficaProductos();
         this.graficaPagos();
         this.graficasOptions();
+        this.definirTotalVentas();
+        this.definirTotalProductos();
     }
 
-    constructor(private dashboardService: DashboardService) {}
+    definirFiltroFecha(): void{
+        this.fecha = [
+            { nombre: 'Filtro1' },
+            { nombre: 'Filtro2' },
+            { nombre: 'Filtro3' },
+            { nombre: 'Filtro4' },
+            { nombre: 'Filtro5' }
+        ];
+    }
 
+    definirTotalVentas(): void {
+        this.dashboardService.getPago().subscribe(
+            (datos) => {
+              const registros = datos; // Ajusta según la propiedad real en tu objeto
+              if (registros && Array.isArray(registros)) {
+                // Mapea los nombres de las empresas
+                const montos: number[] = registros.map((registro: any) => registro.monto);
+                this.lengthEmpresas = montos.reduce((total, numero) => total + numero, 0);
+                this.diferenciaGanacias = montos.reduce((total, numero) => total + numero, 0);
+                console.log(this.lengthEmpresas)
+              }
+            },
 
+            (error) => {
+              console.error('Error al obtener datos del backend', error);
+            }
+          )
+      }
+
+      definirTotalProductos(): void {
+        this.dashboardService.getPedidos().subscribe(
+            (datos) => {
+              const registros = datos; // Ajusta según la propiedad real en tu objeto
+              if (registros && Array.isArray(registros)) {
+                this.cantidadPedidos = registros.length;
+              }
+            },
+
+            (error) => {
+              console.error('Error al obtener datos del backend', error);
+            }
+          )
+      }
 
     graficaVentas(): void{
         const documentStyle = getComputedStyle(document.documentElement);
