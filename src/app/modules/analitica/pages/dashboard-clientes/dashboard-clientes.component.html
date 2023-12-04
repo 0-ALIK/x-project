@@ -26,23 +26,23 @@
             <alik-dashboard-card
                 titulo="Clientes Totales"
                 icon="pi-users"
-                [numero]="clientes?.length || 0"
+                [numero]="clientes?.length || 30"
                 tipo="numero" >
             </alik-dashboard-card>
 
             <alik-dashboard-card
                 titulo="Empresas Totales"
                 icon="pi-building"
-                [numero]="empresas?.length || 0"
+                [numero]="empresas?.length || 15"
                 tipo="numero" >
             </alik-dashboard-card>
 
             <alik-dashboard-card
                 titulo="Crecimiento"
                 icon="pi-chart-line"
-                [numero]="clientesMesActual?.length || 0"
+                [numero]="clientesMesActual?.length || 30"
                 tipo="numero"
-                [valorAnterior]="clientesMesAnterior?.length || 0" >
+                [valorAnterior]="clientesMesAnterior?.length || 20" >
             </alik-dashboard-card>
 
             <div class=" border-round w-full flex flex-column justify-content-center align-items-center" [style]="{'background': 'var(--surface-card)'}">
@@ -58,24 +58,24 @@
     <section class="flex flex-column gap-2 mt-2">
         <div class=" flex gap-2">
             <div class="flex w-screen h-auto border-round justify-content-center align-items-center" [style]="{'background': 'var(--surface-card)'}">
-                <p-chart class="w-17rem h-17rem"
+                <p-chart class="w-15rem h-15rem"
                     type="pie"
                     [data]="data3"
                     [options]="options2">
                 </p-chart>
             </div>
+
             <div class="flex w-screen h-full border-round justify-content-center align-items-center" [style]="{'background': 'var(--surface-card)'}">
-                <p-chart class="w-17rem h-17rem"
+                <p-chart class="w-15rem h-15rem"
                     type="pie"
                     [data]="data4"
                     [options]="options2">
                 </p-chart>
             </div>
         </div>
-
-        <div class="pie flex flex-column gap-2">
-            <div class=" border-round h-full" [style]="{'background': 'var(--surface-card)'}">
-                <p-chart class="h-10rem"
+        <div class="flex justify-content-center  ">
+            <div class=" flex border-round w-full h-full"  [style]="{'background': 'var(--surface-card)'}">
+                <p-chart class="  " style="width: 90vh;"
                     type="bar"
                     [data]="data1"
                     [options]="options1">

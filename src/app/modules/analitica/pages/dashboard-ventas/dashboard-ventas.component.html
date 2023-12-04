@@ -1,9 +1,20 @@
 <main>
     <!-- Filtros -->
      <section class="flex flex-row align-content-start justify-content-start mb-1 gap-2">
-        <p-dropdown [options]="direccion"  placeholder="Provincia" optionLabel="provincia"></p-dropdown>
-        <p-dropdown [options]="usuario" placeholder="Empresa" optionLabel="nombre" ></p-dropdown>
+        <p-multiSelect
+            [options]="provincias"
+            placeholder="Meses"
+            display="chip"
+            [showClear]="true">
+        </p-multiSelect>
 
+        <p-dropdown
+            [options]="clientesCompras"
+            placeholder="Productos Compras"
+            optionLabel="label"
+            [showClear]="true"
+            >
+      </p-dropdown>
     </section>
     <!-- Cards superiores -->
     <section>
@@ -18,7 +29,7 @@
         </div>
     </section>
 
-    <section class="flex flex-column ">
+    <section class="flex flex-column w-full ">
         <div class="flex">
             <div class="flex flex-column align-content-center m-2 border-round w-full h-full" [style]="{'background': 'var(--surface-card)'}">
                 <label for="lineal1" class=" w-full h-full text-center p-2"> Comportamiento de las ventas </label>
@@ -29,12 +40,38 @@
                 </p-chart>
             </div>
             <div class="flex flex-column align-content-center m-2 border-round w-full" [style]="{'background': 'var(--surface-card)'}">
+                </div>
+
+
+            <article class="flex flex-column align-content-center m-2 border-round w-full" [style]="{'background': 'var(--surface-card)'}">
+                <p-chart
+                    type="bar"
+                    [data]="productos"
+                    [options]="productosOptions">
+                </p-chart>
+            </article>
+
+        </div>
+
+        <div class="flex">
+            <div class="flex flex-column align-content-center m-2 border-round h-full w-full" [style]="{'background': 'var(--surface-card)'}">
+
                 <p-chart
                     type="bar"
                     [data]="mes"
                     [options]="mesOptions">
                 </p-chart>
             </div>
+
+            <div class="flex flex-column align-content-center m-2 border-round justify-content-center align-items-center w-full h-full " [style]="{'background': 'var(--surface-card)'}">
+                <label for="lineal2" class="text-center p-2">Métodos de pago</label>
+                <p-chart class="w-6"
+                    type="doughnut"
+                    [data]="pagos"
+                    [options]="pagosOptions">
+                </p-chart>
+            </div>
+
         </div>
     </section>
 
