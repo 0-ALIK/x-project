@@ -92,7 +92,7 @@ export class PagosListComponent implements OnInit {
     ) {}
 
     public ngOnInit(): void {
-        if(!localStorage.getItem('usuario')) {
+        if(localStorage.getItem('usuario')) {
             const usuario = JSON.parse(localStorage.getItem('usuario') || '');
             if(usuario.tipo === 'admin') {
                 this.esAdmin = true;

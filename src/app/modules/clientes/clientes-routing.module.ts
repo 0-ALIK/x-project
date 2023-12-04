@@ -4,10 +4,12 @@ import { VerClientesComponent } from './pages/ver-clientes/ver-clientes.componen
 import { PerfilClienteComponent } from './pages/perfil-cliente/perfil-cliente.component';
 import { PerfilEmpresaComponent } from './pages/perfil-empresa/perfil-empresa.component';
 import { NotFoundComponent } from 'src/app/not-found/not-found.component';
+import { adminGuard } from 'src/app/guards/admin.guard';
 
 const routes: Routes = [
     {
         path: '',
+        canActivate: [adminGuard],
         component: VerClientesComponent
     },
     {

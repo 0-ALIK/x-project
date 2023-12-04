@@ -61,8 +61,6 @@ export class SidebarComponent implements OnInit {
         if(!localStorage.getItem('usuario')) return;
         const usuario = JSON.parse(localStorage.getItem('usuario') || '');
 
-        console.log(usuario);
-
         if(usuario.tipo === 'admin') {
             this.rellenarMenuItem();
         } else if(usuario.tipo === 'cliente') {
@@ -98,7 +96,7 @@ export class SidebarComponent implements OnInit {
 
     private rellenarMenuItemCliente(id: number): void {
         const ruta = '/app/clientes/perfil/cliente/'+id
-        console.log(ruta);
+
         this.menuItems = [
             {
                 label: 'Perfil',

@@ -103,8 +103,6 @@ export class NavComponent implements OnInit {
 
         if(!this.usuario) return;
 
-        console.log(usuario);
-
         let link = '/app'
 
         if(usuario.tipo === 'cliente') {

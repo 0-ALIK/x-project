@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 import { DireccionService } from 'src/app/services/direccion.service';
 import { Empresa } from 'src/app/interfaces/usuario.inteface';
 import { ApiEmpresaService } from 'src/app/services/api-empresa.service';
+import { VentasService } from 'src/app/services/ventas.service';
 
 @Component({
   selector: 'app-perfil-empresa',
@@ -37,7 +38,8 @@ export class PerfilEmpresaComponent {
         public dialogService: DialogService,
         private activatedRoute: ActivatedRoute,
         private apiService: DireccionService,
-        private empresaService: ApiEmpresaService
+        private empresaService: ApiEmpresaService,
+        private ventasService: VentasService
     ) {}
 
     public ngOnInit():void {
@@ -64,6 +66,11 @@ export class PerfilEmpresaComponent {
                     nombre_empresa = this.empresa?.nombre
                 }),
 
+                this.ventasService.getAllPedidos().subscribe({
+                    next: pedidos => {
+                        this.pedidos = pedidos.filter(p => p.cliente?.empresa?.id_empresa === Number(id));
+                    }
+                });
 
                 formData.append('nombre',nombre_empresa);
                 this.empresaService.getColaboradores(id,nombre_empresa).subscribe((resp:any)=>{

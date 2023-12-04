@@ -21,13 +21,19 @@
             </p-dropdown>
         </div>
 
+        <div *ngIf="direcciones.length === 0" class="w-full p-5 surface-100 border-round">
+            No hay direcciones
+        </div>
+
         <button  pButton label="Agregar Sucursal" (click)="agregarDireccion(cliente?.id_cliente)"></button>
         <div class="claseboba" style="margin-top: 20px;">
+
             <alik-card-direccion
                 *ngFor="let direccion of direcciones"
                 [direccion]="direccion"
                 [fondo]="true">
             </alik-card-direccion>
+
         </div>
     </ng-container>
 
@@ -39,15 +45,21 @@
                 [reclamo]="reclamo">
             </ticket-card>
         </div>
+        <div *ngIf="reclamos.length === 0" class="w-full p-5 surface-100 border-round">
+            No hay reclamos
+        </div>
     </ng-container>
 
     <ng-container *ngIf="activeItem?.label && activeItem?.label === 'Pedidos'" >
-        <div class="flex gap-2">
+        <div class="flex flex-column gap-2">
             <venta-card
-                [style]="{'width': '50%'}"
+                class="w-full"
                 *ngFor="let pedido of pedidos"
                 [pedido]="pedido">
             </venta-card>
+        </div>
+        <div *ngIf="pedidos.length === 0" class="w-full p-5 surface-100 border-round">
+            No hay pedidos
         </div>
     </ng-container>
 

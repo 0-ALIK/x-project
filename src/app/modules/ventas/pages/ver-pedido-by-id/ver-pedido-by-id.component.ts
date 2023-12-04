@@ -36,9 +36,9 @@ import { ReclamosService } from 'src/app/modules/tickets/services/tickets.servic
                         <alik-card-empresa [empresa]="empresa"></alik-card-empresa>
                     </div>
                 </ng-container>
-                <div class="mb-2">
+                <div class="mb-2" *ngIf="pedido">
                     <h2 class="text-lg m-0 p-0">Dirección de envio</h2>
-                    <alik-card-direccion [direccion]="pedido?.direccion"></alik-card-direccion>
+                    <alik-card-direccion [direccion]="pedido.direccion"></alik-card-direccion>
                 </div>
                 <div class="mb-2" *ngIf="esAdmin">
                     <h2 class="text-lg m-0 p-0">Estado del pedido</h2>
@@ -78,6 +78,7 @@ import { ReclamosService } from 'src/app/modules/tickets/services/tickets.servic
                         (onClick)="generarFactura()">
                     </p-button>
                     <p-button
+                        *ngIf="!esAdmin"
                         label="Crear reclamo"
                         [disabled]="reclamo !== undefined"
                         (onClick)="crearReclamo()">
@@ -142,7 +143,7 @@ export class VerPedidoByIdComponent implements OnInit {
     ) {}
 
     public ngOnInit(): void {
-        if(!localStorage.getItem('usuario')) {
+        if(localStorage.getItem('usuario')) {
             const usuario = JSON.parse(localStorage.getItem('usuario') || '');
             if(usuario.tipo === 'admin') {
                 this.esAdmin = true;
@@ -160,22 +161,12 @@ export class VerPedidoByIdComponent implements OnInit {
                 this.estados = estados;
             }
         });
-
-        this.reclamoService.getReclamos().subscribe({
-            next: resp => {
-                this.reclamo = resp.data.find((r: Reclamo) => r.id_reclamo === this.pedido?.id_pedido);
-                console.log(this.reclamo);
-            },
-            error: error => {
-                console.log(error);
-            }
-        });
     }
 
     private obtenerPedido(id: number): void {
         this.ventaService.getAllPedidos().subscribe({
             next: pedidos => {
-                this.pedido = pedidos.find(p => p.id_pedido = id);
+                this.pedido = pedidos.find(p => p.id_pedido === Number(id));
 
                 if(!this.pedido) {
                     console.log('NO SE ENCONTRO XD');
@@ -191,7 +182,15 @@ export class VerPedidoByIdComponent implements OnInit {
                     this.empresa = this.pedido.cliente?.empresa
                     this.tieneEmpresa = true;
                 }
-                console.log(this.pedido);
+
+                this.reclamoService.getReclamos().subscribe({
+                    next: resp => {
+                        this.reclamo = resp.data.find((r: Reclamo) => r.id_reclamo === this.pedido?.id_pedido);
+                    },
+                    error: error => {
+                        console.log(error);
+                    }
+                });
             }
         });
     }

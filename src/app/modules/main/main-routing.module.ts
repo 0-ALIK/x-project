@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './main.component';
 import { NotFoundComponent } from 'src/app/not-found/not-found.component';
+import { adminGuard } from 'src/app/guards/admin.guard';
 
 const usuario = JSON.parse(localStorage.getItem('usuario') || '');
 
@@ -40,6 +41,7 @@ const routes: Routes = [
             },
             {
                 path: 'inventario',
+                canActivate: [adminGuard],
                 loadChildren: () => import('../inventario/inventario.module').then(m => m.InventarioModule)
             },
             {
@@ -64,10 +66,12 @@ const routes: Routes = [
             },
             {
                 path: 'usuarios',
+                canActivate: [adminGuard],
                 redirectTo: ''
             },
             {
                 path: 'analitica',
+                canActivate: [adminGuard],
                 loadChildren: () => import('../analitica/analitica.module').then(m => m.AnaliticaModule)
             },
             {

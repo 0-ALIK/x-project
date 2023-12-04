@@ -10,6 +10,7 @@ import { Cliente } from 'src/app/interfaces/usuario.inteface';
 import { ApiClienteService } from 'src/app/services/api-cliente.service';
 import { DireccionService } from 'src/app/services/direccion.service';
 import { AgregarDireccionComponent } from '../../components/agregar-direccion/agregar-direccion/agregar-direccion.component';
+import { VentasService } from 'src/app/services/ventas.service';
 
 
 @Component({
@@ -32,7 +33,7 @@ export class PerfilClienteComponent implements OnInit{
 
     public reclamos: Reclamo[] = reclamos;
 
-    public pedidos: Pedido[] = pedidos;
+    public pedidos: Pedido[] = [];
 
     public cliente: Cliente | undefined;
 
@@ -42,7 +43,8 @@ export class PerfilClienteComponent implements OnInit{
         public dialogService: DialogService,
         private activatedRoute: ActivatedRoute,
         private apiService: DireccionService,
-        private clienteService: ApiClienteService
+        private clienteService: ApiClienteService,
+        private ventaService: VentasService
     ) {}
 
     public ngOnInit():void {
@@ -66,6 +68,16 @@ export class PerfilClienteComponent implements OnInit{
                 this.clienteService.getDatosCliente(id).subscribe((resp:any)=>{
                     this.cliente = resp
                 })
+
+                this.ventaService.getAllPedidos().subscribe({
+                    next: (pedidos:any) => {
+                        this.pedidos = pedidos.filter((p: any) => {
+                            console.log(p.cliente_id, id);
+
+                            return p.cliente_id === Number(id)
+                        });
+                    }
+                });
             }
         });
 

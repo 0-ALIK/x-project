@@ -4,6 +4,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { RegistroMayoristaComponent } from './modules/auth/pages/registro-mayorista/registro-mayorista.component';
 import { LoginComponent } from './modules/auth/pages/login/login.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { authGuard } from './guards/auth.guard';
 
 const routes: Routes = [
     {
@@ -17,6 +18,7 @@ const routes: Routes = [
     },
     {
         path: 'app',
+        canActivate: [authGuard],
         loadChildren: () => import('./modules/main/main.module').then(module => module.MainModule)
     },
     {
