@@ -101,6 +101,28 @@ export class ApiEmpresaService {
         return this.Http.delete<any>('http://127.0.0.1:8000/api/sucursales/' + id_empresa+'/'+id_sucursal ,  {headers} );
     }
 
+
+
+    public editarSucursal( id_sucursal:any, id_empresa:any,formData:FormData){
+        const token = localStorage.getItem('token') || '';
+        const headers = new HttpHeaders()
+            .set('Authorization', `Bearer ` + token)
+            .set('Type-content', 'aplication/json');
+            console.log(id_empresa+ ' ' + id_sucursal)
+
+        return this.Http.post<any>('http://127.0.0.1:8000/api/sucursales/' + id_empresa+'/'+id_sucursal ,formData,  {headers} );
+    }
+
+    public editarDireccion( id_sucursal:any, id_empresa:any,formData:FormData){
+        const token = localStorage.getItem('token') || '';
+        const headers = new HttpHeaders()
+            .set('Authorization', `Bearer ` + token)
+            .set('Type-content', 'aplication/json');
+            console.log(id_empresa+ ' ' + id_sucursal)
+
+        return this.Http.post<any>('http://127.0.0.1:8000/api/clientes/' + id_empresa+'/direcciones/'+id_sucursal ,formData,  {headers} );
+    }
+
     public eliminarDireccion( id_direccion:any, id_cliente:any){
         const token = localStorage.getItem('token') || '';
         const headers = new HttpHeaders()

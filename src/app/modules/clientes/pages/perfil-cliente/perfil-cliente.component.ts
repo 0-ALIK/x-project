@@ -11,6 +11,7 @@ import { ApiClienteService } from 'src/app/services/api-cliente.service';
 import { DireccionService } from 'src/app/services/direccion.service';
 import { AgregarDireccionComponent } from '../../components/agregar-direccion/agregar-direccion/agregar-direccion.component';
 import { VentasService } from 'src/app/services/ventas.service';
+import { EditarDireccionComponent } from '../../components/editar-direccion/editar-direccion/editar-direccion.component';
 
 
 @Component({
@@ -91,6 +92,18 @@ export class PerfilClienteComponent implements OnInit{
             header: 'Agregar Direccion',
             data: {
                id_cliente: id_cliente
+              }
+        });
+
+    }
+
+    public editarDireccion(id_empresa:any):void{
+
+        this.ref = this.dialogService.open(EditarDireccionComponent, {
+            header: 'Editar Direccion',
+            data: {
+               id_empresa: id_empresa,
+               direcciones: this.direcciones
               }
         });
 

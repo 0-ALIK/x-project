@@ -15,6 +15,7 @@
             <p-dropdown
                 [options]="provincias"
                 [(ngModel)]="provinciaSelected"
+                name="provinciaSelected"
                 optionLabel="nombre"
                 [showClear]="true"
                 placeholder="Filtra por provincia">
@@ -26,6 +27,7 @@
         </div>
 
         <button  pButton label="Agregar Sucursal" (click)="agregarDireccion(cliente?.id_cliente)"></button>
+        <button pButton label="Editar Direccion" class="p-button-outlined" (click)="editarDireccion(cliente?.id_cliente)"></button>
         <div class="claseboba" style="margin-top: 20px;">
 
             <alik-card-direccion

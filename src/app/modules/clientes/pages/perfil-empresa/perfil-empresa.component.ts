@@ -11,6 +11,7 @@ import { DireccionService } from 'src/app/services/direccion.service';
 import { Empresa } from 'src/app/interfaces/usuario.inteface';
 import { ApiEmpresaService } from 'src/app/services/api-empresa.service';
 import { VentasService } from 'src/app/services/ventas.service';
+import { EditarSucursalComponent } from '../../components/editar-sucursal/editar-sucursal/editar-sucursal.component';
 
 @Component({
   selector: 'app-perfil-empresa',
@@ -24,7 +25,7 @@ export class PerfilEmpresaComponent {
     public items: MenuItem[] | undefined;
     public activeItem: MenuItem | undefined;
 
-    public provincias: Provincia[] = provincias;
+    public provincias: Provincia[] = [];
 
     public provinciaSelected: Provincia | undefined;
 
@@ -40,7 +41,9 @@ export class PerfilEmpresaComponent {
         private apiService: DireccionService,
         private empresaService: ApiEmpresaService,
         private ventasService: VentasService
-    ) {}
+    ) {
+
+    }
 
     public ngOnInit():void {
         this.items = [
@@ -105,5 +108,17 @@ export class PerfilEmpresaComponent {
                id_empresa: id_empresa
               }
         });
+    }
+
+    public editarSucursal(id_empresa:any):void{
+
+        this.ref = this.dialogService.open(EditarSucursalComponent, {
+            header: 'Editar Direccion',
+            data: {
+               id_empresa: id_empresa,
+               direcciones: this.direcciones
+              }
+        });
+
     }
 }
