@@ -91,6 +91,8 @@ export class VerDetalleComponent implements OnInit {
 
                 this.reclamosService.getReclamoById(this.ticketNumber).subscribe({
                     next: ({data}) => {
+                        data.cliente.nombre = data.cliente.usuario.nombre;
+                        data.cliente.foto = data.cliente.usuario.foto;
                         this.reclamo = data;
                         console.log(this.reclamo);
                     }
@@ -99,7 +101,6 @@ export class VerDetalleComponent implements OnInit {
         });
 
     }
-
 
     public closeTicket(): void {
         // Lógica para cerrar el ticket

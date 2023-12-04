@@ -14,6 +14,8 @@ import {SugerenciasService} from 'src/app/services/sugerencias.service' ;
 
 export class VerBlogComponent{
 
+    estrellas:number = 5
+
     public usuario: Usuario[] | undefined;
     private ref: DynamicDialogRef | undefined;
     

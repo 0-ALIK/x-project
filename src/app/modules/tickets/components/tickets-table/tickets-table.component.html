@@ -65,11 +65,10 @@
         <tr [pSelectableRow]="reclamo">
             <td>
                 <div class="flex align-items-center gap-1">
-                    <p>{{ reclamo.cliente.apellido}}</p>
+                    <p>{{ reclamo.cliente.nombre+' '+reclamo.cliente.apellido }}</p>
                 </div>
             </td>
             <td>{{ reclamo.descripcion }}</td>
-
             <td>
                 <p-tag [value]="getPriorityInfo(reclamo.prioridad_id).nombre" [severity]="getPriorityInfo(reclamo.prioridad_id).color"></p-tag>
             </td>

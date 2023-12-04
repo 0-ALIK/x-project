@@ -1,17 +1,50 @@
-<main >
+<main>
     <!-- Filtros -->
-    <section class="flex flex-row align-content-start justify-content-start mb-1 gap-2">
-        <p-dropdown [options]="direccion"  placeholder="provincia" optionLabel="provincia"></p-dropdown>
-        <p-dropdown [options]="fecha" placeholder="Fecha" optionLabel="nombre" ></p-dropdown>
-        <p-dropdown [options]="usuario" placeholder="Empresa" optionLabel="nombre" ></p-dropdown>
+    <section class="flex flex-row align-content-start justify-content-start gap-2 mb-1">
+        <p-multiSelect
+            [options]="provincias"
+            placeholder="Provincias"
+            display="chip"
+            (onChange)="selectedProvincias($event)"
+            [showClear]="true">
+        </p-multiSelect>
+
+
+        <p-dropdown
+            [options]="clientesCompras"
+            placeholder="Clientes según compras"
+            optionLabel="label"
+            [showClear]="true"
+            (onChange)="selectedClientes($event)">
+      </p-dropdown>
+
 
     </section>
     <!-- Cards superiores -->
     <section>
-        <div class="flex flex-row justify-content-between">
-            <alik-dashboard-card class="mx-2" titulo="Clientes Totales" icon="pi-users" [numero]="lengthEmpresas" tipo="numero" [valorAnterior]="85" ></alik-dashboard-card>
-            <alik-dashboard-card class="mx-2" titulo="Empresas Totales" icon="pi-building" [numero]="58" tipo="numero" [valorAnterior]="49" ></alik-dashboard-card>
-            <alik-dashboard-card class="mx-2" titulo="Crecimiento" icon="pi-chart-line" [numero]="54" tipo="numero" [valorAnterior]="24" ></alik-dashboard-card>
+        <div class="flex gap-2">
+            <alik-dashboard-card
+                titulo="Clientes Totales"
+                icon="pi-users"
+                [numero]="clientes?.length || 0"
+                tipo="numero" >
+            </alik-dashboard-card>
+
+            <alik-dashboard-card
+                titulo="Empresas Totales"
+                icon="pi-building"
+                [numero]="empresas?.length || 0"
+                tipo="numero" >
+            </alik-dashboard-card>
+
+            <alik-dashboard-card
+                titulo="Crecimiento"
+                icon="pi-chart-line"
+                [numero]="clientesMesActual?.length || 0"
+                tipo="numero"
+                [valorAnterior]="clientesMesAnterior?.length || 0" >
+            </alik-dashboard-card>
+
             <div class=" border-round w-full flex flex-column justify-content-center align-items-center" [style]="{'background': 'var(--surface-card)'}">
                 <p>Rendimiento</p>
                 <ana-speedometer
@@ -22,16 +55,34 @@
         </div>
     </section>
 
-    <section class="flex flex-row">
-        <div class=" flex flex-column m">
-            <div class="flex w-17rem h-19rem m-2 border-round justify-content-center align-items-center" [style]="{'background': 'var(--surface-card)'}"><p-chart class="w-17rem h-17rem" type="pie" [data]="data3" [options]="options3"></p-chart></div>
-            <div class="flex w-17rem h-19rem m-2 border-round justify-content-center align-items-center" [style]="{'background': 'var(--surface-card)'}"><p-chart class="w-17rem h-17rem" type="pie" [data]="data4" [options]="options4"></p-chart></div>
+    <section class="flex flex-column gap-2 mt-2">
+        <div class=" flex gap-2">
+            <div class="flex w-screen h-auto border-round justify-content-center align-items-center" [style]="{'background': 'var(--surface-card)'}">
+                <p-chart class="w-17rem h-17rem"
+                    type="pie"
+                    [data]="data3"
+                    [options]="options2">
+                </p-chart>
+            </div>
+            <div class="flex w-screen h-full border-round justify-content-center align-items-center" [style]="{'background': 'var(--surface-card)'}">
+                <p-chart class="w-17rem h-17rem"
+                    type="pie"
+                    [data]="data4"
+                    [options]="options2">
+                </p-chart>
+            </div>
         </div>
 
-        <div class="pie flex flex-column">
-            <div class=" m-2 border-round h-19rem" [style]="{'background': 'var(--surface-card)'}"><p-chart class="h-10rem" type="bar" [data]="data1" [options]="options1"></p-chart></div>
-            <div class=" m-2 border-round h-19rem" [style]="{'background': 'var(--surface-card)'}"><p-chart class="h-10rem" type="bar" [data]="data2" [options]="options2"></p-chart></div>
+        <div class="pie flex flex-column gap-2">
+            <div class=" border-round h-full" [style]="{'background': 'var(--surface-card)'}">
+                <p-chart class="h-10rem"
+                    type="bar"
+                    [data]="data1"
+                    [options]="options1">
+                </p-chart>
+            </div>
         </div>
+
     </section>
 </main>
 
