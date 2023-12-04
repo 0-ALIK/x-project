@@ -1,11 +1,6 @@
-import { empresas } from 'src/app/interfaces/data';
-import { Pedido } from './../../../../interfaces/pedido.interface';
-import { Direccion } from './../../../../interfaces/direccion.interface';
-import { clientes, direcciones, provincias, productos, pedidos } from './../../../../interfaces/data';
 import { DashboardService } from './../../services/dashboard.service';
-import { Cliente, Empresa, Usuario } from 'src/app/interfaces/usuario.inteface';
+import { Cliente, Empresa } from 'src/app/interfaces/usuario.inteface';
 import { Component, OnInit } from '@angular/core';
-
 
     @Component({
       selector: 'app-dashboard-clientes',
@@ -14,15 +9,21 @@ import { Component, OnInit } from '@angular/core';
     })
     export class DashboardClientesComponent implements OnInit {
 
-        provincia: any[] | undefined;
+        provincias: any[] | undefined;
+        empresaProvincia: any[] | undefined;
         provinciaFrecuente: any[] = [];
-
+        provinciaFrecuenteCopy: any[] = [];
 
         clientes: Cliente[] | undefined;
-        provinciaCliente: any[] | undefined;
+        clientesCopy: Cliente[] | undefined;
+        clientesCompras: any[] | undefined;
+
         clientesFrecuentes: any[] = [];
+        clientesFrecuentesCopy: any[] = [];
+
         clientesMesActual: any[] | undefined;
         clientesMesAnterior: any[] | undefined;
+        provinciaCliente: any[] = [];
 
         empresas: Empresa[] | undefined;
 
@@ -39,14 +40,25 @@ import { Component, OnInit } from '@angular/core';
         ngOnInit() {
             this.definirClientes();
             this.definirEmpresas();
-            this.definirProvinciasPedidos();
-            this.definirPedidos();
+            this.definirClientesCompras();
             this.optionsGrafica();
+            this.definirProvinciasClientes();
+            this.definirProvinciasCompras();
+            this.clientesCompras = [
+                { label: 'Más compran', value: 'masCompras' },
+                { label: 'Menos compran', value: 'menosCompras' }
+             ]
+
+             this.provincias = [
+                { label: 'Missouri',value: 'miss' },
+                { label: 'Georgia', value: 'geor' },
+                { label: 'Michigan', value: 'mich' }
+             ]
         }
 
-        constructor(private dashboardService: DashboardService) {}
+        constructor(private dashboardService: DashboardService,) {}
 
-         definirClientes(): void {
+        definirClientes(): void {//carga los clientes para el card de totalclientes
              this.dashboardService.getClientes().subscribe({
                  next: (clientes) => {
                     this.clientes = clientes;
@@ -69,9 +81,9 @@ import { Component, OnInit } from '@angular/core';
                      console.error(error);
                  }
                })
-         }
+        }
 
-         definirEmpresas(): void {
+        definirEmpresas(): void {//carga las empresas para el card de total empresas
             this.dashboardService.getEmpresas().subscribe({
                 next: (empresa) => {
                    this.empresas = empresa;
@@ -83,39 +95,11 @@ import { Component, OnInit } from '@angular/core';
               })
         }
 
-        definirProvinciasPedidos(): void {
+        definirClientesCompras(): void {//define clientes que mas y menos compran
             this.dashboardService.getPedidos().subscribe({
                 next: (pedidos) => {
 
                     if (pedidos.length === 0) return;
-
-                    const frecuenciaProvincia: { [idProvincia: string]: number } = {};
-                    pedidos.forEach((pedido) => {
-                        if(!pedido?.cliente || !pedido?.cliente?.id_cliente) return;
-
-                        const id_provincia = pedido.cliente.id_cliente;
-                        frecuenciaProvincia[id_provincia] = (frecuenciaProvincia[id_provincia] || 0) + 1;
-                    });
-
-                    Object.keys(frecuenciaProvincia).forEach((id_provincia) => {
-                        const pedido = pedidos.find(pedido => pedido?.direccion?.provincia?.id_provincia === Number(id_provincia));
-                        this.provinciaFrecuente.push({
-                            frecuencia: frecuenciaProvincia[id_provincia],
-                            provincia: pedido?.direccion?.provincia
-                        });
-                    })//lo adapte a provincia a lo loko, no se como se hace nada pipipipipipipi
-
-                    this.graficaSegmentacion();
-                }
-            });
-
-        }
-
-        definirPedidos(): void {
-            this.dashboardService.getPedidos().subscribe({
-                next: (provincias) => {
-
-                    if (provincias.length === 0) return;
 
                     const frecuenciaClientes: { [idCliente: string]: number } = {};
                     pedidos.forEach((pedido) => {
@@ -132,82 +116,156 @@ import { Component, OnInit } from '@angular/core';
                             cliente: pedido?.cliente
                         });
                     })
+                    this.clientesFrecuentesCopy = [...this.clientesFrecuentes]
+                    this.selectedClientes({})
 
-                    this.clientesFrecuentes.sort((a, b) => b.frecuencia - a.frecuencia);
-                    this.graficaClientesMas();
-                    this.graficaClientesMenos();
+                    this.graficaClientes();
+
                 }
             });
 
         }
 
-        definirEmpresaProvincias(): void{
-            this.dashboardService.getClientesProvincias().subscribe({
-                next:(pedidos) => {
-                    this.provincia = pedidos.direcciones.provincia.nombre;
-                    console.log(this.provincia)
-                    this.provinciaCliente = clientes.flatMap(function(cliente) {
-                        return cliente.direcciones?.map((direccion) => {
-                          return {
-                            nombreCliente: cliente.nombre,
-                            nombreProvincia: direccion.provincia?.nombre || 'Sin provincia',
-                          };
-                        }) || [];
-                      });
-
-                      console.log('Provincias Cliente' + this.provinciaCliente );
+        definirProvincias(): void {//carga las empresas para el card de total empresas
+            this.dashboardService.getProvincias().subscribe({
+                next: (provincia) => {
+                   this.provincias = provincia;
+                  console.log(provincia);
                 },
                 error: (error) => {
                     console.error(error);
                 }
-            })
+              })
         }
 
-        graficaClientesMas(): void{
-            const documentStyle = getComputedStyle(document.documentElement);
+        definirProvinciasCompras(): void { //provincias que mas compran o que compras hace cada provincia mas o menos
+            this.dashboardService.getPedidos().subscribe({
+                next: (pedidos) => {
+                    if (pedidos.length === 0) return;
 
+                    const frecuenciaProvincia: { [idProvincia: string]: number } = {};
+                    pedidos.forEach((pedido) => {
+                        if(!pedido?.direccion || !pedido?.direccion?.id_direccion) return;
+
+                        const id_provincia = pedido.direccion.id_direccion;
+                        frecuenciaProvincia[id_provincia] = (frecuenciaProvincia[id_provincia] || 0) + 1;
+                    });
+
+                    Object.keys(frecuenciaProvincia).forEach((id_provincia) => {
+                        const pedido = pedidos.find(pedido => pedido?.direccion?.provincia?.id_provincia === Number(id_provincia));
+                        const nombreProvincia = pedido?.direccion?.provincia || 'Sin provincia';
+
+                        this.provinciaFrecuente.push({
+                            frecuencia: frecuenciaProvincia[id_provincia],
+                            provincia: nombreProvincia
+                        });
+                    })
+                    this.provinciaFrecuenteCopy = this.provinciaFrecuente;
+                    this.graficaSegmentacion();//muestra las provincias y sus compras
+                    this.selectedProvincias({});
+                }
+            });
+        }
+
+        definirProvinciasClientes(): void { //clientes que mas hay en cada provincia
+            this.dashboardService.getPedidos().subscribe({
+                next: (pedidos) => {
+                    if (pedidos.length === 0) return;
+
+                    const frecuenciaProvinciaCliente: { [idDireccion: string]: number } = {};
+                    pedidos.forEach((pedido) => {
+                        if(!pedido?.direccion || !pedido?.direccion?.id_direccion) return;
+
+                        const id_direccion = pedido.direccion.id_direccion;
+                        frecuenciaProvinciaCliente[id_direccion] = (frecuenciaProvinciaCliente[id_direccion] || 0) + 1;
+                    });
+
+                    Object.keys(frecuenciaProvinciaCliente).forEach((id_direccion) => {
+                        const pedido = pedidos.find(pedido => pedido?.direccion?.id_direccion === Number(id_direccion));
+                        const nombreCliente = pedido?.cliente || 'Sin cliente';
+
+                        this.provinciaCliente.push({
+                            frecuencia: frecuenciaProvinciaCliente[id_direccion],
+                            cliente: nombreCliente
+                        });
+                    })
+                    this.provinciaCliente.sort((a, b) => b.frecuencia - a.frecuencia);
+
+                    this.graficaProvinciasClientes();//muestra las provincias y sus compras
+                }
+            });
+        }
+
+        public selectedClientes(event: any): void {
+            if(!event || !event.value){
+                  this.clientesFrecuentes = [...this.clientesFrecuentesCopy];
+
+                return
+            }
+
+            if (event.value === 'masCompras') {
+                this.clientesFrecuentes.sort((a, b) => b.frecuencia - a.frecuencia);
+                return
+            } else {
+                this.clientesFrecuentes.sort((a, b) => b.frecuencia - a.frecuencia).reverse()
+                setTimeout(() => {this.graficaClientes();}, 100);
+                return
+            }
+        }
+
+        public selectedProvincias(event:any): void{
+
+            console.log('Antes de la operación:', this.provinciaFrecuenteCopy);
+            this.provinciaFrecuente = this.provinciaFrecuenteCopy
+            console.log('sin filtración:', this.provinciaFrecuente);
+
+
+            if (event.value.length === 0) {
+                this.provinciaFrecuente = [...this.provinciaFrecuenteCopy];
+
+              } else {
+                this.provinciaFrecuente = this.provinciaFrecuente.filter(item => {
+                    const isIncluded = event.value.includes(item.provincia.nombre);
+                    console.log(`Item: ${item.provincia.nombre}, isIncluded: ${isIncluded}`);
+                    return isIncluded;
+                });
+
+                console.log('Después de la filtración: else   ', this.provinciaFrecuente);
+
+
+            }
+              console.log('Después de la filtración:', this.provinciaFrecuente);
+            //   this.provinciaFrecuente.sort((a, b) => b.frecuencia - a.frecuencia);
+
+            this.provinciaFrecuente = this.provinciaFrecuenteCopy
+
+            console.log('Después de la copia profunda:', this.provinciaFrecuente);
+              this.graficaSegmentacion();
+        }
+
+        graficaClientes(): void{
+            const documentStyle = getComputedStyle(document.documentElement);
             const frecuencias = this.clientesFrecuentes.map( clienteFrecuente => clienteFrecuente.frecuencia);
             const nombres = this.clientesFrecuentes.map( clienteFrecuente => clienteFrecuente.cliente.nombre);
-
             this.data1 = {
-                labels: nombres.slice(0, 3),
+                labels: nombres.slice(0, 4),
                 datasets: [
                     {
-                        label: 'Clientes que más compran',
-                        backgroundColor: documentStyle.getPropertyValue('--blue-600'),
+                        label: 'Compras',
+                        backgroundColor: [documentStyle.getPropertyValue('--cyan-300'),documentStyle.getPropertyValue('--cyan-600')],
                         borderColor: documentStyle.getPropertyValue('--indigo-500'),
-                        data: frecuencias.slice(0,3)
+                        data: frecuencias.slice(0,4)
                     },
                 ]
             };
 
         }
 
-        graficaClientesMenos(): void{
-            const documentStyle = getComputedStyle(document.documentElement);
-
-            const frecuencias = this.clientesFrecuentes.map( clienteFrecuente => clienteFrecuente.frecuencia);
-            const nombres = this.clientesFrecuentes.map( clienteFrecuente => clienteFrecuente.cliente.nombre);
-
-            this.data2 = {
-                labels: nombres.reverse().slice(0,3),
-                datasets: [
-                    {
-                        label: 'Clientes que menos compran',
-                        backgroundColor: documentStyle.getPropertyValue('--pink-500'),
-                        borderColor: documentStyle.getPropertyValue('--pink-400'),
-                        data: frecuencias.reverse().slice(0,3)
-                    }
-                ]
-            }
-
-        }
-
         graficaSegmentacion(): void{
             const documentStyle = getComputedStyle(document.documentElement);
 
-            const nombres = this.provinciaFrecuente?.map(provincia => provincia.nombre);
-            const frecuencias = this.provinciaFrecuente?.map(provincia => provincia.provincia.frecuencia);
+            const nombres = this.provinciaFrecuente?.map(provinciaFrecuente => provinciaFrecuente.provincia.nombre);
+            const frecuencias = this.provinciaFrecuente?.map(provinciaFrecuente => provinciaFrecuente.frecuencia);
 
             this.data3 = {
                 labels: nombres,
@@ -221,14 +279,19 @@ import { Component, OnInit } from '@angular/core';
             };
         }
 
-        graficaProvincias(): void{
+        graficaProvinciasClientes(): void{
+            const nombre2s = this.provinciaFrecuente?.map(provinciaFrecuente => provinciaFrecuente.provincia.nombre);
+            const frecuencia2s = this.provinciaFrecuente?.map(provinciaFrecuente => provinciaFrecuente.frecuencia);
             const documentStyle = getComputedStyle(document.documentElement);
 
+            const frecuencias = this.provinciaCliente.map( provinciaCliente => provinciaCliente.frecuencia);
+            const nombres = this.provinciaCliente.map( provinciaCliente => provinciaCliente.cliente.nombre);
+
             this.data4 = {
-                labels: this.provincia,
+                labels: nombres,
                 datasets: [
                     {
-                        data: [540, 325, 702],
+                        data:frecuencias,
                         backgroundColor: [documentStyle.getPropertyValue('--pink-300'), documentStyle.getPropertyValue('--pink-600'), documentStyle.getPropertyValue('--pink-800')],
                         hoverBackgroundColor: [documentStyle.getPropertyValue('--pink-200'), documentStyle.getPropertyValue('--pink-400'), documentStyle.getPropertyValue('--pink-500')]
                     }
@@ -287,5 +350,4 @@ import { Component, OnInit } from '@angular/core';
                 }
             };
         }
-
     }

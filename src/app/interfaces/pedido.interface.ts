@@ -29,7 +29,7 @@ export interface Pedido {
     id_pedido?: number;
     cliente?: Cliente,
     fecha?: Date,
-    fecha_cambio_estado?: Date,
+    fecha_cambio_estado?: string,
     detalles?: string;
     pagos?: Pago[]
     estado?: PedidoEstado;
