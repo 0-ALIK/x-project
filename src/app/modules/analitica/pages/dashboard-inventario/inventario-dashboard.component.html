@@ -1,25 +1,18 @@
-
 <section class="mb-2 flex gap-2">
     <div>
         <p-dropdown
-            [options]="categorias"
-            optionLabel="nombre"
-            [showClear]="true" placeholder="Categorias">
+            [options]="filtroProducto"
+            [(ngModel)]="selectedFiltroProducto"
+            (onChange)="defineData1()"
+            [showClear]="true" placeholder="Elige filtrar por Marca o Categoria">
         </p-dropdown>
-
     </div>
-
     <div>
         <p-dropdown
-            [options]="marcas"
-            optionLabel="nombre"
-            [showClear]="true" placeholder="Marcas">
-            <ng-template let-marca pTemplate="item">
-                <div [style]="{'display': 'flex', 'alignItems': 'center', 'gap': 'var(--spacing-2)'}" >
-                    <img [src]="marca.logo" style="width: 18px">
-                    <div>{{ marca.nombre }}</div>
-                </div>
-            </ng-template>
+            [options]="filtroProducto2"
+            [(ngModel)]="selectedFiltroProducto2"
+            (onChange)="definirProductosQueMasHay()"
+            [showClear]="true" placeholder="Elige filtrar por Marca o Categoria">
         </p-dropdown>
     </div>
 </section>
@@ -45,40 +38,17 @@
         <alik-dashboard-card
         titulo="Marcas"
             icon="pi-verified"
-            [numero]="marcas?.length || 0"
+            [numero]="marcas.length || 0"
             tipo="numero"
         ></alik-dashboard-card>
 
         <alik-dashboard-card
         titulo="Categorías"
             icon="pi-tag"
-            [numero]="categorias?.length || 0"
+            [numero]="categorias.length || 0"
             tipo="numero"
         ></alik-dashboard-card>
 
-    <section class="flex gap-2 mb-2">
-        <div>
-            <div>
-                <p-dropdown
-                    [options]="filtroProducto"
-                    [(ngModel)]="selectedFiltroProducto"
-                    (onChange)="defineData1()"
-                    [showClear]="true" placeholder="Elige filtrar por Marca o Categoria">
-                </p-dropdown>
-            </div>
-
-            <div class="p-2 border-round w-full" [style]="{'background': 'var(--surface-card)', 'flex': '2'}">
-                <p-chart
-                    type="doughnut"
-                    [options]="options"
-                    [data]="comprasData"
-                ></p-chart>
-            </div>
-        </div>
-        
-
-        <div class="p-2 border-round w-full flex flex-column justify-content-center align-items-center" [style]="{'background': 'var(--surface-card)', 'flex': '1'}">
-            <h2>Indicador de rendimiento</h2>
         <div class=" border-round w-full flex flex-column justify-content-center align-items-center" [style]="{'background': 'var(--surface-card)'}">
             <p>Rendimiento</p>
             <ana-speedometer
@@ -97,14 +67,12 @@
             ></p-chart>
         </div>
 
-        <div>
-            <div class="flex w-full h-full border-round justify-content-center align-items-center surface-card">
-                <p-chart class=""
-                    type="pie"
-                    [data]="segmentacionData"
-                    [options]="optionsPie">
-                </p-chart>
-            </div>
+        <div class="p-2 border-round" style=" background: var(--surface-card);">
+            <p-chart
+                type="doughnut"
+                [options]="options"
+                [data]="comprasData"
+            ></p-chart>
         </div>
     </section>
 </main>

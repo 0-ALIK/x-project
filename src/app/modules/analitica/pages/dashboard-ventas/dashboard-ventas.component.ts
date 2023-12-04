@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Direccion } from 'src/app/interfaces/direccion.interface';
 import { Usuario } from 'src/app/interfaces/usuario.inteface';
+import { DashboardService } from '../../services/dashboard.service';
 
 
 @Component({
@@ -8,9 +9,12 @@ import { Usuario } from 'src/app/interfaces/usuario.inteface';
   templateUrl: './dashboard-ventas.component.html',
 })
 export class DashboardVentasComponent implements OnInit {
+    constructor(private dashboardService: DashboardService){}
 
     direccion: Direccion[] | undefined;
-    lengthEmpresas: number = 20;
+    lengthEmpresas: number = 0;
+    diferenciaGanacias: number = 0;
+
     fecha: any[] | undefined;
     usuario:Usuario [] | undefined;
 
@@ -32,6 +36,7 @@ export class DashboardVentasComponent implements OnInit {
         this.graficaVentas();
         this.graficaProductos();
         this.graficaPagos();
+        this.definirTotalVentas();
     }
 
     definirFiltroFecha(): void{
@@ -43,6 +48,41 @@ export class DashboardVentasComponent implements OnInit {
             { nombre: 'Filtro5' }
         ];
     }
+
+    definirTotalVentas(): void {
+        this.dashboardService.getPago().subscribe(
+            (datos) => {
+              const registros = datos; // Ajusta según la propiedad real en tu objeto
+              if (registros && Array.isArray(registros)) {
+                // Mapea los nombres de las empresas
+                const montos: number[] = registros.map((registro: any) => registro.monto);
+                this.lengthEmpresas = montos.reduce((total, numero) => total + numero, 0);
+                this.diferenciaGanacias = montos.reduce((total, numero) => total + numero, 0);
+                console.log(this.lengthEmpresas)
+              }
+            },
+      
+            (error) => {
+              console.error('Error al obtener datos del backend', error);
+            }
+          )
+      }
+
+      definirTotalProductos(): void {
+        this.dashboardService.getPedidos().subscribe({
+          next: (productosResponse: any) => {
+            console.log('Respuesta de la API (productos):', productosResponse);
+    
+            //this.productos = productosResponse.data as  Producto[] || [];
+    
+            //this.CantidadTotalProductos = this.productos.length;
+            
+          },
+          error: (error) => {
+            console.error('Error al obtener productos', error);
+          }
+        });
+      }
 
     graficaVentas(): void{
         const documentStyle = getComputedStyle(document.documentElement);

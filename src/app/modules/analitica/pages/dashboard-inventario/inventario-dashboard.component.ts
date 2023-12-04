@@ -11,6 +11,7 @@ import { marcas } from 'src/app/interfaces/data';
 export class DashboardInventarioComponent implements OnInit {
     constructor(private analitica: ReclamosService,
                 private dashboardService: DashboardService){}
+                
     public productos: Producto[] | undefined;
     public options: any;
 
@@ -18,6 +19,10 @@ export class DashboardInventarioComponent implements OnInit {
 
     public filtroProducto: string[] = [];
     public selectedFiltroProducto: string = 'Categoria';
+
+    public filtroProducto2: string[] = [];
+    public selectedFiltroProducto2: string = '+ Stock';
+
 
     public stockData: any;
 
@@ -41,6 +46,10 @@ export class DashboardInventarioComponent implements OnInit {
             'Categoria',
             'Marca'
         ]
+        this.filtroProducto2 = [
+          '+ Stock',
+          '- Stock'
+      ]
 
         this.defineOptions();
         this.obtenerMarcasCategoria();
@@ -49,6 +58,7 @@ export class DashboardInventarioComponent implements OnInit {
         this.definirTotalCategorias();
         this.definirTotalMarcas(); 
         this.definirTotalInventario();
+
         this.analitica.getProductos().subscribe(
             (datos) => {
                 this.productosMarca = datos.map((data: any) => data.marca_id);
@@ -62,7 +72,7 @@ export class DashboardInventarioComponent implements OnInit {
         this.analitica.getMarcas().subscribe(
             (datos) => {
                 this.marcas = datos;
-                this.defineData1();
+
             },
             (error) => {
               console.error('Error al obtener datos del backend', error);
@@ -72,6 +82,7 @@ export class DashboardInventarioComponent implements OnInit {
           this.analitica.getCategorias().subscribe(
             (datos) => {
                 this.categorias = datos;
+                this.defineData1();
             },
             (error) => {
               console.error('Error al obtener datos del backend', error);
@@ -86,8 +97,7 @@ export class DashboardInventarioComponent implements OnInit {
     public defineData1(): void {
         var marcasCantidad = [];
         const conteo:any = [];
-        if(this.selectedFiltroProducto == "Marca")
-        {
+        
             this.productosMarca.forEach(producto => {
                 const valor = producto; // Reemplaza 'tuPropiedad' con el nombre real de la propiedad que deseas contar
     
@@ -102,7 +112,8 @@ export class DashboardInventarioComponent implements OnInit {
                 }
             });
             conteo.map((data:any) => console.log(data.contador))
-    
+            if(this.selectedFiltroProducto == "Marca")
+          {
             const labels = this.marcas.map(producto => producto.nombre);
             
             marcasCantidad = conteo.map((data:any) => data.contador)
@@ -112,32 +123,17 @@ export class DashboardInventarioComponent implements OnInit {
                 labels: labels,
                 datasets: [
                     {
-                        label: 'Productos más comprados',
+                        label: 'Cantidad: ',
                         data: marcasCantidad,
-                        backgroundColor: ['rgba(6, 182, 212, 0.2)', 'rgba(6, 182, 212, 0.2)', 'rgba(6, 182, 212, 0.2)', 'rgba(6, 182, 212, 0.2)', 'rgba(6, 182, 212, 0.2)'],
-                        borderColor: ['rgb(53, 196, 220)', 'rgb(53, 196, 220)', 'rgb(53, 196, 220)', 'rgb(53, 196, 220)', 'rgb(53, 196, 220)'],
+                        backgroundColor: ['rgba(6, 182, 212, 0.2)'],
+                        borderColor: ['rgb(53, 196, 220)'],
                         borderWidth: 2
                     }
                 ]
             };
-        }
+          }
         if(this.selectedFiltroProducto == "Categoria")
         {
-            this.productosCategoria.forEach(producto => {
-                const valor = producto; // Reemplaza 'tuPropiedad' con el nombre real de la propiedad que deseas contar
-    
-                const indice = conteo.findIndex((item:any) => item.valor === valor);
-    
-                if (indice !== -1) {
-                    // Si el valor ya está en el array, incrementa el contador
-                    conteo[indice].contador++;
-                } else {
-                    // Si es la primera vez que aparece el valor, añade un nuevo objeto al array
-                    conteo.push({valor, contador:1});
-                }
-            });
-            conteo.map((data:any) => console.log(data.contador))
-    
             const labels = this.categorias.map(producto => producto.nombre);
             
             marcasCantidad = conteo.map((data:any) => data.contador)
@@ -147,10 +143,10 @@ export class DashboardInventarioComponent implements OnInit {
                 labels: labels,
                 datasets: [
                     {
-                        label: 'Productos más comprados',
+                        label: 'Cantidad: ',
                         data: marcasCantidad,
-                        backgroundColor: ['rgba(6, 182, 212, 0.2)', 'rgba(6, 182, 212, 0.2)', 'rgba(6, 182, 212, 0.2)', 'rgba(6, 182, 212, 0.2)', 'rgba(6, 182, 212, 0.2)'],
-                        borderColor: ['rgb(53, 196, 220)', 'rgb(53, 196, 220)', 'rgb(53, 196, 220)', 'rgb(53, 196, 220)', 'rgb(53, 196, 220)'],
+                        backgroundColor: ['rgba(6, 182, 212, 0.2)'],
+                        borderColor: ['rgb(53, 196, 220)'],
                         borderWidth: 2
                     }
                 ]
@@ -164,7 +160,7 @@ export class DashboardInventarioComponent implements OnInit {
           }, 2000);
         }
       
-        private definirProductosQueMasHay(): void {
+        public definirProductosQueMasHay(): void {
           this.dashboardService.getProductos().subscribe({
             next: (productosResponse: any) => {
               console.log('Respuesta de la API:', productosResponse);
@@ -175,18 +171,33 @@ export class DashboardInventarioComponent implements OnInit {
                 console.error('No hay productos o la estructura es incorrecta');
                 return;
               }
-      
-              const arregloProductos = this.productos.map(producto => ({
-                nombre: producto.nombre || '',
-                cantidadCajas: producto.cantidad_cajas || 0,
-              }));
-      
-              arregloProductos.sort((a, b) => (b.cantidadCajas || 0) - (a.cantidadCajas || 0));
-      
-              const top3Productos = arregloProductos.slice(0, 5);
-      
-              console.log('Productos que más hay:', top3Productos);
-              this.graficaProductos(top3Productos);
+              if(this.selectedFiltroProducto2 == '+ Stock'){
+                const arregloProductos = this.productos.map(producto => ({
+                  nombre: producto.nombre || '',
+                  cantidadCajas: producto.cantidad_cajas || 0,
+                }));
+        
+                arregloProductos.sort((a, b) => (b.cantidadCajas || 0) - (a.cantidadCajas || 0));
+        
+                const top3Productos = arregloProductos.slice(0, 5);
+        
+                console.log('Productos que más hay:', top3Productos);
+                this.graficaProductos(top3Productos);
+              }
+              if(this.selectedFiltroProducto2 == '- Stock')
+              {
+                const arregloProductos = this.productos.map(producto => ({
+                  nombre: producto.nombre || '',
+                  cantidadCajas: producto.cantidad_cajas || 0,
+                }));
+        
+                arregloProductos.sort((a, b) => (a.cantidadCajas || 0) - (b.cantidadCajas || 0));
+        
+                const top3Productos = arregloProductos.slice(0, 5);
+        
+                console.log('Productos que más hay:', top3Productos);
+                this.graficaProductos(top3Productos);
+              }
             },
             error: (error) => {
               console.error('Error al obtener productos que más hay', error);
@@ -276,7 +287,7 @@ export class DashboardInventarioComponent implements OnInit {
           if (Array.isArray(top3Productos) && top3Productos.length > 0) {
             console.log('Datos disponibles:', top3Productos);
       
-            const labels = top3Productos.map((producto: any) => producto.nombre);
+            const labels = top3Productos.map((producto) => producto.nombre);
             console.log('Etiquetas:', labels);
       
             const data = top3Productos.map((producto: any) => producto.cantidadCajas);
@@ -286,7 +297,7 @@ export class DashboardInventarioComponent implements OnInit {
               labels: labels,
               datasets: [
                 {
-                  label: 'Productos que más existen',
+                  label: 'Productos',
                   backgroundColor: Array.from({ length: top3Productos.length }, () => documentStyle.getPropertyValue('--blue-600')),
                   borderColor: Array.from({ length: top3Productos.length }, () => documentStyle.getPropertyValue('--indigo-500')),
                   data: data,

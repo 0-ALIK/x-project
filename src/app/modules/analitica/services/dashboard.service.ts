@@ -51,5 +51,7 @@ export class DashboardService {
     public getProvincias(): Observable<any> {
         return this.http.get<any>(this.host + '/api/provincias');
     }
-    
+    public getPago(): Observable<any> {
+        return this.http.get<any>('http://127.0.0.1:8000/api/analitica/pago/')
+      }
 }
