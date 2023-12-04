@@ -65,11 +65,11 @@
         <tr [pSelectableRow]="reclamo">
             <td>
                 <div class="flex align-items-center gap-1">
-                    <p>{{ reclamo.usuario_nombre}}</p>
+                    <p>{{ reclamo.cliente.apellido}}</p>
                 </div>
             </td>
             <td>{{ reclamo.descripcion }}</td>
-            
+
             <td>
                 <p-tag [value]="getPriorityInfo(reclamo.prioridad_id).nombre" [severity]="getPriorityInfo(reclamo.prioridad_id).color"></p-tag>
             </td>
@@ -81,7 +81,7 @@
                 <p-tag [value]="getCategoriaInfo(reclamo.categoria).nombre" [severity]="getCategoriaInfo(reclamo.categoria).color"></p-tag>
             </td>
 
-            <td>{{ reclamo.fecha}}</td>
+            <td>{{ reclamo.created_at | date}}</td>
             <td>
                 <p-button icon="pi pi-trash" [rounded]="true" severity="danger" [outlined]="true"></p-button>
             </td>
