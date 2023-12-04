@@ -55,4 +55,14 @@ export class ChatService {
     });
   }
 
+  openChat(messageData: any): Observable<any> {
+    const token = localStorage.getItem('token') || '';
+        let header =  new HttpHeaders()
+            .set('Type-content', 'aplication/json')
+            .set('authorization', 'Bearer '+token)
+
+        return this.http.post(`${this.apiUrl}/api/chat/open`, messageData, {
+            headers: header
+        });
+  }
 }

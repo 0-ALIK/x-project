@@ -5,6 +5,7 @@ import { ReclamosService } from '../../services/tickets.service';
 import { ClientesService } from 'src/app/services/clientes.service';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Reclamo } from 'src/app/interfaces/raclamo.interface';
+import { ChatService } from 'src/app/modules/chat/chat.service';
 
 @Component({
   selector: 'app-ver-detalle',
@@ -75,6 +76,7 @@ export class VerDetalleComponent implements OnInit {
         private activatedRoute: ActivatedRoute,
         private reclamosService: ReclamosService,
         private clientesService: ClientesService,
+        private chatService: ChatService,
     ) { }
 
     public ngOnInit(): void {
@@ -114,12 +116,19 @@ export class VerDetalleComponent implements OnInit {
         // Puedes agregar aquí la lógica específica para cambiar el estado del ticket
     }
 
-    public cargarBoton(): void{
-        this.loading = true;
-        setTimeout(() => {
-            this.loading = false
-        }, 2000);
-    }
+    public cargarBoton(): void {
+        const numero_reclamo = this.ticketNumber;
+        const mensaje = `Hola, estoy aquí para asistirte con tu reclamo`;
+        this.chatService.sendMessage({reclamo: numero_reclamo, mensaje: mensaje }).subscribe(
+          (response) => {
+              console.log('Mensaje enviado con éxito:', response);
+          },
+          (error) => {
+              console.error('Error al enviar el mensaje:', error);
+          }
+         );
+        this.router.navigate(['/app/chat/reclamo', numero_reclamo]);      
+      }
 
 }
 
