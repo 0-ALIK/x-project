@@ -19,7 +19,7 @@ interface UploadEvent {
                 [ngModelOptions]="{standalone: true}"
                 optionLabel="categoria"
                 [showClear]="true"
-                placeholder="Seleciona una forma de pago">
+                placeholder="Selecciona una categoría">
             </p-dropdown>
 
             <textarea
@@ -94,7 +94,9 @@ export class AgregarReclamoComponent implements AfterViewInit, OnInit {
         formData.append('pedido_id', this.pedidoid.toString());
         formData.append('categoria', this.categoria.id_r_categoria.toString());
         formData.append('descripcion', this.detalles);
-        formData.append('evidencia', 'NO HAY CLOUDINARY');
+
+        if(this.documento)
+            formData.append('evidencia', this.documento);
 
         this.reclamoService._agregarReclamo(formData).subscribe({
             next: resp => {
