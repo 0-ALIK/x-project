@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Pago } from 'src/app/interfaces/pedido.interface';
 import { ImportesCalcService } from '../../services/importes-calc.service';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
@@ -25,7 +25,8 @@ import { Button } from 'primeng/button';
                         <p>{{pagos?.length}} pagos realizados</p>
                         <p>{{ calcDeuda() | currency:'USD':'symbol':'1.2-2'}} de deuda</p>
                     </div>
-                    <p-button label="Agregar pago" (onClick)="agregarPago()"></p-button>
+                    <p-button *ngIf="esAdmin" label="Agregar pago" (onClick)="agregarPago()"></p-button>
+                    <div *ngIf="!esAdmin"></div>
                 </div>
             </ng-template>
 
@@ -34,7 +35,7 @@ import { Button } from 'primeng/button';
                     <th>Monto</th>
                     <th>Fecha</th>
                     <th>Forma de pago</th>
-                    <th>Acciones</th>
+                    <th *ngIf="esAdmin">Acciones</th>
                 </tr>
             </ng-template>
 
@@ -43,7 +44,7 @@ import { Button } from 'primeng/button';
                     <td>{{pago.monto | currency:'USD':'symbol':'1.2-2' }}</td>
                     <td>{{pago.fecha | date}}</td>
                     <td><p-tag [value]="pago.forma_pago.nombre"></p-tag></td>
-                    <td>
+                    <td *ngIf="esAdmin">
                         <p-button
                             #button
                             (onClick)="eliminarPago( pago, button )"
@@ -65,7 +66,7 @@ import { Button } from 'primeng/button';
     </div>
     `,
 })
-export class PagosListComponent {
+export class PagosListComponent implements OnInit {
 
     @Input('pedidoid')
     public pedidoid!: number;
@@ -81,12 +82,23 @@ export class PagosListComponent {
 
     private ref: DynamicDialogRef | undefined;
 
+    public esAdmin: boolean =false;
+
     public constructor(
         public importesCalc: ImportesCalcService,
         public dialogService: DialogService,
         public message: MessageService,
         public ventasService: VentasService
     ) {}
+
+    public ngOnInit(): void {
+        if(localStorage.getItem('usuario')) {
+            const usuario = JSON.parse(localStorage.getItem('usuario') || '');
+            if(usuario.tipo === 'admin') {
+                this.esAdmin = true;
+            }
+        }
+    }
 
     public agregarPago(): void {
         this.ref = this.dialogService.open(AgregarEditarPagoComponent, {

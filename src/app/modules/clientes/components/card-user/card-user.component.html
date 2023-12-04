@@ -1,5 +1,5 @@
 <ng-container *ngIf="cliente">
-    <div class="flex flex-row gap-1 align-items-center">
+    <div class="flex cursor-pointer flex-row gap-1 align-items-center" [routerLink]="['/app/clientes/perfil/cliente', cliente.id_cliente]">
         <p-avatar [image]="cliente.foto" styleClass="mr-2" size="xlarge" shape="circle"></p-avatar>
         <div>
             <p class="m-0 p-0 text-xl">{{cliente.nombre + ' ' + cliente.apellido}}</p>

@@ -8,6 +8,8 @@ import { Usuario } from '../interfaces/usuario.inteface';
 })
 export class ReclamosService {
 
+    private host: string = 'http://127.0.0.1:8000'
+
     constructor(
         private http: HttpClient
     ) {}

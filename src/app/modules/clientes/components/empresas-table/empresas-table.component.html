@@ -47,12 +47,6 @@
                     <p-columnFilter field="razon_social" display="menu"></p-columnFilter>
                 </div>
             </th>
-            <th>
-                <div class="flex align-items-center">
-                    Total Pedidos
-                    <p-columnFilter field="nombre" type="numeric" display="menu"></p-columnFilter>
-                </div>
-            </th>
             <th><div class="flex align-items-center">Acciones</div></th>
         </tr>
     </ng-template>
@@ -69,7 +63,6 @@
             <td>{{ empresa.ruc }}</td>
             <td>{{ empresa.telefono }}</td>
             <td>{{ empresa.razon_social }}</td>
-            <td>{{ -1 }}</td>
             <td>
                 <p-button icon="pi pi-trash" [rounded]="true" [text]="true" severity="danger" (click)="showEliminarEmpresa(empresa.id_cliente,empresa.nombre)"></p-button>
             </td>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { AngleUpIcon } from 'primeng/icons/angleup';
 import { provincias } from 'src/app/interfaces/data';
 import { Provincia } from 'src/app/interfaces/direccion.interface';
 import { ApiEmpresaService } from 'src/app/services/api-empresa.service';
@@ -19,32 +20,41 @@ export class AgregarSucursalComponent {
     public telefono: any;
     public id_empresa: any;
     public codigo_postal: any;
-    public descripcion: any;
+    public detalles: any;
+    public nombre: any;
 
 
     constructor(
         public apiService: ApiEmpresaService,
         public ref: DynamicDialogRef,
         public config: DynamicDialogConfig
-    ){}
+    ){
+
+            this.id_empresa = this.config.data.id_empresa;
+            console.log(this.id_empresa)
+
+    }
 
     ngOnInit(): void {
-        this.id_empresa = this.config.data.id_cliente;
+
+
     }
 
     agregarSucursal() {
+
         const formData = new FormData();
-        formData.append('provincia', this.provinciaSelected );
+        formData.append('nombre',this.nombre);
+        formData.append('provincia_id', '2');
         formData.append('telefono', this.telefono);
         formData.append('codigo_postal', this.codigo_postal);
-        formData.append('descripcion', this.descripcion);
-        formData.append('_method', 'PUT');
+        formData.append('detalles', this.detalles);
 
+        console.log(formData);
 
 
 
         //const formData = new FormData
-        this.apiService.agregarColaborador(this.id_empresa, formData).subscribe((resp:any)=>{
+        this.apiService.agregarSucursal(this.id_empresa, formData).subscribe((resp:any)=>{
             window.location.reload()
         })
         }

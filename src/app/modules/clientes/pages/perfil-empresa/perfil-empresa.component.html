@@ -24,6 +24,9 @@
         </div>
 
         <div class="claseboba">
+            <div *ngIf="direcciones.length === 0" class="w-full p-5 surface-100 border-round">
+                No hay direcciones
+            </div>
             <alik-card-direccion
                 *ngFor="let direccion of direcciones"
                 [direccion]="direccion"
@@ -51,12 +54,15 @@
     </ng-container>
 
     <ng-container *ngIf="activeItem?.label && activeItem?.label === 'Pedidos'" >
-        <div class="flex gap-2">
+        <div  class="flex flex-column gap-2">
             <venta-card
-                [style]="{'width': '50%'}"
+                class="w-full"
                 *ngFor="let pedido of pedidos"
                 [pedido]="pedido">
             </venta-card>
+        </div>
+        <div *ngIf="pedidos.length === 0" class="w-full p-5 surface-100 border-round">
+            No hay pedidos
         </div>
     </ng-container>
 </div>

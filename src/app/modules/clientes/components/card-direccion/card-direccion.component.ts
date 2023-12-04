@@ -1,14 +1,11 @@
-import { Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
-import { DialogService } from 'primeng/dynamicdialog';
-import { Direccion } from 'src/app/interfaces/direccion.interface';
-import { DireccionService } from 'src/app/services/direccion.service';
+import { AfterViewInit, Component, Input } from '@angular/core';
+import { ApiEmpresaService } from 'src/app/services/api-empresa.service';
 
 @Component({
     selector: 'alik-card-direccion',
     templateUrl: './card-direccion.component.html'
 })
-export class CardDireccionComponent {
+export class CardDireccionComponent implements AfterViewInit {
 
     @Input('direccion')
     public direccion: any | undefined;
@@ -16,5 +13,38 @@ export class CardDireccionComponent {
     @Input('fondo')
     public fondo: boolean = false;
 
+    @Input('cliente')
+    public cliente: any;
+
+    constructor(
+        public apiService: ApiEmpresaService,
+    ){
+
+    }
+    ngAfterViewInit(): void {}
+
+    public eliminarSucursal(id_direccion: any, id_empresa:any){
+
+        this.apiService.eliminarSucursal(id_direccion,id_empresa).subscribe((resp:any)=>{
+
+        })
+    }
+
+    public eliminarDireccion(id_direccion: any, id_cliente:any){
+        console.log(id_direccion)
+        console.log(this.direccion);
+
+        this.apiService.eliminarDireccion(id_direccion,id_cliente).subscribe((resp:any)=>{
+
+        })
+    }
+
+    public getProvincia(): string {
+        if(typeof this.direccion?.provincia === 'object') {
+            return this.direccion?.provincia.nombre;
+        }
+
+        return this.direccion?.provincia;
+    }
 
 }

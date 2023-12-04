@@ -37,6 +37,7 @@ export class ApiEmpresaService {
         const token = localStorage.getItem('token') || '';
         const headers = new HttpHeaders().set('Authorization', `Bearer `+token);
         return this.Http.get<any>('http://127.0.0.1:8000/api/clientes/' , {headers, params: nombre_empresa});
+
     }
 
     public eliminarEmpresa(idEmpresa:any ){
@@ -70,6 +71,17 @@ export class ApiEmpresaService {
         return this.Http.post<any>('http://127.0.0.1:8000/api/clientes/', formData,  {headers} );
     }
 
+    public eliminarColaborador(id_colaborador:number): Observable<any> {
+        const token = localStorage.getItem('token') || '';
+        const headers = new HttpHeaders()
+        .set('Authorization', `Bearer ` + token)
+        .set('Type-content', 'aplication/json');
+
+
+        return this.Http.delete<any>('http://127.0.0.1:8000/api/clientes/'+id_colaborador,  {headers} );
+    }
+
+
     public agregarSucursal(idEmpresa:number, formData:FormData): Observable<any> {
         const token = localStorage.getItem('token') || '';
         const headers = new HttpHeaders()
@@ -77,6 +89,26 @@ export class ApiEmpresaService {
             .set('Type-content', 'aplication/json');
 
         return this.Http.post<any>('http://127.0.0.1:8000/api/sucursales/' + idEmpresa , formData,  {headers} );
+    }
+
+    public eliminarSucursal( id_sucursal:any, id_empresa:any){
+        const token = localStorage.getItem('token') || '';
+        const headers = new HttpHeaders()
+            .set('Authorization', `Bearer ` + token)
+            .set('Type-content', 'aplication/json');
+            console.log(id_empresa+ ' ' + id_sucursal)
+
+        return this.Http.delete<any>('http://127.0.0.1:8000/api/sucursales/' + id_empresa+'/'+id_sucursal ,  {headers} );
+    }
+
+    public eliminarDireccion( id_direccion:any, id_cliente:any){
+        const token = localStorage.getItem('token') || '';
+        const headers = new HttpHeaders()
+            .set('Authorization', `Bearer ` + token)
+            .set('Type-content', 'aplication/json');
+            console.log(id_cliente+ ' ' + id_direccion)
+
+        return this.Http.delete<any>('http://127.0.0.1:8000/api/clientes/' + id_cliente+'/direcciones/'+id_direccion ,  {headers} );
     }
 
 }

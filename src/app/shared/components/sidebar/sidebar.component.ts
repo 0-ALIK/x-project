@@ -59,17 +59,69 @@ export class SidebarComponent implements OnInit {
 
     public ngOnInit(): void {
         if(!localStorage.getItem('usuario')) return;
-        const usuario = localStorage.getItem('usuario');
+        const usuario = JSON.parse(localStorage.getItem('usuario') || '');
 
-        this.rellenarMenuItem();
+        if(usuario.tipo === 'admin') {
+            this.rellenarMenuItem();
+        } else if(usuario.tipo === 'cliente') {
+            if(Array.isArray(usuario.data)) {
+                const id: number = usuario.data[0].id_cliente;
+                this.rellenarMenuItemCliente(id);
+            } else {
+                const id: number = usuario.data.id_cliente;
+                this.rellenarMenuItemCliente(id);
+            }
+        } else {
+            if(Array.isArray(usuario.data)) {
+                const id: number = usuario.data[0].id_empresa;
+            this.rellenarMenuItemEmpresa(id);
+            } else {
+                const id: number = usuario.data.id_empresa;
+                this.rellenarMenuItemCliente(id);
+            }
+        }
     }
 
-    private rellenarMenuItemCliente(): void {
+    private rellenarMenuItemEmpresa(id: number):void {
+        const ruta = '/app/clientes/perfil/empresa/'+id
+
         this.menuItems = [
             {
+                label: 'Perfil',
+                icon: 'pi pi-fw pi-user',
+                route: ruta
+            },
+        ];
+    }
+
+    private rellenarMenuItemCliente(id: number): void {
+        const ruta = '/app/clientes/perfil/cliente/'+id
+
+        this.menuItems = [
+            {
+                label: 'Perfil',
+                icon: 'pi pi-fw pi-user',
+                route: ruta
+            },
+            {
                 label: 'Productos',
-                icon: 'pi pi-fw pi-box',
+                icon: 'pi pi-fw pi-shopping-bag',
                 route: '/app/ventas/c/ecommerce'
+            },
+            {
+                label: 'Carrito',
+                icon: 'pi pi-fw pi-shopping-cart',
+                route: '/app/ventas/c/carrito'
+            },
+            {
+                label: 'Chat',
+                icon: 'pi pi-fw pi-comments',
+                route: '/app/chat'
+            },
+            {
+                label: 'Blog',
+                icon: 'pi pi-fw pi-globe',
+                route: '/app/blog'
             }
         ];
     }

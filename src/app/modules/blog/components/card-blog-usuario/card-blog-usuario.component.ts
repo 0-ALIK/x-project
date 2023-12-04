@@ -14,7 +14,7 @@ export class CardBlogUsuarioComponent implements OnInit {
     estrellas: number = 3
 
     constructor(private sugerenciaService: SugerenciasService) {}
-  
+
     ngOnInit(): void {
       this.sugerenciaService.getSugerencias().subscribe(data => {
         this.clientess = data.sugerencias;

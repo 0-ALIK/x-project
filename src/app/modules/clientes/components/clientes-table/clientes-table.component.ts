@@ -41,7 +41,6 @@ export class ClientesTableComponent implements OnInit {
         private apiService: ApiClienteService
     ) {
         this.apiService.getClientes().subscribe((resp:any)=>{
-            //console.log(resp)
             this.arregloClientes = resp
         })
     }
@@ -65,7 +64,6 @@ export class ClientesTableComponent implements OnInit {
         this.ref.onClose.subscribe((result) => {
             if (result) {
               this.apiService.eliminarCliente(id_cliente).subscribe((resp:any)=>{
-                //console.log(resp)
                 console.log('Se elimino correctamente')
             })
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MenuItem } from 'primeng/api';
-import { DialogService } from 'primeng/dynamicdialog';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { direcciones, pedidos, provincias, reclamos } from 'src/app/interfaces/data';
 import { Direccion, Provincia } from 'src/app/interfaces/direccion.interface';
 import { Pedido } from 'src/app/interfaces/pedido.interface';
@@ -9,6 +9,8 @@ import { Reclamo } from 'src/app/interfaces/raclamo.interface';
 import { Cliente } from 'src/app/interfaces/usuario.inteface';
 import { ApiClienteService } from 'src/app/services/api-cliente.service';
 import { DireccionService } from 'src/app/services/direccion.service';
+import { AgregarDireccionComponent } from '../../components/agregar-direccion/agregar-direccion/agregar-direccion.component';
+import { VentasService } from 'src/app/services/ventas.service';
 
 
 @Component({
@@ -31,15 +33,18 @@ export class PerfilClienteComponent implements OnInit{
 
     public reclamos: Reclamo[] = reclamos;
 
-    public pedidos: Pedido[] = pedidos;
+    public pedidos: Pedido[] = [];
 
     public cliente: Cliente | undefined;
+
+    private ref: DynamicDialogRef | undefined;
 
     public constructor(
         public dialogService: DialogService,
         private activatedRoute: ActivatedRoute,
         private apiService: DireccionService,
-        private clienteService: ApiClienteService
+        private clienteService: ApiClienteService,
+        private ventaService: VentasService
     ) {}
 
     public ngOnInit():void {
@@ -63,10 +68,32 @@ export class PerfilClienteComponent implements OnInit{
                 this.clienteService.getDatosCliente(id).subscribe((resp:any)=>{
                     this.cliente = resp
                 })
+
+                this.ventaService.getAllPedidos().subscribe({
+                    next: (pedidos:any) => {
+                        this.pedidos = pedidos.filter((p: any) => {
+                            console.log(p.cliente_id, id);
+
+                            return p.cliente_id === Number(id)
+                        });
+                    }
+                });
             }
         });
 
         this.provincias = provincias;
+    }
+
+    public agregarDireccion(id_cliente:any){
+
+        console.log(id_cliente)
+        this.ref = this.dialogService.open(AgregarDireccionComponent, {
+            header: 'Agregar Direccion',
+            data: {
+               id_cliente: id_cliente
+              }
+        });
+
     }
 
     public onChange(event:MenuItem):void {

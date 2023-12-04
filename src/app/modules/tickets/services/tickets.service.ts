@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -12,7 +12,7 @@ export class ReclamosService {
     constructor(private http: HttpClient) {}
 
     public getReclamos(): Observable<any> {
-        const url = `${this.apiUrl}/reclamo`; 
+        const url = `${this.apiUrl}/reclamo`;
 
         return this.http.get<any>(url);
     }
@@ -20,5 +20,18 @@ export class ReclamosService {
     getReclamoById(reclamo_Id: number): Observable<any> {
       const url = `${this.apiUrl}/reclamo/${reclamo_Id}`;
       return this.http.get<any>(url);
+    }
+
+    public getReclamoCategorias(): Observable<any> {
+
+        return this.http.get<any>(this.apiUrl+'/reclamo/categorias');
+    }
+
+    public _agregarReclamo(formData: FormData): Observable<any> {
+        const token = localStorage.getItem('token') || '';
+        let headers =  new HttpHeaders()
+            .set('Type-content', 'aplication/json')
+            .set('authorization', 'Bearer '+ token)
+        return this.http.post(this.apiUrl+'/reclamo', formData, {headers});
     }
 }

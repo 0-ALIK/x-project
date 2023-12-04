@@ -12,20 +12,25 @@
     </div>
 
     <div class="mb-2">
+        <label htmlFor="nombre" class="block">Nombre</label>
+        <input pInputText name="nombre" [(ngModel)]="nombre" aria-describedby="username-help">
+    </div>
+
+    <div class="mb-2">
         <label htmlFor="telefono" class="block">Telefono</label>
-        <input type="phone" id="telefono" pInputText [(ngModel)]="telefono">
+        <input pInputText name="telefono" [(ngModel)]="telefono" aria-describedby="username-help">
     </div>
 
     <div class="mb-2">
         <label htmlFor="code" class="block">Código postal</label>
-        <input type="text" id="code" pInputText [(ngModel)]="codigo_postal">
+        <input pInputText name="codigo_postal" [(ngModel)]="codigo_postal" aria-describedby="username-help">
     </div>
 
     <div class="mb-2">
         <label htmlFor="code" class="block">Detalles</label>
-        <textarea rows="5" cols="30" pInputTextarea [autoResize]="true" [(ngModel)]="descripcion"></textarea>
+        <textarea rows="5" cols="30" pInputTextarea [autoResize]="true" name="detalles" [(ngModel)]="detalles"></textarea>
     </div>
 
-    <p-button label="Agregar"></p-button>
+    <p-button label="Agregar" (onClick)="agregarSucursal()"></p-button>
 
 </form>

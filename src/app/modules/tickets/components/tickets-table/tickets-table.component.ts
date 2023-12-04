@@ -34,7 +34,11 @@ export class TicketsTableComponent {
     ngOnInit(): void {
         this.reclamosService.getReclamos().subscribe(
           data => {
-            this.reclamos = data.data;
+            this.reclamos = data.data.map((r: any) => {
+                r.cliente.nombre = r.cliente.usuario.nombre;
+                r.cliente.foto = r.cliente.usuario.foto;
+                return r;
+            });
             console.log('Datos recibidos:', data);
           },
           error => {
@@ -44,7 +48,7 @@ export class TicketsTableComponent {
 
       }
 
-    
+
 
     public showGenerarReporte(): void {
         this.ref = this.dialogService.open(ReporteTicketsComponent, { header: 'Generar Reporte' });
@@ -53,9 +57,9 @@ export class TicketsTableComponent {
     public onSeleccion( evento: any ): void {
         this.router.navigate(['/app/tickets', evento.data.id_reclamo]);
     }
-    
 
-    //funciones 
+
+    //funciones
     getPriorityInfo(prioridad: number): { nombre: string, color: string } {
         switch (prioridad) {
           case 1:

@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 import { DireccionService } from 'src/app/services/direccion.service';
 import { Empresa } from 'src/app/interfaces/usuario.inteface';
 import { ApiEmpresaService } from 'src/app/services/api-empresa.service';
+import { VentasService } from 'src/app/services/ventas.service';
 
 @Component({
   selector: 'app-perfil-empresa',
@@ -37,7 +38,8 @@ export class PerfilEmpresaComponent {
         public dialogService: DialogService,
         private activatedRoute: ActivatedRoute,
         private apiService: DireccionService,
-        private empresaService: ApiEmpresaService
+        private empresaService: ApiEmpresaService,
+        private ventasService: VentasService
     ) {}
 
     public ngOnInit():void {
@@ -49,6 +51,8 @@ export class PerfilEmpresaComponent {
         ];
         this.activeItem = this.items[0];
         console.log(this.activeItem.label);
+
+        const formData = new FormData();
 
         this.activatedRoute.params.subscribe({
             next: ({id, nombre_empresa}) => {
@@ -62,7 +66,14 @@ export class PerfilEmpresaComponent {
                     nombre_empresa = this.empresa?.nombre
                 }),
 
-                this.empresaService.getColaboradores(id,nombre_empresa ).subscribe((resp:any)=>{
+                this.ventasService.getAllPedidos().subscribe({
+                    next: pedidos => {
+                        this.pedidos = pedidos.filter(p => p.cliente?.empresa?.id_empresa === Number(id));
+                    }
+                });
+
+                formData.append('nombre',nombre_empresa);
+                this.empresaService.getColaboradores(id,nombre_empresa).subscribe((resp:any)=>{
                     this.arregloColaboradores = resp;
                     console.log(resp)
                 })
@@ -80,14 +91,18 @@ export class PerfilEmpresaComponent {
     public agregarColaborador(id_empresa:any): void {
         this.ref = this.dialogService.open(AgregarColaboradorComponent, {
             header: 'Agregar Colaborador',
+            data: {
+                id_empresa: id_empresa
+               }
         });
     }
 
     public agregarSucursal(id_empresa:any): void {
+        console.log(id_empresa)
         this.ref = this.dialogService.open(AgregarSucursalComponent, {
-            header: 'Agregar Sucursal',
+            header: 'Agregar Direccion',
             data: {
-                id_empresa: id_empresa
+               id_empresa: id_empresa
               }
         });
     }

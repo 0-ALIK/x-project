@@ -3,7 +3,9 @@ import { Admin, Cliente } from "./usuario.inteface";
 
 export interface ReclamoCategoria {
     id_reclamo_categoria?: number;
+    id_r_categoria?: number;
     nombre?: string;
+    categoria?: string;
 }
 
 export interface ReclamoPrioridad {
