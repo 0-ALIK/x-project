@@ -78,10 +78,8 @@
             <td>{{ cliente.correo }}</td>
             <td>
                 <div class="flex align-items-center gap-1" *ngIf="cliente.empresa">
-                    <div>
-                        <p-avatar [image]="cliente.empresa.foto" shape="circle"></p-avatar>
-                    </div>
-                    <p class="celda-cliente-nombre">{{ cliente.empresa.nombre }}</p>
+
+                    <p class="celda-cliente-nombre">{{ cliente.empresa }}</p>
                 </div>
                 <div *ngIf="!cliente.empresa">
                     No tiene empresa
