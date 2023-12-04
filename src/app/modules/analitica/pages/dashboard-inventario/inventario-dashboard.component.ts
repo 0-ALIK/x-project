@@ -258,7 +258,7 @@ export class DashboardInventarioComponent implements OnInit {
             const cantidadProductosEnCaja = producto.cantidad_por_caja || 0;
             const cantidadCajas = producto.cantidad_cajas || 0;
             const precioUnitario = producto.precio_unit || 0;   
-            const valorProducto = cantidadProductosEnCaja * cantidadCajas * precioUnitario;
+            const valorProducto = (cantidadProductosEnCaja * cantidadCajas) + precioUnitario;
             
             return total + valorProducto;
           }, 0);

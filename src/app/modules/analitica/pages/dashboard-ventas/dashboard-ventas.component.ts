@@ -14,7 +14,7 @@ export class DashboardVentasComponent implements OnInit {
     direccion: Direccion[] | undefined;
     lengthEmpresas: number = 0;
     diferenciaGanacias: number = 0;
-
+    cantidadPedidos: number = 0;
     fecha: any[] | undefined;
     usuario:Usuario [] | undefined;
 
@@ -37,6 +37,7 @@ export class DashboardVentasComponent implements OnInit {
         this.graficaProductos();
         this.graficaPagos();
         this.definirTotalVentas();
+        this.definirTotalProductos();
     }
 
     definirFiltroFecha(): void{
@@ -61,7 +62,7 @@ export class DashboardVentasComponent implements OnInit {
                 console.log(this.lengthEmpresas)
               }
             },
-      
+
             (error) => {
               console.error('Error al obtener datos del backend', error);
             }
@@ -69,19 +70,18 @@ export class DashboardVentasComponent implements OnInit {
       }
 
       definirTotalProductos(): void {
-        this.dashboardService.getPedidos().subscribe({
-          next: (productosResponse: any) => {
-            console.log('Respuesta de la API (productos):', productosResponse);
-    
-            //this.productos = productosResponse.data as  Producto[] || [];
-    
-            //this.CantidadTotalProductos = this.productos.length;
-            
-          },
-          error: (error) => {
-            console.error('Error al obtener productos', error);
-          }
-        });
+        this.dashboardService.getPedidos().subscribe(
+            (datos) => {
+              const registros = datos; // Ajusta según la propiedad real en tu objeto
+              if (registros && Array.isArray(registros)) {
+                this.cantidadPedidos = registros.length;
+              }
+            },
+      
+            (error) => {
+              console.error('Error al obtener datos del backend', error);
+            }
+          )
       }
 
     graficaVentas(): void{
