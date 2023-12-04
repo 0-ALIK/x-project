@@ -19,7 +19,7 @@ import { VentasService } from 'src/app/services/ventas.service';
 })
 export class PerfilEmpresaComponent {
 
-    public pedidos: Pedido[] = pedidos;
+    public pedidos: Pedido[] = [];
 
     public items: MenuItem[] | undefined;
     public activeItem: MenuItem | undefined;
